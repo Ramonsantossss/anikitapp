@@ -13,6 +13,8 @@ app.use(secure)
 app.use(express.static("public"))
 
 app.use('/', mainrouter);
+//app.use('/api', mainrouter);
+
 
 app.listen(8080, () => {
     console.log("Server running on port 8080")
