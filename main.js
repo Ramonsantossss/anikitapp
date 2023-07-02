@@ -12,8 +12,48 @@ router.get('/', (req, res) => {
     res.sendFile(__path + '/paginas/index.html')
 })
 
-
+var { getVideoDownloadLink, getAudioDownloadLink } = require('./data/youtube.js')
 const listkey = ["anikit"];
+
+
+
+
+
+router.get('/anikit/ytmp4', async(req, res) => {
+var videoUrl = req.query.videoUrl
+if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
+//const getVideoDownloadLink = require("./data/youtube.js")
+// Exemplo de uso
+getVideoDownloadLink(videoUrl)
+  .then((downloadLink) => {
+    if (downloadLink) {
+      res.json({
+      url: `${downloadLink}`
+    })
+    } else {
+      console.log('Falha ao obter o link de download do vídeo.');
+    }
+  });
+
+})
+
+router.get('/anikit/ytmp3', async(req, res) => {
+var videoUrl = req.query.videoUrl
+if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
+//const getAudioDownloadLink = require("./data/youtube.js")
+getAudioDownloadLink(videoUrl)
+  .then((downloadLink) => {
+    if (downloadLink) {
+    res.json({
+      url: `${downloadLink}`
+    })
+     // console.log('Link de download do áudio:', downloadLink);
+    } else {
+      console.log('Falha ao obter o link de download do áudio.');
+    }
+  });
+
+});
 
 
 router.get('/nsfw/ahegao', async (req, res, next) => {

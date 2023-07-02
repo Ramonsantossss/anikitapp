@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
-    "ssl-express-www": "^3.0.7"
+    "ssl-express-www": "^3.0.7",
+    "ytdl-core": "^4.11.4"
   }
 }
