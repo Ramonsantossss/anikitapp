@@ -12,10 +12,34 @@ router.get('/', (req, res) => {
     res.sendFile(__path + '/paginas/index.html')
 })
 
-var { getVideoDownloadLink, getAudioDownloadLink } = require('./data/youtube.js')
+var { ytPlayMp4, ytPlayMp3, getVideoDownloadLink, getAudioDownloadLink } = require('./data/youtube.js')
 const listkey = ["anikit"];
+ var { youtube } = require('./data/youtube.js')
 
+router.get("/anikit/playmp4", async (req, res, next) => {
+  const query = req.query.query;
+  if (!query) return res.json({"error": "faltouo parâmetro query"})
+    ytPlayMp4(query)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res.json(error);
+      });
 
+});
+
+router.get("/anikit/playmp3", async (req, res, next) => {
+  const query = req.query.query;
+  if (!query) return res.json({"error": "faltouo parâmetro query"})
+    ytPlayMp3(query)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res.json(error);
+      });
+});
 
 
 
