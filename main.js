@@ -12,9 +12,25 @@ router.get('/', (req, res) => {
     res.sendFile(__path + '/paginas/index.html')
 })
 
-var { ytPlayMp4, ytPlayMp3, getVideoDownloadLink, getAudioDownloadLink } = require('./data/youtube.js')
+var { ytPlayMp4, tiktokdownload, ytPlayMp3, getVideoDownloadLink, getAudioDownloadLink } = require('./data/youtube.js')
 const listkey = ["anikit"];
  var { youtube } = require('./data/youtube.js')
+
+
+router.get('/anikit/tiktok', async(req, res) => {
+var videoUrl = req.query.videoUrl
+if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
+//const getVideoDownloadLink = require("./data/youtube.js")
+      tiktokdownload(videoUrl)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res.json(error);
+      });
+
+})
+
 
 router.get("/anikit/playmp4", async (req, res, next) => {
   const query = req.query.query;
