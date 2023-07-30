@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Logins</title>
+</head>
+<style>
+        *{
+          margin: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #C8A2C8;
+        }
+
+        body.dark-theme {
+            background-color: #222;
+            color: #fff;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        .menu-container {
+            position: fixed;
+            top: 0;
+            left: -100%; /* Start off hidden */
+            height: 100%;
+            width: 180px;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            transition: left 0.3s ease-in-out;
+        }
+
+        .menu-container.show-menu {
+            left: 0; /* Show the menu when class 'show-menu' is added */
+        }
+
+        .menu-container button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .menu-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .menu-toggle {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            display: block;
+            color: white;
+            
+        }
+        .header{
+            background-color: blueviolet;
+            justify-content: space-between;
+            padding: 0 10%;
+            height: 3.5em;
+            margin: 0;
+            box-shadow: 1px 1px 4px var(--color-dark4);
+        }
+        .menu-toggle.hide-menu {
+            display: none; /* Hide the menu toggle when class 'hide-menu' is added */
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .video-container {
+            margin-left: 200px; /* to create space for the menu */
+            max-width: 99%;
+            margin: 20px auto;
+            margin: 15px;
+            background-color: #b040ff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            color: white;
+            box-shadow: 1px 1px 1px black;
+        }
+        input[type="text"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            color: black;
+            text-align: center;   
+            }
+        input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            color: black;
+        }
+        button[type="submit"] {
+            display: block;
+            margin-top: 10px; 
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .video-player-container {
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="menu-container" id="menu">
+        <span class="close-button" onclick="toggleMenu()">&#10006;</span>
+        <h3>Menu</h3><br><hr><br>
+        <button onclick="toggleDarkTheme()">Tema Escuro</button>
+        <button onclick="changeBackgroundColor()">Mudar Cor</button>
+    </div>
+    <div class="header">
+          <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+    </div>
+    <br>
+  <h1>Editar Login - <%= user.username %></h1>
+    <div class="video-container">
+
+  <form action="/edit/<%= user.username %>" method="post">
+    <label for="username">Nome de Usuário:</label>
+    <input type="text" id="username" name="username" value="<%= user.username %>" disabled>
+    <label for="password">Nova Senha:</label>
+    <input type="password" id="password" name="password">
+    <label for="key">Nova Chave:</label>
+    <input type="text" id="key" name="key">
+    <center>
+    <button type="submit">Salvar</button>
+    </center>
+  </form>
+    </div>
+
+
+    <script>
+        function toggleDarkTheme() {
+            const body = document.querySelector('body');
+            body.classList.toggle('dark-theme');
+        }
+
+        function changeBackgroundColor() {
+            const newColor = prompt('Digite uma cor em formato hexadecimal (#RRGGBB) ou um nome de cor:');
+            const body = document.querySelector('body');
+            body.style.backgroundColor = newColor;
+        }
+
+        
+
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const menuToggle = document.querySelector('.menu-toggle');
+
+            menu.classList.toggle('show-menu');
+            menuToggle.classList.toggle('hide-menu');
+        }
+    </script>
+</body>
+</html>
