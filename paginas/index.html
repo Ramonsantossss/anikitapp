@@ -94,7 +94,10 @@
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    
 }
+
+
 
 h1 {
     text-align: center;
@@ -217,10 +220,11 @@ footer {
             <a href="/docs" >Documentação</a>
         </div>
     </div>
-    
+
     <h1>Transformando imagens de anime em realidade.</h1>
 
     <div id="imageGallery"></div><br><br><br>
+
     <footer>
       <p>Desenvolvido com 💜 por <a href="https://youtube.com/@clovermods">@clovermods</a></p>
    </footer>
@@ -230,7 +234,7 @@ footer {
       // Função para atualizar a imagem
 function updateImage() {
     // Fazer uma solicitação para a API de imagens de animes
-    fetch('https://trevorestapi.onrender.com/api/anime/elaina?apikey=clover')
+    fetch('https://appp--trevodev.repl.co/anime/elaina?username=Clover&key=1244567890')
         .then(response => response.json())
         .then(data => {
             const imageGallery = document.getElementById('imageGallery');
