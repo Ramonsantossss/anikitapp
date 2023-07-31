@@ -33,15 +33,36 @@
         }
         .header{
             background-color: var(--color-dark2);
-            justify-content: space-between;
+                display: flex;
+    justify-content: space-between;
             padding: 0 10%;
             height: 3.5em;
             box-shadow: 1px 1px 4px var(--color-dark4);
         }
-        .navigation_header{
-            gap: 3em;
-            z-index: 2;
-        }
+
+
+
+
+
+            .navigation_header{
+                position: absolute;
+                flex-direction: column !important;
+                top: 0;
+                background: var(--color-dark5);
+                height: 100%;
+                width: 35vw;
+                padding: 1em;
+                animation-duration: 1s;
+                margin-left: -100vw;
+            }
+            .btn_icon_header{
+                display: block;
+                border: none;
+                color: var(--color-white);
+                cursor: pointer;
+                margin-left: 10px; /* Adicione margem entre o botão e o nome */
+                background-color: transparent;
+            }
         .content{
             padding-top: 5em;
             text-align: center;
@@ -62,13 +83,7 @@
             padding: 10px;
             border-radius: 10px;
         }
-        .btn_icon_header{
-            background: transparent;
-            border: none;
-            color: var(--color-white);
-            cursor: pointer;
-            display: none;
-        }
+
         @media screen and (max-width: 768px) {
             .navigation_header{
                 position: absolute;
@@ -197,20 +212,29 @@ footer {
             color: var(--color-purple);
         }
     
-    
+    .logo_header {
+    display: flex;
+    align-items: center;
+}
 </style>
 
 </head>
 <body id="body">
     <div class="header" id="header">
+    <!-- ... outros elementos ... -->
+
         <button onclick="toggleSidebar()" class="btn_icon_header">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
             </svg>
         </button>
-        <div class="logo_header">
-<h3 style="color: white;"><i>AniKit</i></h3>
-        </div>
+        
+    <div class="logo_header">
+        <h3 style="color: white;"><i>AniKit</i></h3>
+        <button onclick="redirectToProfile()" class="btn_icon_header">
+            <i class="fas fa-user"></i>
+        </button>
+    </div>
         <div class="navigation_header" id="navigation_header">
             <button onclick="toggleSidebar()" class="btn_icon_header">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -231,6 +255,27 @@ footer {
 
     <script>
 
+    // ... outros códigos ...
+
+    function getURLParams() {
+            const searchParams = new URLSearchParams(window.location.search);
+            const username = searchParams.get('username');
+            const key = searchParams.get('key');
+            return { username, key };
+        }
+
+        // Função para redirecionar o usuário para o perfil com a chave e o nome do usuário
+        function redirectToProfile() {
+            const { username, key } = getURLParams();
+            if (username && key) {
+                const profileUrl = `/perfil/${username}?key=${key}`;
+                window.location.href = profileUrl;
+            } else {
+                alert('Nome de usuário ou chave não fornecidos na URL.');
+            }
+        }
+
+    // ... outros códigos ...
       // Função para atualizar a imagem
 function updateImage() {
     // Fazer uma solicitação para a API de imagens de animes

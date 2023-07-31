@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt-bor">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
+<html lang="en">
 <head>
-    <title>Registrar</title>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Logins</title>
+</head>
+<style>
         *{
           margin: 0;
         }
@@ -13,17 +13,27 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #C8A2C8;
-        }
-
-        body.dark-theme {
-            background-color: #222;
-            color: #fff;
-        }
-
-        h1 {
             color: white;
         }
 
+
+body.dark-theme {
+background-color: black;
+}
+.dark-theme .video-container {
+  background-color: #444; /* Cor de fundo do contêiner de vídeo escuro */
+}
+
+.dark-theme .header {
+  background-color: #444; /* Cor de fundo do cabeçalho escuro */
+}
+
+        h1 {
+            
+        }
+        h3 {
+        
+        }
         .menu-container {
             position: fixed;
             top: 0;
@@ -64,7 +74,7 @@
             font-size: 24px;
             cursor: pointer;
             display: block;
-            color: white;
+            
             
         }
         .header{
@@ -96,7 +106,7 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             padding: 20px;
             border-radius: 8px;
-            color: white;
+            
             box-shadow: 1px 1px 1px black;
         }
         input[type="text"] {
@@ -106,9 +116,10 @@
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            background-color: white;
+            background-
             color: black;
-        }
+            text-align: center;   
+            }
         input[type="password"] {
             width: 90%;
             padding: 10px;
@@ -116,13 +127,13 @@
             font-size: 16px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            background-color: white;
+            background-
             color: black;
         }
-        input[type="submit"] {
+        button[type="submit"] {
             display: block;
             margin-top: 10px; 
-            padding: 10px 50px;
+            padding: 10px;
             font-size: 16px;
             background-color: #007bff;
             color: #fff;
@@ -133,26 +144,28 @@
         button {
             display: block;
             margin-top: 10px; 
-            padding: 10px 60px;
+            padding: 10px;
             font-size: 16px;
             background-color: #007bff;
             color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-        }
-        a {
-            text-decoration: none;
-        }
-
+            }
         .video-player-container {
             margin-top: 10px;
             width: 100%;
             display: flex;
             justify-content: center;
         }
+        img {
+        width: 40%;
+        border-radius: 50%;
+        box-shadow: 0px 0px 23px 5px violet;
+        }
 
     </style>
+    
 </head>
 
 <body>
@@ -166,31 +179,36 @@
           <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
     </div>
     <br>
-  <h1>Registro de Novo Usuário</h1>
+    <h1>Perfil do Usuário</h1>
     <div class="video-container">
-  <form action="/register" method="post">
-            <label for="username">Nome de Usuário:</label>
-            <input type="text" placeholder="Insira o nome de Usuário" id="username" name="username" required><br>
-        
-            <label for="password">Senha:</label>
-            <input type="password" placeholder="Insira Sua Senha" id="password" name="password" required><br>
-        
-            <label for="key">Chave:</label>
-            <input type="text" id="key" placeholder="Insira Sua Key" name="key" required><br>
-             <center>
-            <input type="submit" value="Registrar" onclick="redirectToLogin()">
-             </center>
-          </form>
-          <center>
-             <a href="/entrar"><button>   Entrar   </button></a>
-          </center>
+    <center>
+    <img src="<%= user.ft %>">
+    </center>
+    <h3><%= user.username %></h3>
+    <br>
+    <center>
+
+    <form action="/edit/<%= user.username %>" method="post">
+    <label for="password">Nova Senha:</label>
+    <input type="password" id="password" placeholder="Senha atual: <%= user.password %>" name="password">
+    <label for="ft">Nova Foto:</label>
+    <input type="text" id="ft" placeholder="Exemplo: <%= user.ft %>" name="ft">
+    <center>
+    <button type="submit">   Salvar   </button>
+    </center>
+  </form>
+    </center>
     </div>
 
 
     <script>
         function toggleDarkTheme() {
             const body = document.querySelector('body');
+            const card = document.querySelector('.video-container ');
+            const cabeca = document.querySelector('.header');
             body.classList.toggle('dark-theme');
+            cabeca.classList.toggle('dark-theme');
+            card.classList.toggle('dark-theme');
         }
 
         function changeBackgroundColor() {
@@ -199,7 +217,14 @@
             body.style.backgroundColor = newColor;
         }
 
-        
+        function mostrarSenha() {
+            const senhaDiv = document.getElementById('senhaDiv');
+            if (senhaDiv.style.display === 'none') {
+                senhaDiv.style.display = 'block';
+            } else {
+                senhaDiv.style.display = 'none';
+            }
+        }
 
         function toggleMenu() {
             const menu = document.getElementById('menu');
@@ -210,5 +235,4 @@
         }
     </script>
 </body>
-
 </html>
