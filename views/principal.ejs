@@ -25,7 +25,7 @@
 }
 
 .dark-theme .video-container {
-  background-color: #222; /* Cor de fundo do contêiner de vídeo escuro */
+  background-color: #444; /* Cor de fundo do contêiner de vídeo escuro */
 }
 
 .dark-theme .header {
@@ -36,6 +36,9 @@
   background-color: #444; /* Cor de fundo do cabeçalho escuro */
 }
 
+.dark-theme .example {
+      background-color: #555;
+    }
 
         h1 {
             color: white;
@@ -68,14 +71,14 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-        }
+            }
 
         .menu-container button:hover {
             background-color: #0056b3;
         }
 
         .menu-toggle {
-            position: fixed;
+            position: absolute;
             top: 10px;
             left: 10px;
             font-size: 24px;
@@ -175,14 +178,8 @@
     align-items: center;
 }
 
-.image {
-    display: block;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border: 4px solid #FFFFFF;
-    box-sizing: border-box;
-}
+
+
 
 footer {
             background-color: blueviolet;
@@ -258,7 +255,7 @@ footer {
         }
         .header{
             background-color: var(--color-dark2);
-                display: flex;
+            display: flex;
     justify-content: space-between;
             padding: 0 10%;
             height: 3.5em;
@@ -283,7 +280,7 @@ footer {
             .btn_icon_header{
                 display: block;
                 border: none;
-                color: var(--color-white);
+                color: var(--color-gray);
                 cursor: pointer;
                 margin-left: 10px; /* Adicione margem entre o botão e o nome */
                 background-color: transparent;
@@ -361,12 +358,12 @@ h1 {
 }
 
 .image {
-    display: block;
-    width: 100%;
+    width: 80%;
     height: auto;
     object-fit: cover;
     border: 4px solid #FFFFFF;
     box-sizing: border-box;
+    border-radius:  50%;
 }
 
 /* Restante do código CSS permanece o mesmo */
@@ -460,6 +457,44 @@ footer {
     text-align: center;
     color: white;
   }
+  
+
+    p {
+      margin-bottom: 10px;
+      margin: 10px;
+      color: white;
+      text-align: center;
+    }
+    .aoba {
+      padding: 3px 5px;
+      font-size: 14px;
+      border-radius: 3px;
+      background-color: black;
+      color: green;
+      padding: 8px;
+      font-size: 14px;
+      text-align: initial;
+    }
+    .endpoint {
+      margin: 10px;
+      padding: 10px;
+      background-color: blueviolet;
+      border-radius: 7px;
+      text-align: initial;
+    }
+    .example {
+      background-color: blueviolet;
+      color: white;
+      padding: 10px;
+      border-radius: 7px;
+      margin: 10px;
+      text-align: initial;
+    }
+    .kik{
+      margin-top: 5px;
+      color: white;
+    }
+    
     </style>
 </head>
 
@@ -486,18 +521,169 @@ footer {
   </div>
     <br>
     <h1>Transformando imagens de anime em realidade.</h1>
+    <div class="video-container">
+    <div id="imagePerfil">
+    </div>
+    <center>
+    <img class="image" src='<%= user.ft %>'>
+    </center><br>
+    <h3>Ola @<%= user.username %> seja bem-vindo(a)</h3>
 
-    <div id="imageGallery"></div><br><br><br>
-<h1>Lista de Usuários</h1>
+    </div>
+    <br>
+      <h1>Documentação</h1>
+  <p>Essa API possui várias rotas disponíveis para realizar diferentes ações. Abaixo estão os detalhes de cada rota</p>
+
+  <!-- Rota anime/{command} -->
+  <div class="video-container">
+    <h2>Rota:<div class="aoba">/anime/{Tipo}?username=<%= user.username %>&key<%= user.key %></div></h2>
+    <h2>Tipos disponíveis</h2>
+    <p class="kik">
+      cosplay,
+waifu,
+waifu2,
+shota,
+loli,
+yotsuba,
+shinomiya,
+yumeko,
+tejina,
+chiho,
+shizuka,
+boruto,
+kagori,
+kaga,
+kotori,
+mikasa,
+akiyama,
+hinata,
+minato,
+naruto,
+nezuko,
+yuki,
+hestia,
+emilia,
+itachi,
+elaina,
+madara,
+sasuke,
+deidara,
+sakura,
+tsunade
+    </p>
+    <!-- Detalhes omitidos para simplificar -->
+  </div>
+
+  <!-- Rota nsfw/{command} -->
+  <div class="video-container">
+    <h2>Rota: <div class="aoba">/nsfw/{Tipo}?username=<%= user.username %>&key<%= user.key %></div></h2>
+        <h2>Tipos disponíveis</h2>
+    <p class="kik">
+ahegao,
+ass,
+bdsm,
+blowjob,
+cuckold,
+cum,
+ero,
+kasedaiki,
+femdom,
+foot,
+gangbang,
+glasses,
+hentai2,
+jahy,
+manga,
+masturbation,
+neko,
+orgy,
+panties,
+pussy,
+neko2,
+neko,
+tentacles,
+thighs,
+yuri,
+zettai
+    </p>
+    <!-- Detalhes omitidos para evitar conteúdo inapropriado -->
+  </div>
+
+  <!-- Rota anikit/ytmp4 -->
+  <div class="video-container">
+    <h2>Rota: <div class="aoba">/anikit/ytmp4</div></h2>
+    <!-- Detalhes omitidos para simplificar -->
+
+  <div class="example">
+    <p><strong>Exemplo de Requisição (ytmp4):</strong></p>
+    <div><div class="aoba">GET https://anikit-9yjf.onrender.com/anikit/ytmp4?username=<%= user.username %>&key<%= user.key %>&<br>videoUrl=https://www.youtube.com/watch?v=exemplo</div></div>
+    <p><strong>Exemplo de Resposta (ytmp4):</strong></p>
+    <div><div class="aoba">{"url": "https://exemplo.com/video_baixado.mp4"}</div></div>
+  </div>  </div>
+
+  <!-- Rota anikit/ytmp3 -->
+  <div class="video-container">
+    <h2>Rota: <div class="aoba">/anikit/ytmp3</div></h2>
+    <!-- Detalhes omitidos para simplificar -->
+
+  <div class="example">
+    <p><strong>Exemplo de Requisição (ytmp3):</strong></p>
+    <div><div class="aoba">GET https://anikit-9yjf.onrender.com/anikit/ytmp3?username=<%= user.username %>&key<%= user.key %>&<br>videoUrl=https://www.youtube.com/watch?v=exemplo</div></div>
+    <p><strong>Exemplo de Resposta (ytmp3):</strong></p>
+    <div><div class="aoba">{"url": "https://exemplo.com/audio_baixado.mp3"}</div></div>
+  </div>  </div>
+
+  <!-- Rota anikit/playmp4 -->
+  <div class="video-container">
+    <h2>Rota: <div class="aoba">/anikit/playmp4</div></h2>
+    <!-- Detalhes omitidos para simplificar -->
+
+  <div class="example">
+    <p><strong>Exemplo de Requisição (playmp4):</strong></p>
+    <div><div class="aoba">GET https://anikit-9yjf.onrender.com/anikit/playmp4?username=<%= user.username %>&key<%= user.key %>&<br>query=nome_musica</div></div>
+    <p><strong>Exemplo de Resposta (playmp4):</strong></p>
+    <div><div class="aoba">{<br>
+  "title": "titulo",<br>
+  "thumb": "https://i.ytimg.com/vi/humb.jpg",<br>
+  "channel": "@clovermods",<br>
+  "published": "1822-08-09",<br>
+  "views": "1B",<br>
+  "url": "https://exemplo.com/audio_reproduzido.mp4"
+  <br>}</div></div>
+  </div>  </div>
+
+  <!-- Rota anikit/playmp3 -->
+  <div class="video-container">
+    <h2>Rota: <div class="aoba">/anikit/playmp3</div></h2>
+    <!-- Detalhes omitidos para simplificar -->
+
+  <div class="example">
+    <p><strong>Exemplo de Requisição (playmp3):</strong></p>
+    <div><div class="aoba">GET https://anikit-9yjf.onrender.com/anikit/playmp3?username=<%= user.username %>&key<%= user.key %>&<br>query=nome_musica</div></div>
+    <p><strong>Exemplo de Resposta (playmp3):</strong></p>
+    <div><div class="aoba">{<br>
+  "title": "titulo",<br>
+  "thumb": "https://i.ytimg.com/vi/humb.jpg",<br>
+  "channel": "@clovermods",<br>
+  "published": "1822-08-09",<br>
+  "views": "1B",<br>
+  "url": "https://exemplo.com/audio_reproduzido.mp3"
+  <br>}</div></div>
+  </div>  </div>
+    <br>
+<h1>Lista de Usuários com mais saldo</h1>
     <div class="video-container">
 <center>
-  <% users.forEach(function(users) { %><br>
-    <div class="user-info">
-      <img class="user-photo" src="<%= users.ft %>" alt="Foto do Usuário">
-      <div class="user-name"><%= users.username %></div>
-    </div><hr>
-  <% }); %>
-  <center>
+<% topUsers.sort((a, b) => b.saldo - a.saldo).forEach(function(user) { %><br>
+  <div class="user-info">
+    <img class="user-photo" src="<%= user.ft %>" alt="Foto do Usuário">
+    <div class="user-name">@<%= user.username %>: <%= user.saldo %></div>
+  </div><hr>
+<% }); %>
+
+</center>
+
+
   </div>
   <br><br>
     <footer>
@@ -507,6 +693,46 @@ footer {
     <script>
 
     // ... outros códigos ...
+// arquivo.js
+
+// Função para carregar o arquivo JSON de usuários
+function carregarUsuarios(callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.overrideMimeType("application/json");
+  xhr.open("GET", "../data/users.json", true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status == "200") {
+      var data = JSON.parse(xhr.responseText);
+      callback(data.users);
+    }
+  };
+  xhr.send(null);
+}
+
+// Função para exibir os 7 usuários com os saldos mais altos
+function exibirTop7Usuarios() {
+  carregarUsuarios(function (usuarios) {
+    usuarios.sort(function (a, b) {
+      return b.saldo - a.saldo;
+    });
+    var topUsers = usuarios.slice(0, 7);
+
+    var tabelaUsuarios = document.getElementById("tabela-usuarios");
+
+    topUsers.forEach(function (user) {
+      var row = tabelaUsuarios.insertRow();
+      var nomeCell = row.insertCell(0);
+      var saldoCell = row.insertCell(1);
+
+      nomeCell.innerHTML = user.username;
+      saldoCell.innerHTML = user.saldo;
+    });
+  });
+}
+
+// Chama a função para exibir os 7 usuários com os saldos mais altos
+//exibirTop7Usuarios();
+
 
     function getURLParams() {
             const searchParams = new URLSearchParams(window.location.search);
@@ -591,11 +817,12 @@ updateImage();
             const card = document.querySelector('.video-container ');
             const cabeca = document.querySelector('.header');
             const footer = document.querySelector('footer');
+            const endpoint = document.querySelector('.endpoint')
             body.classList.toggle('dark-theme');
             cabeca.classList.toggle('dark-theme');
             card.classList.toggle('dark-theme');
             footer.classList.toggle('dark-theme');
-       
+            endpoint.classList.toggle('dark-theme');
         }
 
         function changeBackgroundColor() {
