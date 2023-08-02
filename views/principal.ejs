@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -745,7 +745,7 @@ function exibirTop7Usuarios() {
         function redirectToProfile() {
             const { username, key } = getURLParams();
             if (username && key) {
-                const profileUrl = `/perfil/${username}?key=${key}`;
+                const profileUrl = `/perfil/${username}/${key}?key=${key}`;
                 window.location.href = profileUrl;
             } else {
                 alert('Nome de usuário ou chave não fornecidos na URL.');
@@ -754,9 +754,10 @@ function exibirTop7Usuarios() {
 
     // ... outros códigos ...
       // Função para atualizar a imagem
+      /*
 function updateImage() {
     // Fazer uma solicitação para a API de imagens de animes
-    fetch('https://appp--trevodev.repl.co/anime/elaina?username=SUPREMO&key=SER_SUPREMO')
+    fetch('https://appp--trevodev.repl.co/anime/elaina?username=SUPREMO&key=key')
         .then(response => response.json())
         .then(data => {
             const imageGallery = document.getElementById('imageGallery');
@@ -807,6 +808,8 @@ imageContainer.appendChild(downloadButton);
         })
         .catch(error => console.log(error));
 }
+*/
+
 
 // Chamar a função para exibir a primeira imagem
 updateImage();
