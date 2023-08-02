@@ -1,9 +1,46 @@
 {
   "users": [
     {
-      "username": "Dj",
-      "password": "dhdhddufff",
-      "key": "Djdfhhf"
+      "username": "SUPREMO",
+      "password": "adm",
+      "key": "SER_SUPREMO",
+      "saldo": 790,
+      "ft": "https://telegra.ph/file/76f6d2796831fc93d983d.jpg"
+    },
+    {
+      "username": "Alma Negra",
+      "password": "am",
+      "key": "Am",
+      "saldo": 300,
+      "ft": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSx4nmp0N84lMOTniYBSTr9yNQi4jmDmly2UoQ-UE1zKJP-S6KOetWNN6lY&s=10"
+    },
+    {
+      "username": "Lkz",
+      "password": "12345",
+      "key": "Hg",
+      "saldo": "2000",
+      "ft": "https://telegra.ph/file/f932f56e19397b0c7c448.jpg"
+    },
+    {
+      "username": "Pe de pano da net",
+      "password": "panopreto",
+      "key": "Pe",
+      "saldo": "173",
+      "ft": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH7UeVSJfnSN7GLphWzJE-LLyDV5y-Og_0wA&usqp=CAU"
+    },
+    {
+      "username": "Clover",
+      "password": "cm",
+      "key": "Clover",
+      "saldo": "7000",
+      "ft": "https://telegra.ph/file/a06e4c0191ecabd302df8.jpg"
+    },
+    {
+      "username": "xxAlan 愛",
+      "password": "ALANLOGIN",
+      "key": "ALANKEYXX",
+      "saldo": 13997,
+      "ft": "https://telegra.ph/file/f932f56e19397b0c7c448.jpg"
     }
   ]
 }
