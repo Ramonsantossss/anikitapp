@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="pt-bor">
+<html lang="pt-br">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <head>
-    <title>Registrar</title>
+    <title>Login</title>
     <style>
         *{
           margin: 0;
@@ -15,10 +15,18 @@
             background-color: #333;
         }
 
-        body.dark-theme {
-            background-color: #222;
-            color: #fff;
-        }
+        .dark-theme {
+  background-color: #333; /* Cor de fundo escuro */
+  color: #fff; /* Cor do texto escuro */
+}
+
+.dark-theme .video-container {
+  background-color: #222; /* Cor de fundo do contêiner de vídeo escuro */
+}
+
+.dark-theme .header {
+  background-color: #444; /* Cor de fundo do cabeçalho escuro */
+}
 
         h1 {
             color: white;
@@ -122,13 +130,29 @@
         input[type="submit"] {
             display: block;
             margin-top: 10px; 
-            padding: 10px 50px;
+            padding: 10px;
             font-size: 16px;
-            background-color: #007bff;
+            background-color: #444;
             color: #fff;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+        }
+        input[type="key"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            color: black;
+        }
+        .video-player-container {
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
         }
         button {
             display: block;
@@ -140,16 +164,6 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-        }
-        a {
-            text-decoration: none;
-        }
-
-        .video-player-container {
-            margin-top: 10px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
         }
 
     </style>
@@ -166,35 +180,31 @@
           <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
     </div>
     <br>
-  <h1>Registro de Novo Usuário</h1>
+  <h1>Login</h1>
     <div class="video-container">
-  <form action="/register" method="post">
-            <label for="username">Nome de Usuário:</label>
-            <input type="text" placeholder="Insira o nome de Usuário" id="username" name="username" required><br>
-        
-            <label for="password">Senha:</label>
-            <input type="password" placeholder="Insira Sua Senha" id="password" name="password" required><br>
-        
-            <label for="key">Chave:</label>
-            <input type="text" id="key" placeholder="Insira Sua Key" name="key" required><br>
-            
-            <label for="numero">Numero::</label>
-            <input type="text" id="numero" placeholder="Insira Seu Número" name="numero" required><br>
-             <center>
-            <input type="submit" value="Registrar" onclick="redirectToLogin()">
-             </center>
-          </form>
-          <center>
-             <a href="/entrar"><button>   Entrar   </button></a>
-    <p>Coloque o numero sem espaço, sem caracteres especiais e sem o 9 da operadora</p><p>Exemplo: 557599281755</p>
-          </center>
+  <form action="/login" method="POST">
+    <label for="username">Nome de Usuário:</label>
+    <input type="text" id="username" name="username">
+    <label for="password">Senha:</label>
+    <input type="password" id="password" name="password">
+    <label for="key">ApiKey:</label>
+    <input type="text" id="key" name="key">
+    <center>
+    <button type="submit">Entrar</button>
+    </center>
+  </form>
     </div>
 
 
     <script>
         function toggleDarkTheme() {
-            const body = document.querySelector('body');
+                        const body = document.querySelector('body');
+            const card = document.querySelector('.video-container ');
+            const cabeca = document.querySelector('.header');
             body.classList.toggle('dark-theme');
+            cabeca.classList.toggle('dark-theme');
+            card.classList.toggle('dark-theme');
+       
         }
 
         function changeBackgroundColor() {

@@ -12,7 +12,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #C8A2C8;
+            background-color: #444;
         }
 
         .dark-theme {
@@ -76,7 +76,7 @@
             
         }
         .header{
-            background-color: blueviolet;
+            background-color: #444;
             justify-content: space-between;
             padding: 0 10%;
             height: 3.5em;
@@ -100,7 +100,7 @@
             max-width: 99%;
             margin: 20px auto;
             margin: 15px;
-            background-color: #b040ff;
+            background-color: #333;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             padding: 20px;
             border-radius: 8px;
@@ -176,7 +176,7 @@
   <h1>Lista de Logins</h1>
     <div class="video-container">
 <hr><br>
-    <% users.forEach((user) => { %>
+    <% users.readUsers((user) => { %>
       
         <span>Nome de usuário: <%= user.username %></span><br>
         <span>Senha: <%= user.password %></span><br>

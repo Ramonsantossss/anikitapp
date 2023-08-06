@@ -16,7 +16,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #C8A2C8;
+            background-color: #333;
         }
 
 .dark-theme {
@@ -98,7 +98,7 @@
         }
 
         .header {
-            background-color: blueviolet;
+            background-color: #444;
             justify-content: space-between;
             padding: 0 10%;
             height: 3.5em;
@@ -125,7 +125,7 @@
             max-width: 99%;
             margin: 20px auto;
             margin: 15px;
-            background-color: blueviolet;
+            background-color: #444;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
             padding: 20px;
             border-radius: 8px;
@@ -182,7 +182,7 @@
 
 
 footer {
-            background-color: blueviolet;
+            background-color: #444;
             color: #fff;
             padding: 10px;
             text-align: center;
@@ -233,7 +233,7 @@ footer {
          :root{
             --color-white: #fff;
             --color-dark1: rgb(39, 39, 39);
-            --color-dark2: #4B0082;
+            --color-dark2: #444;
             --color-dark3: #414141;
             --color-dark4: #1c1c1c;
             --color-dark5: #343434;
@@ -327,7 +327,7 @@ footer {
             to {margin-left: -10vw;}
         }
         body {
-    background-color: #C8A2C8;
+    background-color: #333;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
@@ -416,7 +416,7 @@ h1 {
   margin: 15px;
 }
 footer {
-            background-color: #4B0082;
+            background-color: #444;
             color: #fff;
             padding: 10px;
             text-align: center;
@@ -478,12 +478,12 @@ footer {
     .endpoint {
       margin: 10px;
       padding: 10px;
-      background-color: blueviolet;
+      background-color: #444;
       border-radius: 7px;
       text-align: initial;
     }
     .example {
-      background-color: blueviolet;
+      background-color: #444;
       color: white;
       padding: 10px;
       border-radius: 7px;
@@ -745,7 +745,7 @@ function exibirTop7Usuarios() {
         function redirectToProfile() {
             const { username, key } = getURLParams();
             if (username && key) {
-                const profileUrl = `/perfil/${username}/${key}?key=${key}`;
+                const profileUrl = `/login`;
                 window.location.href = profileUrl;
             } else {
                 alert('Nome de usuário ou chave não fornecidos na URL.');
