@@ -671,13 +671,13 @@ zettai
   <br>}</div></div>
   </div>  </div>
     <br>
-<h1>Lista de Usuários com mais saldo</h1>
+<h1>Lista de Usuários Mais Ativos</h1>
     <div class="video-container">
 <center>
-<% topUsers.sort((a, b) => b.saldo - a.saldo).forEach(function(user) { %><br>
+<% topUsers.sort((a, b) => b.total - a.total).forEach(function(user) { %><br>
   <div class="user-info">
     <img class="user-photo" src="<%= user.ft %>" alt="Foto do Usuário">
-    <div class="user-name">@<%= user.username %>: <%= user.saldo %></div>
+    <div class="user-name">@<%= user.username %>: <%= user.total %></div>
   </div><hr>
 <% }); %>
 
