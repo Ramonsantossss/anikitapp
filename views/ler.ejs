@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Mangás</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin: 14px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.0);
+      border-radius: 8px;
+      background-color: rgba(28, 28, 28);
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    h2 {
+      margin-top: 20px;
+      font-size: 24px;
+      color: white;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+    }
+
+    li {
+      background-color: #fff;
+      border-radius: 0px;
+      padding: 20px;
+      margin-bottom: 2px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    p {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: #666;
+    }
+
+    a {
+      text-decoration: none;
+      font-size: 24px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 20px 0;
+    }
+    .comentario {
+    background-color: rgba(28, 28, 28);
+    margin: 7px
+    }
+    
+    a h1 {
+      font-size: 24px;
+      color: white;
+      text-align: center;
+
+    }
+    
+    .btn-show-chapters {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 7px 80px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 24px;
+    }
+
+
+
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Capítulo <%= info.chapter_number %></h2>
+  <ul>
+    <% fotos.forEach(manga => { %>
+      <li>
+          <img src="<%= manga.legacy %>" alt="Imagem do Manga">
+      </li>
+    <% }); %>
+<center>
+<hr>
+     <button class="btn-show-chapters">
+  <a style="color: white;" href="/ler/<%= info.next_chapter.release_id %>"
+  <h2>Capítulo <%= info.next_chapter.number %></h2>
+  </a>
+     </button><hr>
+  </center>
+  </ul><br>
+  
+  <br>
+<!-- Coloque este código antes da tag </body> -->
+<div class="comentario" id="disqus_thread"></div>
+<script>
+(function() {
+    var disqus_config = function () {
+        this.page.url = window.location.href; // Pega a URL da página atual
+        this.page.identifier = 'IDENTIFICADOR_UNICO'; // Um identificador exclusivo para a página
+    };
+
+    var d = document, s = d.createElement('script');
+    s.src = 'https://manganime-7.disqus.com/embed.js'; // Substitua SEU_SHORTNAME pelo seu "shortname"
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+</div>
+</body>
+</html>

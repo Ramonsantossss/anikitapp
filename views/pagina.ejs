@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Mangás</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      
+      background-color: #2c2c2c;
+      color: white;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 24px;
+      color: white;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: nowrap; /* Impede quebra de linha */
+      text-align: center;
+      overflow-x: auto; /* Adiciona scroll horizontal */
+    }
+
+    li {
+      background-color: #1c1c1c;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 5px;
+      margin-right: 15px; /* Espaçamento entre os mangás */
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      min-width: 300px; /* Largura mínima para o mangá */
+      text-align: center;
+    }
+    .div {
+    
+    display: flex;
+    align-items: flex-start; /* Centralizar verticalmente */
+    }
+    .manga-info {
+      margin-left: 20px;
+      display: none; /* Inicialmente oculto */
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 5px;
+      color: white;
+      text-align: center;
+    }
+    
+    .nome {
+      margin-left: 20px;
+      margin: 20px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 7px;
+    }
+    p {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: white;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    img {
+      max-width: 100px;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 20px 0;
+    }
+
+    .show-info {
+      margin-top: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .description {
+      display: none;
+      text-align: left;
+      margin-top: 10px;
+      font-size: 14px;
+      color: white;
+      text-align: center;
+    }
+
+    .show-info.active {
+      background-color: #0056b3;
+    }
+
+    .show-info.active + .description {
+      display: block;
+    }
+    .div_2 {
+    display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lista de Mangás</h1>
+  <br><br>
+ <h3 class"nome">    • Lançados Recentemente</h3>
+  <ul>
+    <% info.forEach(manga => { %>
+      <li>
+      <div class="div">
+        <img src="<%= manga.image %>" alt="Capa do Manga">
+      <div class"div_2">
+          <p>Autor: <%= manga.author %></p>
+          <p>Categorias: <%= manga.categories.join(', ') %></p>
+          <p>Score: <%= manga.score %></p>
+          <a href="/manga/<%= manga.id %>?foto=<%= manga.image %>">
+          <button class="show-info">
+          Capítulos
+          </button>
+          </a>
+       </div>
+       </div>
+        <div class="manga-info">
+          <h2><%= manga.name %></h2>
+
+          <div class="description">
+            <p>Descrição: <%= manga.description %></p>
+          </div>
+        </div>
+      </li>
+      <hr>
+    <% }); %>
+  </ul>
+  <br><br>
+  <h3 class"nome">   • Mais Vistos</h3>
+  <ul>
+    <% data.forEach(manga => { %>
+      <li>
+      <div class="div">
+        <img src="<%= manga.image %>" alt="Capa do Manga">
+      <div class"div_2">
+          <p>Autor: <%= manga.author %></p>
+          <p>Categorias: <%= manga.categories.join(', ') %></p>
+          <p>Score: <%= manga.score %></p>
+          <a href="/manga/<%= manga.id %>?foto=<%= manga.image %>">
+          <button class="show-info">
+          Capítulos
+          </button>
+          </a>
+       </div>
+       </div>
+        <div class="manga-info">
+          <h2><%= manga.name %></h2>
+
+          <div class="description">
+            <p>Descrição: <%= manga.description %></p>
+          </div>
+        </div>
+      </li>
+      <hr>
+    <% }); %>
+  </ul>
+  
+  <script>
+    const showInfoButtons = document.querySelectorAll('.show-info');
+
+    showInfoButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const mangaInfo = button.closest('.manga-info');
+        const description = mangaInfo.querySelector('.description');
+        description.classList.toggle('active');
+        button.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Mangá</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      margin: 14px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.0);
+      border-radius: 8px;
+      background-color: rgba(28, 28, 28);
+    }
+
+    h1 {
+      margin-top: 0;
+      color: #007bff;
+      text-align: center;
+    }
+    h2 {
+      margin-top: 0;
+      color: #007bff;
+      text-align: center;
+    }
+    h3 {
+      margin-top: 7px;
+      color: white;
+      text-align: center;
+    }
+    
+    .oi {
+    display: flex;
+    
+    padding: 20px;
+    border-radius: 7px;
+    }
+    
+    img {
+      max-width: 50%;
+      height: auto;
+      border-radius: 7px;
+      float: right;
+      margin-left: 20px;
+    }
+
+    .btn-show-chapters {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 20px;
+    }
+
+    .chapters-alert {
+      display: none;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .chapters-content {
+      padding: 0px 10px;
+      border-radius: 7px;
+      max-width: 100%;
+      border-radius: 7px;
+    }
+
+    .chapters-content h2 {
+      margin-top: 0;
+      color: #007bff;
+    }
+
+    .chapters-content ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .chapters-content li {
+      margin-bottom: 0px;
+      box-shadow: 0 0 2px rgba(220, 220, 220);
+      padding-bottom: 10px;
+      border-radius: 7px;
+      margin-top: 2%;
+    }
+    span {
+    margin-top: 7px;
+    }
+    .chapters-content a {
+      color: #333;
+      text-decoration: none;
+      display: block;
+    }
+
+    .chapters-content p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+      text-align: left;
+    }
+
+    .close-button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+    .chapter-list {
+      list-style: none;
+      padding: 10;
+      display: none;
+      margin: 0 auto;
+
+    }
+    .capi li{
+      background-color: #1c1c1c;
+      color: white;
+      margin: 0;
+    }
+    .chapter-list.active {
+      display: block;
+    }
+
+    .chapter-list li {
+      margin-bottom: 10px;
+    }
+
+    .chapter-info {
+      margin-left: 20px;
+    }
+
+    .chapter-info a {
+      text-decoration: none;
+      color: white;
+    }
+
+    .chapter-number {
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      
+    }
+    .chapter-date {
+      font-size: 14px;
+      color: gray;
+    }
+    .comentarios {
+    margin: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="oi">
+    <h3><%= info.name %></h3>
+    <img src="<%= foto %>" alt="Capa do Mangá">
+    </div>
+    <center>
+    <button class="btn-show-chapters">Ocultar Lista de Capítulos</button>
+    </center>
+    <div class="chapters-content">
+    <h2></h2>
+    <hr>
+      <ul class="chapter-list active">
+      <div class="capi">
+        <% info.chapters.forEach(manga => { %>
+              <a href="/ler/<%= manga.id_release %>">
+          <li>
+          <center>
+            <span class="chapter-number">Capítulo <%= manga.number %></span>
+          </center>
+            <div class="chapter-info">
+                <p><%= manga.chapter_name %></p>
+                <p class="chapter-date">Data <%= manga.date %></p>
+
+            </div>
+          </li>
+              </a>
+        <% }); %>
+      </div>
+      </ul>
+      <hr>
+    </div><br><br>
+    <h2>Comentários</h2>
+    <h3>cuidado com os spoilers</h3>
+    <!-- Coloque este código antes da tag </body> -->
+<div class="comentarios" id="disqus_thread"></div>
+<script>
+(function() {
+    var disqus_config = function () {
+        this.page.url = window.location.href; // Pega a URL da página atual
+        this.page.identifier = 'IDENTIFICADOR_UNICO'; // Um identificador exclusivo para a página
+    };
+
+    var d = document, s = d.createElement('script');
+    s.src = 'https://manganime-7.disqus.com/embed.js'; // Substitua SEU_SHORTNAME pelo seu "shortname"
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+})();
+</script>
+    <br><br>
+  </div>
+
+  <script>
+    const btnShowChapters = document.querySelector('.btn-show-chapters');
+    const chapterList = document.querySelector('.chapter-list');
+    
+    btnShowChapters.addEventListener('click', () => {
+      chapterList.classList.toggle('active');
+      if (chapterList.classList.contains('active')) {
+        btnShowChapters.textContent = 'Esconder Lista de Capítulos';
+      } else {
+        btnShowChapters.textContent = 'Mostrar Lista de Capítulos';
+      }
+    });
+  </script>
+</body>
+</html>
