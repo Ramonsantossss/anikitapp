@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+  <title>Lista de Mangás</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #2c2c2c;
+      color: white;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 24px;
+      color: white;
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: nowrap; 
+      text-align: center;
+      overflow-x: auto;
+    }
+
+    li {
+      background-color: #333;
+      border-radius: 8px;
+      padding: 7px;
+      margin: 5px;
+      margin-right: 12px;
+      box-shadow: 0 0 5px black;
+      min-width: 300px;
+      text-align: center;
+    }
+    .div {
+      display: flex;
+      align-items: flex-start;
+    }
+    .manga-info {
+      margin-left: 20px;
+      display: none;
+    }
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 5px;
+      color: white;
+      text-align: center;
+    }
+
+    .nome {
+      margin-left: 20px;
+      margin: 26px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 7px;
+    }
+    p {
+      font-size: 14px;
+      margin-bottom: 10px;
+      color: white;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    img {
+      max-width: 100px;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 20px 0;
+    }
+
+    .show-info {
+      margin-top: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      text-align: center;
+    }
+
+    .description {
+      display: none;
+      text-align: left;
+      margin-top: 10px;
+      font-size: 14px;
+      color: white;
+      text-align: center;
+    }
+
+    .show-info.active {
+      background-color: #0056b3;
+    }
+
+    .show-info.active + .description {
+      display: block;
+    }
+    .div_2 {
+      display: block;
+    }
+    
+    /* Estilos do menu lateral */
+    .menu-container {
+      position: absolute;
+      top: 0;
+      left: -100%;
+      height: 100%;
+      width: 180px;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      transition: left 0.3s ease-in-out;
+    }
+
+    .menu-container.show-menu {
+      left: 0;
+    }
+
+    .menu-container button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .menu-container button:hover {
+      background-color: #0056b3;
+    }
+
+    .menu-toggle {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      display: block;
+      color: white;
+    }
+
+    /* Estilos do cabeçalho */
+    .btn_icon_header {
+      font-size: 24px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: white;
+      margin-left: auto;
+    }
+
+    .header {
+      background-color: #444;
+      justify-content: space-between;
+      padding: 0 10%;
+      height: 3.5em;
+      margin: 0;
+      box-shadow: 1px 1px 4px black;
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-toggle.hide-menu {
+      display: none;
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .video-container {
+      margin-left: 200px;
+      max-width: 99%;
+      margin: 20px auto;
+      margin: 15px;
+      background-color: #444;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      border-radius: 8px;
+      color: white;
+      box-shadow: 1px 1px 1px black;
+    }
+
+    .logo_header {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+      font-size: 21px;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    /* Estilo para a imagem de perfil no botão */
+    .profile-image {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    /* Estilo para o ícone do usuário do Font Awesome */
+    .btn_icon_header {
+      font-family: 'Font Awesome 5 Free';
+      font-size: 21px;
+      margin-left: auto;
+    }
+
+    i {
+      color: white;
+    }
+
+    .logo_header {
+      display: flex;
+      align-items: center;
+    }
+    
+    .img_logo_header {
+      width: 45px;
+    }
+
+    .header,
+    .navigation_header {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .header {
+      background-color: var(--color-dark2);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10%;
+      height: 3.5em;
+    }
+
+    .navigation_header {
+      position: absolute;
+      flex-direction: column !important;
+      top: 0;
+      height: 100%;
+      width: 35vw;
+      padding: 1em;
+      animation-duration: 1s;
+      margin-left: -100vw;
+    }
+
+    .btn_icon_header {
+      display: block;
+      border: none;
+      color: var(--color-gray);
+      cursor: pointer;
+      margin-left: 10px;
+      background-color: transparent;
+    }
+
+    .content {
+      padding-top: 5em;
+      text-align: center;
+      height: 100vh;
+      transition: 1s;
+    }
+
+    .navigation_header a {
+      text-decoration: none;
+      color: var(--color-purple);
+      transition: 1s;
+      font-weight: bold;
+    }
+
+    .navigation_header a:hover {
+      color: var(--color-white);
+    }
+
+    .active {
+      background: var(--color-dark3);
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .o {
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+    <div class="menu-container" id="menu">
+        <span class="close-button" onclick="toggleMenu()">&#10006;</span>
+        <br>
+        <hr><br>
+        <button onclick="toggleDarkTheme()">Tema Escuro</button>
+        <button onclick="changeBackgroundColor()">Mudar Cor</button>
+    </div>
+    <div class="header">
+          <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
+<div class="logo_header">
+      <button onclick="redirectToProfile()" class="btn_icon_header">
+          <!-- Ícone de pesquisa -->
+          <i class="fas fa-search"></i>
+      </button>
+    </div>
+    </div>
+    <br>
+  <br><br>
+  <div class="o">
+ <h3 class"nome">    • Lançados Recentemente</h3>
+ </div>
+  <ul>
+    <% info.forEach(manga => { %>
+      <li>
+      <div class="div">
+        <img src="<%= manga.image %>" alt="Capa do Manga">
+      <div class"div_2">
+          <h4><%= manga.name %></h4>
+          <p class="categories">Categorias:<%= manga.categories ? manga.categories.join(', ') : '' %></p>
+          <p>Score: <%= manga.score %></p>
+          <a href="/manga/<%= manga.id %>?foto=<%= manga.image %>">
+          <button class="show-info">
+          Capítulos
+          </button>
+          </a>
+       </div>
+       </div>
+        <div class="manga-info">
+          <h2><%= manga.name %></h2>
+
+          <div class="description">
+            <p>Descrição: <%= manga.description %></p>
+          </div>
+        </div>
+      </li>
+      <hr>
+    <% }); %>
+  </ul>
+  <br><br>
+  <div class="o">
+ <h3 class"nome">    • Mais Vistos</h3>
+ </div>
+  <ul>
+    <% data.forEach(manga => { %>
+      <li>
+      <div class="div">
+        <img src="<%= manga.image %>" alt="Capa do Manga">
+      <div class"div_2">
+          <h4><%= manga.name %></h4>
+          <p>Categorias: <%= manga.categories.join(', ') %></p>
+          <p>Score: <%= manga.score %></p>
+          <a href="/manga/<%= manga.id %>?foto=<%= manga.image %>">
+          <button class="show-info">
+          Capítulos
+          </button>
+          </a>
+       </div>
+       </div>
+        <div class="manga-info">
+          <h2><%= manga.name %></h2>
+
+          <div class="description">
+            <p>Descrição: <%= manga.description %></p>
+          </div>
+        </div>
+      </li>
+      <hr>
+    <% }); %>
+  </ul>
+  
+  <script>
+  
+  function redirectToProfile() {
+                const profileUrl = `/search`;
+                window.location.href = profileUrl;
+        }
+        
+        
+    const showInfoButtons = document.querySelectorAll('.show-info');
+
+    showInfoButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const mangaInfo = button.closest('.manga-info');
+        const description = mangaInfo.querySelector('.description');
+        description.classList.toggle('active');
+        button.classList.toggle('active');
+      });
+    });
+function toggleMenu() {
+            const menu = document.getElementById('menu');
+            const menuToggle = document.querySelector('.menu-toggle');
+
+            menu.classList.toggle('show-menu');
+            menuToggle.classList.toggle('hide-menu');
+        }
+  </script>
+</body>
+</html>
