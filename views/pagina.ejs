@@ -1,195 +1,516 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!Doctype html>
+<html lang="pt">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista de Mangás</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      
-      background-color: #2c2c2c;
-      color: white;
-    }
-
-    h1 {
-      margin-top: 20px;
-      font-size: 24px;
-      color: white;
-      text-align: center;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: nowrap; /* Impede quebra de linha */
-      text-align: center;
-      overflow-x: auto; /* Adiciona scroll horizontal */
-    }
-
-    li {
-      background-color: #1c1c1c;
-      border-radius: 8px;
-      padding: 20px;
-      margin: 5px;
-      margin-right: 15px; /* Espaçamento entre os mangás */
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-      min-width: 300px; /* Largura mínima para o mangá */
-      text-align: center;
-    }
-    .div {
-    
-    display: flex;
-    align-items: flex-start; /* Centralizar verticalmente */
-    }
-    .manga-info {
-      margin-left: 20px;
-      display: none; /* Inicialmente oculto */
-    }
-
-    h2 {
-      font-size: 20px;
-      margin-bottom: 5px;
-      color: white;
-      text-align: center;
-    }
-    
-    .nome {
-      margin-left: 20px;
-      margin: 20px;
-      margin-bottom: 10px;
-      font-size: 18px;
-      font-weight: bold;
-      margin: 7px;
-    }
-    p {
-      font-size: 14px;
-      margin-bottom: 10px;
-      color: white;
-      text-align: center;
-    }
-
-    a {
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      text-align: center;
-    }
-
-    img {
-      max-width: 100px;
-      height: auto;
-      border-radius: 4px;
-    }
-
-    hr {
-      border: none;
-      border-top: 1px solid #ccc;
-      margin: 20px 0;
-    }
-
-    .show-info {
-      margin-top: 10px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 5px 10px;
-      font-size: 14px;
-      cursor: pointer;
-      border-radius: 4px;
-      text-align: center;
-    }
-
-    .description {
-      display: none;
-      text-align: left;
-      margin-top: 10px;
-      font-size: 14px;
-      color: white;
-      text-align: center;
-    }
-
-    .show-info.active {
-      background-color: #0056b3;
-    }
-
-    .show-info.active + .description {
-      display: block;
-    }
-    .div_2 {
-    display: block;
-    }
-  </style>
+   <title>AndManga</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width">
+   <link rel="stylesheet" href="./styles.css" type="text/css">
+   <link rel="stylesheet" href="./animations.css" type="text/css">
+   <meta name="author" content="Tchialo Armando">
 </head>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin: 0;
+    font-size: 13px;
+    background-color: #3c3c3c;
+}
+
+
+.header-main {
+    border: 0 0 1px solid white;
+    padding: 15px;
+    box-shadow: 1px 1px 2px white;
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+
+.header-main::after {
+    display: table;
+    clear: both;
+}
+
+.logo-text {
+    color: dodgerblue;
+    font-size: 18px;
+    font-weight: bold;
+    font-style: italic;
+    letter-spacing: 4px;
+    position: relative;
+    top: 5px;
+}
+
+.search-div {
+    float: right;
+    width: 40%;
+    position: relative;
+}
+
+.search-form input[type=text] {
+    padding: 8px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    width: 100%;
+    border-width: 0px;
+    outline: 0px;
+    background-image: url(../images/interface/search.svg);
+    background-repeat: no-repeat;
+    background-position: 10px;
+    background-size: 18px;
+    padding-left: 40px;
+}
+
+.float-clear {
+    clear: both;
+}
+
+footer {
+    bottom: 0px;
+    width: 100%;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 6px 2px black;
+}
+
+footer .header {
+    font-size: small;
+    padding: 8px 12px;
+    color: white;
+    text-align: right;
+    background-color: black;
+    box-shadow: 0px 0px 4px black;
+    cursor: pointer;
+}
+.mangas-container {
+    display: flex;
+    padding: 10px 10px;
+    max-height: 200px;
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: space-between;
+}
+
+.mangas-container.vertical{
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+    justify-content: space-around;
+}
+
+.mangas-container .manga {
+    padding: 5px;
+    box-shadow: 0px 0px 3px gray;
+    display: inline-block;
+    margin: 5px;
+    transition: all .3s ease;
+    cursor: pointer;
+}
+
+.mangas-container .manga:hover {
+    transform: scale(1.1);
+}
+
+.mangas-container .manga:hover .title {
+    background-color: dodgerblue;
+    box-shadow: 0px 0px 2px dodgerblue;
+}
+
+.mangas-container .manga .cover {
+    padding: 4px;
+    width: 100px;
+    height: 100px;
+}
+
+.mangas-container .manga .title {
+    color: white;
+    padding: 4px;
+    text-align: center;
+    background-color: black;
+    box-shadow: 0px 0px 2px black;
+}
+
+.mangas-container .manga .chapters {
+   font-size: x-small;
+   text-align: center;
+   padding: 5px 0;
+   color: gray;
+}
+
+.mangas-container .manga.highlight:hover .title {
+    background-color: dodgerblue;
+    box-shadow: 0px 0px 2px dodgerblue;
+}
+
+.mangas-container .manga.highlight .cover {
+    padding: 4px;
+    width: 100px;
+    height: 100px;
+}
+
+.mangas-container .manga.highlight .title {
+    color: white;
+    padding: 4px;
+    text-align: center;
+    background-color: black;
+    box-shadow: 0px 0px 2px ;
+}
+
+.menu-div {
+    float: left;
+    margin-right: 15px;
+    position: relative;
+}
+
+.menu-div .btn-menu {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    transition: all .8s ease;
+}
+
+.menu-div .btn-menu:hover {
+    background-color: rgba(255, 101, 101, 0.281);
+    transform: rotate(180deg);
+}
+
+.header-main .menu {
+    display: none;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0px 0px 3px gray;
+    position: absolute;
+}
+
+.header-main .menu ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.header-main .menu ul li {
+    padding: 8px 10px;
+    text-align: left;
+    width: 150px;
+    cursor: pointer;
+    border-bottom: 1px solid whitesmoke;
+    transition: padding 0.3s ease;
+
+}
+
+.header-main .menu ul li:hover {
+    background-color: whitesmoke;
+    color: dodgerblue;
+    padding-left: 20px;
+}
+
+.genders .genders-div {
+    display: flex;
+    padding: 10px 10px;
+    width: 100%;
+    flex-direction: row;
+    overflow: auto;
+    border-bottom: 1px solid whitesmoke;
+    flex-wrap: nowrap;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.genders .genders-div .gender {
+    padding: 10px;
+    color: dodgerblue;
+    display: inline-block;
+    border-radius: 10px;
+    cursor: pointer;
+    
+}
+
+.genders .genders-div .gender:hover {
+    background-color: rgba(120, 176, 231, 0.363);
+    color: dodgerblue;
+    box-shadow: 0px 0px 3px rgba(120, 176, 231, 0.363);
+}
+
+.cover img {
+    width: 100%;
+    height: 100%;
+}
+
+.modal-manga {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-manga-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+main {
+    padding-bottom: 50px;
+}
+
+.search-div .search-results-container {
+    position: absolute;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0px 0px 3px gray;
+    padding: 10px;
+    margin-top: 10px;
+    display: none;
+    right: 0;
+}
+
+.search-results-container .header {
+    padding: 10px;
+    text-align: right;
+    font-size: small;
+    border-bottom: 1px solid whitesmoke;
+    margin-bottom: 5px;
+}
+
+.search-result-manga {
+    width: 400px;
+    height: 60px;
+    background-color: rgba(245, 245, 245, 0.342);
+    padding: 2px;
+    margin-bottom: 10px;
+} @media (max-width: 600px) {
+    .search-result-manga {
+        width: 85vw;
+    }
+}
+
+.search-result-manga .cover {
+    float: left;
+    width: 20%;
+    height: 100%;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.search-result-manga .manga-title {
+   font-weight: bold;
+   padding: 5px;
+} 
+
+.search-result-manga .manga-title + div {
+   font-size: small;
+   text-align: right;
+   color: gray;
+   padding-right: 5px;
+}
+
+ .section-mangas {
+     margin: 15px auto;
+     border-radius: 6px;
+     border: 0 0 1px solid #2c2c2c;
+     width: 96%;
+     background-color: rgba(0, 0, 0, 0.3);
+     padding: 8px;
+ }
+
+ .section-mangas .header {
+     background-color: black;
+     color: rgba(255, 255, 255, 0.9);
+     padding: 6px;
+     border-radius: 6px;
+     padding-left: 10px;
+     box-shadow: 0px 0px 2px black;
+ }
+
+.anim-footer-appear {
+    animation-name: footer-appear;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.anim-footer-close {
+    animation-name: footer-close;
+    animation-duration: 1s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+@keyframes footer-appear {
+    from {
+       bottom: -220px;
+    }
+
+    to {
+        bottom: 0px;
+    }
+}
+
+@keyframes footer-close {
+    from {
+       bottom: 0px;
+    }
+
+    to {
+        bottom: -220px;
+    }
+}
+
+.anim-menu-appear {
+    animation-name: menu-appear;
+    animation-duration: .3s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+.anim-menu-close {
+    animation-name: menu-close;
+    animation-duration: .3s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+}
+
+@keyframes menu-appear {
+    from {
+       left: -100%;
+    }
+
+    to {
+       left: 0;
+    }
+}
+
+@keyframes menu-close {
+    from {
+       transform: scale(1);
+    }
+
+    to {
+        transform: scale(0);
+    }
+}
+</style>
 <body>
-  <h1>Lista de Mangás</h1>
-  <br><br>
- <h3 class"nome">    • Lançados Recentemente</h3>
-  <ul>
-    <% info.forEach(manga => { %>
-      <li>
-      <div class="div">
-        <img src="<%= manga.image %>" alt="Capa do Manga">
-      <div class"div_2">
-          <p>Autor: <%= manga.author %></p>
-          <p>Categorias: <%= manga.categories.join(', ') %></p>
-          <p>Score: <%= manga.score %></p>
-          <a href="/manga/<%= manga.id %>?foto=<%= manga.image %>">
-          <button class="show-info">
-          Capítulos
-          </button>
-          </a>
-       </div>
-       </div>
-        <div class="manga-info">
-          <h2><%= manga.name %></h2>
+<form action="/search" method="get">
+   <header class="header-main">
+      <div class="menu-div">
+         <br />
+         <div class="menu" id="menu">
+            <ul>
+               <li>Género</li>
+               <li>Categoria</li>
+               <li>Atualizados</li>
+               <li>Popular</li>
+               <li>Obras de Arte</li>
+               <li>Sobre</li>
+            </ul>
+         </div>
+      </div>
+      <span class="logo-text"><span style="color:white">Ani</span>Kit</span>
+      <small></small>
+      <div class="search-div">
+         <div class="search-form">
+            <input type="text" placeholder="Pesquisar" id="searchInput" name="q" value="<%= query %>">
+         </div>
+      </div>
+      <div class="float-clear"></div>
+   </header>
+</from>
+   <section class="genders">
+      <div class="genders-div">
+         <a href="#"><div class="gender">Acção</div></a>
+         <a href="#"><div class="gender">Drama</div></a>
+         <a href="#"><div class="gender">Comédia</div></a>
+         <a href="#"><div class="gender">Romance</div></a>
+         <a href="#"><div class="gender">Escolar</div></a>
+         <a href="#"><div class="gender">Shoujo</div></a>
+         <a href="#"><div class="gender">Harém</div></a>
+         <a href="#"><div class="gender">Mistério</div></a>
+         <a href="#"><div class="gender">Esporte</div></a>
+         <a href="#"><div class="gender">Aventura</div></a>
+      </div>
+   </section>
 
-          <div class="description">
-            <p>Descrição: <%= manga.description %></p>
-          </div>
-        </div>
-      </li>
-      <hr>
-    <% }); %>
-  </ul>
-  <br><br>
-  <h3 class"nome">   • Mais Vistos</h3>
-  <ul>
-    <% data.forEach(manga => { %>
-      <li>
-      <div class="div">
-        <img src="<%= manga.image %>" alt="Capa do Manga">
-      <div class"div_2">
-          <p>Autor: <%= manga.author %></p>
-          <p>Categorias: <%= manga.categories.join(', ') %></p>
-          <p>Score: <%= manga.score %></p>
-          <a href="/manga/<%= manga.id %>?foto=<%= manga.image %>">
-          <button class="show-info">
-          Capítulos
-          </button>
-          </a>
-       </div>
-       </div>
-        <div class="manga-info">
-          <h2><%= manga.name %></h2>
+   <main>
+      <section class="section-mangas">
+         <div class="header"># Acabaram de Sair!!!</div>
+         <div class="mangas-container">
+         <% info.forEach(manga => { %>
+<a href="/manga/<%= manga.id %>?foto=<%= manga.image %>">
+            <div class="manga">
+               <div class="cover"><img src="<%= manga.image %>"></div>
+               <div class="title"><%= manga.name %></div>
+               <div class="chapters">Score: <%= manga.score %></div>
+            </div>
+</a>
+         <% }); %>
+         </div>
+      </section>
+      <section class="section-mangas">
+         <div class="header"># Recomendações</div>
+         <div class="mangas-container">
+         <% data.forEach(manga => { %>
+<a href="/manga/<%= manga.id %>?foto=<%= manga.image %>">
+            <div class="manga">
+               <div class="cover"><img src="<%= manga.image %>"></div>
+               <div class="title"><%= manga.name %></div>
+               <div class="chapters">Score: <%= manga.score %></div>
+            </div>
+</a>
+         <% }); %>
+         </div>
+      </section>
+   </main>
 
-          <div class="description">
-            <p>Descrição: <%= manga.description %></p>
-          </div>
-        </div>
-      </li>
-      <hr>
-    <% }); %>
-  </ul>
-  
+   <footer>
+      <div class="header">
+         Destaques
+      </div>
+      <section class="mangas-container">
+         <% zera.forEach(manga => { %>
+<a href="/manga/<%= manga.id %>?foto=<%= manga.image %>">
+         <div class="manga highlight">
+               <div class="cover"><img src="<%= manga.image %>"></div>
+               <div class="title"><%= manga.name %></div>
+               <div class="chapters">Score: <%= manga.score %></div>
+         </div>
+</a>
+         <% }); %>
+      </section>
+   </footer>
+
+   <div class="modal-manga">
+      <div class="modal-manga-content">
+
+      </div>
+   </div>
+   
+   
   <script>
     const showInfoButtons = document.querySelectorAll('.show-info');
 
@@ -203,4 +524,6 @@
     });
   </script>
 </body>
+
 </html>
+<script src="./script.js"></script>
