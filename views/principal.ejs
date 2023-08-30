@@ -513,10 +513,12 @@ footer {
     <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
     <div class="logo_header">
       <i>AniKit   </i>
-      <button onclick="redirectToProfile()" class="btn_icon_header">
+      <a href="/perfil?username=<%= user.username %>&key=<%= user.key %>&password=<%= user.password %>"
+      <button class="btn_icon_header">
         <i class='fas fa-user-edit'>
 </i>
       </button>
+     </a>
     </div>
   </div>
     <br>
@@ -743,12 +745,12 @@ function exibirTop7Usuarios() {
 
         // Função para redirecionar o usuário para o perfil com a chave e o nome do usuário
         function redirectToProfile() {
-            const { username, key } = getURLParams();
-            if (username && key) {
-                const profileUrl = `/login`;
+            //const { username, key } = getURLParams();
+          //  if (username && key) {
+                const profileUrl = `/perfil?username=${user.username}&key=${user.key}`;
                 window.location.href = profileUrl;
-            } else {
-                alert('Nome de usuário ou chave não fornecidos na URL.');
+          //  } else {
+              //  alert('Nome de usuário ou chave não fornecidos na URL.');
             }
         }
 

@@ -191,13 +191,10 @@ background-color: black;
     <form action="/edit/<%= user.username %>" method="post">
     <label for="password">Nova Senha:</label>
     <input type="password" id="password" placeholder="Senha atual: <%= user.password %>" name="password">
-    <label for="numero">Novo Numero:</label>
-    <input type="text" id="numero" placeholder="Numero atual: <%= user.numero %>" name="numero">
     <label for="ft">Nova Foto:</label>
     <input type="text" id="ft" placeholder="Exemplo: <%= user.ft %>" name="ft">
     <center>
     <button type="submit">   Salvar   </button>
-    <p>Coloque o numero sem espaço, sem caracteres especiais e sem o 9 da operadora</p><p>Exemplo: 557599281755</p>
     </center>
   </form>
     </center>
