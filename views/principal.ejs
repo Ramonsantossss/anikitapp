@@ -2,441 +2,450 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="UTF-8" ></script>
+  <link rel="stylesheet" href="style.css">
+ <meta name='viewport' content='width=device-width, initial-scale=1'>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  <title>Lista de Logins</title>
-</head>
+<link rel="shortcut icon" href="https://telegra.ph/file/a3374ddefcec357cd06b2.jpg" type="image/x-icon" />
+  <title>Clover-Mods</title>
 <style>
-        *{
-          margin: 0;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #333;
-        }
 
-.dark-theme {
-  background-color: #333; /* Cor de fundo escuro */
-  color: #fff; /* Cor do texto escuro */
-}
-
-.dark-theme .video-container {
-  background-color: #444; /* Cor de fundo do contêiner de vídeo escuro */
-}
-
-.dark-theme .header {
-  background-color: #444; /* Cor de fundo do cabeçalho escuro */
-}
-
-.dark-theme footer {
-  background-color: #444; /* Cor de fundo do cabeçalho escuro */
-}
-
-.dark-theme .example {
-      background-color: #555;
-    }
-
-        h1 {
-            color: white;
-        }
-
-        .menu-container {
-            position: absolute;
-            top: 0;
-            left: -100%;
-            height: 100%;
-            width: 180px;
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            transition: left 0.3s ease-in-out;
-        }
-
-        .menu-container.show-menu {
-            left: 0;
-        }
-
-        .menu-container button {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            }
-
-        .menu-container button:hover {
-            background-color: #0056b3;
-        }
-
-        .menu-toggle {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            display: block;
-            color: white;
-        }
-        
-        /* Estilos para o botão de perfil no canto superior direito */
-        .btn_icon_header {
-            font-size: 24px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            color: white;
-            margin-left: auto;
-        }
-
-        .header {
-            background-color: #444;
-            justify-content: space-between;
-            padding: 0 10%;
-            height: 3.5em;
-            margin: 0;
-            box-shadow: 1px 1px 4px black;
-            display: flex;
-            align-items: center; /* Centralizar itens verticalmente */
-        }
-
-        .menu-toggle.hide-menu {
-            display: none;
-        }
-
-        .close-button {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .video-container {
-            margin-left: 200px;
-            max-width: 99%;
-            margin: 20px auto;
-            margin: 15px;
-            background-color: #444;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            border-radius: 8px;
-            color: white;
-            box-shadow: 1px 1px 1px black;
-        }
-        input[type="text"],
-        input[type="password"],
-        input[type="submit"] {
-            width: 90%;
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: white;
-            color: black;
-        }
-        .video-player-container {
-            margin-top: 10px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-        a {
-            text-decoration: none;
-        }
-        
-        
-.download-button {
-    left: 10px;
-}
-
-.update-button {
-    right: 10px;
-}
-
-.image-container {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin: 10px;
-    overflow: hidden;
-}
-
-#imageGallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
-
-
-
-footer {
-            background-color: #444;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            box-shadow: 4px 1px 1px 2px black;
-        }
-
-        footer p {
-            margin: 0;
-        }
-        footer a {
-            color: var(--color-purple);
-        }
-
-/* Restante do CSS omitido por questão de concisão */
-
-.logo_header {
-  display: flex;
-  align-items: center;
-  margin-left: auto; /* Mover para o canto direito */
-  font-size: 21px; /* Tamanho do texto AniKit */
-  font-family: 'Roboto', sans-serif; /* Usando a fonte Roboto do Google Fonts */
-}
-
-/* Estilo para a imagem de perfil no botão */
-.profile-image {
-  width: 30px; /* Ajuste o tamanho conforme necessário */
-  height: 30px; /* Ajuste o tamanho conforme necessário */
-  border-radius: 50%; /* Para ter a forma circular */
-  margin-right: 10px; /* Espaçamento entre a imagem e o texto */
-}
-
-/* Estilo para o ícone do usuário do Font Awesome */
-.btn_icon_header {
-  font-family: 'Font Awesome 5 Free'; /* Usando a fonte Font Awesome */
-  font-size: 21px;
-  margin-left: auto; 
-}
-
- 
- i {
- color: white;
- }
- 
-         :root{
+  
+:root{
             --color-white: #fff;
             --color-dark1: rgb(39, 39, 39);
-            --color-dark2: #444;
-            --color-dark3: #414141;
+            --color-dark2: grenn;
+            --color-dark3: black;
             --color-dark4: #1c1c1c;
             --color-dark5: #343434;
             --color-purple: #b040ff;
-        }
-        *{
-            margin: 0;
-            padding: 0;
-        }
-
-        .img_logo_header{
-            width: 45px;
-        }
-        .header,
-        .navigation_header{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-        }
-        .header{
-            background-color: var(--color-dark2);
-            display: flex;
-    justify-content: space-between;
-            padding: 0 10%;
-            height: 3.5em;
-            box-shadow: 1px 1px 4px var(--color-dark4);
-        }
-
-
-
-
-
-            .navigation_header{
-                position: absolute;
-                flex-direction: column !important;
-                top: 0;
-                background: var(--color-dark5);
-                height: 100%;
-                width: 35vw;
-                padding: 1em;
-                animation-duration: 1s;
-                margin-left: -100vw;
-            }
-            .btn_icon_header{
-                display: block;
-                border: none;
-                color: var(--color-gray);
-                cursor: pointer;
-                margin-left: 10px; /* Adicione margem entre o botão e o nome */
-                background-color: transparent;
-            }
-        .content{
-            padding-top: 5em;
-            text-align: center;
-            height: 100vh;
-            transition: 1s;
-        }
-        .navigation_header a{
-            text-decoration: none;
-            color: var(--color-purple);
-            transition: 1s;
-            font-weight: bold;
-        }
-        .navigation_header a:hover{
-            color: var(--color-white);
-        }
-        .active{
-            background: var(--color-dark3);
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        @media screen and (max-width: 768px) {
-            .navigation_header{
-                position: absolute;
-                flex-direction: column !important;
-                top: 0;
-                background: var(--color-dark5);
-                height: 100%;
-                width: 35vw;
-                padding: 1em;
-                animation-duration: 1s;
-                margin-left: -100vw;
-            }
-            .btn_icon_header{
-                display: block;
-            }
-        }
-        @keyframes showSidebar {
-            from {margin-left: -100vw;}
-            to {margin-left: -10vw;}
-        }
-        body {
-    background-color: #333;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    
+}
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
-h1 {
-    text-align: center;
-    color: #FFFFFF;
-    padding: 20px;
+body{
+  min-height: 100vh;
+  background-color: #1C1C1C;
+  background-size: 200% 200%;
+  animation: color 2.7s ease infinite;
+  color: white;
 }
 
-#imageGallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+@keyframes color {
+  0% {
+    background-position: 0% 50%;
+  }
+  
+  50% {
+    background-position: 100% 50%;
+  }
+  
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-.image-container {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
-    margin: 10px;
+.side-bar{
+  background: rgba(000,000,000 , 0.2);
+  backdrop-filter:blur(15px);
+  width: 290px;
+  height: 100vh;
+  position: fixed;
+  top:0;
+  left: -100%;
+  overflow-y: auto;
+  transition: 0.5s ease;
+  transition-property: left;
+}
+
+.side-bar.active{
+  left: 0;
+}
+
+.side-bar .menu{
+  width: 100%;
+  margin-top: 35px;
+  text-shadow: 7px 7px 7px black;
+}
+
+.side-bar .menu .item{
+  position:relative;
+  cursor:pointer;
+}
+
+.side-bar .menu .item a{
+  color: #fff;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+  padding: 5px 30px;
+  line-height: 40px;
+}
+
+.side-bar .menu .item a:hover{
+  transition: 0.3s ease;
+
+}
+
+.side-bar .menu .item i{
+  margin-right: 10px;
+}
+
+.side-bar .menu .item a .dropdown{
+  background: rgba(000,000,000 , 0.0);
+  position: absolute;
+  right:0;
+  margin: 13px;
+  transition: 0.3s ;
+}
+.sub-btn{
+  text-shadow: 7px 7px 7px black;
+  background: rgba(000,000,000 , 0.0);
+}
+.side-bar .menu .item .sub-menu{
+  background: transparent;
+  display:none;
+  box-shadow: 0 0 5px white;
+  
+}
+
+.side-bar .menu .item .sub-menu a{
+  padding-left: 80px;
+  box-shadow: 0 0 5px white;
+  
+}
+
+.rotate{
+  transform: rotate(90deg);
+}
+.item{
+  box-shadow: 0 0 2px white;
+  border-radius: 9px;
+  margin: 5px;
+}
+.close-btn{
+  position: absolute;
+  color: #fff;
+  font-size: 20px;
+  right: 0;
+  margin: 25px;
+  cursor: pointer;
+  
+}
+.menu-btn i{
+ 
+}
+
+.menu-btn{
+  position: absolute;
+  color: #fff;
+  font-size: 25px;
+  margin: 17px;
+  cursor:pointer;
+  
+}
+.fe img{
+  position: absolute;
+  width: 30px;
+  position: absolute;
+  margin: 15px;
+  margin-left: 90%;
+  border-radius: 50%;
+  box-shadow: 0 0 30px black;
+}
+h1{
+  text-align: center;
+  
+  margin-top: 25px;
+}
+
+.ab i{
+  border-radius: 50%;
+  text-align: center;
+  
+}
+.txt i {
+  text-align: center;
+  
+  margin-top: 25px;
+  font-size: 25px;
+  margin-left: 25px;
+  right: 1px;
+  
+}
+.tutotxt {
+  background-color: var(--color-dark3);
+  border-radius: 7px;  
+  margin: 24px;
+  box-shadow: 0 0 7px darkgray;
+  
+  }
+.fotos {
+  width: 90%;
+  border-radius: 7px;
+}
+.tutotxtt{
+  
+  margin: 7px;
+  text-align: center;
+}
+.aaaa {
+  
+  margin: 5px;
+}
+.cabeca{
+  background-color: var(--color-dark3);
+  
+  text-align: center;
+  padding: 20px;
+  box-shadow: 10px 10px 10px black;
+  box-shadow: 0 0 7px darkgray;
+}
+.final{
+  background-color: var(--color-dark3);
+  
+  margin-bottom: 0;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 10px 10px 10px black;
+  box-shadow: 0 0 7px darkgray;
+}
+
+.ft{
+  position: absolute;
+  font-size: 20px;
+  position: absolute;
+  margin: 23px;
+  margin-left: 90%;
+  
+}
+.det{
+  position: absolute;
+  font-size: 18px;
+  position: absolute;
+  margin: 22px;
+  margin-left: 79.9%;
+  
+  
+}
+ga{
+  display: none;
+  margin-top: 25px;
+  background-color: var(--color-dark3);
+}
+.suba a{
+  position: absolute;
+  font-size: 20px;
+  position: absolute;
+  margin: 19px;
+  margin-left: -720%;
+  
+  padding: 20px 43px;
+  background-color: var(--color-dark3);
+  transition: 0.5s ease;
+  transition-property: left;
+  
+}
+.suba p{
+  position: absolute;
+  font-size: 13px;
+  position: absolute;
+  margin-left: -500%;
+  
+  padding: 20px 40px;
+  background-color: var(--color-dark1);
+  box-shadow: 0 0 7px black;
+  
+}
+.fe img{
+  border: solid 1px white;
+}
+.visitas{
+  background-color: var(--color-dark3);
+  border-radius: 7px;  
+  margin: 24px;
+  box-shadow: 0 0 7px black;
+  padding: 20px 30px;
+}
+.visitas h3{
+  
+}
+.visitas img{
+  width: 25%;
+}
+
+}
+.bv{
+  
+}
+.amigo{
+  margin-top: 90%;
+}
+.menuzin {
+  
+  padding: 20px 30px;
+}
+.menuzin summary{
+  
+}
+.menuzin a{
+  text-decoration: none;
+  
+}
+details {
+  transition: 6.3s;
+}
+.sup{
+  text-align: center;
+}
+.content {
+    border-radius: 20px;
     overflow: hidden;
 }
 
-.image {
-    width: 80%;
-    height: auto;
-    object-fit: cover;
-    border: 4px solid #FFFFFF;
-    box-sizing: border-box;
-    border-radius:  50%;
+.navigation {
+  
+  display: flex;
 }
 
-/* Restante do código CSS permanece o mesmo */
-
-
-.download-button,
-.update-button {
-    position: absolute;
-    bottom: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: #4C566A;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 20px;
-    color: #FFFFFF;
+.nov{
+  
+  text-align: center;
 }
 
-.download-button:hover,
-.update-button:hover {
-    background-color: #2E3440;
-}
-
-/* Restante do código CSS permanece o mesmo */
-
-.download-button {
-    left: 10px;
-}
-
-.update-button {
-    right: 10px;
-}
-
-@media (max-width: 768px) {
-    .image-container {
-        max-width: 100%;
-    }
-}
-.docs{
-  margin: 15px;
-  color: white;
-  font-size: 19px;
-  margin: 15px;
-  background-color: #4B0082;
-  border-radius: 15px;
-}
-.docs p{
-  margin: 15px;
-}
-footer {
-            background-color: #444;
-            color: #fff;
-            padding: 10px;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            box-shadow: 1px 1px 4px black;
-        }
-
-        footer p {
-            margin: 0;
-        }
-        footer a {
-            color: var(--color-purple);
-        }
+.bar {
     
-    .logo_header {
+    width: 20%;
+    height: 20%;
+    border: 2px solid red;
+    margin: 6px;
+    margin-top: 0;
+    border-radius: 15px;
+    cursor: pointer;
+    transform: .5s ease;
+}
+
+.bar:hover {
+    background-color: darkred;
+    
+}
+
+input {
+  display: none;
+}
+
+.ain{
+  width: 95%;
+}
+
+.slides {
     display: flex;
-    align-items: center;
+    width: 500%;
+    height: 100%;
+}
+
+.slide {
+    width: 20%;
+    transition: .6s;
+}
+.content .slide img {
+    width: 97%;
+    border-radius: 15px;
+}
+#slide1:checked ~ .s1 {
+    margin-left: -0%;
+} 
+
+#slide2:checked ~ .s1 {
+    margin-left: -20%;
+} 
+
+#slide3:checked ~ .s1 {
+    margin-left: -40%;
+} 
+
+#slide4:checked ~ .s1 {
+    margin-left: -60%;
+} 
+
+#slide5:checked ~ .s1 {
+    margin-left: -80%;
+}
+
+.laranja{
+    background-color: orange;
+    transition: all 0.25s ease-in-out;
+}
+.vermelho{
+    background-color: red;
+    transition: all 0.25s ease-in-out;
+}
+.purpura{
+    background-color: purple;
+    transition: all 0.25s ease-in-out;
+}
+
+.contaimer button{
+    padding: 10px 10px;
+    border-radius: 50%;
+    
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 300;
+    margin: 0 px;
+    border: 0;
+}
+
+div.contaimer{
+    padding: 10px 20px;
+    min-width: 90vw;
+    text-align: center;
+}
+
+.laranja{
+    background-color: orange;
+    transition: all 0.25s ease-in-out;
+    color: white;
+}
+.vermelho{
+    background-color: red;
+    transition: all 0.25s ease-in-out;
+    color: white;
+}
+.purpura{
+    background-color: white;
+    transition: all 0.25s ease-in-out;
+    color: white;
+}
+
+.contaimer button{
+    padding: 10px 10px;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 300;
+    margin: 0 10px;
+}
+
+div.contaimer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 90vw;
+    text-align: center;
+}
+img{
+  width: 100%;
 }
 
   .user-info {
@@ -449,7 +458,7 @@ footer {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 13px;
   }
 
   .user-name {
@@ -457,399 +466,400 @@ footer {
     text-align: center;
     color: white;
   }
-  
+  .footer{
+  text-align: center;
+  font-size: 12px;
+  margin: 10px;
+  color: white;
+  background: black;
+  margin: 0;
+  padding: 15px;
+  box-shadow: 0 0 3px white;
+}
+.footer a{
+  color: red;
+  text-decoration: none;
+}
+.video-container{
+margin: 10px;
+}
+.ip h3 {
+text-align: center;
+}
+      </style>
+<script>
+document.getElementById("btn-laranja").addEventListener("click", function(){
+  document.querySelector("body").setAttribute("class","laranja");
+})
 
-    p {
-      margin-bottom: 10px;
-      margin: 10px;
-      color: white;
-      text-align: center;
-    }
-    .aoba {
-      padding: 3px 5px;
-      font-size: 14px;
-      border-radius: 3px;
-      background-color: black;
-      color: green;
-      padding: 8px;
-      font-size: 14px;
-      text-align: initial;
-    }
-    .endpoint {
-      margin: 10px;
-      padding: 10px;
-      background-color: #444;
-      border-radius: 7px;
-      text-align: initial;
-    }
-    .example {
-      background-color: #444;
-      color: white;
-      padding: 10px;
-      border-radius: 7px;
-      margin: 10px;
-      text-align: initial;
-    }
-    .kik{
-      margin-top: 5px;
-      color: white;
-    }
-    
-    </style>
+document.getElementById("btn-vermelho").addEventListener("click", function(){
+  document.querySelector("body").setAttribute("class","vermelho");
+})
+
+document.getElementById("btn-purpura").addEventListener("click", function(){
+  document.querySelector("body").setAttribute("class","purpura");
+  document.querySelector("div").setAttribute("class","purpura");
+})
+</script>
 </head>
-
-
-
-
 <body>
 
-  <div class="menu-container" id="menu">
-        <span class="close-button" onclick="toggleMenu()">&#10006;</span>
-        <h3>Menu</h3><br><hr><br>
-        <button onclick="toggleDarkTheme()">Tema Escuro</button>
-        <button onclick="changeBackgroundColor()">Mudar Cor</button>
-  </div>
-  <div class="header">
-    <div class="menu-toggle" onclick="toggleMenu()">&#9776;</div>
-    <div class="logo_header">
-      <i>AniKit   </i>
-      <a href="/perfil?username=<%= user.username %>&key=<%= user.key %>&password=<%= user.password %>"
-      <button class="btn_icon_header">
-        <i class='fas fa-user-edit'>
-</i>
-      </button>
+
+    <header>
+      <nav>
+        
+        <div class="menu-btn">
+          <i class="fas fa-bars"></i>
+        
+        </div>
+
+        
+        </div>
+
+
+        <div class="fe">
+      <a href="/perfil?username=<%= user.username %>&key=<%= user.key %>&password=<%= user.password %>">
+          <img src="<%= user.ft%>">
      </a>
-    </div>
-  </div>
-    <br>
-    <h1>Transformando imagens de anime em realidade.</h1>
+        </div>
+        <div class="side-bar">
+          <div class="close-btn">
+            <i class="fas fa-times"></i>
+          </div>
+            <div class="txt">
+<i class="fa fa-cog fa-spin fa-3x fa-fw"></i><i> Aproveite</i>
+            </div>
+<br>
+<hr>
+          <div class="menu">
+
+            <div class="item">
+<a class="sub-btn"><i class='far fa-check-circle'></i>DOWNLOADER<i class="fas fa-angle-right dropdown"></i></a>
+<div class="sub-menu">
+
+<a class="sub-item" target="_blank" href="/anikit/playmp4?query=vmz baka&username=<%= user.username %>&key=<%= user.key %>"
+    target="_blank">Youtube MP4</a>
+
+<a class="sub-item" target="_blank" href="/anikit/playmp3?query=vmz baka&username=<%= user.username %>&key=<%= user.key %>"
+    target="_blank">Youtube MP3</a>
+    
+<a class="sub-item" target="_blank" href="/anikit/tiktok?videoUrl=https://vm.tiktok.com/ZMjLFBD7e/&username=<%= user.username %>&key=<%= user.key %>"
+    target="_blank">TikTok Video</a>
+    
+<a class="dropdown-item" target="_blank" href="/18/video?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Video +18</a>
+
+<a class="dropdown-item" target="_blank" href="/18/foto_18?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Foto +18</a>
+
+<a class="dropdown-item" target="_blank" href="/18/travazap?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Foto pra perfil</a>
+
+<a class="dropdown-item" target="_blank" href="/memes?username=<%= user.username %>&key=<%= user.key %>" target="_blank">memes</a>
+
+            </div>
+            </div>
+            
+            <div class="item">
+<a class="sub-btn"><i class='far fa-check-circle'></i>SFW<i class="fas fa-angle-right dropdown"></i></a>
+<div class="sub-menu">
+
+<a class="dropdown-item" target="_blank" href="/anime/cosplay?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Cosplay</a>
+<a class="dropdown-item" target="_blank" href="/anime/waifu?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Waifu</a>
+<a class="dropdown-item" target="_blank" href="/anime/waifu2?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Waifu2</a>
+<a class="dropdown-item" target="_blank" href="/anime/shota?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Shota</a>
+<a class="dropdown-item" target="_blank" href="/anime/loli?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Loli</a>
+<a class="dropdown-item" target="_blank" href="/anime/yotsuba?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Yotsuba</a>
+<a class="dropdown-item" target="_blank" href="/anime/shinomiya?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Shinomiya</a>
+<a class="dropdown-item" target="_blank" href="/anime/yumeko?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Yumeko</a>
+<a class="dropdown-item" target="_blank" href="/anime/tejina?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Tejina</a>
+<a class="dropdown-item" target="_blank" href="/anime/chiho?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Chiho</a>
+<a class="dropdown-item" target="_blank" href="/anime/shizuka?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Shizuka</a>
+<a class="dropdown-item" target="_blank" href="/anime/boruto?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Boruto</a>
+<a class="dropdown-item" target="_blank" href="/anime/kagori?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Kagori</a>
+<a class="dropdown-item" target="_blank" href="/anime/kaga?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Kaga</a>
+<a class="dropdown-item" target="_blank" href="/anime/kotori?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Kotori</a>
+<a class="dropdown-item" target="_blank" href="/anime/mikasa?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Mikasa</a>
+<a class="dropdown-item" target="_blank" href="/anime/akiyama?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Akiyama</a>
+<a class="dropdown-item" target="_blank" href="/anime/hinata?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Hinata</a>
+<a class="dropdown-item" target="_blank" href="/anime/minato?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Minato</a>
+<a class="dropdown-item" target="_blank" href="/anime/naruto?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Naruto</a>
+<a class="dropdown-item" target="_blank" href="/anime/nezuko?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Nezuko</a>
+<a class="dropdown-item" target="_blank" href="/anime/yuki?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Yuki</a>
+<a class="dropdown-item" target="_blank" href="/anime/hestia?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Hestia</a>
+<a class="dropdown-item" target="_blank" href="/anime/emilia?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Emilia</a>
+<a class="dropdown-item" target="_blank" href="/anime/itachi?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Itachi</a>
+<a class="dropdown-item" target="_blank" href="/anime/elaina?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Elaina</a>
+<a class="dropdown-item" target="_blank" href="/anime/madara?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Madara</a>
+<a class="dropdown-item" target="_blank" href="/anime/sasuke?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Sasuke</a>
+<a class="dropdown-item" target="_blank" href="/anime/deidara?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Deidara</a>
+<a class="dropdown-item" target="_blank" href="/anime/sakura?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Sakura</a>
+<a class="dropdown-item" target="_blank" href="/anime/tsunade?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Tsunade</a>
+
+</div>
+</div>
+
+            <div class="item">
+<a class="sub-btn"><i class='far fa-check-circle'></i>NSFW<i class="fas fa-angle-right dropdown"></i></a>
+<div class="sub-menu">
+                      <a class="dropdown-item" target="_blank" href="/anime/nsfwloli?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Nswf loli</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/ahegao?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw ahegao</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/ass?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw ass</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/bdsm?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Nswf bdsm</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/blowjob?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw blowjob</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/cuckold?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw cuckold</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/cum?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw cum</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/ero?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw ero</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/femdom?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw femdom</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/foot?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw foot</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/gangbang?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw gangbanh</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/glasses?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw glasses</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/hentai?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw hentai</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/gifs?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw gifs</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/jahy?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw jahy</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/manga?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw manga</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/masturbation?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw mstb</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/neko?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw neko</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/orgy?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw orgy</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/panties?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw panties</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/pussy?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw pussy</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/neko2?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw neko2</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/tentacles?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw tentacles</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/thighs?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw things</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/yuri?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw yuri</a>
+                      <a class="dropdown-item" target="_blank" href="/nsfw/zettai?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw zettai</a>
+            </div>
+            </div>
+
+<div class="item">
+  <a class="sub-btn"><i class='fa fa-user-circle'></i><i class="sup">Info Animes</i><i class="fas fa-angle-right dropdown"></i></a>
+<div class="sub-menu">
+<a href="/recent-episodes?username=<%= user.username %>&key=<%= user.key %>">Episódios Recentes</a>
+<a href="/popular?username=<%= user.username %>&key=<%= user.key %>">Populares</a>
+<a href="/info/ID DO ANIME AQUI?username=<%= user.username %>&key=<%= user.key %>">Info Anime</a>
+<a href="/epis/ID DO ANIME AQUI?username=<%= user.username %>&key=<%= user.key %>">Episódios Do Anime</a>
+
+</div>
+</div>
+
+            <div class="amigo">
+            <hr>
+            <br>
+<div class="item">
+  <a class="sub-btn"><i class='fa fa-user-circle'></i><i class="sup">Suporte</i><i class="fas fa-angle-right dropdown"></i></a>
+<div class="sub-menu">
+<a href="http://wa.me/557598659560">ADM</a>
+</div>
+</div>
+
+          </div>
+          </div>
+          </div>
+
+
+</div>
+</div>
+
+      </nav>
+
+
+    </header>
+<div class="cabeca">
+  <p class="fas fa-database"> AniKit - Api</p>
+</div>
+  
+<div tabindex="0" class="content" onfocus="closeSidebar()" id="content">
+
+</div>
+ <div class="tutotxt"><br>
+   <center>
+
+   <h2 class="nov">Ola <%= user.username %> ↯</h2>
+     <br>
+
+
+ <img src="https://pa1.narvii.com/6810/6ca17ac222220521e1c966cce82a34a52e12f3c4_hq.gif" alt="foto">
+ 
+<br><br><br>
+
+  </center>
+</div>
+
+<div class="tutotxt">
+<div class="ip">
+<div class="card">
+<div class="card-body">
+<h5 class="font-weight-bold text-danger text-uppercase"></h5>
+<h3 style="color: red;" class="font-weight-bold">Suas Informações ↯</h3>
     <div class="video-container">
-    <div id="imagePerfil">
-    </div>
     <center>
-    <img class="image" src='<%= user.ft %>'>
-    </center><br>
-    <h3>Ola @<%= user.username %> seja bem-vindo(a)</h3>
-
+    </center>
+    <h4>Nick: <%= user.username %></h4>
+    <h4>Saldo: <%= user.saldo %></h4>
+    <h4>Chave: <%= user.key %></h4>
+    <br>
+    <p>Para editar seu perfil clique na foto no canto direito do topo da tela</p>
+  </form>
+    </center>
     </div>
-    <br>
-      <h1>Documentação</h1>
-  <p>Essa API possui várias rotas disponíveis para realizar diferentes ações. Abaixo estão os detalhes de cada rota</p>
+</div>
+</div>
+</div>
+</div>
+  
+  
+  
+</div>
 
-  <!-- Rota anime/{command} -->
-  <div class="video-container">
-    <h2>Rota:<div class="aoba">/anime/{Tipo}?username=<%= user.username %>&key<%= user.key %></div></h2>
-    <h2>Tipos disponíveis</h2>
-    <p class="kik">
-      cosplay,
-waifu,
-waifu2,
-shota,
-loli,
-yotsuba,
-shinomiya,
-yumeko,
-tejina,
-chiho,
-shizuka,
-boruto,
-kagori,
-kaga,
-kotori,
-mikasa,
-akiyama,
-hinata,
-minato,
-naruto,
-nezuko,
-yuki,
-hestia,
-emilia,
-itachi,
-elaina,
-madara,
-sasuke,
-deidara,
-sakura,
-tsunade
-    </p>
-    <!-- Detalhes omitidos para simplificar -->
+<div class="tutotxt">
+  <div class="menuzin">
+    <h4>Inscreva-se nos canais</h4><br>
+    <details>
+    <summary>Parceiros</summary>
+      
+      <br><hr><br>
+      <a href="#"><li class='far fa-user-circle'>  Em Desenvolvimento</li></a>
+      <br><br><hr><br
+      <a href="#"><li class='far fa-user-circle'>  Em Desenvolvimento</li></a>
+      <br><br><hr><br>
+      <a href="#"><li class='far fa-user-circle'>  Em Desenvolvimento</li></a>
+      <br><br><hr><br>
+      <a href="#"><li class='far fa-user-circle'>  Em Desenvolvimento</li></a>
+      <br><br><hr>
+      
+    </details>
   </div>
+</div>
 
-  <!-- Rota nsfw/{command} -->
-  <div class="video-container">
-    <h2>Rota: <div class="aoba">/nsfw/{Tipo}?username=<%= user.username %>&key<%= user.key %></div></h2>
-        <h2>Tipos disponíveis</h2>
-    <p class="kik">
-ahegao,
-ass,
-bdsm,
-blowjob,
-cuckold,
-cum,
-ero,
-kasedaiki,
-femdom,
-foot,
-gangbang,
-glasses,
-hentai2,
-jahy,
-manga,
-masturbation,
-neko,
-orgy,
-panties,
-pussy,
-neko2,
-neko,
-tentacles,
-thighs,
-yuri,
-zettai
-    </p>
-    <!-- Detalhes omitidos para evitar conteúdo inapropriado -->
+
+</div>
+
+
+<div class="tutotxt">
+<br>
+<h3 class="tutotxtt">Informações básicas</h3><br><br>
+<p class="tutotxtt">O que e um chat bot</p>
+<div class="aaaa">
+<br>
+<p>O chatbot é um programa que funciona como um robô automatizado no WhatsApp Business, ou seja, é possível ter um bot para o aplicativo. Esse software tem inúmeras funções e, dentro deste aplicativo popular, apresenta utilitários incríveis para a conversação e o gerenciamento de problemas com consumidores.</p>
+<br>
+<hr>
+<br>
+<h4 class="tutotxtt">Para que servem?</h4>
+<br>
+<p>O que é um Bot para WhatsApp? Um bot para WhatsAppoferece aos clientes uma experiência conversacional automatizada em tempo real diretamente no aplicativo, usando a API do WhatsApp para Negócios.</p>
+<br>
+<hr>
+<br>
+<h4 class="tutotxtt">Como funciona o bot?</h4>
+<br>
+<p>
+Um 'bot' – abreviatura de robô – é um programa de software que executa tarefas automatizadas, repetitivas e pré-definidas. Os bots normalmente imitam ou substituem o comportamento do usuário humano. Por serem automatizados, operam muito mais rápido do que os usuários humanos.
+</p>
+<br>
+<hr>
+<br>
+<h4 class="tutotxtt">O que é um bot de atendimento?</h4>
+<br>
+<p>Os bots de atendimento se tornaram cada vez mais comuns no dia a dia das empresas, e tem a intenção de melhorar a qualidade nos canais de mensageria, automatizando atendimentos e otimizando o tempo de resposta para os clientes que entram em contato com uma marca.</p>
+
+<br>
   </div>
-
-  <!-- Rota anikit/ytmp4 -->
-  <div class="video-container">
-    <h2>Rota: <div class="aoba">/anikit/ytmp4</div></h2>
-    <!-- Detalhes omitidos para simplificar -->
-
-  <div class="example">
-    <p><strong>Exemplo de Requisição (ytmp4):</strong></p>
-    <div><div class="aoba">GET https://anikit-9yjf.onrender.com/anikit/ytmp4?username=<%= user.username %>&key<%= user.key %>&<br>videoUrl=https://www.youtube.com/watch?v=exemplo</div></div>
-    <p><strong>Exemplo de Resposta (ytmp4):</strong></p>
-    <div><div class="aoba">{"url": "https://exemplo.com/video_baixado.mp4"}</div></div>
-  </div>  </div>
-
-  <!-- Rota anikit/ytmp3 -->
-  <div class="video-container">
-    <h2>Rota: <div class="aoba">/anikit/ytmp3</div></h2>
-    <!-- Detalhes omitidos para simplificar -->
-
-  <div class="example">
-    <p><strong>Exemplo de Requisição (ytmp3):</strong></p>
-    <div><div class="aoba">GET https://anikit-9yjf.onrender.com/anikit/ytmp3?username=<%= user.username %>&key<%= user.key %>&<br>videoUrl=https://www.youtube.com/watch?v=exemplo</div></div>
-    <p><strong>Exemplo de Resposta (ytmp3):</strong></p>
-    <div><div class="aoba">{"url": "https://exemplo.com/audio_baixado.mp3"}</div></div>
-  </div>  </div>
-
-  <!-- Rota anikit/playmp4 -->
-  <div class="video-container">
-    <h2>Rota: <div class="aoba">/anikit/playmp4</div></h2>
-    <!-- Detalhes omitidos para simplificar -->
-
-  <div class="example">
-    <p><strong>Exemplo de Requisição (playmp4):</strong></p>
-    <div><div class="aoba">GET https://anikit-9yjf.onrender.com/anikit/playmp4?username=<%= user.username %>&key<%= user.key %>&<br>query=nome_musica</div></div>
-    <p><strong>Exemplo de Resposta (playmp4):</strong></p>
-    <div><div class="aoba">{<br>
-  "title": "titulo",<br>
-  "thumb": "https://i.ytimg.com/vi/humb.jpg",<br>
-  "channel": "@clovermods",<br>
-  "published": "1822-08-09",<br>
-  "views": "1B",<br>
-  "url": "https://exemplo.com/audio_reproduzido.mp4"
-  <br>}</div></div>
-  </div>  </div>
-
-  <!-- Rota anikit/playmp3 -->
-  <div class="video-container">
-    <h2>Rota: <div class="aoba">/anikit/playmp3</div></h2>
-    <!-- Detalhes omitidos para simplificar -->
-
-  <div class="example">
-    <p><strong>Exemplo de Requisição (playmp3):</strong></p>
-    <div><div class="aoba">GET https://anikit-9yjf.onrender.com/anikit/playmp3?username=<%= user.username %>&key<%= user.key %>&<br>query=nome_musica</div></div>
-    <p><strong>Exemplo de Resposta (playmp3):</strong></p>
-    <div><div class="aoba">{<br>
-  "title": "titulo",<br>
-  "thumb": "https://i.ytimg.com/vi/humb.jpg",<br>
-  "channel": "@clovermods",<br>
-  "published": "1822-08-09",<br>
-  "views": "1B",<br>
-  "url": "https://exemplo.com/audio_reproduzido.mp3"
-  <br>}</div></div>
-  </div>  </div>
-    <br>
+</div>
+  
 <h1>Lista de Usuários Mais Ativos</h1>
-    <div class="video-container">
+<div class="tutotxt">
+<div class="tutotxtt">
 <center>
 <% topUsers.sort((a, b) => b.total - a.total).forEach(function(user) { %><br>
-  <div class="user-info">
-    <img class="user-photo" src="<%= user.ft %>" alt="Foto do Usuário">
-    <div class="user-name">@<%= user.username %>: <%= user.total %></div>
-  </div><hr>
+<div class="user-info">
+<img class="user-photo" src="<%= user.ft %>" alt="Foto do Usuário">
+<div class="user-name">@<%= user.username %>: <%= user.total %>
+</div>
+</div>
+<hr><br>
 <% }); %>
 
 </center>
+</div>
+</div>
 
 
-  </div>
-  <br><br>
-    <footer>
-      <p>Desenvolvido com 💜 por <a href="https://youtube.com/@clovermods">@clovermods</a></p>
-   </footer>
-
-    <script>
-
-    // ... outros códigos ...
-// arquivo.js
-
-// Função para carregar o arquivo JSON de usuários
-function carregarUsuarios(callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.overrideMimeType("application/json");
-  xhr.open("GET", "../data/users.json", true);
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState === 4 && xhr.status == "200") {
-      var data = JSON.parse(xhr.responseText);
-      callback(data.users);
-    }
-  };
-  xhr.send(null);
-}
-
-// Função para exibir os 7 usuários com os saldos mais altos
-function exibirTop7Usuarios() {
-  carregarUsuarios(function (usuarios) {
-    usuarios.sort(function (a, b) {
-      return b.saldo - a.saldo;
-    });
-    var topUsers = usuarios.slice(0, 7);
-
-    var tabelaUsuarios = document.getElementById("tabela-usuarios");
-
-    topUsers.forEach(function (user) {
-      var row = tabelaUsuarios.insertRow();
-      var nomeCell = row.insertCell(0);
-      var saldoCell = row.insertCell(1);
-
-      nomeCell.innerHTML = user.username;
-      saldoCell.innerHTML = user.saldo;
-    });
-  });
-}
-
-// Chama a função para exibir os 7 usuários com os saldos mais altos
-//exibirTop7Usuarios();
+ </div>
 
 
-    function getURLParams() {
-            const searchParams = new URLSearchParams(window.location.search);
-            const username = searchParams.get('username');
-            const key = searchParams.get('key');
-            return { username, key };
-        }
-
-        // Função para redirecionar o usuário para o perfil com a chave e o nome do usuário
-        function redirectToProfile() {
-            //const { username, key } = getURLParams();
-          //  if (username && key) {
-                const profileUrl = `/perfil?username=${user.username}&key=${user.key}`;
-                window.location.href = profileUrl;
-          //  } else {
-              //  alert('Nome de usuário ou chave não fornecidos na URL.');
-            }
-        }
-
-    // ... outros códigos ...
-      // Função para atualizar a imagem
-      /*
-function updateImage() {
-    // Fazer uma solicitação para a API de imagens de animes
-    fetch('https://appp--trevodev.repl.co/anime/elaina?username=SUPREMO&key=key')
-        .then(response => response.json())
-        .then(data => {
-            const imageGallery = document.getElementById('imageGallery');
-            imageGallery.innerHTML = ''; // Limpar as imagens anteriores
-
-            // Verificar se a resposta contém a propriedade 'url'
-            if (data.url) {
-                // Criar elemento de imagem e definir a URL da imagem
-                const imgElement = document.createElement('img');
-                imgElement.src = data.url;
-                imgElement.classList.add('image');
-
-                // Criar contêiner para a imagem
-                const imageContainer = document.createElement('div');
-                imageContainer.classList.add('image-container');
-
-                // Adicionar a imagem ao contêiner
-                imageContainer.appendChild(imgElement);
-
- // Criar botão de download
-const downloadButton = document.createElement('button');
-downloadButton.innerHTML = '<i class="fas fa-download"></i>';
-downloadButton.classList.add('download-button');
-downloadButton.addEventListener('click', function() {
-    // Lógica para download da imagem
-    const link = document.createElement('a');
-    link.href = data.url;
-    link.download = 'imagem.jpg';
-    link.click();
-});
-
-// Adicionar o botão de download ao contêiner
-imageContainer.appendChild(downloadButton);
-
-
-                // Criar botão de atualização
-                const updateButton = document.createElement('button');
-                updateButton.innerHTML = '<i class="fas fa-sync-alt"></i>';
-                updateButton.classList.add('update-button');
-                updateButton.addEventListener('click', updateImage);
-
-                // Adicionar o botão de atualização ao contêiner
-                imageContainer.appendChild(updateButton);
-
-                // Adicionar o contêiner de imagem à galeria
-                imageGallery.appendChild(imageContainer);
-            }
-        })
-        .catch(error => console.log(error));
-}
+   <footer class="footer">
+<div class="d-sm-flex justify-content-center justify-content-sm-between">
+<p><span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2023 Clover-Mods</span></p>
+<p><span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Meu Canal: <a href="https://youtube.com/@clovermods" target="_blank">「 Clique 」</a> RUMO AOS 1000 INSCRITOS</span></p>
+</div>
+ </footer>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js">
+</script>
+<script>
+/*
+swal({
+title: 'Salve❤️',
+text: 'Espero que goste',
+imageUrl: 'https://pa1.narvii.com/6810/6ca17ac222220521e1c966cce82a34a52e12f3c4_hq.gif',
+footer: 'Clover-Mods',
+imageHeight: 200,
+imageAlt: ':)',
+animation: true
+})
 */
+</script>
+<!--
+<audio autoplay="true" src="https://j.top4top.io/m_1772xeikf9.mp3">
+
+</audio>
+-->
 
 
-// Chamar a função para exibir a primeira imagem
-updateImage();
-//setInterval(updateImage, 5000);
+    <script type="text/javascript">
+   // alert('deseja continuar?')
+        $(document).ready(function(){
 
-        function toggleDarkTheme() {
-                        const body = document.querySelector('body');
-            const card = document.querySelector('.video-container ');
-            const cabeca = document.querySelector('.header');
-            const footer = document.querySelector('footer');
-            const endpoint = document.querySelector('.endpoint')
-            body.classList.toggle('dark-theme');
-            cabeca.classList.toggle('dark-theme');
-            card.classList.toggle('dark-theme');
-            footer.classList.toggle('dark-theme');
-            endpoint.classList.toggle('dark-theme');
-        }
+          $('.sub-btn').click(function(){
+            $(this).next('.sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+          });
 
-        function changeBackgroundColor() {
-            const newColor = prompt('Digite uma cor em formato hexadecimal (#RRGGBB) ou um nome de cor:');
-            const body = document.querySelector('body');
-            body.style.backgroundColor = newColor;
-        }
+          $('.menu-btn').click(function(){
+            $('.side-bar').addClass('active');
+            $('.menu-btn').css("visibility", "hidden");
+          });
 
-        
+          $('.close-btn').click(function(){
+            $('.side-bar').removeClass('active');
+            $('.menu-btn').css("visibility", "visible");
+          });
 
-        function toggleMenu() {
-            const menu = document.getElementById('menu');
-            const menuToggle = document.querySelector('.menu-toggle');
-
-            menu.classList.toggle('show-menu');
-            menuToggle.classList.toggle('hide-menu');
-        }
-        
-        function _0x46c6(_0x2c0605,_0x1db1ab){var _0x4c23c1=_0x4c23();return _0x46c6=function(_0x46c68c,_0x3cf67f){_0x46c68c=_0x46c68c-0x18f;var _0x51ebd6=_0x4c23c1[_0x46c68c];return _0x51ebd6;},_0x46c6(_0x2c0605,_0x1db1ab);}var _0x3a16c2=_0x46c6;function _0x4c23(){var _0x180f57=['3742320HnNHDN','content','getElementById','-100vw','9reQYrY','filter','21684792ahELoT','showSidebar','blur(2px)','1367430aUIAwL','animationName','marginLeft','style','2924658RkzNTn','50733ThhihE','navigation_header','header','1702005DJjfZl','innerWidth','6099898vTeIXV','resize','404iBEIcz'];_0x4c23=function(){return _0x180f57;};return _0x4c23();}(function(_0x5f2542,_0x4fffc6){var _0xea6af6=_0x46c6,_0x21a879=_0x5f2542();while(!![]){try{var _0x551f86=-parseInt(_0xea6af6(0x18f))/0x1+-parseInt(_0xea6af6(0x1a1))/0x2+parseInt(_0xea6af6(0x1a2))/0x3*(parseInt(_0xea6af6(0x193))/0x4)+parseInt(_0xea6af6(0x194))/0x5+-parseInt(_0xea6af6(0x19d))/0x6+-parseInt(_0xea6af6(0x191))/0x7+parseInt(_0xea6af6(0x19a))/0x8*(parseInt(_0xea6af6(0x198))/0x9);if(_0x551f86===_0x4fffc6)break;else _0x21a879['push'](_0x21a879['shift']());}catch(_0x325724){_0x21a879['push'](_0x21a879['shift']());}}}(_0x4c23,0xdc8fd));var header=document['getElementById'](_0x3a16c2(0x1a4)),navigationHeader=document[_0x3a16c2(0x196)](_0x3a16c2(0x1a3)),content=document[_0x3a16c2(0x196)](_0x3a16c2(0x195)),showSidebar=![];function toggleSidebar(){var _0x1ca7bb=_0x3a16c2;showSidebar=!showSidebar,showSidebar?(navigationHeader[_0x1ca7bb(0x1a0)]['marginLeft']='-10vw',navigationHeader[_0x1ca7bb(0x1a0)]['animationName']=_0x1ca7bb(0x19b),content['style'][_0x1ca7bb(0x199)]=_0x1ca7bb(0x19c)):(navigationHeader['style'][_0x1ca7bb(0x19f)]=_0x1ca7bb(0x197),navigationHeader[_0x1ca7bb(0x1a0)][_0x1ca7bb(0x19e)]='',content['style']['filter']='');}function closeSidebar(){showSidebar&&(showSidebar=!![],toggleSidebar());}window['addEventListener'](_0x3a16c2(0x192),function(_0x117be5){var _0x285fc6=_0x3a16c2;window[_0x285fc6(0x190)]>0x300&&showSidebar&&(showSidebar=!![],toggleSidebar());});
+        });
 
 
+let contador = 1;
 
+setInterval( function(){
+    document.getElementById('slide' + contador).checked = true;
+    contador++;
+
+    if(counter > 5 ) {
+        contador = 1;
+    }
+}, 3000 );
+
+
+document.getElementById("btn-laranja").addEventListener("click", function(){
+  document.querySelector("tut").setAttribute("class","laranja");
+})
+
+document.getElementById("btn-vermelho").addEventListener("click", function(){
+  document.querySelector("body").setAttribute("class","vermelho");
+})
+
+document.getElementById("btn-purpura").addEventListener("click", function(){
+  document.querySelector("body").setAttribute("class","purpura");
+})
     </script>
+
 </body>
+
 </html>
