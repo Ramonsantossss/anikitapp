@@ -355,7 +355,7 @@ let resultInstance;
 
 async function fetchData() {
   try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/pages/${id}`);
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/chapters/${id}`);
     const resultado = await response.json();
     resultInstance = resultado;
   } catch (error) {
