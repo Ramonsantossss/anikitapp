@@ -257,10 +257,21 @@ aaaaaaa(name, id).then((adm) => {
 
 app.get("/pages/:id", (req, res) => {
     const id = req.params.id;
+let resultInstance;
 
-    api.getPages(id).then((pages) => {
-        res.send(pages);
-    });
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/pages/${id}`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
 });
 
 app.get("/genres/", (_req, res) => {
