@@ -250,19 +250,6 @@ function getMangaById(name, id) {
 }
 });
 
-app.get("/chapters/:id/", async (req, res) => {
-  const id = req.params.id;
- // const name = req.params.name;
-
-  try {
-fetchChaptersData(id).then((adm) => {
-  res.json(adm);
-});
-  } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
-    res.status(500).json({ error: 'Erro ao buscar os dados.' });
-  }
-});
 
 
 app.get("/pages/:id", (req, res) => {
@@ -359,7 +346,7 @@ app.get("/top/", async (_req, res) => {
     res.redirect("/top/1");
 });
 
-app.get("/manga/:id", async(req, res) => {
+app.get("/chapters/:id", async(req, res) => {
     const id = req.params.id;
 let resultInstance;
 
