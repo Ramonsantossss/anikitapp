@@ -1,1 +1,4447 @@
-const _0x4435ef=_0x4e5e;(function(_0x337cb0,_0x39bb6a){const _0x430e3d=_0x4e5e,_0x2d97aa=_0x337cb0();while(!![]){try{const _0x352836=-parseInt(_0x430e3d(0x114))/0x1+parseInt(_0x430e3d(0x1ae))/0x2*(parseInt(_0x430e3d(0xd8))/0x3)+parseInt(_0x430e3d(0x193))/0x4+parseInt(_0x430e3d(0xdf))/0x5+parseInt(_0x430e3d(0x1e8))/0x6+parseInt(_0x430e3d(0x105))/0x7+parseInt(_0x430e3d(0x1da))/0x8*(-parseInt(_0x430e3d(0xc2))/0x9);if(_0x352836===_0x39bb6a)break;else _0x2d97aa['push'](_0x2d97aa['shift']());}catch(_0x588e77){_0x2d97aa['push'](_0x2d97aa['shift']());}}}(_0x6088,0xbb1a7));const express=require(_0x4435ef(0x9d)),mongoose=require('mongoose'),{MongoClient}=require(_0x4435ef(0x15c)),bodyParser=require(_0x4435ef(0x1ad)),fs=require('fs'),path=require(_0x4435ef(0x102)),session=require(_0x4435ef(0x1bd)),bcrypt=require(_0x4435ef(0x1c4)),jwt=require(_0x4435ef(0x11c)),app=express(),router=app,__path=require(_0x4435ef(0x102)),axios=require(_0x4435ef(0x127)),{fetchSearchGogo,fetchGogoRecentEpisodes,fetchGogoAnimeInfo,fetchGogoanimeEpisodeSource,episod,ytPlayMp4,tiktokdownload,ytPlayMp3,getVideoDownloadLink,getAudioDownloadLink,scrapeWebsite}=require(_0x4435ef(0x104));let clientInstance;function _0x6088(){const _0x520c4d=['https://zany-pear-deer-gown.cyclic.cloud/recents/1','/nsfw/masturbation','/data/rize.json','754756wgNDhE','/data/tentacles.json','artist','/anime/hekel','https://zany-pear-deer-gown.cyclic.cloud/top/','/anime/cosplay','/anime/kaga','results','https://ruby-careful-skunk.cyclic.app/top/2','/anime/itachi','/data/neko.json','./views/registro.html','Usuário\x20registrado\x20com\x20sucesso','/epis/:animeId','profile','/recents/:page','/anikit/ytmp3','/manga/:name/:id','/top/1','/watch/:episodeId','search','sendFile','/anime/wallhp','@hapi/boom','/edit/:username','/data/doraemon.json','body-parser','8ZvbwrK','body','An\x20error\x20occurred\x20while\x20fetching\x20manga\x20data.','/data/hentai.json','/data/ryujin.json','/anime/nezuko','/data/akira.json','/entrar','/data/ero.json','Erro\x20no\x20servidor','join','/data/miku.json','/data/pokemon.json','findOne','node-fetch','express-session','Erro\x20ao\x20salvar\x20os\x20dados\x20no\x20banco\x20de\x20dados:','/confirma','/data/kaori.json','/data/chiho.json','/data/shizuka.json','https://ruby-careful-skunk.cyclic.app/chapters/','bcrypt','/data/waifu.json','/register','/anime/loli','/anime/shinomiya','/anime/jeni','/anime/onepiece','performance-now','then','child_process','/wallpaper/pubg','/pages/:id','/anime/ryujin','/anime/hestia','./data/pack.js','/nsfw/neko','/data/montor.json','mangas','Erro\x20ao\x20acessar\x20o\x20banco\x20de\x20dados:','id_serie','DD/MM/YY','HH:mm:ss','3424taTlkK','/reg','/data/aesthetic.json','Conectou\x20ao\x20banco!','/18/travazap','send','get','/data/anjing.json','error','/data/kurumi.json','application/x-www-form-urlencoded','span.chapters','/anime/shizuka','index','3072678tXZeFl','id_category','ainaim','/data/kagura.json','json','readFileSync','/data/femdom.json','/recent-episodes','/anime/ayuzawa','/data/nezuko.json','attr','/popular/','/nsfw/yuri','/anime/sagiri','moment-timezone','/data/mikasa.json','episodeId','/data/toukachan.json','/data/shina.json','push','/data/sasuke.json','/anime/mikasa','/mangakit','/data/gremory.json','value','/anime/miku','/wallpaper/anjing','content','/anime/emilia','trim','/data/nsfwloli.json','/anime/toukachan','Erro\x20ao\x20buscar\x20mangás:','/data/yotsuba.json','/data/waifu2.json','/anime/yuri','/data/kotori.json','urlencoded','/nsfw/zettai','express','/data/boruto.json','videoUrl','saldo','data','/anime/nsfwloli','/data/megumin.json','/manga/:id','/memes','text','/anime/madara','mongodb+srv://anikit:EPt96b3yMx3wmEC@cluster0.ukzkyjq.mongodb.net/?retryWrites=true&w=majority','/data/pubg.json','format','/data/zettai.json','h2.priority','Credenciais\x20inválidas','/data/blowjob.json','/anime/deidara','Falha\x20ao\x20obter\x20o\x20link\x20de\x20download\x20do\x20áudio.','/data/bdsm.json','redirect','foto_18','./lib/color','/recents/1','Erro\x20ao\x20buscar\x20os\x20dados.','deleteMany','hash','User','sort','/anime/keneki','/data/meme.json','/data/ass.json','writeFileSync','Falha\x20ao\x20obter\x20o\x20link\x20de\x20download\x20do\x20vídeo.','/info/:animeId','pesquisamanga','34407gAuYoT','parse','/nsfw/panties','/anime/montor','Saldo\x20insuficiente.','/paginaPrincipal','random','render','/nsfw/manga','meta[property=\x22og:image\x22]','/anime/mobil','/anime/gremory','/chapters/:id/','/anime/isuzu','/anikit/playmp4','name','/anime/minato','/anime/erza','session','/nsfw/blowjob','/nsfw/neko2','/recents','105330maMjdd','/anime/elaina','https://ruby-careful-skunk.cyclic.app/pages/','/popular/1','/data/kakasih.json','/login','/18/foto_18','2690685WxCzmr','Erro\x20ao\x20salvar\x20o\x20usuário\x20no\x20banco\x20de\x20dados:','/anikit/tiktok','/nsfw/foot','params','fluent-ffmpeg','/anime/hinata','/perfil','/top/','/data/shinka.json','/perfil/','/data/pussy.json','/data/isuzu.json','https://zany-pear-deer-gown.cyclic.cloud/popular/','map','ejs','/anikit?username=','search=','/anime/yumeko','label','/data/asuna.json','/anime/shina','/anime/ana','/data/masturbation.json','/anime/tejina','page','trevoso','usuarios','/data/shota.json','connect','/data/satanic.json','catch','use','https://zany-pear-deer-gown.cyclic.cloud/search?q=','/anikit/ytmp4','path','message','./lib/scraper.js','9295062sZzdWO','/nsfw/bdsm','password','pagina','find','chalk','/data/cuckold.json','/genres/','/data/hekel.json','https://zany-pear-deer-gown.cyclic.cloud/pages/','/anime/waifu2','post','series','/anime/anime','/anime/kurumi','304626ngaNxF','/data/onepiece.json','/data/jeni.json','username','/anime/boruto','log','/anime/shota','https://animaster.onrender.com/api/popular/1','jsonwebtoken','ler','Acesso\x20não\x20autorizado.','/data/orgy.json','/data/memes-video.json','save','view\x20engine','/data/minato.json','/anime/naruto','login','load','axios','/anime/kaori','/data/mobil.json','/anime/shinka','manga','&key=','/nsfw/jahy','query','/data/tejina.json','span.series-title\x20h1','/anime/akiyama','/data/yuki.json','/wallpaper/satanic','Erro\x20ao\x20buscar\x20os\x20dados:','Usuário\x20já\x20existe','key','/data/akiyama.json','/data/kucing.json','stringify','/data/sakura.json','/anime/kagura','type','/data/inori.json','floor','America/Sao_Paulo','/anime/kucing','listen','/data/cecan.json','/data/emilia.json','categories','/wallpaper/asuna','faltouo\x20parâmetro\x20videoUrl','Nome\x20de\x20usuário\x20já\x20existe.\x20Por\x20favor,\x20escolha\x20outro.','Schema','meta[name=\x22description\x22]','/popular/:page','/data/gangbang.json','https://ruby-careful-skunk.cyclic.app/search?q=','linkifyjs','Nome\x20de\x20usuário\x20ou\x20senha\x20incorretos.\x20Por\x20favor,\x20tente\x20novamente.','./views/login.html','sign','/data/ayuzawa.json','/anime/kotori','/data/itori.json','/random/meme','/data/cum.json','https://mangalivre.net/manga/','status','/edit/','Erro\x20interno\x20do\x20servidor.\x20Por\x20favor,\x20tente\x20novamente\x20mais\x20tarde.','Acesso\x20não\x20autorizado\x20para\x20editar.','/data/erza.json','mongodb','/anime/waifu','/data/itachi.json','https://zany-pear-deer-gown.cyclic.cloud/chapters/','/anime/rose','/anime/rize','limit','/data/deidara.json','length','total','/wallpaper/ppcouple','/data/rose.json','/data/shinomiya.json','/data/wallhp2.json','set','https://zany-pear-deer-gown.cyclic.cloud/genres','/anime/yotsuba','/data/sagiri.json','/nsfw/cuckold','/anime/tsunade','/data/keneki.json','/anime/cecan','/clover','animeId','foto','/data/ahegao.json','Erro\x20ao\x20salvar\x20os\x20dados\x20no\x20arquivo\x20users.json:','/data/yuri.json','/anime/chiho','/data/loli.json','/anime/yuki','edit','/data/elaina.json','/anime/itori','cover','Error:','/anime/doraemon','Usuário\x20não\x20encontrado.','yt-search','/nsfw/femdom','/data/panties.json','/new','/data/kaga.json','/data/profil.json','/data/tsunade.json','/anime/sakura','secreto','/rota','/search','/log','/ler/:id','/data/yumeko.json'];_0x6088=function(){return _0x520c4d;};return _0x6088();}const P=require('pino'),{Boom}=require(_0x4435ef(0x1aa)),fetch=require(_0x4435ef(0x1bc)),chalk=require(_0x4435ef(0x10a)),{color,bgcolor,logs}=require(_0x4435ef(0xb4)),moment=require(_0x4435ef(0x1f6)),hora=moment['tz'](_0x4435ef(0x13f))[_0x4435ef(0xaa)](_0x4435ef(0x1d9)),data=moment['tz'](_0x4435ef(0x13f))['format'](_0x4435ef(0x1d8)),yts=require(_0x4435ef(0x182)),speed=require(_0x4435ef(0x1cb)),ffmpeg=require(_0x4435ef(0xe4)),{exec,spawn,execSync}=require(_0x4435ef(0x1cd)),linkfy=require(_0x4435ef(0x14d));app[_0x4435ef(0xff)](session({'secret':_0x4435ef(0xf9),'resave':![],'saveUninitialized':!![]}));const {Schema}=mongoose,cors=require('cors');app['use'](cors()),app[_0x4435ef(0xff)](bodyParser[_0x4435ef(0x1ec)]()),app['use'](bodyParser[_0x4435ef(0x9b)]({'extended':!![]})),app['set'](_0x4435ef(0x122),_0x4435ef(0xee)),app[_0x4435ef(0x16a)]('views',path[_0x4435ef(0x1b8)](__dirname,'views'));const adminKey='sua_chave_do_administrador',userSchema=new mongoose['Schema']({'username':{'type':String,'required':!![]},'password':{'type':String,'required':!![]},'key':{'type':String,'required':!![]},'saldo':{'type':Number,'default':0x0},'total':{'type':Number,'default':0x0},'ft':{'type':String,'default':null},'favoriteMangas':[{'mangaId':String,'mangaName':String,'imageUrl':String}]}),User=mongoose['model'](_0x4435ef(0xb9),userSchema),cer=new mongoose['Schema']({'username':String,'password':String,'key':String,'saldo':{'type':Number,'default':0x0},'total':{'type':Number,'default':0x0},'ft':String});async function diminuirSaldo(_0x1c6843){const _0x4131ba=_0x4435ef;try{const _0x91f010=await User[_0x4131ba(0x1bb)]({'username':_0x1c6843});if(!_0x91f010)return![];return _0x91f010[_0x4131ba(0xa0)]>0x0?(_0x91f010[_0x4131ba(0xa0)]--,await _0x91f010['save'](),!![]):![];}catch(_0xebbf12){return console[_0x4131ba(0x1e2)]('Erro\x20ao\x20diminuir\x20saldo:',_0xebbf12),![];}}function _0x4e5e(_0x204656,_0x10b2ef){const _0x60887d=_0x6088();return _0x4e5e=function(_0x4e5e0e,_0x329bb3){_0x4e5e0e=_0x4e5e0e-0x91;let _0x4732ee=_0x60887d[_0x4e5e0e];return _0x4732ee;},_0x4e5e(_0x204656,_0x10b2ef);}async function adicionarSaldo(_0x5789fa){const _0x882405=_0x4435ef;try{const _0x2ea74b=await User[_0x882405(0x1bb)]({'username':_0x5789fa});if(!_0x2ea74b)return![];return _0x2ea74b[_0x882405(0x165)]+=0x1,await _0x2ea74b['save'](),!![];}catch(_0x4e7863){return console[_0x882405(0x1e2)]('Erro\x20ao\x20adicionar\x20total:',_0x4e7863),![];}}async function readUsers(){const _0x38cd4f=_0x4435ef;try{return await User[_0x38cd4f(0x109)]();}catch(_0x1b6bac){return console[_0x38cd4f(0x1e2)](_0x38cd4f(0x1d6),_0x1b6bac),[];}}async function saveUsers(_0x52d5f5){const _0x48e426=_0x4435ef;try{await User[_0x48e426(0xb7)](),await User['insertMany'](_0x52d5f5);}catch(_0x27ee1b){console[_0x48e426(0x1e2)](_0x48e426(0x1be),_0x27ee1b);}}Person=User,app[_0x4435ef(0x1e0)](_0x4435ef(0x18b),(_0x3d4e49,_0x2c2e31)=>{const _0x5ad373=_0x4435ef;_0x2c2e31[_0x5ad373(0x1ec)]({'message':'Sua\x20API\x20está\x20funcionando!'});}),app['get'](_0x4435ef(0x18c),(_0xfec198,_0x59b436)=>{const _0x2f17e0=_0x4435ef,_0x33ed57=_0xfec198[_0x2f17e0(0x12e)]['q'];let _0x37c23d;async function _0x142170(){const _0x1921ff=_0x2f17e0;try{const _0x4e98a1=await fetch('https://zany-pear-deer-gown.cyclic.cloud/search?q='+_0x33ed57),_0x4fa0dd=await _0x4e98a1[_0x1921ff(0x1ec)]();_0x37c23d=_0x4fa0dd;}catch(_0x2f2bdb){console[_0x1921ff(0x1e2)](_0x1921ff(0x134),_0x2f2bdb);}}_0x142170()['then'](()=>{const _0x2fa1ff=_0x2f17e0;_0x59b436[_0x2fa1ff(0x1ec)](_0x37c23d);});});function getMangaById(_0xf7e0ab,_0x18d3b0){var _0x26d3ca={};const _0x2d8094=_0xf7e0ab;let _0x1e4838;return((async()=>{const _0x36e936=_0x4e5e;try{let _0x32da34=await axios['get'](_0x36e936(0x156)+_0xf7e0ab+'/'+_0x18d3b0);_0x1e4838=_0x32da34[_0x36e936(0xa1)];const _0x415752=cheerio[_0x36e936(0x126)](_0x1e4838),_0x428c36=_0x415752(_0x36e936(0x149))[_0x36e936(0x1f2)](_0x36e936(0x91)),_0x488ae2=_0x415752(_0x36e936(0x130))[_0x36e936(0xa6)]()[_0x36e936(0x93)](),_0x148b3f=_0x415752(_0x36e936(0xcb))[_0x36e936(0x1f2)](_0x36e936(0x91)),_0x17b618={'nome':_0x488ae2,'desc':_0x428c36,'image':_0x148b3f};_0x26d3ca[_0x36e936(0x12b)]=_0x17b618;}catch(_0x18a774){console['error'](_0x18a774[_0x36e936(0x103)]);}return _0x26d3ca;})());}app[_0x4435ef(0x1e0)]('/dados',async(_0x2b134b,_0x1a5320)=>{const _0x281bde=_0x4435ef,_0x2e7b15=_0x2b134b[_0x281bde(0x12e)]['id'],_0x244013=_0x2b134b['query'][_0x281bde(0xd1)];try{getMangaById(_0x244013,_0x2e7b15)['then'](_0x5d7583=>{const _0x46547f=_0x281bde;_0x1a5320[_0x46547f(0x1ec)](_0x5d7583);});}catch(_0x10cbfc){console[_0x281bde(0x1e2)](_0x281bde(0x134),_0x10cbfc),_0x1a5320['status'](0x1f4)[_0x281bde(0x1ec)]({'error':_0x281bde(0xb6)});}}),app[_0x4435ef(0x1e0)](_0x4435ef(0xce),async(_0x1c98a9,_0x5449a5)=>{const _0x2619ba=_0x4435ef,_0x2a5346=_0x1c98a9[_0x2619ba(0xe3)]['id'];try{fetchChaptersData(_0x2a5346)['then'](_0x404929=>{const _0x5197d8=_0x2619ba;_0x5449a5[_0x5197d8(0x1ec)](_0x404929);});}catch(_0x16b088){console['error'](_0x2619ba(0x134),_0x16b088),_0x5449a5[_0x2619ba(0x157)](0x1f4)[_0x2619ba(0x1ec)]({'error':'Erro\x20ao\x20buscar\x20os\x20dados.'});}}),app['get'](_0x4435ef(0x1cf),(_0x5be502,_0x397212)=>{const _0x37ee6d=_0x4435ef,_0x54d269=_0x5be502[_0x37ee6d(0xe3)]['id'];api['getPages'](_0x54d269)[_0x37ee6d(0x1cc)](_0x3a4a7d=>{const _0x3e0a20=_0x37ee6d;_0x397212[_0x3e0a20(0x1df)](_0x3a4a7d);});}),app[_0x4435ef(0x1e0)](_0x4435ef(0x10c),(_0xfa9f6f,_0xed8144)=>{let _0x59451c;async function _0x202c36(){const _0x21a90e=_0x4e5e;try{const _0x5f22bd=await fetch(_0x21a90e(0x16b)),_0x5e7203=await _0x5f22bd[_0x21a90e(0x1ec)]();_0x59451c=_0x5e7203;}catch(_0x31b552){console[_0x21a90e(0x1e2)]('Erro\x20ao\x20buscar\x20os\x20dados:',_0x31b552);}}_0x202c36()['then'](()=>{const _0x885036=_0x4e5e;_0xed8144[_0x885036(0x1ec)](_0x59451c);});}),app['get'](_0x4435ef(0xd7),(_0xdf5284,_0x1ad91d)=>{const _0x2af475=_0x4435ef;_0x1ad91d[_0x2af475(0xb2)](_0x2af475(0xb5));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1a2),(_0x1a6078,_0x55dedb)=>{let _0x44bad3;async function _0x111c1f(){const _0x149f2b=_0x4e5e;try{const _0x358f9d=await fetch(_0x149f2b(0x190)),_0x5afa22=await _0x358f9d[_0x149f2b(0x1ec)]();_0x44bad3=_0x5afa22;}catch(_0x278e3f){console[_0x149f2b(0x1e2)]('Erro\x20ao\x20buscar\x20os\x20dados:',_0x278e3f);}}_0x111c1f()['then'](()=>{const _0x1ee523=_0x4e5e;_0x55dedb[_0x1ee523(0x1ec)](_0x44bad3);});}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1f3),async(_0x308576,_0x2dbad3)=>{const _0x1be53a=_0x4435ef;_0x2dbad3['redirect'](_0x1be53a(0xdb));}),app[_0x4435ef(0x1e0)]('/popular/:page',(_0x37873b,_0x379086)=>{const _0x3d1431=_0x4435ef,_0x435923=_0x37873b[_0x3d1431(0xe3)][_0x3d1431(0xf8)];let _0xb6ff36;async function _0x10a5ff(){const _0x34d68e=_0x3d1431;try{const _0x4b0e00=await fetch(_0x34d68e(0xec)+_0x435923),_0x30f40b=await _0x4b0e00[_0x34d68e(0x1ec)]();_0xb6ff36=_0x30f40b;}catch(_0x4ec51d){console[_0x34d68e(0x1e2)](_0x34d68e(0x134),_0x4ec51d);}}_0x10a5ff()['then'](()=>{const _0x3f69fb=_0x3d1431;_0x379086[_0x3f69fb(0x1ec)](_0xb6ff36);});}),app[_0x4435ef(0x1e0)]('/top/:page',(_0x363d9c,_0x555fcc)=>{const _0x36b37e=_0x4435ef,_0x3bb8cd=_0x363d9c[_0x36b37e(0xe3)][_0x36b37e(0xf8)];let _0x22b18b;async function _0x5b8273(){const _0x4ccb8c=_0x36b37e;try{const _0x554fb9=await fetch(_0x4ccb8c(0x197)+_0x3bb8cd),_0x2d6b2b=await _0x554fb9[_0x4ccb8c(0x1ec)]();_0x22b18b=_0x2d6b2b;}catch(_0x3ba6ed){console[_0x4ccb8c(0x1e2)]('Erro\x20ao\x20buscar\x20os\x20dados:',_0x3ba6ed);}}_0x5b8273()[_0x36b37e(0x1cc)](()=>{const _0x81ebe3=_0x36b37e;_0x555fcc[_0x81ebe3(0x1ec)](_0x22b18b);});}),app[_0x4435ef(0x1e0)](_0x4435ef(0xe7),async(_0x4f2602,_0x2b3b67)=>{const _0x312730=_0x4435ef;_0x2b3b67[_0x312730(0xb2)](_0x312730(0x1a5));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xa4),async(_0x380021,_0x3aab94)=>{const _0x1acedb=_0x4435ef,_0x4137e0=_0x380021[_0x1acedb(0xe3)]['id'];let _0x4a3f2c;async function _0x8d19bc(){const _0x174deb=_0x1acedb;try{const _0x11e1e6=await fetch(_0x174deb(0x10e)+_0x4137e0),_0x1e9f6b=await _0x11e1e6[_0x174deb(0x1ec)]();_0x4a3f2c=_0x1e9f6b;}catch(_0x185cce){console[_0x174deb(0x1e2)](_0x174deb(0x134),_0x185cce);}}_0x8d19bc()[_0x1acedb(0x1cc)](()=>{const _0x22e85c=_0x1acedb;_0x3aab94[_0x22e85c(0x1ec)](_0x4a3f2c);});}),app[_0x4435ef(0x110)](_0x4435ef(0x1c6),async(_0x3097ff,_0x40757e)=>{const _0x2cb00f=_0x4435ef,{username:_0xcaf653,password:_0x1730d9,numero:_0x112828,key:_0x38b51d}=_0x3097ff[_0x2cb00f(0x1af)],_0x23715a=await User[_0x2cb00f(0x1bb)]({'username':_0xcaf653});if(_0x23715a)return _0x40757e[_0x2cb00f(0x157)](0x199)[_0x2cb00f(0x1df)](_0x2cb00f(0x147));const _0x465b8c='https://telegra.ph/file/f932f56e19397b0c7c448.jpg',_0x4b5139=0x2710,_0x1f250f=0x0,_0x33afcb=new User({'username':_0xcaf653,'password':_0x1730d9,'key':_0x38b51d,'saldo':_0x4b5139,'total':_0x1f250f,'ft':_0x465b8c});try{return await _0x33afcb[_0x2cb00f(0x121)](),_0x40757e[_0x2cb00f(0xb2)](_0x2cb00f(0x1b5));}catch(_0x58154d){return console[_0x2cb00f(0x1e2)](_0x2cb00f(0xe0),_0x58154d),_0x40757e[_0x2cb00f(0x157)](0x1f4)['send'](_0x2cb00f(0x159));}}),app[_0x4435ef(0x1e0)]('/login',(_0x107e2d,_0x69c225)=>{const _0x11c416=_0x4435ef;_0x69c225[_0x11c416(0xc9)](_0x11c416(0x125));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x172),(_0x1fd146,_0x2d99f8)=>{const _0x5187b2=_0x4435ef,{key:_0x1662f1}=_0x1fd146[_0x5187b2(0x12e)];if(_0x1662f1!==adminKey)return _0x2d99f8['status'](0x191)[_0x5187b2(0x1df)]('Acesso\x20não\x20autorizado\x20para\x20editar.');const _0xafd38b=readUsers();_0x2d99f8['render'](_0x5187b2(0x1e7),{'users':_0xafd38b});}),app[_0x4435ef(0x110)](_0x4435ef(0x1bf),async(_0x39dd0d,_0x3f070f)=>{const _0xcde6bd=_0x4435ef,{username:_0x3aa515,password:_0x287f7e}=_0x39dd0d['body'];try{const _0x4b4650=await User[_0xcde6bd(0x1bb)]({'username':_0x3aa515});if(!_0x4b4650||_0x4b4650['password']!==_0x287f7e)return _0x3f070f[_0xcde6bd(0x157)](0x191)[_0xcde6bd(0x1df)]('Nome\x20de\x20usuário\x20ou\x20senha\x20incorretos.\x20Por\x20favor,\x20tente\x20novamente.');_0x39dd0d[_0xcde6bd(0xd4)]['username']=_0x4b4650[_0xcde6bd(0x117)],_0x39dd0d[_0xcde6bd(0xd4)][_0xcde6bd(0x107)]=_0x4b4650['password'],_0x3f070f[_0xcde6bd(0xb2)](_0xcde6bd(0x158)+_0x4b4650[_0xcde6bd(0x117)]);}catch(_0x472e11){return console[_0xcde6bd(0x1e2)]('Erro\x20ao\x20acessar\x20o\x20banco\x20de\x20dados:',_0x472e11),_0x3f070f[_0xcde6bd(0x157)](0x1f4)['send'](_0xcde6bd(0x159));}}),app[_0x4435ef(0x110)](_0x4435ef(0xdd),async(_0x29a10e,_0x19bcdd)=>{const _0x2d5628=_0x4435ef,{username:_0x2afad5,password:_0x5e5d04,key:_0x1dfc84}=_0x29a10e[_0x2d5628(0x1af)];try{const _0x2171fb=await User['findOne']({'username':_0x2afad5});if(!_0x2171fb||_0x2171fb['password']!==_0x5e5d04)return _0x19bcdd['status'](0x191)[_0x2d5628(0x1df)](_0x2d5628(0x14e));_0x29a10e['session'][_0x2d5628(0x117)]=_0x2171fb['username'],_0x19bcdd[_0x2d5628(0xb2)](_0x2d5628(0xe9)+_0x2171fb['username']+'/'+_0x1dfc84+'/'+_0x5e5d04);}catch(_0x2f5668){return console[_0x2d5628(0x1e2)](_0x2d5628(0x1d6),_0x2f5668),_0x19bcdd['status'](0x1f4)[_0x2d5628(0x1df)](_0x2d5628(0x159));}}),app[_0x4435ef(0x110)](_0x4435ef(0xc7),async(_0xa8f8d6,_0x3855a1)=>{const _0x1092f4=_0x4435ef,{username:_0x1e31cb,password:_0x25770a,key:_0x522fd3}=_0xa8f8d6['body'];try{const _0x2f317d=await User[_0x1092f4(0x1bb)]({'username':_0x1e31cb});if(!_0x2f317d||_0x2f317d['password']!==_0x25770a)return _0x3855a1['status'](0x191)[_0x1092f4(0x1df)](_0x1092f4(0x14e));_0x3855a1[_0x1092f4(0xb2)](_0x1092f4(0xef)+_0x2f317d['username']+_0x1092f4(0x12c)+_0x2f317d['key']);}catch(_0x522af0){return console['error'](_0x1092f4(0x1d6),_0x522af0),_0x3855a1['status'](0x1f4)[_0x1092f4(0x1df)]('Erro\x20interno\x20do\x20servidor.\x20Por\x20favor,\x20tente\x20novamente\x20mais\x20tarde.');}}),app['get'](_0x4435ef(0xe6),async(_0x48602d,_0xacc808)=>{const _0x1c4d85=_0x4435ef,{username:_0x1befad,key:_0x4e167c,password:_0xa62a68}=_0x48602d[_0x1c4d85(0x12e)],_0x170861=await User['findOne']({'username':_0x1befad,'key':_0x4e167c}),_0x154ef2=_0x170861;if(!_0x170861)return _0xacc808['status'](0x191)[_0x1c4d85(0x1df)]('Acesso\x20não\x20autorizado.');try{const _0x346d4e=await User[_0x1c4d85(0x1bb)]({'username':_0x1befad,'key':_0x4e167c,'password':_0xa62a68});if(!_0x346d4e)return _0xacc808[_0x1c4d85(0x157)](0x194)[_0x1c4d85(0x1df)](_0x1c4d85(0x181));_0xacc808['render'](_0x1c4d85(0x1a1),{'user':_0x346d4e});}catch(_0x58751c){return console['error'](_0x1c4d85(0x1d6),_0x58751c),_0xacc808[_0x1c4d85(0x157)](0x1f4)['send'](_0x1c4d85(0x159));}}),app[_0x4435ef(0x1e0)]('/editar/:username',async(_0x28954a,_0x5c9da3)=>{const _0x3feb43=_0x4435ef,{username:_0x1c5d6a}=_0x28954a[_0x3feb43(0xe3)],{key:_0x46b8fc}=_0x28954a[_0x3feb43(0x12e)];try{const _0x55ff20=await User['findOne']({'username':_0x1c5d6a});if(!_0x55ff20)return _0x5c9da3[_0x3feb43(0x157)](0x194)[_0x3feb43(0x1df)](_0x3feb43(0x181));if(_0x46b8fc!==adminKey&&_0x55ff20[_0x3feb43(0x136)]!==_0x46b8fc)return _0x5c9da3[_0x3feb43(0x157)](0x191)[_0x3feb43(0x1df)](_0x3feb43(0x15a));_0x5c9da3[_0x3feb43(0xc9)](_0x3feb43(0x17b),{'user':_0x55ff20});}catch(_0x598c2b){return console[_0x3feb43(0x1e2)](_0x3feb43(0x1d6),_0x598c2b),_0x5c9da3['status'](0x1f4)[_0x3feb43(0x1df)](_0x3feb43(0x159));}}),app[_0x4435ef(0x110)](_0x4435ef(0x1ab),async(_0x2b2bf6,_0x4adc37)=>{const _0x2bc501=_0x4435ef,{username:_0x480ded}=_0x2b2bf6[_0x2bc501(0xe3)],{password:_0xedbc7f,key:_0x4971cc,ft:_0x255d4b,saldo:_0x3c42e7}=_0x2b2bf6[_0x2bc501(0x1af)];try{const _0x25c295=await User['findOne']({'username':_0x480ded});if(!_0x25c295)return _0x4adc37[_0x2bc501(0x157)](0x194)[_0x2bc501(0x1df)](_0x2bc501(0x181));_0xedbc7f&&(_0x25c295[_0x2bc501(0x107)]=_0xedbc7f),_0x4971cc&&(_0x25c295[_0x2bc501(0x136)]=_0x4971cc),_0x3c42e7&&(_0x25c295[_0x2bc501(0xa0)]=_0x3c42e7),_0x255d4b&&(_0x25c295['ft']=_0x255d4b),await _0x25c295['save'](),_0x4adc37[_0x2bc501(0xb2)](_0x2bc501(0xef)+_0x25c295[_0x2bc501(0x117)]+_0x2bc501(0x12c)+_0x25c295['key']);}catch(_0x48c474){return console[_0x2bc501(0x1e2)](_0x2bc501(0x1d6),_0x48c474),_0x4adc37[_0x2bc501(0x157)](0x1f4)[_0x2bc501(0x1df)]('Erro\x20interno\x20do\x20servidor.\x20Por\x20favor,\x20tente\x20novamente\x20mais\x20tarde.');}}),app[_0x4435ef(0x1e0)]('/anikit',async(_0x3eb440,_0x3b660d)=>{const _0x10a624=_0x4435ef,{username:_0x3cac21,key:_0x2f2a6b}=_0x3eb440['query'];try{const _0xa21743=await User[_0x10a624(0x1bb)]({'username':_0x3cac21,'key':_0x2f2a6b}),_0xf1ca32=_0xa21743;if(!_0xa21743)return _0x3b660d['status'](0x191)[_0x10a624(0x1df)]('Acesso\x20não\x20autorizado.');const _0x47a14a=await User[_0x10a624(0x109)]()[_0x10a624(0xba)]({'total':-0x1})[_0x10a624(0x162)](0x7);_0x3b660d[_0x10a624(0xc9)]('principal',{'user':_0xa21743,'users':_0xf1ca32,'topUsers':_0x47a14a});}catch(_0x4a1e86){return console[_0x10a624(0x1e2)](_0x10a624(0x1d6),_0x4a1e86),_0x3b660d[_0x10a624(0x157)](0x1f4)[_0x10a624(0x1df)](_0x10a624(0x159));}}),app[_0x4435ef(0x1e0)]('/',(_0x1aa3d8,_0x38da2c)=>{const _0x4879fb=_0x4435ef,_0x43af9b=path['join'](__dirname,_0x4879fb(0x14f));_0x38da2c['sendFile'](_0x43af9b);}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1b5),(_0x51c38c,_0x417cd3)=>{const _0x173721=_0x4435ef,_0x5c883f=path['join'](__dirname,_0x173721(0x14f));_0x417cd3[_0x173721(0x1a8)](_0x5c883f);}),app[_0x4435ef(0x1e0)](_0x4435ef(0x185),(_0x29239d,_0x7585a2)=>{const _0x527704=_0x4435ef,_0x19de2e=path[_0x527704(0x1b8)](__dirname,_0x527704(0x19e));_0x7585a2[_0x527704(0x1a8)](_0x19de2e);});function getMangaById(_0x1be436,_0xfa86ca){var _0x743007;const _0x1720b0=_0x1be436;let _0x147ffd;return((async()=>{const _0x17d7c0=_0x4e5e;try{let _0x3092a6=await axios[_0x17d7c0(0x1e0)](_0x17d7c0(0x156)+_0x1be436+'/'+_0xfa86ca);_0x147ffd=_0x3092a6[_0x17d7c0(0xa1)];const _0x10b971=cheerio[_0x17d7c0(0x126)](_0x147ffd),_0x2b9413=_0x10b971(_0x17d7c0(0x149))[_0x17d7c0(0x1f2)](_0x17d7c0(0x91)),_0x30e9db=_0x10b971(_0x17d7c0(0xcb))[_0x17d7c0(0x1f2)]('content'),_0x14d768=[];_0x10b971('ul.scans-list\x20li')['each']((_0x26658a,_0x94edf0)=>{const _0x4a9faa=_0x17d7c0,_0x1268cb=_0x10b971(_0x94edf0)[_0x4a9faa(0x109)](_0x4a9faa(0xac))[_0x4a9faa(0xa6)](),_0x32bfb6=_0x10b971(_0x94edf0)[_0x4a9faa(0x109)]('span.separator')['next']()[_0x4a9faa(0xa6)](),_0x158fde=_0x10b971(_0x94edf0)[_0x4a9faa(0x109)](_0x4a9faa(0x1e5))[_0x4a9faa(0xa6)]()[_0x4a9faa(0x93)]();_0x14d768[_0x4a9faa(0x1fb)]({'priority':_0x1268cb,'scanlator':_0x32bfb6,'chapters':_0x158fde});});const _0x37e228={'nome':_0x1be436,'id':_0xfa86ca,'desc':_0x2b9413,'foto':_0x30e9db};return _0x37e228;}catch(_0x2ce359){console['error'](_0x2ce359[_0x17d7c0(0x103)]);}})());}app[_0x4435ef(0x1e0)](_0x4435ef(0x1a4),async(_0x2dda0a,_0x3a6c3f)=>{const _0x75c9cb=_0x4435ef,_0x5221ef=_0x2dda0a[_0x75c9cb(0xe3)][_0x75c9cb(0xd1)],_0x4c52b0=_0x2dda0a[_0x75c9cb(0xe3)]['id'];getMangaById(ab,aa)[_0x75c9cb(0x1cc)](_0x468a17=>{const _0x499f0e=_0x75c9cb;_0x3a6c3f[_0x499f0e(0x1ec)](_0x468a17);});}),app[_0x4435ef(0x1e0)](_0x4435ef(0x18c),(_0x38372d,_0x423e11)=>{const _0x2a7693=_0x4435ef,_0xb0e162=_0x38372d['query']['q'];let _0xf6e07a;async function _0x4f34da(){const _0x3d82c0=_0x4e5e;try{const _0x18957f=await fetch(_0x3d82c0(0x100)+_0xb0e162),_0x28c49f=await _0x18957f['json']();_0xf6e07a=_0x28c49f;}catch(_0x56ad11){console[_0x3d82c0(0x1e2)](_0x3d82c0(0x134),_0x56ad11);}}_0x4f34da()[_0x2a7693(0x1cc)](()=>{_0x423e11['json'](_0xf6e07a);});}),app[_0x4435ef(0x1e0)](_0x4435ef(0xce),async(_0x5e3358,_0xc9b2a0)=>{const _0x5209d2=_0x4435ef,_0x87aa44=_0x5e3358[_0x5209d2(0xe3)]['id'];let _0x5561d6;async function _0xff68c9(){const _0x144c10=_0x5209d2;try{const _0xb1d721=await fetch(_0x144c10(0x15f)+_0x87aa44),_0x257347=await _0xb1d721[_0x144c10(0x1ec)]();_0x5561d6=_0x257347;}catch(_0x3e9ce0){console[_0x144c10(0x1e2)]('Erro\x20ao\x20buscar\x20os\x20dados:',_0x3e9ce0);}}_0xff68c9()[_0x5209d2(0x1cc)](()=>{const _0x23fb40=_0x5209d2;_0xc9b2a0[_0x23fb40(0x1ec)](_0x5561d6);});}),app['get']('/genres/',(_0x2a905d,_0x25103e)=>{const _0x13ea25=_0x4435ef;let _0x1da340;async function _0x3983be(){const _0x36bd83=_0x4e5e;try{const _0x3fc03b=await fetch(_0x36bd83(0x16b)),_0x14c3ad=await _0x3fc03b[_0x36bd83(0x1ec)]();_0x1da340=_0x14c3ad;}catch(_0x4be496){console[_0x36bd83(0x1e2)](_0x36bd83(0x134),_0x4be496);}}_0x3983be()[_0x13ea25(0x1cc)](()=>{const _0x4a9762=_0x13ea25;_0x25103e[_0x4a9762(0x1ec)](_0x1da340);});}),app[_0x4435ef(0x1e0)](_0x4435ef(0xd7),(_0x5c0db4,_0x1a679e)=>{const _0x275ef7=_0x4435ef;_0x1a679e[_0x275ef7(0xb2)](_0x275ef7(0xb5));}),app['get'](_0x4435ef(0x1a2),(_0x1e223b,_0x1ff1f2)=>{const _0x90d161=_0x4435ef;let _0x4061d2;async function _0x518eae(){const _0x2ff0d7=_0x4e5e;try{const _0x3bf1a6=await fetch(_0x2ff0d7(0x190)),_0x57b5aa=await _0x3bf1a6[_0x2ff0d7(0x1ec)]();_0x4061d2=_0x57b5aa;}catch(_0x433d14){console['error'](_0x2ff0d7(0x134),_0x433d14);}}_0x518eae()[_0x90d161(0x1cc)](()=>{const _0x4d7e8f=_0x90d161;_0x1ff1f2[_0x4d7e8f(0x1ec)](_0x4061d2);});}),app[_0x4435ef(0x1e0)]('/popular/',async(_0x204d34,_0xa60521)=>{const _0x3e2fe6=_0x4435ef;_0xa60521[_0x3e2fe6(0xb2)](_0x3e2fe6(0xdb));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x14a),(_0x98469c,_0x3d707e)=>{const _0xcd5495=_0x4435ef,_0x527454=_0x98469c['params'][_0xcd5495(0xf8)];let _0x1defed;async function _0x3f8681(){const _0x46c9ef=_0xcd5495;try{const _0x4526fe=await fetch(_0x46c9ef(0xec)+_0x527454),_0x5ed572=await _0x4526fe['json']();_0x1defed=_0x5ed572;}catch(_0x348e94){console[_0x46c9ef(0x1e2)]('Erro\x20ao\x20buscar\x20os\x20dados:',_0x348e94);}}_0x3f8681()[_0xcd5495(0x1cc)](()=>{_0x3d707e['json'](_0x1defed);});}),app[_0x4435ef(0x1e0)]('/top/:page',(_0x48d091,_0x4ba43a)=>{const _0xc7ce84=_0x4435ef,_0x116c99=_0x48d091['params']['page'];let _0x4b4201;async function _0x54f734(){const _0x58fb24=_0x4e5e;try{const _0x2ec6ce=await fetch(_0x58fb24(0x197)+_0x116c99),_0x17057b=await _0x2ec6ce['json']();_0x4b4201=_0x17057b;}catch(_0x36cc98){console[_0x58fb24(0x1e2)](_0x58fb24(0x134),_0x36cc98);}}_0x54f734()[_0xc7ce84(0x1cc)](()=>{const _0x112450=_0xc7ce84;_0x4ba43a[_0x112450(0x1ec)](_0x4b4201);});}),app[_0x4435ef(0x1e0)](_0x4435ef(0xe7),async(_0x2fedc4,_0x53aa64)=>{const _0x300d2c=_0x4435ef;_0x53aa64['redirect'](_0x300d2c(0x1a5));});const salvar=new mongoose[(_0x4435ef(0x148))]({'username':String,'password':String}),Pessoa=mongoose['model'](_0x4435ef(0xfa),salvar);app[_0x4435ef(0xff)](bodyParser[_0x4435ef(0x1ec)]()),app[_0x4435ef(0x110)](_0x4435ef(0x1db),async(_0x959fa0,_0xfcf64b)=>{const _0x3254e8=_0x4435ef;try{const {username:_0x524112,password:_0x3f0ee6}=_0x959fa0['body'],_0x3c7ade=await Pessoa[_0x3254e8(0x1bb)]({'username':_0x524112});if(_0x3c7ade)return _0xfcf64b[_0x3254e8(0x157)](0x190)[_0x3254e8(0x1ec)]({'message':_0x3254e8(0x135)});const _0x1a4ed=await bcrypt[_0x3254e8(0xb8)](_0x3f0ee6,0xa),_0x218025=new User({'username':_0x524112,'password':_0x1a4ed,'favoritos':[],'historico':[]});return await _0x218025['save'](),_0xfcf64b[_0x3254e8(0x157)](0xc9)[_0x3254e8(0x1ec)]({'message':_0x3254e8(0x19f)});}catch(_0x12b686){return console[_0x3254e8(0x1e2)](_0x12b686),_0xfcf64b['status'](0x1f4)[_0x3254e8(0x1ec)]({'message':_0x3254e8(0x1b7)});}}),app['post'](_0x4435ef(0x18d),async(_0x106c6a,_0x26cc27)=>{const _0x1988cb=_0x4435ef;try{const {username:_0x59f6b9,password:_0x2bb559}=_0x106c6a[_0x1988cb(0x1af)],_0x53101a=await Pessoa[_0x1988cb(0x1bb)]({'username':_0x59f6b9});if(!_0x53101a)return _0x26cc27['status'](0x191)['json']({'message':_0x1988cb(0xad)});const _0x53c60c=await bcrypt['compare'](_0x2bb559,_0x53101a[_0x1988cb(0x107)]);if(!_0x53c60c)return _0x26cc27['status'](0x191)[_0x1988cb(0x1ec)]({'message':_0x1988cb(0xad)});const _0x1608cd=jwt[_0x1988cb(0x150)]({'userId':_0x53101a['_id']},_0x1988cb(0x18a),{'expiresIn':'1h'});return _0x26cc27['status'](0xc8)[_0x1988cb(0x1ec)]({'token':_0x1608cd});}catch(_0x2f4f7f){return console[_0x1988cb(0x1e2)](_0x2f4f7f),_0x26cc27[_0x1988cb(0x157)](0x1f4)['json']({'message':_0x1988cb(0x1b7)});}}),router[_0x4435ef(0x1e0)](_0x4435ef(0x1ef),async(_0x55761c,_0x230fc9)=>{const _0x3055f1=_0x4435ef,_0x401e2f=_0x55761c[_0x3055f1(0x12e)]['page'],_0x156f2b=_0x55761c['query'][_0x3055f1(0x13c)],{username:_0x24546b,key:_0x5f3541}=_0x55761c[_0x3055f1(0x12e)],_0x8a1662=Person,_0x567e94=await User[_0x3055f1(0x1bb)]({'username':_0x24546b,'key':_0x5f3541});if(!_0x567e94)return _0x230fc9[_0x3055f1(0x157)](0x191)['send'](_0x3055f1(0x11e));const _0x46d4e8=diminuirSaldo(_0x24546b),_0x2b9998=adicionarSaldo(_0x24546b);if(_0x46d4e8&&_0x2b9998){const _0xfe9f0f=await fetchGogoRecentEpisodes({'page':_0x401e2f,'type':_0x156f2b});_0x230fc9[_0x3055f1(0x1ec)](_0xfe9f0f)[_0x3055f1(0x157)](0xc8);}else console[_0x3055f1(0x119)](_0x3055f1(0xc6));}),router['get'](_0x4435ef(0x1a0),async(_0x4749c1,_0x10a592)=>{const _0x19e0d2=_0x4435ef,_0x59c42f=_0x4749c1[_0x19e0d2(0xe3)][_0x19e0d2(0x173)],{username:_0x235903,key:_0x59083a}=_0x4749c1[_0x19e0d2(0x12e)],_0x380430=Person,_0x833151=await User[_0x19e0d2(0x1bb)]({'username':_0x235903,'key':_0x59083a});if(!_0x833151)return _0x10a592[_0x19e0d2(0x157)](0x191)[_0x19e0d2(0x1df)](_0x19e0d2(0x11e));const _0x34a03b=diminuirSaldo(_0x235903),_0x54edd4=adicionarSaldo(_0x235903);if(_0x34a03b&&_0x54edd4){const _0xecc9c3=await episod({'animeId':_0x59c42f});_0x10a592['json'](_0xecc9c3)[_0x19e0d2(0x157)](0xc8);}else console[_0x19e0d2(0x119)]('Saldo\x20insuficiente.');}),router[_0x4435ef(0x1e0)](_0x4435ef(0xc1),async(_0x3b4856,_0x493539)=>{const _0xcee90b=_0x4435ef,_0x54c0c0=_0x3b4856[_0xcee90b(0x12e)][_0xcee90b(0x1ea)],_0x18fbca=require('got');async function _0x69a22a(_0x478588){const _0x3f5a9d=_0xcee90b;var _0x57a56f={'mangas':[]};const _0x1074fd=_0x3f5a9d(0xf0)+_0x478588;try{let _0x5a5f5f=await _0x18fbca['post']('https://mangalivre.net/lib/search/series.json',{'body':_0x1074fd,'headers':{'x-requested-with':'XMLHttpRequest','content-type':_0x3f5a9d(0x1e4)}});const _0x526822=JSON[_0x3f5a9d(0xc3)](_0x5a5f5f[_0x3f5a9d(0x1af)]);if(_0x526822['series'])for(let _0x563a8d of _0x526822[_0x3f5a9d(0x111)]){_0x57a56f[_0x3f5a9d(0x1d5)]['push']({'id_serie':_0x563a8d[_0x3f5a9d(0x1d7)],'name':_0x563a8d['name'],'label':_0x563a8d[_0x3f5a9d(0xf2)],'score':_0x563a8d['score'],'value':_0x563a8d[_0x3f5a9d(0x200)],'author':_0x563a8d['author'],'artist':_0x563a8d[_0x3f5a9d(0x195)],'image':_0x563a8d[_0x3f5a9d(0x17e)],'categories':_0x563a8d[_0x3f5a9d(0x144)][_0x3f5a9d(0xed)](_0x1d6760=>{const _0x24378b=_0x3f5a9d;return{'name':_0x1d6760[_0x24378b(0xd1)],'id_category':_0x1d6760[_0x24378b(0x1e9)]};})});}return _0x57a56f;}catch(_0x11e28f){console['log'](_0x11e28f[_0x3f5a9d(0x103)]);}}_0x69a22a(_0x54c0c0)[_0xcee90b(0x1cc)](_0x4723cb=>{const _0x135050=_0xcee90b;_0x493539[_0x135050(0x1ec)](_0x4723cb);})['catch'](_0x4f2d34=>{const _0x2beed2=_0xcee90b;console[_0x2beed2(0x1e2)](_0x4f2d34);});}),router[_0x4435ef(0x1e0)](_0x4435ef(0xc0),async(_0x4752d3,_0x429b4b)=>{const _0x825042=_0x4435ef,_0x394c2e=_0x4752d3[_0x825042(0xe3)][_0x825042(0x173)],{username:_0x5422c7,key:_0x16d30e}=_0x4752d3[_0x825042(0x12e)],_0x23e764=Person,_0x14f831=await User[_0x825042(0x1bb)]({'username':_0x5422c7,'key':_0x16d30e});if(!_0x14f831)return _0x429b4b[_0x825042(0x157)](0x191)[_0x825042(0x1df)]('Acesso\x20não\x20autorizado.');const _0x35194c=diminuirSaldo(_0x5422c7),_0x50df6c=adicionarSaldo(_0x5422c7);if(_0x35194c&&_0x50df6c){const _0xa6aaf=await fetchGogoAnimeInfo({'animeId':_0x394c2e});_0x429b4b[_0x825042(0x1ec)]([_0xa6aaf])['status'](0xc8);}else console[_0x825042(0x119)]('Saldo\x20insuficiente.');}),router[_0x4435ef(0x1e0)]('/popular',async(_0x4dc2a7,_0x3a50dc)=>{const _0x402d25=_0x4435ef,{username:_0x4dfc48,key:_0x27209a}=_0x4dc2a7[_0x402d25(0x12e)],_0x5d672b=Person,_0x2c787e=await User[_0x402d25(0x1bb)]({'username':_0x4dfc48,'key':_0x27209a});if(!_0x2c787e)return _0x3a50dc[_0x402d25(0x157)](0x191)[_0x402d25(0x1df)]('Acesso\x20não\x20autorizado.');const _0x4fc7dc=diminuirSaldo(_0x4dfc48),_0x558bc1=adicionarSaldo(_0x4dfc48);_0x4fc7dc&&_0x558bc1?fetch(encodeURI(_0x402d25(0x11b)))[_0x402d25(0x1cc)](_0x3625b4=>_0x3625b4[_0x402d25(0x1ec)]())[_0x402d25(0x1cc)](_0x4c2b38=>{const _0x1987e9=_0x402d25;_0x3a50dc[_0x1987e9(0x1ec)](_0x4c2b38[_0x1987e9(0x19a)])[_0x1987e9(0x157)](0xc8);}):console[_0x402d25(0x119)]('Saldo\x20insuficiente.');}),router[_0x4435ef(0x1e0)](_0x4435ef(0x1a6),async(_0x237b7b,_0xf49d58)=>{const _0x528540=_0x4435ef,_0x47df3b=_0x237b7b[_0x528540(0xe3)][_0x528540(0x1f8)],_0x26ecb8=await fetchGogoanimeEpisodeSource({'episodeId':_0x47df3b});_0xf49d58[_0x528540(0x1ec)]([_0x26ecb8])[_0x528540(0x157)](0xc8);const {username:_0x22e11b,key:_0x4c4fb6}=_0x237b7b['query'],_0x5094d3=Person,_0x14d623=await User[_0x528540(0x1bb)]({'username':_0x22e11b,'key':_0x4c4fb6});if(!_0x14d623)return _0xf49d58[_0x528540(0x157)](0x191)['send']('Acesso\x20não\x20autorizado.');const _0x2d5156=diminuirSaldo(_0x22e11b),_0x5a9ac8=adicionarSaldo(_0x22e11b);if(_0x2d5156&&_0x5a9ac8){}else console['log'](_0x528540(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xe1),async(_0xa565ae,_0x55123f)=>{const _0x556845=_0x4435ef;var _0x51753c=_0xa565ae['query'][_0x556845(0x9f)];if(!_0x51753c)return _0x55123f[_0x556845(0x1ec)]({'error':_0x556845(0x146)});const {username:_0x3d83c9,key:_0x15f41b}=_0xa565ae['query'],_0x1c0d7c=Person,_0x206274=await User[_0x556845(0x1bb)]({'username':_0x3d83c9,'key':_0x15f41b});if(!_0x206274)return _0x55123f['status'](0x191)[_0x556845(0x1df)](_0x556845(0x11e));const _0xfac1bd=diminuirSaldo(_0x3d83c9),_0x52aa48=adicionarSaldo(_0x3d83c9);_0xfac1bd&&_0x52aa48?scrapeWebsite(_0x51753c)[_0x556845(0x1cc)](_0x347400=>{const _0x566d23=_0x556845;console[_0x566d23(0x119)]('Links\x20dos\x20vídeos\x20encontrados:'),_0x55123f[_0x566d23(0x1ec)]({'link':_0x347400[0x0]});}):console[_0x556845(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0xd0),async(_0xa862ab,_0xfd1634,_0x4b05d9)=>{const _0x3bf16c=_0x4435ef;var _0x80a009=_0xa862ab[_0x3bf16c(0x12e)][_0x3bf16c(0x12e)];if(!_0x80a009)return _0xfd1634[_0x3bf16c(0x1ec)]({'error':'faltouo\x20parâmetro\x20query'});const {username:_0x15b124,key:_0x5777fa}=_0xa862ab[_0x3bf16c(0x12e)],_0x49dfbd=Person,_0x46c5e4=await User[_0x3bf16c(0x1bb)]({'username':_0x15b124,'key':_0x5777fa});if(!_0x46c5e4)return _0xfd1634[_0x3bf16c(0x157)](0x191)[_0x3bf16c(0x1df)]('Acesso\x20não\x20autorizado.');const _0x2043c5=diminuirSaldo(_0x15b124),_0x40a249=adicionarSaldo(_0x15b124);_0x2043c5&&_0x40a249?ytPlayMp4(_0x80a009)['then'](_0x3c1b16=>{const _0x43ac1d=_0x3bf16c;_0xfd1634[_0x43ac1d(0x1ec)](_0x3c1b16);})[_0x3bf16c(0xfe)](_0x484c22=>{_0xfd1634['json'](_0x484c22);}):console['log'](_0x3bf16c(0xc6));}),app[_0x4435ef(0x1e0)]('/anikit/playmp3',async(_0x9a9502,_0x5090ff,_0x307963)=>{const _0x168275=_0x4435ef,{username:_0x43f19a,key:_0x4904ae,query:_0x281054}=_0x9a9502[_0x168275(0x12e)],_0x269506=Person,_0x4f24a4=await User['findOne']({'username':_0x43f19a,'key':_0x4904ae});if(!_0x4f24a4)return _0x5090ff['status'](0x191)[_0x168275(0x1df)]('Acesso\x20não\x20autorizado.');const _0x1d3ce5=diminuirSaldo(_0x43f19a),_0x487b03=adicionarSaldo(_0x43f19a);_0x1d3ce5&&_0x487b03?ytPlayMp3(_0x281054)[_0x168275(0x1cc)](_0x303e62=>{const _0x2d3089=_0x168275;_0x5090ff[_0x2d3089(0x1ec)](_0x303e62);})[_0x168275(0xfe)](_0x4d9b9d=>{const _0x223632=_0x168275;_0x5090ff[_0x223632(0x1ec)](_0x4d9b9d);}):console[_0x168275(0x119)](_0x168275(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x101),async(_0x2a28c4,_0x17e341)=>{const _0x471e22=_0x4435ef;var _0x33663c=_0x2a28c4[_0x471e22(0x12e)][_0x471e22(0x9f)];if(!_0x33663c)return _0x17e341[_0x471e22(0x1ec)]({'error':'faltouo\x20parâmetro\x20videoUrl'});const {username:_0x21a0a4,key:_0x4e9fc4}=_0x2a28c4[_0x471e22(0x12e)],_0x29eee5=Person,_0x20c107=await User[_0x471e22(0x1bb)]({'username':_0x21a0a4,'key':_0x4e9fc4});if(!_0x20c107)return _0x17e341[_0x471e22(0x157)](0x191)[_0x471e22(0x1df)](_0x471e22(0x11e));const _0x1b8dd4=diminuirSaldo(_0x21a0a4),_0x4d6f7b=adicionarSaldo(_0x21a0a4);_0x1b8dd4&&_0x4d6f7b?getVideoDownloadLink(_0x33663c)[_0x471e22(0x1cc)](_0x141bc0=>{const _0x269d22=_0x471e22;_0x141bc0?_0x17e341[_0x269d22(0x1ec)]({'url':''+_0x141bc0}):console[_0x269d22(0x119)](_0x269d22(0xbf));}):console[_0x471e22(0x119)](_0x471e22(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1a3),async(_0x3494fa,_0x50a0ce)=>{const _0xffcea2=_0x4435ef;var _0x278161=_0x3494fa[_0xffcea2(0x12e)][_0xffcea2(0x9f)];if(!_0x278161)return _0x50a0ce[_0xffcea2(0x1ec)]({'error':_0xffcea2(0x146)});const {username:_0x570c13,key:_0x52fbfb}=_0x3494fa[_0xffcea2(0x12e)],_0x3a25be=Person,_0x3e2562=await User[_0xffcea2(0x1bb)]({'username':_0x570c13,'key':_0x52fbfb});if(!_0x3e2562)return _0x50a0ce[_0xffcea2(0x157)](0x191)[_0xffcea2(0x1df)]('Acesso\x20não\x20autorizado.');const _0xd5498a=diminuirSaldo(_0x570c13),_0xe0e985=adicionarSaldo(_0x570c13);_0xd5498a&&_0xe0e985?getAudioDownloadLink(_0x278161)['then'](_0x1ce550=>{const _0x15797e=_0xffcea2;_0x1ce550?_0x50a0ce['json']({'url':''+_0x1ce550}):console[_0x15797e(0x119)](_0x15797e(0xb0));}):console['log'](_0xffcea2(0xc6));}),app[_0x4435ef(0x1e0)]('/nsfw/ahegao',async(_0x35c09a,_0x1b801b,_0x54ddb7)=>{const _0x658452=_0x4435ef,{username:_0x28015d,key:_0x21b215}=_0x35c09a[_0x658452(0x12e)],_0x22ea7c=Person,_0x50a41c=await User['findOne']({'username':_0x28015d,'key':_0x21b215});if(!_0x50a41c)return _0x1b801b['status'](0x191)[_0x658452(0x1df)]('Acesso\x20não\x20autorizado.');const _0x6a2abc=diminuirSaldo(_0x28015d),_0x542285=adicionarSaldo(_0x28015d);if(_0x6a2abc&&_0x542285){const _0x3e6753=JSON[_0x658452(0xc3)](fs['readFileSync'](__dirname+_0x658452(0x175))),_0x46b872=_0x3e6753[Math[_0x658452(0x13e)](Math['random']()*_0x3e6753[_0x658452(0x164)])];_0x1b801b[_0x658452(0x1ec)]({'url':''+_0x46b872});}else console['log'](_0x658452(0xc6));}),app[_0x4435ef(0x1e0)]('/nsfw/ass',async(_0x1dff22,_0xe131c2,_0x4b939d)=>{const _0x18263e=_0x4435ef,{username:_0x541138,key:_0x48d354}=_0x1dff22[_0x18263e(0x12e)],_0x18959f=Person,_0x57cc43=await User[_0x18263e(0x1bb)]({'username':_0x541138,'key':_0x48d354});if(!_0x57cc43)return _0xe131c2[_0x18263e(0x157)](0x191)[_0x18263e(0x1df)](_0x18263e(0x11e));const _0x4a9c55=diminuirSaldo(_0x541138),_0x544600=adicionarSaldo(_0x541138);if(_0x4a9c55&&_0x544600){const _0x85d904=JSON[_0x18263e(0xc3)](fs[_0x18263e(0x1ed)](__dirname+_0x18263e(0xbd))),_0x5848e8=_0x85d904[Math[_0x18263e(0x13e)](Math[_0x18263e(0xc8)]()*_0x85d904[_0x18263e(0x164)])];_0xe131c2[_0x18263e(0x1ec)]({'url':''+_0x5848e8});}else console[_0x18263e(0x119)](_0x18263e(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x106),async(_0x2d38d6,_0x32ce9b,_0x4e86fa)=>{const _0x1a42a8=_0x4435ef,{username:_0x14fc05,key:_0x1b24b0}=_0x2d38d6[_0x1a42a8(0x12e)],_0xbd7d1b=Person,_0x497419=await User['findOne']({'username':_0x14fc05,'key':_0x1b24b0});if(!_0x497419)return _0x32ce9b[_0x1a42a8(0x157)](0x191)[_0x1a42a8(0x1df)](_0x1a42a8(0x11e));const _0x19c828=diminuirSaldo(_0x14fc05),_0xcaf1ef=adicionarSaldo(_0x14fc05);if(_0x19c828&&_0xcaf1ef){const _0x54c612=JSON[_0x1a42a8(0xc3)](fs[_0x1a42a8(0x1ed)](__dirname+_0x1a42a8(0xb1))),_0x1eddd7=_0x54c612[Math['floor'](Math['random']()*_0x54c612[_0x1a42a8(0x164)])];_0x32ce9b[_0x1a42a8(0x1ec)]({'url':''+_0x1eddd7});}else console['log'](_0x1a42a8(0xc6));}),app['get'](_0x4435ef(0xd5),async(_0x2848c3,_0x2b88f4,_0x1bf5de)=>{const _0x5a0af1=_0x4435ef,{username:_0x2c4ff7,key:_0x25f215}=_0x2848c3[_0x5a0af1(0x12e)],_0x38b4cb=Person,_0x150e66=await User['findOne']({'username':_0x2c4ff7,'key':_0x25f215});if(!_0x150e66)return _0x2b88f4[_0x5a0af1(0x157)](0x191)['send'](_0x5a0af1(0x11e));const _0x7e840d=diminuirSaldo(_0x2c4ff7),_0x51cc77=adicionarSaldo(_0x2c4ff7);if(_0x7e840d&&_0x51cc77){const _0x5b43bf=JSON[_0x5a0af1(0xc3)](fs[_0x5a0af1(0x1ed)](__dirname+_0x5a0af1(0xae))),_0x4a8f3d=_0x5b43bf[Math[_0x5a0af1(0x13e)](Math[_0x5a0af1(0xc8)]()*_0x5b43bf[_0x5a0af1(0x164)])];_0x2b88f4['json']({'url':''+_0x4a8f3d});}else console['log'](_0x5a0af1(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x16e),async(_0x3370db,_0xb5692b,_0x286fe2)=>{const _0x89cd=_0x4435ef,{username:_0x6f8cf7,key:_0x3e8bb5}=_0x3370db[_0x89cd(0x12e)],_0xee827a=Person,_0x3add96=await User[_0x89cd(0x1bb)]({'username':_0x6f8cf7,'key':_0x3e8bb5});if(!_0x3add96)return _0xb5692b[_0x89cd(0x157)](0x191)[_0x89cd(0x1df)](_0x89cd(0x11e));const _0x431dfa=diminuirSaldo(_0x6f8cf7),_0x29ab09=adicionarSaldo(_0x6f8cf7);if(_0x431dfa&&_0x29ab09){const _0x5c555d=JSON[_0x89cd(0xc3)](fs[_0x89cd(0x1ed)](__dirname+_0x89cd(0x10b))),_0x25e904=_0x5c555d[Math[_0x89cd(0x13e)](Math[_0x89cd(0xc8)]()*_0x5c555d[_0x89cd(0x164)])];_0xb5692b[_0x89cd(0x1ec)]({'url':''+_0x25e904});}else console[_0x89cd(0x119)](_0x89cd(0xc6));}),app[_0x4435ef(0x1e0)]('/nsfw/cum',async(_0x2f5e87,_0x3353d9,_0x2811b2)=>{const _0x33f54d=_0x4435ef,{username:_0x9e32e3,key:_0x113ee6}=_0x2f5e87[_0x33f54d(0x12e)],_0x11e4aa=Person,_0xf340fb=await User[_0x33f54d(0x1bb)]({'username':_0x9e32e3,'key':_0x113ee6});if(!_0xf340fb)return _0x3353d9[_0x33f54d(0x157)](0x191)[_0x33f54d(0x1df)](_0x33f54d(0x11e));const _0x53c6a1=diminuirSaldo(_0x9e32e3),_0x7d41d5=adicionarSaldo(_0x9e32e3);if(_0x53c6a1&&_0x7d41d5){const _0x137d21=JSON[_0x33f54d(0xc3)](fs['readFileSync'](__dirname+_0x33f54d(0x155))),_0x27a762=_0x137d21[Math['floor'](Math[_0x33f54d(0xc8)]()*_0x137d21[_0x33f54d(0x164)])];_0x3353d9['json']({'url':''+_0x27a762});}else console[_0x33f54d(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)]('/nsfw/ero',async(_0x54be5b,_0x549779,_0x2882c3)=>{const _0x1d1274=_0x4435ef,{username:_0x1bea58,key:_0x5c8063}=_0x54be5b[_0x1d1274(0x12e)],_0x53fc1e=Person,_0xa90187=await User['findOne']({'username':_0x1bea58,'key':_0x5c8063});if(!_0xa90187)return _0x549779['status'](0x191)[_0x1d1274(0x1df)](_0x1d1274(0x11e));const _0xbfd703=diminuirSaldo(_0x1bea58),_0x2ad641=adicionarSaldo(_0x1bea58);if(_0xbfd703&&_0x2ad641){const _0x3524c5=JSON[_0x1d1274(0xc3)](fs[_0x1d1274(0x1ed)](__dirname+_0x1d1274(0x1b6))),_0x3f5b24=_0x3524c5[Math[_0x1d1274(0x13e)](Math[_0x1d1274(0xc8)]()*_0x3524c5[_0x1d1274(0x164)])];_0x549779[_0x1d1274(0x1ec)]({'url':''+_0x3f5b24});}else console[_0x1d1274(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0xa5),async(_0x3de3cc,_0x24b7e5,_0x1f4800)=>{const _0x23ec78=_0x4435ef,{username:_0x25b412,key:_0x1059d5}=_0x3de3cc[_0x23ec78(0x12e)],_0x1c32b=Person,_0x383d92=await User[_0x23ec78(0x1bb)]({'username':_0x25b412,'key':_0x1059d5});if(!_0x383d92)return _0x24b7e5[_0x23ec78(0x157)](0x191)['send']('Acesso\x20não\x20autorizado.');const _0xf01580=diminuirSaldo(_0x25b412),_0x30d97f=adicionarSaldo(_0x25b412);if(_0xf01580&&_0x30d97f){const _0x421c59=JSON['parse'](fs[_0x23ec78(0x1ed)](__dirname+_0x23ec78(0x120))),_0x2213c2=_0x421c59[Math['floor'](Math[_0x23ec78(0xc8)]()*_0x421c59['length'])];_0x24b7e5[_0x23ec78(0x1ec)]({'url':''+_0x2213c2});}else console[_0x23ec78(0x119)](_0x23ec78(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x183),async(_0x47a1e2,_0x594648,_0x411f92)=>{const _0x2d0ee4=_0x4435ef,{username:_0x2ae94f,key:_0x5ea640}=_0x47a1e2['query'],_0x299999=Person,_0xe84b61=await User[_0x2d0ee4(0x1bb)]({'username':_0x2ae94f,'key':_0x5ea640});if(!_0xe84b61)return _0x594648[_0x2d0ee4(0x157)](0x191)[_0x2d0ee4(0x1df)]('Acesso\x20não\x20autorizado.');const _0x34ff30=diminuirSaldo(_0x2ae94f),_0x6f352=adicionarSaldo(_0x2ae94f);if(_0x34ff30&&_0x6f352){const _0x20e200=JSON[_0x2d0ee4(0xc3)](fs['readFileSync'](__dirname+_0x2d0ee4(0x1ee))),_0x531b25=_0x20e200[Math[_0x2d0ee4(0x13e)](Math[_0x2d0ee4(0xc8)]()*_0x20e200[_0x2d0ee4(0x164)])];_0x594648[_0x2d0ee4(0x1ec)]({'url':''+_0x531b25});}else console[_0x2d0ee4(0x119)](_0x2d0ee4(0xc6));}),app['get'](_0x4435ef(0xe2),async(_0x13d04f,_0x32261f,_0x19aed1)=>{const _0x752def=_0x4435ef,{username:_0x468315,key:_0x4f870e}=_0x13d04f[_0x752def(0x12e)],_0x3a8d80=Person,_0x5f24c7=await User[_0x752def(0x1bb)]({'username':_0x468315,'key':_0x4f870e});if(!_0x5f24c7)return _0x32261f[_0x752def(0x157)](0x191)[_0x752def(0x1df)]('Acesso\x20não\x20autorizado.');const _0x179a88=diminuirSaldo(_0x468315),_0x4402aa=adicionarSaldo(_0x468315);if(_0x179a88&&_0x4402aa){const _0x1cdd39=JSON[_0x752def(0xc3)](fs['readFileSync'](__dirname+'/data/foot.json')),_0x205b13=_0x1cdd39[Math[_0x752def(0x13e)](Math[_0x752def(0xc8)]()*_0x1cdd39['length'])];_0x32261f['json']({'url':''+_0x205b13});}else console[_0x752def(0x119)](_0x752def(0xc6));}),app[_0x4435ef(0x1e0)]('/nsfw/gangbang',async(_0x37b993,_0x28aad7,_0x4e3e32)=>{const _0x2d6593=_0x4435ef,{username:_0x4d10ef,key:_0xbeec77}=_0x37b993['query'],_0x53b2fb=Person,_0x55a6b5=await User[_0x2d6593(0x1bb)]({'username':_0x4d10ef,'key':_0xbeec77});if(!_0x55a6b5)return _0x28aad7[_0x2d6593(0x157)](0x191)['send'](_0x2d6593(0x11e));const _0x47073c=diminuirSaldo(_0x4d10ef),_0x5f5aba=adicionarSaldo(_0x4d10ef);if(_0x47073c&&_0x5f5aba){const _0x5707f0=JSON[_0x2d6593(0xc3)](fs['readFileSync'](__dirname+_0x2d6593(0x14b))),_0x4ebf51=_0x5707f0[Math[_0x2d6593(0x13e)](Math[_0x2d6593(0xc8)]()*_0x5707f0['length'])];_0x28aad7[_0x2d6593(0x1ec)]({'url':''+_0x4ebf51});}else console[_0x2d6593(0x119)]('Saldo\x20insuficiente.');}),app['get']('/nsfw/glasses',async(_0x3254a2,_0x406c74,_0x355e38)=>{const _0x138a90=_0x4435ef,{username:_0x5d94d3,key:_0x505731}=_0x3254a2[_0x138a90(0x12e)],_0x34d176=Person,_0x118f06=await User[_0x138a90(0x1bb)]({'username':_0x5d94d3,'key':_0x505731});if(!_0x118f06)return _0x406c74['status'](0x191)[_0x138a90(0x1df)]('Acesso\x20não\x20autorizado.');const _0x28f4ab=diminuirSaldo(_0x5d94d3),_0x5ccee8=adicionarSaldo(_0x5d94d3);if(_0x28f4ab&&_0x5ccee8){const _0x1476a5=JSON[_0x138a90(0xc3)](fs[_0x138a90(0x1ed)](__dirname+'/data/glasses.json')),_0x364615=_0x1476a5[Math[_0x138a90(0x13e)](Math[_0x138a90(0xc8)]()*_0x1476a5[_0x138a90(0x164)])];_0x406c74[_0x138a90(0x1ec)]({'url':''+_0x364615});}else console[_0x138a90(0x119)](_0x138a90(0xc6));}),app[_0x4435ef(0x1e0)]('/nsfw/hentai',async(_0x2f305c,_0x1207ed,_0x182eff)=>{const _0x2ca0fc=_0x4435ef,{username:_0x575843,key:_0x42adbc}=_0x2f305c['query'],_0x1a197e=Person,_0x5a10c3=await User[_0x2ca0fc(0x1bb)]({'username':_0x575843,'key':_0x42adbc});if(!_0x5a10c3)return _0x1207ed[_0x2ca0fc(0x157)](0x191)['send'](_0x2ca0fc(0x11e));const _0x1d0cda=diminuirSaldo(_0x575843),_0x57c1d1=adicionarSaldo(_0x575843);if(_0x1d0cda&&_0x57c1d1){const _0xf49d6b=JSON['parse'](fs[_0x2ca0fc(0x1ed)](__dirname+_0x2ca0fc(0x1b1))),_0x205f09=_0xf49d6b[Math[_0x2ca0fc(0x13e)](Math[_0x2ca0fc(0xc8)]()*_0xf49d6b[_0x2ca0fc(0x164)])];_0x1207ed[_0x2ca0fc(0x1ec)]({'url':''+_0x205f09});}else console['log'](_0x2ca0fc(0xc6));}),app[_0x4435ef(0x1e0)]('/nsfw/gifs',async(_0xe2d775,_0x2ad807,_0x5a285f)=>{const _0x58b087=_0x4435ef,{username:_0x46f21a,key:_0x5416a1}=_0xe2d775[_0x58b087(0x12e)],_0x225aa9=Person,_0x3f5068=await User['findOne']({'username':_0x46f21a,'key':_0x5416a1});if(!_0x3f5068)return _0x2ad807[_0x58b087(0x157)](0x191)[_0x58b087(0x1df)](_0x58b087(0x11e));const _0x49041b=diminuirSaldo(_0x46f21a),_0x17a963=adicionarSaldo(_0x46f21a);if(_0x49041b&&_0x17a963){const _0x248ea8=JSON[_0x58b087(0xc3)](fs[_0x58b087(0x1ed)](__dirname+'/data/gifs.json')),_0x438674=_0x248ea8[Math[_0x58b087(0x13e)](Math['random']()*_0x248ea8['length'])];_0x2ad807[_0x58b087(0x1ec)]({'url':''+_0x438674});}else console[_0x58b087(0x119)](_0x58b087(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x12d),async(_0x23452b,_0x3e8b8e,_0x84cacf)=>{const _0x571fe1=_0x4435ef,{username:_0x129209,key:_0x28394f}=_0x23452b['query'],_0x2dbbd7=Person,_0x19688c=await User[_0x571fe1(0x1bb)]({'username':_0x129209,'key':_0x28394f});if(!_0x19688c)return _0x3e8b8e[_0x571fe1(0x157)](0x191)[_0x571fe1(0x1df)](_0x571fe1(0x11e));const _0x4ca453=diminuirSaldo(_0x129209),_0x3dedfc=adicionarSaldo(_0x129209);if(_0x4ca453&&_0x3dedfc){const _0x373793=JSON['parse'](fs[_0x571fe1(0x1ed)](__dirname+'/data/jahy.json')),_0x32b25c=_0x373793[Math[_0x571fe1(0x13e)](Math['random']()*_0x373793[_0x571fe1(0x164)])];_0x3e8b8e[_0x571fe1(0x1ec)]({'url':''+_0x32b25c});}else console['log'](_0x571fe1(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xca),async(_0x490df0,_0x38ba98,_0xfd19c1)=>{const _0x5da4ea=_0x4435ef,{username:_0x3c937a,key:_0x301567}=_0x490df0[_0x5da4ea(0x12e)],_0x215854=Person,_0xc850bb=await User[_0x5da4ea(0x1bb)]({'username':_0x3c937a,'key':_0x301567});if(!_0xc850bb)return _0x38ba98[_0x5da4ea(0x157)](0x191)['send'](_0x5da4ea(0x11e));const _0x3293cf=diminuirSaldo(_0x3c937a),_0x597d02=adicionarSaldo(_0x3c937a);if(_0x3293cf&&_0x597d02){const _0x479124=JSON[_0x5da4ea(0xc3)](fs[_0x5da4ea(0x1ed)](__dirname+'/data/manga.json')),_0x5a46ae=_0x479124[Math[_0x5da4ea(0x13e)](Math[_0x5da4ea(0xc8)]()*_0x479124[_0x5da4ea(0x164)])];_0x38ba98['json']({'url':''+_0x5a46ae});}else console[_0x5da4ea(0x119)](_0x5da4ea(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x191),async(_0xb4fe2c,_0x25f6dd,_0x3d4e54)=>{const _0x11e1c0=_0x4435ef,{username:_0x360ca9,key:_0x5db18b}=_0xb4fe2c['query'],_0x4eadf2=Person,_0x2073cf=await User[_0x11e1c0(0x1bb)]({'username':_0x360ca9,'key':_0x5db18b});if(!_0x2073cf)return _0x25f6dd['status'](0x191)[_0x11e1c0(0x1df)](_0x11e1c0(0x11e));const _0x1783f8=diminuirSaldo(_0x360ca9),_0x368007=adicionarSaldo(_0x360ca9);if(_0x1783f8&&_0x368007){const _0x5cbc70=JSON[_0x11e1c0(0xc3)](fs[_0x11e1c0(0x1ed)](__dirname+_0x11e1c0(0xf6))),_0x158f84=_0x5cbc70[Math[_0x11e1c0(0x13e)](Math[_0x11e1c0(0xc8)]()*_0x5cbc70[_0x11e1c0(0x164)])];_0x25f6dd[_0x11e1c0(0x1ec)]({'url':''+_0x158f84});}else console[_0x11e1c0(0x119)](_0x11e1c0(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1d3),async(_0x3ad927,_0x41ab88,_0xdc08d1)=>{const _0x1b114d=_0x4435ef,{username:_0x231e73,key:_0x3e26dd}=_0x3ad927['query'],_0x30b94c=Person,_0x2d63d3=await User[_0x1b114d(0x1bb)]({'username':_0x231e73,'key':_0x3e26dd});if(!_0x2d63d3)return _0x41ab88[_0x1b114d(0x157)](0x191)[_0x1b114d(0x1df)](_0x1b114d(0x11e));const _0x165317=diminuirSaldo(_0x231e73),_0xa70edc=adicionarSaldo(_0x231e73);if(_0x165317&&_0xa70edc){const _0xb502b5=JSON[_0x1b114d(0xc3)](fs[_0x1b114d(0x1ed)](__dirname+_0x1b114d(0x19d))),_0x982d03=_0xb502b5[Math[_0x1b114d(0x13e)](Math[_0x1b114d(0xc8)]()*_0xb502b5[_0x1b114d(0x164)])];_0x41ab88[_0x1b114d(0x1ec)]({'url':''+_0x982d03});}else console[_0x1b114d(0x119)](_0x1b114d(0xc6));}),app[_0x4435ef(0x1e0)]('/nsfw/orgy',async(_0x229bd9,_0x2fd58a,_0xb4196)=>{const _0x4e43ad=_0x4435ef,{username:_0x5a902e,key:_0xb288af}=_0x229bd9[_0x4e43ad(0x12e)],_0x4b2838=Person,_0x2aacdc=await User[_0x4e43ad(0x1bb)]({'username':_0x5a902e,'key':_0xb288af});if(!_0x2aacdc)return _0x2fd58a[_0x4e43ad(0x157)](0x191)[_0x4e43ad(0x1df)](_0x4e43ad(0x11e));const _0x3cc4a6=diminuirSaldo(_0x5a902e),_0x53451d=adicionarSaldo(_0x5a902e);if(_0x3cc4a6&&_0x53451d){const _0x5e9d1a=JSON[_0x4e43ad(0xc3)](fs['readFileSync'](__dirname+_0x4e43ad(0x11f))),_0x409550=_0x5e9d1a[Math[_0x4e43ad(0x13e)](Math[_0x4e43ad(0xc8)]()*_0x5e9d1a['length'])];_0x2fd58a[_0x4e43ad(0x1ec)]({'url':''+_0x409550});}else console[_0x4e43ad(0x119)](_0x4e43ad(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xc4),async(_0x11f9a9,_0x1ef7b8,_0x31753f)=>{const _0x5e659e=_0x4435ef,{username:_0x40ac78,key:_0x54e26a}=_0x11f9a9[_0x5e659e(0x12e)],_0x14f4e6=Person,_0x4154a9=await User[_0x5e659e(0x1bb)]({'username':_0x40ac78,'key':_0x54e26a});if(!_0x4154a9)return _0x1ef7b8['status'](0x191)[_0x5e659e(0x1df)](_0x5e659e(0x11e));const _0x12d091=diminuirSaldo(_0x40ac78),_0x816ecd=adicionarSaldo(_0x40ac78);if(_0x12d091&&_0x816ecd){const _0x3baa8b=JSON['parse'](fs[_0x5e659e(0x1ed)](__dirname+_0x5e659e(0x184))),_0x2ba4d6=_0x3baa8b[Math[_0x5e659e(0x13e)](Math['random']()*_0x3baa8b[_0x5e659e(0x164)])];_0x1ef7b8[_0x5e659e(0x1ec)]({'url':''+_0x2ba4d6});}else console[_0x5e659e(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)]('/nsfw/pussy',async(_0x53cbfb,_0x4043ef,_0x24b499)=>{const _0xa0d98e=_0x4435ef,{username:_0x1e5c32,key:_0x2975c0}=_0x53cbfb['query'],_0x3642ef=Person,_0x573665=await User['findOne']({'username':_0x1e5c32,'key':_0x2975c0});if(!_0x573665)return _0x4043ef['status'](0x191)[_0xa0d98e(0x1df)]('Acesso\x20não\x20autorizado.');const _0x103047=diminuirSaldo(_0x1e5c32),_0x481aea=adicionarSaldo(_0x1e5c32);if(_0x103047&&_0x481aea){const _0x17e413=JSON[_0xa0d98e(0xc3)](fs['readFileSync'](__dirname+_0xa0d98e(0xea))),_0x5105fe=_0x17e413[Math[_0xa0d98e(0x13e)](Math[_0xa0d98e(0xc8)]()*_0x17e413[_0xa0d98e(0x164)])];_0x4043ef['json']({'url':''+_0x5105fe});}else console[_0xa0d98e(0x119)](_0xa0d98e(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xd6),async(_0xba0cc8,_0x143ae5,_0x5ba849)=>{const _0x3d980a=_0x4435ef,{username:_0x7e35d1,key:_0x25759b}=_0xba0cc8[_0x3d980a(0x12e)],_0x2d66de=Person,_0x180617=await User['findOne']({'username':_0x7e35d1,'key':_0x25759b});if(!_0x180617)return _0x143ae5[_0x3d980a(0x157)](0x191)['send'](_0x3d980a(0x11e));const _0x38a4dc=diminuirSaldo(_0x7e35d1),_0x26f13d=adicionarSaldo(_0x7e35d1);if(_0x38a4dc&&_0x26f13d){const _0x3aeb66=JSON[_0x3d980a(0xc3)](fs[_0x3d980a(0x1ed)](__dirname+'/data/neko2.json')),_0x2713ed=_0x3aeb66[Math['floor'](Math[_0x3d980a(0xc8)]()*_0x3aeb66[_0x3d980a(0x164)])];_0x143ae5[_0x3d980a(0x1ec)]({'url':''+_0x2713ed});}else console['log']('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)]('/nsfw/tentacles',async(_0x3ad0f9,_0x2e5f58,_0x58f457)=>{const _0x33f48d=_0x4435ef,{username:_0x42f2e2,key:_0x3fd1a3}=_0x3ad0f9[_0x33f48d(0x12e)],_0x2a0945=Person,_0x529828=await User['findOne']({'username':_0x42f2e2,'key':_0x3fd1a3});if(!_0x529828)return _0x2e5f58[_0x33f48d(0x157)](0x191)[_0x33f48d(0x1df)](_0x33f48d(0x11e));const _0x40057d=diminuirSaldo(_0x42f2e2),_0x2c012b=adicionarSaldo(_0x42f2e2);if(_0x40057d&&_0x2c012b){const _0x597843=JSON[_0x33f48d(0xc3)](fs[_0x33f48d(0x1ed)](__dirname+_0x33f48d(0x194))),_0xf448d5=_0x597843[Math[_0x33f48d(0x13e)](Math['random']()*_0x597843[_0x33f48d(0x164)])];_0x2e5f58[_0x33f48d(0x1ec)]({'url':''+_0xf448d5});}else console[_0x33f48d(0x119)](_0x33f48d(0xc6));}),app[_0x4435ef(0x1e0)]('/nsfw/thighs',async(_0x22bbb1,_0x3498a1,_0x3ca110)=>{const _0x500a9b=_0x4435ef,{username:_0x2729d4,key:_0x37c7cc}=_0x22bbb1[_0x500a9b(0x12e)],_0x34df7e=Person,_0x416f70=await User['findOne']({'username':_0x2729d4,'key':_0x37c7cc});if(!_0x416f70)return _0x3498a1[_0x500a9b(0x157)](0x191)[_0x500a9b(0x1df)]('Acesso\x20não\x20autorizado.');const _0x1fe911=diminuirSaldo(_0x2729d4),_0x1f6126=adicionarSaldo(_0x2729d4);if(_0x1fe911&&_0x1f6126){const _0x584829=JSON['parse'](fs[_0x500a9b(0x1ed)](__dirname+'/data/thighs.json')),_0x169863=_0x584829[Math[_0x500a9b(0x13e)](Math[_0x500a9b(0xc8)]()*_0x584829['length'])];_0x3498a1[_0x500a9b(0x1ec)]({'url':''+_0x169863});}else console[_0x500a9b(0x119)](_0x500a9b(0xc6));}),app['get'](_0x4435ef(0x1f4),async(_0xc73f39,_0x3d876f,_0x39924a)=>{const _0x39e1b8=_0x4435ef,{username:_0x3b2983,key:_0x283a3f}=_0xc73f39[_0x39e1b8(0x12e)],_0x4ff778=Person,_0x220618=await User[_0x39e1b8(0x1bb)]({'username':_0x3b2983,'key':_0x283a3f});if(!_0x220618)return _0x3d876f[_0x39e1b8(0x157)](0x191)[_0x39e1b8(0x1df)]('Acesso\x20não\x20autorizado.');const _0x19cc23=diminuirSaldo(_0x3b2983),_0x18794=adicionarSaldo(_0x3b2983);if(_0x19cc23&&_0x18794){const _0x4c041d=JSON[_0x39e1b8(0xc3)](fs['readFileSync'](__dirname+_0x39e1b8(0x177))),_0x37d4ce=_0x4c041d[Math[_0x39e1b8(0x13e)](Math['random']()*_0x4c041d['length'])];_0x3d876f['json']({'url':''+_0x37d4ce});}else console['log'](_0x39e1b8(0xc6));}),app['get'](_0x4435ef(0x9c),async(_0x42f4b7,_0x372a94,_0x295e53)=>{const _0x2594ad=_0x4435ef,{username:_0x288c84,key:_0x2cf52b}=_0x42f4b7[_0x2594ad(0x12e)],_0x2b5407=Person,_0x8cb386=await User[_0x2594ad(0x1bb)]({'username':_0x288c84,'key':_0x2cf52b});if(!_0x8cb386)return _0x372a94[_0x2594ad(0x157)](0x191)[_0x2594ad(0x1df)](_0x2594ad(0x11e));const _0x53ecf0=diminuirSaldo(_0x288c84),_0x325348=adicionarSaldo(_0x288c84);if(_0x53ecf0&&_0x325348){const _0x18fc68=JSON[_0x2594ad(0xc3)](fs[_0x2594ad(0x1ed)](__dirname+_0x2594ad(0xab))),_0x445dad=_0x18fc68[Math[_0x2594ad(0x13e)](Math['random']()*_0x18fc68[_0x2594ad(0x164)])];_0x372a94[_0x2594ad(0x1ec)]({'url':''+_0x445dad});}else console['log'](_0x2594ad(0xc6));}),app['get'](_0x4435ef(0xbb),async(_0x3511e3,_0x1b57e1,_0x56d2ec)=>{const _0x326175=_0x4435ef,{username:_0x13297c,key:_0xfe3ddf}=_0x3511e3[_0x326175(0x12e)],_0x15b31c=Person,_0x288311=await User[_0x326175(0x1bb)]({'username':_0x13297c,'key':_0xfe3ddf});if(!_0x288311)return _0x1b57e1[_0x326175(0x157)](0x191)[_0x326175(0x1df)]('Acesso\x20não\x20autorizado.');const _0x1b890d=diminuirSaldo(_0x13297c),_0x3662f5=adicionarSaldo(_0x13297c);if(_0x1b890d&&_0x3662f5){const _0x1a6d77=JSON[_0x326175(0xc3)](fs[_0x326175(0x1ed)](__dirname+_0x326175(0x170))),_0x5d03de=_0x1a6d77[Math[_0x326175(0x13e)](Math[_0x326175(0xc8)]()*_0x1a6d77[_0x326175(0x164)])];_0x1b57e1[_0x326175(0x1ec)]({'url':''+_0x5d03de});}else console[_0x326175(0x119)](_0x326175(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/megumin',async(_0x2a265e,_0x5e5cf9,_0x1939e9)=>{const _0x43caa6=_0x4435ef,{username:_0x4be539,key:_0x3ab020}=_0x2a265e[_0x43caa6(0x12e)],_0x464c51=Person,_0x322a10=await User[_0x43caa6(0x1bb)]({'username':_0x4be539,'key':_0x3ab020});if(!_0x322a10)return _0x5e5cf9[_0x43caa6(0x157)](0x191)[_0x43caa6(0x1df)](_0x43caa6(0x11e));const _0x15ca80=diminuirSaldo(_0x4be539),_0xae5669=adicionarSaldo(_0x4be539);if(_0x15ca80&&_0xae5669){const _0x4d92f6=JSON[_0x43caa6(0xc3)](fs[_0x43caa6(0x1ed)](__dirname+_0x43caa6(0xa3))),_0x10c145=_0x4d92f6[Math[_0x43caa6(0x13e)](Math['random']()*_0x4d92f6[_0x43caa6(0x164)])];_0x5e5cf9[_0x43caa6(0x1ec)]({'url':''+_0x10c145});}else console[_0x43caa6(0x119)](_0x43caa6(0xc6));}),app['get'](_0x4435ef(0x16c),async(_0x481fa5,_0x4a389c,_0x355ee3)=>{const _0x5a9f3b=_0x4435ef,{username:_0x4cb667,key:_0x14c41c}=_0x481fa5[_0x5a9f3b(0x12e)],_0x3cdcc8=Person,_0x183d48=await User['findOne']({'username':_0x4cb667,'key':_0x14c41c});if(!_0x183d48)return _0x4a389c[_0x5a9f3b(0x157)](0x191)[_0x5a9f3b(0x1df)](_0x5a9f3b(0x11e));const _0x1ce744=diminuirSaldo(_0x4cb667),_0x4713c8=adicionarSaldo(_0x4cb667);if(_0x1ce744&&_0x4713c8){const _0x55234b=JSON[_0x5a9f3b(0xc3)](fs[_0x5a9f3b(0x1ed)](__dirname+_0x5a9f3b(0x97))),_0x3892e2=_0x55234b[Math[_0x5a9f3b(0x13e)](Math[_0x5a9f3b(0xc8)]()*_0x55234b['length'])];_0x4a389c['json']({'url':''+_0x3892e2});}else console[_0x5a9f3b(0x119)](_0x5a9f3b(0xc6));}),app['get'](_0x4435ef(0x1c8),async(_0x13f3f2,_0x893703,_0x429852)=>{const _0x11d380=_0x4435ef,{username:_0x5328cd,key:_0x501502}=_0x13f3f2[_0x11d380(0x12e)],_0x37703a=Person,_0x2fc4b3=await User[_0x11d380(0x1bb)]({'username':_0x5328cd,'key':_0x501502});if(!_0x2fc4b3)return _0x893703[_0x11d380(0x157)](0x191)[_0x11d380(0x1df)]('Acesso\x20não\x20autorizado.');const _0x442eb7=diminuirSaldo(_0x5328cd),_0x5792de=adicionarSaldo(_0x5328cd);if(_0x442eb7&&_0x5792de){const _0x25abc5=JSON[_0x11d380(0xc3)](fs[_0x11d380(0x1ed)](__dirname+_0x11d380(0x168))),_0x33332f=_0x25abc5[Math[_0x11d380(0x13e)](Math[_0x11d380(0xc8)]()*_0x25abc5[_0x11d380(0x164)])];_0x893703[_0x11d380(0x1ec)]({'url':''+_0x33332f});}else console[_0x11d380(0x119)](_0x11d380(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xf1),async(_0x1d0201,_0x40ef93,_0x11f4dc)=>{const _0x430103=_0x4435ef,{username:_0x4e517a,key:_0x3e36f6}=_0x1d0201[_0x430103(0x12e)],_0x510664=Person,_0x46c044=await User['findOne']({'username':_0x4e517a,'key':_0x3e36f6});if(!_0x46c044)return _0x40ef93[_0x430103(0x157)](0x191)[_0x430103(0x1df)](_0x430103(0x11e));const _0x424ac2=diminuirSaldo(_0x4e517a),_0x466ba2=adicionarSaldo(_0x4e517a);if(_0x424ac2&&_0x466ba2){const _0x2fc3bd=JSON[_0x430103(0xc3)](fs[_0x430103(0x1ed)](__dirname+_0x430103(0x18f))),_0x34fb88=_0x2fc3bd[Math['floor'](Math[_0x430103(0xc8)]()*_0x2fc3bd['length'])];_0x40ef93['json']({'url':''+_0x34fb88});}else console[_0x430103(0x119)](_0x430103(0xc6));}),app['get'](_0x4435ef(0xf7),async(_0x4375b3,_0x1f087a,_0x136f16)=>{const _0x35b04f=_0x4435ef,{username:_0x405404,key:_0x9e7b1f}=_0x4375b3[_0x35b04f(0x12e)],_0x26a995=Person,_0x21e5ac=await User[_0x35b04f(0x1bb)]({'username':_0x405404,'key':_0x9e7b1f});if(!_0x21e5ac)return _0x1f087a[_0x35b04f(0x157)](0x191)[_0x35b04f(0x1df)](_0x35b04f(0x11e));const _0x36e62d=diminuirSaldo(_0x405404),_0xd23f12=adicionarSaldo(_0x405404);if(_0x36e62d&&_0xd23f12){const _0x5c0779=JSON[_0x35b04f(0xc3)](fs[_0x35b04f(0x1ed)](__dirname+_0x35b04f(0x12f))),_0x16153b=_0x5c0779[Math[_0x35b04f(0x13e)](Math['random']()*_0x5c0779[_0x35b04f(0x164)])];_0x1f087a[_0x35b04f(0x1ec)]({'url':''+_0x16153b});}else console[_0x35b04f(0x119)](_0x35b04f(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x178),async(_0x28945c,_0x3c739e,_0x161afe)=>{const _0x342411=_0x4435ef,{username:_0x43d669,key:_0x28acb5}=_0x28945c['query'],_0x2750e3=Person,_0x3790c5=await User[_0x342411(0x1bb)]({'username':_0x43d669,'key':_0x28acb5});if(!_0x3790c5)return _0x3c739e[_0x342411(0x157)](0x191)[_0x342411(0x1df)](_0x342411(0x11e));const _0x10eba9=diminuirSaldo(_0x43d669),_0x140033=adicionarSaldo(_0x43d669);if(_0x10eba9&&_0x140033){const _0x5eb085=JSON[_0x342411(0xc3)](fs[_0x342411(0x1ed)](__dirname+_0x342411(0x1c1))),_0xe58e24=_0x5eb085[Math['floor'](Math[_0x342411(0xc8)]()*_0x5eb085['length'])];_0x3c739e['json']({'url':''+_0xe58e24});}else console[_0x342411(0x119)](_0x342411(0xc6));}),app[_0x4435ef(0x1e0)]('/18/video',async(_0x575354,_0xb74e3f,_0x5c4da1)=>{const _0x234bb0=_0x4435ef,{username:_0x523fec,key:_0x4bba2c}=_0x575354[_0x234bb0(0x12e)],_0x55e3e2=Person,_0x46588d=await User[_0x234bb0(0x1bb)]({'username':_0x523fec,'key':_0x4bba2c});if(!_0x46588d)return _0xb74e3f[_0x234bb0(0x157)](0x191)[_0x234bb0(0x1df)](_0x234bb0(0x11e));const _0x2247e6=diminuirSaldo(_0x523fec),_0x3bbaaa=adicionarSaldo(_0x523fec);if(_0x2247e6&&_0x3bbaaa){const _0x214440=require(_0x234bb0(0x1d2)),_0x1b41fc=_0x214440['video_18'],_0x3ea0a6=_0x1b41fc[Math[_0x234bb0(0x13e)](Math[_0x234bb0(0xc8)]()*_0x1b41fc[_0x234bb0(0x164)])];_0xb74e3f['json']({'url':''+_0x3ea0a6});}else console[_0x234bb0(0x119)](_0x234bb0(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1de),async(_0x35098c,_0x1622f5,_0x25f465)=>{const _0x4dcd08=_0x4435ef,{username:_0x54f732,key:_0x53a9c0}=_0x35098c[_0x4dcd08(0x12e)],_0x156fee=Person,_0x197d7c=await User[_0x4dcd08(0x1bb)]({'username':_0x54f732,'key':_0x53a9c0});if(!_0x197d7c)return _0x1622f5[_0x4dcd08(0x157)](0x191)[_0x4dcd08(0x1df)](_0x4dcd08(0x11e));const _0x5c0422=diminuirSaldo(_0x54f732),_0x44113e=adicionarSaldo(_0x54f732);if(_0x5c0422&&_0x44113e){const _0x4ce16c=require(_0x4dcd08(0x1d2)),_0x4112bf=_0x4ce16c['travazap'],_0x519139=_0x4112bf[Math[_0x4dcd08(0x13e)](Math[_0x4dcd08(0xc8)]()*_0x4112bf[_0x4dcd08(0x164)])];_0x1622f5[_0x4dcd08(0x1ec)]({'url':''+_0x519139});}else console['log'](_0x4dcd08(0xc6));}),app['get'](_0x4435ef(0xde),async(_0x54d05a,_0x53da94,_0x1a2114)=>{const _0x254bce=_0x4435ef,{username:_0x2582a7,key:_0x192189}=_0x54d05a[_0x254bce(0x12e)],_0x4d772c=Person,_0x29f801=await User[_0x254bce(0x1bb)]({'username':_0x2582a7,'key':_0x192189});if(!_0x29f801)return _0x53da94[_0x254bce(0x157)](0x191)[_0x254bce(0x1df)](_0x254bce(0x11e));const _0xdb21ab=diminuirSaldo(_0x2582a7),_0x58831f=adicionarSaldo(_0x2582a7);if(_0xdb21ab&&_0x58831f){const _0x30df6c=require(_0x254bce(0x1d2)),_0x4bf74c=_0x30df6c[_0x254bce(0xb3)],_0x4a2d8d=_0x4bf74c[Math[_0x254bce(0x13e)](Math[_0x254bce(0xc8)]()*_0x4bf74c[_0x254bce(0x164)])];_0x53da94[_0x254bce(0x1ec)]({'url':''+_0x4a2d8d});}else console['log']('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0x95),async(_0x11b878,_0x4cffee,_0x257ae7)=>{const _0x102d4e=_0x4435ef,{username:_0x53959f,key:_0x45ad94}=_0x11b878[_0x102d4e(0x12e)],_0x2c44c4=Person,_0x2a5708=await User[_0x102d4e(0x1bb)]({'username':_0x53959f,'key':_0x45ad94});if(!_0x2a5708)return _0x4cffee[_0x102d4e(0x157)](0x191)[_0x102d4e(0x1df)](_0x102d4e(0x11e));const _0x2cd218=diminuirSaldo(_0x53959f),_0x1687e8=adicionarSaldo(_0x53959f);if(_0x2cd218&&_0x1687e8){const _0x480808=JSON[_0x102d4e(0xc3)](fs[_0x102d4e(0x1ed)](__dirname+_0x102d4e(0x1f9))),_0x379544=_0x480808[Math['floor'](Math['random']()*_0x480808[_0x102d4e(0x164)])];_0x4cffee[_0x102d4e(0x1ec)]({'url':''+_0x379544});}else console[_0x102d4e(0x119)](_0x102d4e(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/akira',async(_0x58b5aa,_0x42978c,_0xf462a5)=>{const _0x125220=_0x4435ef,{username:_0x4f8049,key:_0xcb2c61}=_0x58b5aa[_0x125220(0x12e)],_0x158ec3=Person,_0x1fa7fc=await User[_0x125220(0x1bb)]({'username':_0x4f8049,'key':_0xcb2c61});if(!_0x1fa7fc)return _0x42978c[_0x125220(0x157)](0x191)[_0x125220(0x1df)](_0x125220(0x11e));const _0x373d43=diminuirSaldo(_0x4f8049),_0x56aa51=adicionarSaldo(_0x4f8049);if(_0x373d43&&_0x56aa51){const _0x34a0fa=JSON[_0x125220(0xc3)](fs[_0x125220(0x1ed)](__dirname+_0x125220(0x1b4))),_0x4dbbee=_0x34a0fa[Math[_0x125220(0x13e)](Math['random']()*_0x34a0fa[_0x125220(0x164)])];_0x42978c[_0x125220(0x1ec)]({'url':''+_0x4dbbee});}else console[_0x125220(0x119)]('Saldo\x20insuficiente.');}),app['get'](_0x4435ef(0x17d),async(_0x573619,_0x3eb81a,_0x3b20c9)=>{const _0x77f194=_0x4435ef,{username:_0x4c813e,key:_0x5ae1c6}=_0x573619[_0x77f194(0x12e)],_0x49654c=Person,_0x4ad4f5=await User['findOne']({'username':_0x4c813e,'key':_0x5ae1c6});if(!_0x4ad4f5)return _0x3eb81a[_0x77f194(0x157)](0x191)[_0x77f194(0x1df)]('Acesso\x20não\x20autorizado.');const _0x3535a2=diminuirSaldo(_0x4c813e),_0x15868f=adicionarSaldo(_0x4c813e);if(_0x3535a2&&_0x15868f){const _0x39a5a1=JSON['parse'](fs[_0x77f194(0x1ed)](__dirname+_0x77f194(0x153))),_0x22ff7f=_0x39a5a1[Math['floor'](Math[_0x77f194(0xc8)]()*_0x39a5a1[_0x77f194(0x164)])];_0x3eb81a['json']({'url':''+_0x22ff7f});}else console['log'](_0x77f194(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x113),async(_0x3e968a,_0x6779a,_0x7bf723)=>{const _0x3a6aa6=_0x4435ef,{username:_0x532e38,key:_0x5f489a}=_0x3e968a[_0x3a6aa6(0x12e)],_0x201658=Person,_0x5d1fa9=await User[_0x3a6aa6(0x1bb)]({'username':_0x532e38,'key':_0x5f489a});if(!_0x5d1fa9)return _0x6779a[_0x3a6aa6(0x157)](0x191)['send'](_0x3a6aa6(0x11e));const _0x1d7ced=diminuirSaldo(_0x532e38),_0x3fac77=adicionarSaldo(_0x532e38);if(_0x1d7ced&&_0x3fac77){const _0x151dd4=JSON['parse'](fs[_0x3a6aa6(0x1ed)](__dirname+'/data/kurumi.json')),_0x1dec89=_0x151dd4[Math[_0x3a6aa6(0x13e)](Math[_0x3a6aa6(0xc8)]()*_0x151dd4['length'])];_0x6779a['json']({'url':''+_0x1dec89});}else console[_0x3a6aa6(0x119)]('Saldo\x20insuficiente.');}),app['get'](_0x4435ef(0x201),async(_0x44c1b1,_0x1e49de,_0x10fe90)=>{const _0x424df5=_0x4435ef,{username:_0x5c4552,key:_0x39e36d}=_0x44c1b1[_0x424df5(0x12e)],_0x3d3d2a=Person,_0x4a61ce=await User[_0x424df5(0x1bb)]({'username':_0x5c4552,'key':_0x39e36d});if(!_0x4a61ce)return _0x1e49de['status'](0x191)['send'](_0x424df5(0x11e));const _0x351f8c=diminuirSaldo(_0x5c4552),_0x3b8dd6=adicionarSaldo(_0x5c4552);if(_0x351f8c&&_0x3b8dd6){const _0x548306=JSON[_0x424df5(0xc3)](fs[_0x424df5(0x1ed)](__dirname+_0x424df5(0x1b9))),_0x1dce7c=_0x548306[Math[_0x424df5(0x13e)](Math[_0x424df5(0xc8)]()*_0x548306[_0x424df5(0x164)])];_0x1e49de[_0x424df5(0x1ec)]({'url':''+_0x1dce7c});}else console[_0x424df5(0x119)](_0x424df5(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/pokemon',async(_0x13dc4e,_0x16667d,_0x8bb4c4)=>{const _0x4d0abe=_0x4435ef,{username:_0x2ea53b,key:_0x359ca5}=_0x13dc4e['query'],_0x13ec42=Person,_0x539e2d=await User[_0x4d0abe(0x1bb)]({'username':_0x2ea53b,'key':_0x359ca5});if(!_0x539e2d)return _0x16667d[_0x4d0abe(0x157)](0x191)['send']('Acesso\x20não\x20autorizado.');const _0xda2bab=diminuirSaldo(_0x2ea53b),_0x407782=adicionarSaldo(_0x2ea53b);if(_0xda2bab&&_0x407782){const _0x59eec9=JSON[_0x4d0abe(0xc3)](fs[_0x4d0abe(0x1ed)](__dirname+'/data/pokemon.json')),_0x3e40c7=_0x59eec9[Math[_0x4d0abe(0x13e)](Math[_0x4d0abe(0xc8)]()*_0x59eec9['length'])];_0x16667d[_0x4d0abe(0x1ec)]({'url':''+_0x3e40c7});}else console[_0x4d0abe(0x119)](_0x4d0abe(0xc6));}),app['get'](_0x4435ef(0x1d0),async(_0x661d08,_0x338c0d,_0x5a769f)=>{const _0x484bda=_0x4435ef,{username:_0x1ff692,key:_0x40c183}=_0x661d08[_0x484bda(0x12e)],_0x2849ea=Person,_0x241364=await User[_0x484bda(0x1bb)]({'username':_0x1ff692,'key':_0x40c183});if(!_0x241364)return _0x338c0d[_0x484bda(0x157)](0x191)[_0x484bda(0x1df)]('Acesso\x20não\x20autorizado.');const _0x37c43c=diminuirSaldo(_0x1ff692),_0xa1928a=adicionarSaldo(_0x1ff692);if(_0x37c43c&&_0xa1928a){const _0x391403=JSON[_0x484bda(0xc3)](fs[_0x484bda(0x1ed)](__dirname+_0x484bda(0x1b2))),_0x112c2f=_0x391403[Math[_0x484bda(0x13e)](Math[_0x484bda(0xc8)]()*_0x391403[_0x484bda(0x164)])];_0x338c0d['json']({'url':''+_0x112c2f});}else console[_0x484bda(0x119)](_0x484bda(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/rose',async(_0x32a59d,_0x2b75f0,_0x4d3ed8)=>{const _0x2d9d5e=_0x4435ef,{username:_0x305371,key:_0x3b4fc0}=_0x32a59d['query'],_0x3918fb=Person,_0x5f1768=await User['findOne']({'username':_0x305371,'key':_0x3b4fc0});if(!_0x5f1768)return _0x2b75f0[_0x2d9d5e(0x157)](0x191)['send'](_0x2d9d5e(0x11e));const _0x56abb5=diminuirSaldo(_0x305371),_0x49afa3=adicionarSaldo(_0x305371);if(_0x56abb5&&_0x49afa3){const _0x4a647a=JSON[_0x2d9d5e(0xc3)](fs['readFileSync'](__dirname+_0x2d9d5e(0x167))),_0x41e964=_0x4a647a[Math[_0x2d9d5e(0x13e)](Math['random']()*_0x4a647a[_0x2d9d5e(0x164)])];_0x2b75f0['json']({'url':''+_0x41e964});}else console['log'](_0x2d9d5e(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/kaori',async(_0x521208,_0x1cb720,_0x34cec1)=>{const _0x478530=_0x4435ef,{username:_0x5e0dda,key:_0x28506e}=_0x521208['query'],_0x41cb68=Person,_0x7e06ff=await User['findOne']({'username':_0x5e0dda,'key':_0x28506e});if(!_0x7e06ff)return _0x1cb720[_0x478530(0x157)](0x191)[_0x478530(0x1df)]('Acesso\x20não\x20autorizado.');const _0x3983cc=diminuirSaldo(_0x5e0dda),_0x3eec3e=adicionarSaldo(_0x5e0dda);if(_0x3983cc&&_0x3eec3e){const _0x1d29bc=JSON['parse'](fs[_0x478530(0x1ed)](__dirname+_0x478530(0x1c0))),_0x2bde91=_0x1d29bc[Math[_0x478530(0x13e)](Math[_0x478530(0xc8)]()*_0x1d29bc[_0x478530(0x164)])];_0x1cb720[_0x478530(0x1ec)]({'url':''+_0x2bde91});}else console[_0x478530(0x119)]('Saldo\x20insuficiente.');}),app['get'](_0x4435ef(0x1e6),async(_0x2d66d4,_0x1f2cb6,_0x29156b)=>{const _0x106944=_0x4435ef,{username:_0x125666,key:_0xfd1fca}=_0x2d66d4[_0x106944(0x12e)],_0x5c50a7=Person,_0x1d608a=await User[_0x106944(0x1bb)]({'username':_0x125666,'key':_0xfd1fca});if(!_0x1d608a)return _0x1f2cb6[_0x106944(0x157)](0x191)['send'](_0x106944(0x11e));const _0x3e984c=diminuirSaldo(_0x125666),_0x256071=adicionarSaldo(_0x125666);if(_0x3e984c&&_0x256071){const _0x55851d=JSON[_0x106944(0xc3)](fs['readFileSync'](__dirname+'/data/shizuka.json')),_0x35d17a=_0x55851d[Math[_0x106944(0x13e)](Math[_0x106944(0xc8)]()*_0x55851d[_0x106944(0x164)])];_0x1f2cb6['json']({'url':''+_0x35d17a});}else console['log']('Saldo\x20insuficiente.');}),app['get'](_0x4435ef(0x199),async(_0x366ea9,_0x21333c,_0x51a256)=>{const _0x1e4a65=_0x4435ef,{username:_0x23e9b8,key:_0x42f8f1}=_0x366ea9[_0x1e4a65(0x12e)],_0x5d1541=Person,_0x512023=await User[_0x1e4a65(0x1bb)]({'username':_0x23e9b8,'key':_0x42f8f1});if(!_0x512023)return _0x21333c[_0x1e4a65(0x157)](0x191)[_0x1e4a65(0x1df)]('Acesso\x20não\x20autorizado.');const _0x1a6865=diminuirSaldo(_0x23e9b8),_0x2f7f16=adicionarSaldo(_0x23e9b8);if(_0x1a6865&&_0x2f7f16){const _0x5cdc69=JSON['parse'](fs[_0x1e4a65(0x1ed)](__dirname+_0x1e4a65(0x186))),_0x168b5b=_0x5cdc69[Math['floor'](Math['random']()*_0x5cdc69['length'])];_0x21333c[_0x1e4a65(0x1ec)]({'url':''+_0x168b5b});}else console[_0x1e4a65(0x119)](_0x1e4a65(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x152),async(_0x504d23,_0x358142,_0xa09c46)=>{const _0x146bba=_0x4435ef,{username:_0x45116f,key:_0x17a31a}=_0x504d23[_0x146bba(0x12e)],_0x3b91d9=Person,_0x13b0a9=await User['findOne']({'username':_0x45116f,'key':_0x17a31a});if(!_0x13b0a9)return _0x358142['status'](0x191)[_0x146bba(0x1df)](_0x146bba(0x11e));const _0x37184f=diminuirSaldo(_0x45116f),_0x5d91ae=adicionarSaldo(_0x45116f);if(_0x37184f&&_0x5d91ae){const _0x3f0637=JSON[_0x146bba(0xc3)](fs[_0x146bba(0x1ed)](__dirname+_0x146bba(0x9a))),_0x16fb92=_0x3f0637[Math[_0x146bba(0x13e)](Math['random']()*_0x3f0637[_0x146bba(0x164)])];_0x358142['json']({'url':''+_0x16fb92});}else console['log']('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1fd),async(_0x2bb3fa,_0x3d7c81,_0x1977ed)=>{const _0x20f6bf=_0x4435ef,{username:_0x2ff183,key:_0x354c29}=_0x2bb3fa[_0x20f6bf(0x12e)],_0x569173=Person,_0x1ced58=await User[_0x20f6bf(0x1bb)]({'username':_0x2ff183,'key':_0x354c29});if(!_0x1ced58)return _0x3d7c81['status'](0x191)[_0x20f6bf(0x1df)](_0x20f6bf(0x11e));const _0x1aa27d=diminuirSaldo(_0x2ff183),_0x235c60=adicionarSaldo(_0x2ff183);if(_0x1aa27d&&_0x235c60){const _0x45cfa6=JSON['parse'](fs[_0x20f6bf(0x1ed)](__dirname+_0x20f6bf(0x1f7))),_0x4eecfb=_0x45cfa6[Math['floor'](Math[_0x20f6bf(0xc8)]()*_0x45cfa6[_0x20f6bf(0x164)])];_0x3d7c81[_0x20f6bf(0x1ec)]({'url':''+_0x4eecfb});}else console['log'](_0x20f6bf(0xc6));}),app['get'](_0x4435ef(0x131),async(_0xe12c10,_0x2e1888,_0x2b8554)=>{const _0x9a0076=_0x4435ef,{username:_0x5c0d1d,key:_0x3ca1ea}=_0xe12c10[_0x9a0076(0x12e)],_0x41dc06=Person,_0x49f8af=await User[_0x9a0076(0x1bb)]({'username':_0x5c0d1d,'key':_0x3ca1ea});if(!_0x49f8af)return _0x2e1888[_0x9a0076(0x157)](0x191)[_0x9a0076(0x1df)](_0x9a0076(0x11e));const _0x726d23=diminuirSaldo(_0x5c0d1d),_0x30aeea=adicionarSaldo(_0x5c0d1d);if(_0x726d23&&_0x30aeea){const _0x1a73e8=JSON[_0x9a0076(0xc3)](fs[_0x9a0076(0x1ed)](__dirname+_0x9a0076(0x137))),_0x4b26ea=_0x1a73e8[Math[_0x9a0076(0x13e)](Math[_0x9a0076(0xc8)]()*_0x1a73e8[_0x9a0076(0x164)])];_0x2e1888[_0x9a0076(0x1ec)]({'url':''+_0x4b26ea});}else console['log'](_0x9a0076(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xcd),async(_0x25d765,_0x19c88b,_0x3764de)=>{const _0x366f12=_0x4435ef,{username:_0xd69690,key:_0x29950e}=_0x25d765[_0x366f12(0x12e)],_0x5be0a1=Person,_0x5c1173=await User[_0x366f12(0x1bb)]({'username':_0xd69690,'key':_0x29950e});if(!_0x5c1173)return _0x19c88b[_0x366f12(0x157)](0x191)['send'](_0x366f12(0x11e));const _0x20d3c4=diminuirSaldo(_0xd69690),_0x516423=adicionarSaldo(_0xd69690);if(_0x20d3c4&&_0x516423){const _0x51da2c=JSON[_0x366f12(0xc3)](fs[_0x366f12(0x1ed)](__dirname+_0x366f12(0x1ff))),_0xcd892d=_0x51da2c[Math[_0x366f12(0x13e)](Math[_0x366f12(0xc8)]()*_0x51da2c[_0x366f12(0x164)])];_0x19c88b[_0x366f12(0x1ec)]({'url':''+_0xcd892d});}else console[_0x366f12(0x119)](_0x366f12(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/isuzu',async(_0x7759ef,_0x2d28f4,_0x3d7757)=>{const _0x259747=_0x4435ef,{username:_0x55e083,key:_0x4a4f89}=_0x7759ef[_0x259747(0x12e)],_0x5b7032=Person,_0x3de2da=await User[_0x259747(0x1bb)]({'username':_0x55e083,'key':_0x4a4f89});if(!_0x3de2da)return _0x2d28f4[_0x259747(0x157)](0x191)['send'](_0x259747(0x11e));const _0x42f206=diminuirSaldo(_0x55e083),_0x5cb2c5=adicionarSaldo(_0x55e083);if(_0x42f206&&_0x5cb2c5){const _0x440f52=JSON[_0x259747(0xc3)](fs['readFileSync'](__dirname+_0x259747(0xeb))),_0x27ea6c=_0x440f52[Math[_0x259747(0x13e)](Math[_0x259747(0xc8)]()*_0x440f52[_0x259747(0x164)])];_0x2d28f4[_0x259747(0x1ec)]({'url':''+_0x27ea6c});}else console[_0x259747(0x119)](_0x259747(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x198),async(_0x210513,_0x5f4a44,_0x38f8df)=>{const _0x5bdd71=_0x4435ef,{username:_0x43c8e4,key:_0x2f855c}=_0x210513[_0x5bdd71(0x12e)],_0x21c215=Person,_0x18984a=await User['findOne']({'username':_0x43c8e4,'key':_0x2f855c});if(!_0x18984a)return _0x5f4a44[_0x5bdd71(0x157)](0x191)[_0x5bdd71(0x1df)](_0x5bdd71(0x11e));const _0x518104=diminuirSaldo(_0x43c8e4),_0x302187=adicionarSaldo(_0x43c8e4);if(_0x518104&&_0x302187){const _0x246957=JSON[_0x5bdd71(0xc3)](fs[_0x5bdd71(0x1ed)](__dirname+'/data/cosplay.json')),_0x14d416=_0x246957[Math[_0x5bdd71(0x13e)](Math[_0x5bdd71(0xc8)]()*_0x246957[_0x5bdd71(0x164)])];_0x5f4a44['json']({'url':''+_0x14d416});}else console['log']('Saldo\x20insuficiente.');}),app['get']('/anime/shina',async(_0x495184,_0x352b1a,_0x209807)=>{const _0x1fc390=_0x4435ef,{username:_0xf27820,key:_0x58eb5b}=_0x495184[_0x1fc390(0x12e)],_0x222bdc=Person,_0x9d2d18=await User[_0x1fc390(0x1bb)]({'username':_0xf27820,'key':_0x58eb5b});if(!_0x9d2d18)return _0x352b1a[_0x1fc390(0x157)](0x191)[_0x1fc390(0x1df)](_0x1fc390(0x11e));const _0x19a31e=diminuirSaldo(_0xf27820),_0x299f2b=adicionarSaldo(_0xf27820);if(_0x19a31e&&_0x299f2b){const _0x3b39f1=JSON['parse'](fs[_0x1fc390(0x1ed)](__dirname+_0x1fc390(0x1fa))),_0x323abc=_0x3b39f1[Math['floor'](Math[_0x1fc390(0xc8)]()*_0x3b39f1['length'])];_0x352b1a[_0x1fc390(0x1ec)]({'url':''+_0x323abc});}else console[_0x1fc390(0x119)](_0x1fc390(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x13b),async(_0xd0ef58,_0x315ad0,_0x1b810b)=>{const _0x324a9d=_0x4435ef,{username:_0x277268,key:_0x25491b}=_0xd0ef58[_0x324a9d(0x12e)],_0x260196=Person,_0x219482=await User[_0x324a9d(0x1bb)]({'username':_0x277268,'key':_0x25491b});if(!_0x219482)return _0x315ad0[_0x324a9d(0x157)](0x191)[_0x324a9d(0x1df)](_0x324a9d(0x11e));const _0xd9c0e6=diminuirSaldo(_0x277268),_0x16b883=adicionarSaldo(_0x277268);if(_0xd9c0e6&&_0x16b883){const _0x496b4c=JSON[_0x324a9d(0xc3)](fs[_0x324a9d(0x1ed)](__dirname+_0x324a9d(0x1eb))),_0x235cb8=_0x496b4c[Math['floor'](Math['random']()*_0x496b4c['length'])];_0x315ad0[_0x324a9d(0x1ec)]({'url':''+_0x235cb8});}else console['log']('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0x12a),async(_0x275814,_0x1c4603,_0x220f8f)=>{const _0x39291e=_0x4435ef,{username:_0x791a4d,key:_0xc8a41a}=_0x275814[_0x39291e(0x12e)],_0xaf0109=Person,_0x3299b5=await User[_0x39291e(0x1bb)]({'username':_0x791a4d,'key':_0xc8a41a});if(!_0x3299b5)return _0x1c4603['status'](0x191)['send']('Acesso\x20não\x20autorizado.');const _0x368fe5=diminuirSaldo(_0x791a4d),_0x1629c3=adicionarSaldo(_0x791a4d);if(_0x368fe5&&_0x1629c3){const _0x250f87=JSON[_0x39291e(0xc3)](fs[_0x39291e(0x1ed)](__dirname+'/data/shinka.json')),_0x3dc41b=_0x250f87[Math[_0x39291e(0x13e)](Math[_0x39291e(0xc8)]()*_0x250f87[_0x39291e(0x164)])];_0x1c4603[_0x39291e(0x1ec)]({'url':''+_0x3dc41b});}else console[_0x39291e(0x119)](_0x39291e(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/eba',async(_0x4004b4,_0x2890a8,_0x384f8f)=>{const _0x191b62=_0x4435ef,{username:_0x4e7a44,key:_0xb3986e}=_0x4004b4[_0x191b62(0x12e)],_0x19b0b0=Person,_0x11bbbd=await User[_0x191b62(0x1bb)]({'username':_0x4e7a44,'key':_0xb3986e});if(!_0x11bbbd)return _0x2890a8[_0x191b62(0x157)](0x191)[_0x191b62(0x1df)](_0x191b62(0x11e));const _0x24b66a=diminuirSaldo(_0x4e7a44),_0x536ac7=adicionarSaldo(_0x4e7a44);if(_0x24b66a&&_0x536ac7){const _0x3500e6=JSON['parse'](fs[_0x191b62(0x1ed)](__dirname+'/data/eba.json')),_0x43e5f0=_0x3500e6[Math[_0x191b62(0x13e)](Math[_0x191b62(0xc8)]()*_0x3500e6[_0x191b62(0x164)])];_0x2890a8[_0x191b62(0x1ec)]({'url':''+_0x43e5f0});}else console[_0x191b62(0x119)](_0x191b62(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/deidara',async(_0x4fe7cd,_0x24a8ad,_0x1f8952)=>{const _0x4ebef8=_0x4435ef,{username:_0x563309,key:_0x54d5b3}=_0x4fe7cd[_0x4ebef8(0x12e)],_0x2d449c=Person,_0x2d216a=await User[_0x4ebef8(0x1bb)]({'username':_0x563309,'key':_0x54d5b3});if(!_0x2d216a)return _0x24a8ad['status'](0x191)[_0x4ebef8(0x1df)]('Acesso\x20não\x20autorizado.');const _0x4bdb28=diminuirSaldo(_0x563309),_0x13329e=adicionarSaldo(_0x563309);if(_0x4bdb28&&_0x13329e){const _0x336ab8=JSON[_0x4ebef8(0xc3)](fs['readFileSync'](__dirname+_0x4ebef8(0x163))),_0x1c082a=_0x336ab8[Math['floor'](Math[_0x4ebef8(0xc8)]()*_0x336ab8[_0x4ebef8(0x164)])];_0x24a8ad[_0x4ebef8(0x1ec)]({'url':''+_0x1c082a});}else console[_0x4ebef8(0x119)](_0x4ebef8(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1c9),async(_0x4cb7be,_0x18eeeb,_0x544f1e)=>{const _0x1cc3af=_0x4435ef,{username:_0x5ff42c,key:_0x322952}=_0x4cb7be[_0x1cc3af(0x12e)],_0x58cac6=Person,_0x7cf9b3=await User['findOne']({'username':_0x5ff42c,'key':_0x322952});if(!_0x7cf9b3)return _0x18eeeb[_0x1cc3af(0x157)](0x191)[_0x1cc3af(0x1df)](_0x1cc3af(0x11e));const _0x36ab35=diminuirSaldo(_0x5ff42c),_0x6bfdf8=adicionarSaldo(_0x5ff42c);if(_0x36ab35&&_0x6bfdf8){const _0x3883c0=JSON['parse'](fs['readFileSync'](__dirname+_0x1cc3af(0x116))),_0xea57f=_0x3883c0[Math[_0x1cc3af(0x13e)](Math[_0x1cc3af(0xc8)]()*_0x3883c0['length'])];_0x18eeeb['json']({'url':''+_0xea57f});}else console[_0x1cc3af(0x119)](_0x1cc3af(0xc6));}),app['get'](_0x4435ef(0x154),async(_0x3deea8,_0x2b2c3b,_0x64fbef)=>{const _0x407eac=_0x4435ef,{username:_0x20d89b,key:_0x53ba9f}=_0x3deea8[_0x407eac(0x12e)],_0x5d0401=Person,_0x2ab4b1=await User['findOne']({'username':_0x20d89b,'key':_0x53ba9f});if(!_0x2ab4b1)return _0x2b2c3b[_0x407eac(0x157)](0x191)['send'](_0x407eac(0x11e));const _0x30a5fd=diminuirSaldo(_0x20d89b),_0x3e1a3e=adicionarSaldo(_0x20d89b);if(_0x30a5fd&&_0x3e1a3e){const _0x914fe7=JSON['parse'](fs[_0x407eac(0x1ed)](__dirname+_0x407eac(0xbc))),_0x5540d5=_0x914fe7[Math[_0x407eac(0x13e)](Math[_0x407eac(0xc8)]()*_0x914fe7[_0x407eac(0x164)])];_0x2b2c3b['json']({'url':''+_0x5540d5});}else console[_0x407eac(0x119)](_0x407eac(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/toukachan',async(_0x1e01f6,_0x4b623f,_0x378604)=>{const _0x3f4692=_0x4435ef,{username:_0x61b395,key:_0x56b799}=_0x1e01f6[_0x3f4692(0x12e)],_0x58d847=Person,_0x1b6cdc=await User[_0x3f4692(0x1bb)]({'username':_0x61b395,'key':_0x56b799});if(!_0x1b6cdc)return _0x4b623f['status'](0x191)[_0x3f4692(0x1df)](_0x3f4692(0x11e));const _0x50c856=diminuirSaldo(_0x61b395),_0x4963b9=adicionarSaldo(_0x61b395);if(_0x50c856&&_0x4963b9){const _0x2ba13b=JSON[_0x3f4692(0xc3)](fs['readFileSync'](__dirname+_0x3f4692(0x1f9))),_0x2e460d=_0x2ba13b[Math[_0x3f4692(0x13e)](Math['random']()*_0x2ba13b[_0x3f4692(0x164)])];_0x4b623f['json']({'url':''+_0x2e460d});}else console['log'](_0x3f4692(0xc6));}),app['get']('/anime/akira',async(_0x283227,_0x5637cc,_0x47cee3)=>{const _0x3cec7b=_0x4435ef,{username:_0x5b5198,key:_0x503116}=_0x283227[_0x3cec7b(0x12e)],_0x55698d=Person,_0x47ad16=await User[_0x3cec7b(0x1bb)]({'username':_0x5b5198,'key':_0x503116});if(!_0x47ad16)return _0x5637cc[_0x3cec7b(0x157)](0x191)[_0x3cec7b(0x1df)](_0x3cec7b(0x11e));const _0x54ad2f=diminuirSaldo(_0x5b5198),_0x32329c=adicionarSaldo(_0x5b5198);if(_0x54ad2f&&_0x32329c){const _0x3f87a5=JSON['parse'](fs[_0x3cec7b(0x1ed)](__dirname+_0x3cec7b(0x1b4))),_0x11f4a2=_0x3f87a5[Math[_0x3cec7b(0x13e)](Math[_0x3cec7b(0xc8)]()*_0x3f87a5[_0x3cec7b(0x164)])];_0x5637cc[_0x3cec7b(0x1ec)]({'url':''+_0x11f4a2});}else console[_0x3cec7b(0x119)](_0x3cec7b(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x17d),async(_0x3c0374,_0x3a80a4,_0x4edf64)=>{const _0x534870=_0x4435ef,{username:_0xd3e01c,key:_0x26c4f8}=_0x3c0374[_0x534870(0x12e)],_0x4b13c2=Person,_0x2093cf=await User['findOne']({'username':_0xd3e01c,'key':_0x26c4f8});if(!_0x2093cf)return _0x3a80a4[_0x534870(0x157)](0x191)[_0x534870(0x1df)](_0x534870(0x11e));const _0x3ac4f8=diminuirSaldo(_0xd3e01c),_0x53746b=adicionarSaldo(_0xd3e01c);if(_0x3ac4f8&&_0x53746b){const _0x3938ad=JSON[_0x534870(0xc3)](fs[_0x534870(0x1ed)](__dirname+_0x534870(0x153))),_0x354f59=_0x3938ad[Math['floor'](Math[_0x534870(0xc8)]()*_0x3938ad[_0x534870(0x164)])];_0x3a80a4['json']({'url':''+_0x354f59});}else console['log'](_0x534870(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x113),async(_0x13b6e1,_0x23fba9,_0x1e4a97)=>{const _0x3124c1=_0x4435ef,{username:_0x374ba5,key:_0x1a35cb}=_0x13b6e1[_0x3124c1(0x12e)],_0xd28ccb=Person,_0x4ba627=await User[_0x3124c1(0x1bb)]({'username':_0x374ba5,'key':_0x1a35cb});if(!_0x4ba627)return _0x23fba9[_0x3124c1(0x157)](0x191)['send'](_0x3124c1(0x11e));const _0x5e4351=diminuirSaldo(_0x374ba5),_0x2ec899=adicionarSaldo(_0x374ba5);if(_0x5e4351&&_0x2ec899){const _0x55b428=JSON[_0x3124c1(0xc3)](fs[_0x3124c1(0x1ed)](__dirname+_0x3124c1(0x1e3))),_0x167ae8=_0x55b428[Math['floor'](Math['random']()*_0x55b428[_0x3124c1(0x164)])];_0x23fba9[_0x3124c1(0x1ec)]({'url':''+_0x167ae8});}else console[_0x3124c1(0x119)](_0x3124c1(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x201),async(_0x104b29,_0xb551a3,_0x29b7d9)=>{const _0x184c6c=_0x4435ef,{username:_0x26eac7,key:_0x31a6fd}=_0x104b29[_0x184c6c(0x12e)],_0x502009=Person,_0x4866c7=await User[_0x184c6c(0x1bb)]({'username':_0x26eac7,'key':_0x31a6fd});if(!_0x4866c7)return _0xb551a3['status'](0x191)[_0x184c6c(0x1df)]('Acesso\x20não\x20autorizado.');const _0x23a36d=diminuirSaldo(_0x26eac7),_0x994213=adicionarSaldo(_0x26eac7);if(_0x23a36d&&_0x994213){const _0x4de94f=JSON['parse'](fs[_0x184c6c(0x1ed)](__dirname+_0x184c6c(0x1b9))),_0x37be9d=_0x4de94f[Math[_0x184c6c(0x13e)](Math[_0x184c6c(0xc8)]()*_0x4de94f[_0x184c6c(0x164)])];_0xb551a3[_0x184c6c(0x1ec)]({'url':''+_0x37be9d});}else console[_0x184c6c(0x119)](_0x184c6c(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/pokemon',async(_0x3f087d,_0x31e4ff,_0x534b3c)=>{const _0x2bcbcc=_0x4435ef,{username:_0x2e673c,key:_0x3362d4}=_0x3f087d['query'],_0x57686f=Person,_0x4ae0c5=await User['findOne']({'username':_0x2e673c,'key':_0x3362d4});if(!_0x4ae0c5)return _0x31e4ff[_0x2bcbcc(0x157)](0x191)[_0x2bcbcc(0x1df)](_0x2bcbcc(0x11e));const _0xf09009=diminuirSaldo(_0x2e673c),_0x8c12e2=adicionarSaldo(_0x2e673c);if(_0xf09009&&_0x8c12e2){const _0x8d43cd=JSON['parse'](fs[_0x2bcbcc(0x1ed)](__dirname+_0x2bcbcc(0x1ba))),_0x2e7158=_0x8d43cd[Math[_0x2bcbcc(0x13e)](Math[_0x2bcbcc(0xc8)]()*_0x8d43cd['length'])];_0x31e4ff[_0x2bcbcc(0x1ec)]({'url':''+_0x2e7158});}else console[_0x2bcbcc(0x119)](_0x2bcbcc(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1d0),async(_0x470ad5,_0x12c28e,_0x3b6fea)=>{const _0x267672=_0x4435ef,{username:_0x2d2130,key:_0x5847ab}=_0x470ad5[_0x267672(0x12e)],_0x58845f=Person,_0x2972ac=await User[_0x267672(0x1bb)]({'username':_0x2d2130,'key':_0x5847ab});if(!_0x2972ac)return _0x12c28e[_0x267672(0x157)](0x191)['send'](_0x267672(0x11e));const _0x20b3cc=diminuirSaldo(_0x2d2130),_0x54fbbd=adicionarSaldo(_0x2d2130);if(_0x20b3cc&&_0x54fbbd){const _0x165202=JSON[_0x267672(0xc3)](fs[_0x267672(0x1ed)](__dirname+_0x267672(0x1b2))),_0x1e8098=_0x165202[Math['floor'](Math[_0x267672(0xc8)]()*_0x165202[_0x267672(0x164)])];_0x12c28e[_0x267672(0x1ec)]({'url':''+_0x1e8098});}else console[_0x267672(0x119)](_0x267672(0xc6));}),app['get'](_0x4435ef(0x160),async(_0x203c13,_0x2fe804,_0x5bb299)=>{const _0x328787=_0x4435ef,{username:_0x1c9c0b,key:_0x4850da}=_0x203c13[_0x328787(0x12e)],_0x40ea8b=Person,_0x40fc6c=await User[_0x328787(0x1bb)]({'username':_0x1c9c0b,'key':_0x4850da});if(!_0x40fc6c)return _0x2fe804[_0x328787(0x157)](0x191)['send'](_0x328787(0x11e));const _0x2e86b4=diminuirSaldo(_0x1c9c0b),_0x3235b8=adicionarSaldo(_0x1c9c0b);if(_0x2e86b4&&_0x3235b8){const _0x4d8381=JSON[_0x328787(0xc3)](fs[_0x328787(0x1ed)](__dirname+_0x328787(0x167))),_0x14908a=_0x4d8381[Math[_0x328787(0x13e)](Math[_0x328787(0xc8)]()*_0x4d8381[_0x328787(0x164)])];_0x2fe804[_0x328787(0x1ec)]({'url':''+_0x14908a});}else console[_0x328787(0x119)](_0x328787(0xc6));}),app['get'](_0x4435ef(0x128),async(_0x21f907,_0x4eb890,_0x33acfd)=>{const _0x4bb705=_0x4435ef,{username:_0x411d52,key:_0x401e73}=_0x21f907['query'],_0x440f0a=Person,_0x57567c=await User[_0x4bb705(0x1bb)]({'username':_0x411d52,'key':_0x401e73});if(!_0x57567c)return _0x4eb890[_0x4bb705(0x157)](0x191)[_0x4bb705(0x1df)]('Acesso\x20não\x20autorizado.');const _0x32eb8b=diminuirSaldo(_0x411d52),_0x224d38=adicionarSaldo(_0x411d52);if(_0x32eb8b&&_0x224d38){const _0x10a5be=JSON[_0x4bb705(0xc3)](fs[_0x4bb705(0x1ed)](__dirname+_0x4bb705(0x1c0))),_0x2dc460=_0x10a5be[Math['floor'](Math[_0x4bb705(0xc8)]()*_0x10a5be[_0x4bb705(0x164)])];_0x4eb890[_0x4bb705(0x1ec)]({'url':''+_0x2dc460});}else console[_0x4bb705(0x119)](_0x4bb705(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/shizuka',async(_0x2fdd73,_0x48c3af,_0x5b414b)=>{const _0x500f05=_0x4435ef,{username:_0x360e04,key:_0x1330f7}=_0x2fdd73[_0x500f05(0x12e)],_0x3a1778=Person,_0x372e1e=await User[_0x500f05(0x1bb)]({'username':_0x360e04,'key':_0x1330f7});if(!_0x372e1e)return _0x48c3af[_0x500f05(0x157)](0x191)[_0x500f05(0x1df)](_0x500f05(0x11e));const _0x1dbdab=diminuirSaldo(_0x360e04),_0x139566=adicionarSaldo(_0x360e04);if(_0x1dbdab&&_0x139566){const _0x2e902a=JSON['parse'](fs[_0x500f05(0x1ed)](__dirname+_0x500f05(0x1c2))),_0x40308d=_0x2e902a[Math[_0x500f05(0x13e)](Math[_0x500f05(0xc8)]()*_0x2e902a[_0x500f05(0x164)])];_0x48c3af[_0x500f05(0x1ec)]({'url':''+_0x40308d});}else console[_0x500f05(0x119)](_0x500f05(0xc6));}),app['get'](_0x4435ef(0x199),async(_0x4af770,_0x76155c,_0x33b037)=>{const _0x1c7179=_0x4435ef,{username:_0x4a7f6a,key:_0x3351a5}=_0x4af770[_0x1c7179(0x12e)],_0x3d92d1=Person,_0x31a27d=await User[_0x1c7179(0x1bb)]({'username':_0x4a7f6a,'key':_0x3351a5});if(!_0x31a27d)return _0x76155c[_0x1c7179(0x157)](0x191)[_0x1c7179(0x1df)]('Acesso\x20não\x20autorizado.');const _0x1c1851=diminuirSaldo(_0x4a7f6a),_0x136026=adicionarSaldo(_0x4a7f6a);if(_0x1c1851&&_0x136026){const _0x5cc4e4=JSON[_0x1c7179(0xc3)](fs[_0x1c7179(0x1ed)](__dirname+'/data/kaga.json')),_0x3bb3b9=_0x5cc4e4[Math['floor'](Math[_0x1c7179(0xc8)]()*_0x5cc4e4[_0x1c7179(0x164)])];_0x76155c[_0x1c7179(0x1ec)]({'url':''+_0x3bb3b9});}else console[_0x1c7179(0x119)](_0x1c7179(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/kotori',async(_0x50e341,_0x475bbf,_0x28ea5f)=>{const _0x5e9eb3=_0x4435ef,{username:_0x28c51c,key:_0x43a060}=_0x50e341[_0x5e9eb3(0x12e)],_0x3c2e49=Person,_0x804383=await User['findOne']({'username':_0x28c51c,'key':_0x43a060});if(!_0x804383)return _0x475bbf['status'](0x191)[_0x5e9eb3(0x1df)](_0x5e9eb3(0x11e));const _0x413744=diminuirSaldo(_0x28c51c),_0x4bc7d7=adicionarSaldo(_0x28c51c);if(_0x413744&&_0x4bc7d7){const _0xc72f2e=JSON[_0x5e9eb3(0xc3)](fs['readFileSync'](__dirname+_0x5e9eb3(0x9a))),_0x436d67=_0xc72f2e[Math['floor'](Math[_0x5e9eb3(0xc8)]()*_0xc72f2e[_0x5e9eb3(0x164)])];_0x475bbf['json']({'url':''+_0x436d67});}else console[_0x5e9eb3(0x119)](_0x5e9eb3(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/mikasa',async(_0x2c12eb,_0xd41f7f,_0x3d1639)=>{const _0x35d7dc=_0x4435ef,{username:_0x52808d,key:_0x7d6e61}=_0x2c12eb[_0x35d7dc(0x12e)],_0x456bd9=Person,_0x33c5d9=await User['findOne']({'username':_0x52808d,'key':_0x7d6e61});if(!_0x33c5d9)return _0xd41f7f[_0x35d7dc(0x157)](0x191)['send'](_0x35d7dc(0x11e));const _0x1fffbd=diminuirSaldo(_0x52808d),_0xdfe011=adicionarSaldo(_0x52808d);if(_0x1fffbd&&_0xdfe011){const _0x1c6731=JSON[_0x35d7dc(0xc3)](fs[_0x35d7dc(0x1ed)](__dirname+_0x35d7dc(0x1f7))),_0x1ad569=_0x1c6731[Math['floor'](Math[_0x35d7dc(0xc8)]()*_0x1c6731[_0x35d7dc(0x164)])];_0xd41f7f[_0x35d7dc(0x1ec)]({'url':''+_0x1ad569});}else console[_0x35d7dc(0x119)](_0x35d7dc(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x131),async(_0x21e73d,_0x3c7152,_0x4eb3e1)=>{const _0x53c7e2=_0x4435ef,{username:_0x3e78fa,key:_0x594415}=_0x21e73d[_0x53c7e2(0x12e)],_0x4ae985=Person,_0x5809a7=await User['findOne']({'username':_0x3e78fa,'key':_0x594415});if(!_0x5809a7)return _0x3c7152['status'](0x191)[_0x53c7e2(0x1df)](_0x53c7e2(0x11e));const _0x270498=diminuirSaldo(_0x3e78fa),_0x3483e7=adicionarSaldo(_0x3e78fa);if(_0x270498&&_0x3483e7){const _0xcb71db=JSON['parse'](fs['readFileSync'](__dirname+'/data/akiyama.json')),_0x46ce0a=_0xcb71db[Math[_0x53c7e2(0x13e)](Math[_0x53c7e2(0xc8)]()*_0xcb71db['length'])];_0x3c7152[_0x53c7e2(0x1ec)]({'url':''+_0x46ce0a});}else console[_0x53c7e2(0x119)](_0x53c7e2(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/gremory',async(_0x5edc5b,_0x2b6a86,_0x176603)=>{const _0x59a0c9=_0x4435ef,{username:_0x42b055,key:_0x5762fe}=_0x5edc5b[_0x59a0c9(0x12e)],_0x4d08e5=Person,_0x4adc66=await User[_0x59a0c9(0x1bb)]({'username':_0x42b055,'key':_0x5762fe});if(!_0x4adc66)return _0x2b6a86['status'](0x191)[_0x59a0c9(0x1df)]('Acesso\x20não\x20autorizado.');const _0x11fe93=diminuirSaldo(_0x42b055),_0x4b64f4=adicionarSaldo(_0x42b055);if(_0x11fe93&&_0x4b64f4){const _0x1d3e37=JSON['parse'](fs['readFileSync'](__dirname+_0x59a0c9(0x1ff))),_0x15d236=_0x1d3e37[Math[_0x59a0c9(0x13e)](Math['random']()*_0x1d3e37[_0x59a0c9(0x164)])];_0x2b6a86[_0x59a0c9(0x1ec)]({'url':''+_0x15d236});}else console[_0x59a0c9(0x119)](_0x59a0c9(0xc6));}),app['get'](_0x4435ef(0xcf),async(_0x3c393c,_0x298de7,_0x12ba6d)=>{const _0x464528=_0x4435ef,{username:_0xa01838,key:_0x2a9294}=_0x3c393c[_0x464528(0x12e)],_0x5d2f0a=Person,_0x48d497=await User['findOne']({'username':_0xa01838,'key':_0x2a9294});if(!_0x48d497)return _0x298de7[_0x464528(0x157)](0x191)['send'](_0x464528(0x11e));const _0x58b088=diminuirSaldo(_0xa01838),_0x4d8a21=adicionarSaldo(_0xa01838);if(_0x58b088&&_0x4d8a21){const _0x3ce878=JSON[_0x464528(0xc3)](fs['readFileSync'](__dirname+_0x464528(0xeb))),_0x192b99=_0x3ce878[Math[_0x464528(0x13e)](Math[_0x464528(0xc8)]()*_0x3ce878[_0x464528(0x164)])];_0x298de7[_0x464528(0x1ec)]({'url':''+_0x192b99});}else console[_0x464528(0x119)](_0x464528(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/cosplay',async(_0x954a03,_0xfc9a88,_0x4e56a3)=>{const _0x4721e3=_0x4435ef,{username:_0xaa463a,key:_0x1d4430}=_0x954a03[_0x4721e3(0x12e)],_0x3d0393=Person,_0x3d6334=await User['findOne']({'username':_0xaa463a,'key':_0x1d4430});if(!_0x3d6334)return _0xfc9a88[_0x4721e3(0x157)](0x191)[_0x4721e3(0x1df)](_0x4721e3(0x11e));const _0x449335=diminuirSaldo(_0xaa463a),_0x4882ef=adicionarSaldo(_0xaa463a);if(_0x449335&&_0x4882ef){const _0x125f4d=JSON['parse'](fs['readFileSync'](__dirname+'/data/cosplay.json')),_0x223188=_0x125f4d[Math[_0x4721e3(0x13e)](Math['random']()*_0x125f4d[_0x4721e3(0x164)])];_0xfc9a88['json']({'url':''+_0x223188});}else console['log']('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0xf4),async(_0x2329a4,_0x412d91,_0x32e274)=>{const _0x1b2e0b=_0x4435ef,{username:_0x4407ef,key:_0x5d121a}=_0x2329a4[_0x1b2e0b(0x12e)],_0x136811=Person,_0x37dd0c=await User[_0x1b2e0b(0x1bb)]({'username':_0x4407ef,'key':_0x5d121a});if(!_0x37dd0c)return _0x412d91[_0x1b2e0b(0x157)](0x191)[_0x1b2e0b(0x1df)](_0x1b2e0b(0x11e));const _0x2d0293=diminuirSaldo(_0x4407ef),_0x3a32c4=adicionarSaldo(_0x4407ef);if(_0x2d0293&&_0x3a32c4){const _0xd25680=JSON[_0x1b2e0b(0xc3)](fs[_0x1b2e0b(0x1ed)](__dirname+'/data/shina.json')),_0x444c53=_0xd25680[Math['floor'](Math['random']()*_0xd25680[_0x1b2e0b(0x164)])];_0x412d91[_0x1b2e0b(0x1ec)]({'url':''+_0x444c53});}else console[_0x1b2e0b(0x119)](_0x1b2e0b(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/kagura',async(_0x214cd2,_0x4ed7bf,_0x43fe20)=>{const _0x3c146c=_0x4435ef,{username:_0x6c2be7,key:_0x20fce3}=_0x214cd2[_0x3c146c(0x12e)],_0x810e4b=Person,_0x2fe46e=await User['findOne']({'username':_0x6c2be7,'key':_0x20fce3});if(!_0x2fe46e)return _0x4ed7bf[_0x3c146c(0x157)](0x191)['send'](_0x3c146c(0x11e));const _0x2f0e97=diminuirSaldo(_0x6c2be7),_0x14631b=adicionarSaldo(_0x6c2be7);if(_0x2f0e97&&_0x14631b){const _0x2d15cd=JSON[_0x3c146c(0xc3)](fs[_0x3c146c(0x1ed)](__dirname+'/data/kagura.json')),_0x4957dc=_0x2d15cd[Math[_0x3c146c(0x13e)](Math['random']()*_0x2d15cd[_0x3c146c(0x164)])];_0x4ed7bf[_0x3c146c(0x1ec)]({'url':''+_0x4957dc});}else console[_0x3c146c(0x119)](_0x3c146c(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x12a),async(_0x4dca94,_0x1e8867,_0x366a7f)=>{const _0x511abb=_0x4435ef,{username:_0x221858,key:_0x309318}=_0x4dca94[_0x511abb(0x12e)],_0x98462f=Person,_0x2829f2=await User['findOne']({'username':_0x221858,'key':_0x309318});if(!_0x2829f2)return _0x1e8867['status'](0x191)[_0x511abb(0x1df)]('Acesso\x20não\x20autorizado.');const _0xddad5a=diminuirSaldo(_0x221858),_0x3bcc5e=adicionarSaldo(_0x221858);if(_0xddad5a&&_0x3bcc5e){const _0x2381c8=JSON[_0x511abb(0xc3)](fs[_0x511abb(0x1ed)](__dirname+_0x511abb(0xe8))),_0x186543=_0x2381c8[Math[_0x511abb(0x13e)](Math['random']()*_0x2381c8[_0x511abb(0x164)])];_0x1e8867[_0x511abb(0x1ec)]({'url':''+_0x186543});}else console[_0x511abb(0x119)](_0x511abb(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/eba',async(_0x3f05a1,_0x2fac1b,_0x33cf2a)=>{const _0x3e87c0=_0x4435ef,{username:_0x285dd4,key:_0x40675c}=_0x3f05a1[_0x3e87c0(0x12e)],_0x52c222=Person,_0x2faf0a=await User[_0x3e87c0(0x1bb)]({'username':_0x285dd4,'key':_0x40675c});if(!_0x2faf0a)return _0x2fac1b[_0x3e87c0(0x157)](0x191)['send'](_0x3e87c0(0x11e));const _0x6f4bf1=diminuirSaldo(_0x285dd4),_0x39fdbc=adicionarSaldo(_0x285dd4);if(_0x6f4bf1&&_0x39fdbc){const _0x196d83=JSON[_0x3e87c0(0xc3)](fs[_0x3e87c0(0x1ed)](__dirname+'/data/eba.json')),_0x2213d5=_0x196d83[Math[_0x3e87c0(0x13e)](Math[_0x3e87c0(0xc8)]()*_0x196d83[_0x3e87c0(0x164)])];_0x2fac1b[_0x3e87c0(0x1ec)]({'url':''+_0x2213d5});}else console[_0x3e87c0(0x119)](_0x3e87c0(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xaf),async(_0x5b4cc4,_0x253887,_0x494c1b)=>{const _0x3f467d=_0x4435ef,{username:_0x5fea3e,key:_0xe8864e}=_0x5b4cc4[_0x3f467d(0x12e)],_0x43894d=Person,_0x3b31d2=await User[_0x3f467d(0x1bb)]({'username':_0x5fea3e,'key':_0xe8864e});if(!_0x3b31d2)return _0x253887[_0x3f467d(0x157)](0x191)[_0x3f467d(0x1df)](_0x3f467d(0x11e));const _0xf97391=diminuirSaldo(_0x5fea3e),_0x446f4c=adicionarSaldo(_0x5fea3e);if(_0xf97391&&_0x446f4c){const _0x34ea58=JSON['parse'](fs['readFileSync'](__dirname+_0x3f467d(0x163))),_0x3380fe=_0x34ea58[Math[_0x3f467d(0x13e)](Math[_0x3f467d(0xc8)]()*_0x34ea58[_0x3f467d(0x164)])];_0x253887['json']({'url':''+_0x3380fe});}else console['log'](_0x3f467d(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/jeni',async(_0x2f39c2,_0x13060a,_0x560b05)=>{const _0x1c1ef3=_0x4435ef,{username:_0x1e8a85,key:_0x3acb07}=_0x2f39c2[_0x1c1ef3(0x12e)],_0x31bd87=Person,_0x3ce633=await User[_0x1c1ef3(0x1bb)]({'username':_0x1e8a85,'key':_0x3acb07});if(!_0x3ce633)return _0x13060a[_0x1c1ef3(0x157)](0x191)['send'](_0x1c1ef3(0x11e));const _0x4e82bf=diminuirSaldo(_0x1e8a85),_0x48783b=adicionarSaldo(_0x1e8a85);if(_0x4e82bf&&_0x48783b){const _0x54c479=JSON[_0x1c1ef3(0xc3)](fs[_0x1c1ef3(0x1ed)](__dirname+_0x1c1ef3(0x116))),_0x4ace76=_0x54c479[Math[_0x1c1ef3(0x13e)](Math[_0x1c1ef3(0xc8)]()*_0x54c479[_0x1c1ef3(0x164)])];_0x13060a[_0x1c1ef3(0x1ec)]({'url':''+_0x4ace76});}else console[_0x1c1ef3(0x119)](_0x1c1ef3(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x154),async(_0x3444db,_0xdc8b58,_0x588f39)=>{const _0x14ebdf=_0x4435ef,{username:_0x11310d,key:_0x5754b9}=_0x3444db[_0x14ebdf(0x12e)],_0x2e7b0f=Person,_0x3c8378=await User[_0x14ebdf(0x1bb)]({'username':_0x11310d,'key':_0x5754b9});if(!_0x3c8378)return _0xdc8b58[_0x14ebdf(0x157)](0x191)['send']('Acesso\x20não\x20autorizado.');const _0x5c260d=diminuirSaldo(_0x11310d),_0x181d43=adicionarSaldo(_0x11310d);if(_0x5c260d&&_0x181d43){const _0x179d70=JSON[_0x14ebdf(0xc3)](fs[_0x14ebdf(0x1ed)](__dirname+_0x14ebdf(0xbc))),_0x4e542d=_0x179d70[Math['floor'](Math[_0x14ebdf(0xc8)]()*_0x179d70['length'])];_0xdc8b58[_0x14ebdf(0x1ec)]({'url':''+_0x4e542d});}else console[_0x14ebdf(0x119)]('Saldo\x20insuficiente.');}),app['get'](_0x4435ef(0x133),async(_0x265c73,_0x14db66,_0x3ab680)=>{const _0x25d3b0=_0x4435ef,{username:_0x4b1841,key:_0x3cf8e5}=_0x265c73[_0x25d3b0(0x12e)],_0x10253d=Person,_0x1e3f5e=await User['findOne']({'username':_0x4b1841,'key':_0x3cf8e5});if(!_0x1e3f5e)return _0x14db66[_0x25d3b0(0x157)](0x191)['send'](_0x25d3b0(0x11e));const _0x52a7f1=diminuirSaldo(_0x4b1841),_0x58a4c=adicionarSaldo(_0x4b1841);if(_0x52a7f1&&_0x58a4c){const _0x5a3e36=JSON[_0x25d3b0(0xc3)](fs['readFileSync'](__dirname+_0x25d3b0(0xfd))),_0x4e82bc=_0x5a3e36[Math[_0x25d3b0(0x13e)](Math[_0x25d3b0(0xc8)]()*_0x5a3e36[_0x25d3b0(0x164)])];_0x14db66[_0x25d3b0(0x1ec)]({'url':''+_0x4e82bc});}else console[_0x25d3b0(0x119)](_0x25d3b0(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x19c),async(_0x48ab0a,_0x556f08,_0x42fdc9)=>{const _0x31be89=_0x4435ef,{username:_0x1eb27f,key:_0x385bdd}=_0x48ab0a['query'],_0x5bf012=Person,_0x80cffb=await User[_0x31be89(0x1bb)]({'username':_0x1eb27f,'key':_0x385bdd});if(!_0x80cffb)return _0x556f08[_0x31be89(0x157)](0x191)[_0x31be89(0x1df)](_0x31be89(0x11e));const _0x29980e=diminuirSaldo(_0x1eb27f),_0x53bd11=adicionarSaldo(_0x1eb27f);if(_0x29980e&&_0x53bd11){const _0x135e48=JSON[_0x31be89(0xc3)](fs['readFileSync'](__dirname+_0x31be89(0x15e))),_0xc2aa99=_0x135e48[Math[_0x31be89(0x13e)](Math[_0x31be89(0xc8)]()*_0x135e48['length'])];_0x556f08['json']({'url':''+_0xc2aa99});}else console[_0x31be89(0x119)](_0x31be89(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xa7),async(_0x19b077,_0x1974de,_0x293dbb)=>{const _0x3d72ce=_0x4435ef,{username:_0x47a87c,key:_0x550c03}=_0x19b077[_0x3d72ce(0x12e)],_0x365bbb=Person,_0x2197c9=await User['findOne']({'username':_0x47a87c,'key':_0x550c03});if(!_0x2197c9)return _0x1974de[_0x3d72ce(0x157)](0x191)['send'](_0x3d72ce(0x11e));const _0xa6d081=diminuirSaldo(_0x47a87c),_0x37c304=adicionarSaldo(_0x47a87c);if(_0xa6d081&&_0x37c304){const _0x72b17b=JSON['parse'](fs[_0x3d72ce(0x1ed)](__dirname+'/data/madara.json')),_0x443014=_0x72b17b[Math[_0x3d72ce(0x13e)](Math['random']()*_0x72b17b[_0x3d72ce(0x164)])];_0x1974de['json']({'url':''+_0x443014});}else console[_0x3d72ce(0x119)](_0x3d72ce(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x17a),async(_0x32fad9,_0xdcc895,_0x4e69e4)=>{const _0x4c6a6e=_0x4435ef,{username:_0x2623e5,key:_0xee910e}=_0x32fad9[_0x4c6a6e(0x12e)],_0x11a8a9=Person,_0x37ce8e=await User[_0x4c6a6e(0x1bb)]({'username':_0x2623e5,'key':_0xee910e});if(!_0x37ce8e)return _0xdcc895[_0x4c6a6e(0x157)](0x191)[_0x4c6a6e(0x1df)](_0x4c6a6e(0x11e));const _0x62b020=diminuirSaldo(_0x2623e5),_0x4141cd=adicionarSaldo(_0x2623e5);if(_0x62b020&&_0x4141cd){const _0xf392ca=JSON[_0x4c6a6e(0xc3)](fs[_0x4c6a6e(0x1ed)](__dirname+_0x4c6a6e(0x132))),_0x1fc092=_0xf392ca[Math[_0x4c6a6e(0x13e)](Math[_0x4c6a6e(0xc8)]()*_0xf392ca['length'])];_0xdcc895[_0x4c6a6e(0x1ec)]({'url':''+_0x1fc092});}else console[_0x4c6a6e(0x119)](_0x4c6a6e(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x145),async(_0x8fa4ee,_0x32b17b,_0x397a36)=>{const _0x45ee61=_0x4435ef,{username:_0x4c5c5c,key:_0x4a18a0}=_0x8fa4ee[_0x45ee61(0x12e)],_0x5732e1=Person,_0x28869f=await User['findOne']({'username':_0x4c5c5c,'key':_0x4a18a0});if(!_0x28869f)return _0x32b17b[_0x45ee61(0x157)](0x191)[_0x45ee61(0x1df)]('Acesso\x20não\x20autorizado.');const _0x33819d=diminuirSaldo(_0x4c5c5c),_0x1bdcc6=adicionarSaldo(_0x4c5c5c);if(_0x33819d&&_0x1bdcc6){const _0x146e67=JSON[_0x45ee61(0xc3)](fs[_0x45ee61(0x1ed)](__dirname+_0x45ee61(0xf3))),_0x12c790=_0x146e67[Math[_0x45ee61(0x13e)](Math[_0x45ee61(0xc8)]()*_0x146e67[_0x45ee61(0x164)])];_0x32b17b['json']({'url':''+_0x12c790});}else console[_0x45ee61(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1f0),async(_0x1f3c14,_0x4ce8eb,_0x54030f)=>{const _0x339d6f=_0x4435ef,{username:_0x596b50,key:_0x5cef47}=_0x1f3c14[_0x339d6f(0x12e)],_0x4ce8cc=Person,_0x5b4607=await User['findOne']({'username':_0x596b50,'key':_0x5cef47});if(!_0x5b4607)return _0x4ce8eb[_0x339d6f(0x157)](0x191)['send'](_0x339d6f(0x11e));const _0x4a0833=diminuirSaldo(_0x596b50),_0xab80c8=adicionarSaldo(_0x596b50);if(_0x4a0833&&_0xab80c8){const _0x122b87=JSON[_0x339d6f(0xc3)](fs['readFileSync'](__dirname+_0x339d6f(0x151))),_0x5ed2ff=_0x122b87[Math['floor'](Math[_0x339d6f(0xc8)]()*_0x122b87[_0x339d6f(0x164)])];_0x4ce8eb[_0x339d6f(0x1ec)]({'url':''+_0x5ed2ff});}else console[_0x339d6f(0x119)](_0x339d6f(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/chitoge',async(_0x5e3e63,_0x3c2a4a,_0x1c24e5)=>{const _0x99d3d5=_0x4435ef,{username:_0x372fff,key:_0x3eb87d}=_0x5e3e63['query'],_0x515466=Person,_0x579836=await User['findOne']({'username':_0x372fff,'key':_0x3eb87d});if(!_0x579836)return _0x3c2a4a[_0x99d3d5(0x157)](0x191)['send'](_0x99d3d5(0x11e));const _0x3afaf1=diminuirSaldo(_0x372fff),_0x553235=adicionarSaldo(_0x372fff);if(_0x3afaf1&&_0x553235){const _0x5312be=JSON[_0x99d3d5(0xc3)](fs['readFileSync'](__dirname+'/data/chitoge.json')),_0x1046a8=_0x5312be[Math[_0x99d3d5(0x13e)](Math[_0x99d3d5(0xc8)]()*_0x5312be[_0x99d3d5(0x164)])];_0x3c2a4a[_0x99d3d5(0x1ec)]({'url':''+_0x1046a8});}else console['log'](_0x99d3d5(0xc6));}),app['get'](_0x4435ef(0x92),async(_0x37802b,_0x3b6639,_0x5a29b0)=>{const _0x2ff98b=_0x4435ef,{username:_0x397eb9,key:_0x4430d4}=_0x37802b[_0x2ff98b(0x12e)],_0xd9ac14=Person,_0x19dece=await User[_0x2ff98b(0x1bb)]({'username':_0x397eb9,'key':_0x4430d4});if(!_0x19dece)return _0x3b6639[_0x2ff98b(0x157)](0x191)[_0x2ff98b(0x1df)]('Acesso\x20não\x20autorizado.');const _0x367f49=diminuirSaldo(_0x397eb9),_0x2cd60a=adicionarSaldo(_0x397eb9);if(_0x367f49&&_0x2cd60a){const _0x46b666=JSON['parse'](fs[_0x2ff98b(0x1ed)](__dirname+_0x2ff98b(0x143))),_0x1852dd=_0x46b666[Math[_0x2ff98b(0x13e)](Math[_0x2ff98b(0xc8)]()*_0x46b666[_0x2ff98b(0x164)])];_0x3b6639[_0x2ff98b(0x1ec)]({'url':''+_0x1852dd});}else console[_0x2ff98b(0x119)](_0x2ff98b(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1d1),async(_0x1ec458,_0x3d1768,_0x415045)=>{const _0x2a70eb=_0x4435ef,{username:_0x57645a,key:_0x3429a2}=_0x1ec458['query'],_0x41fafa=Person,_0x519c72=await User[_0x2a70eb(0x1bb)]({'username':_0x57645a,'key':_0x3429a2});if(!_0x519c72)return _0x3d1768['status'](0x191)[_0x2a70eb(0x1df)](_0x2a70eb(0x11e));const _0x1e323d=diminuirSaldo(_0x57645a),_0x1d8f13=adicionarSaldo(_0x57645a);if(_0x1e323d&&_0x1d8f13){const _0x148bf1=JSON[_0x2a70eb(0xc3)](fs[_0x2a70eb(0x1ed)](__dirname+'/data/hestia.json')),_0x45e0d4=_0x148bf1[Math[_0x2a70eb(0x13e)](Math['random']()*_0x148bf1[_0x2a70eb(0x164)])];_0x3d1768['json']({'url':''+_0x45e0d4});}else console[_0x2a70eb(0x119)](_0x2a70eb(0xc6));}),app['get']('/anime/inori',async(_0x449e63,_0x19a8e9,_0x3cfad4)=>{const _0x3b00ba=_0x4435ef,{username:_0x5720d4,key:_0x3b91b4}=_0x449e63['query'],_0x661f0c=Person,_0x2d9d7b=await User[_0x3b00ba(0x1bb)]({'username':_0x5720d4,'key':_0x3b91b4});if(!_0x2d9d7b)return _0x19a8e9[_0x3b00ba(0x157)](0x191)[_0x3b00ba(0x1df)]('Acesso\x20não\x20autorizado.');const _0x12847e=diminuirSaldo(_0x5720d4),_0x1c507b=adicionarSaldo(_0x5720d4);if(_0x12847e&&_0x1c507b){const _0x5ebcf4=JSON['parse'](fs['readFileSync'](__dirname+_0x3b00ba(0x13d))),_0x5317ad=_0x5ebcf4[Math[_0x3b00ba(0x13e)](Math['random']()*_0x5ebcf4[_0x3b00ba(0x164)])];_0x19a8e9[_0x3b00ba(0x1ec)]({'url':''+_0x5317ad});}else console[_0x3b00ba(0x119)](_0x3b00ba(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xf5),async(_0x577abd,_0x22b539,_0x50b452)=>{const _0x4b5c08=_0x4435ef,{username:_0x2fe515,key:_0x14687c}=_0x577abd[_0x4b5c08(0x12e)],_0x286716=Person,_0xc435b3=await User[_0x4b5c08(0x1bb)]({'username':_0x2fe515,'key':_0x14687c});if(!_0xc435b3)return _0x22b539[_0x4b5c08(0x157)](0x191)['send'](_0x4b5c08(0x11e));const _0x19d3d3=diminuirSaldo(_0x2fe515),_0x232f21=adicionarSaldo(_0x2fe515);if(_0x19d3d3&&_0x232f21){const _0x912b5b=JSON[_0x4b5c08(0xc3)](fs[_0x4b5c08(0x1ed)](__dirname+'/data/ana.json')),_0x48efc9=_0x912b5b[Math[_0x4b5c08(0x13e)](Math['random']()*_0x912b5b[_0x4b5c08(0x164)])];_0x22b539[_0x4b5c08(0x1ec)]({'url':''+_0x48efc9});}else console['log'](_0x4b5c08(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x118),async(_0x227571,_0x3dcc0e,_0x4a8e6b)=>{const _0x5a940e=_0x4435ef,{username:_0x58f1b0,key:_0x15d414}=_0x227571[_0x5a940e(0x12e)],_0x10fcfb=Person,_0x2e2d42=await User[_0x5a940e(0x1bb)]({'username':_0x58f1b0,'key':_0x15d414});if(!_0x2e2d42)return _0x3dcc0e['status'](0x191)[_0x5a940e(0x1df)](_0x5a940e(0x11e));const _0x3203c8=diminuirSaldo(_0x58f1b0),_0x4c152e=adicionarSaldo(_0x58f1b0);if(_0x3203c8&&_0x4c152e){const _0x52942b=JSON[_0x5a940e(0xc3)](fs['readFileSync'](__dirname+_0x5a940e(0x9e))),_0x536110=_0x52942b[Math[_0x5a940e(0x13e)](Math[_0x5a940e(0xc8)]()*_0x52942b[_0x5a940e(0x164)])];_0x3dcc0e['json']({'url':''+_0x536110});}else console[_0x5a940e(0x119)](_0x5a940e(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xd3),async(_0x539433,_0x47c282,_0x3a3cd6)=>{const _0x2c1908=_0x4435ef,{username:_0x7164f4,key:_0x45957f}=_0x539433[_0x2c1908(0x12e)],_0x2494f8=Person,_0x58899f=await User['findOne']({'username':_0x7164f4,'key':_0x45957f});if(!_0x58899f)return _0x47c282[_0x2c1908(0x157)](0x191)[_0x2c1908(0x1df)]('Acesso\x20não\x20autorizado.');const _0x13efd3=diminuirSaldo(_0x7164f4),_0x5b7ccd=adicionarSaldo(_0x7164f4);if(_0x13efd3&&_0x5b7ccd){const _0x3604a7=JSON[_0x2c1908(0xc3)](fs[_0x2c1908(0x1ed)](__dirname+_0x2c1908(0x15b))),_0x4912dd=_0x3604a7[Math[_0x2c1908(0x13e)](Math['random']()*_0x3604a7[_0x2c1908(0x164)])];_0x47c282['json']({'url':''+_0x4912dd});}else console[_0x2c1908(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)]('/anime/kakasih',async(_0xa7fbfd,_0xb32c54,_0x2c18b8)=>{const _0x2bdebe=_0x4435ef,{username:_0x5c974c,key:_0x392874}=_0xa7fbfd[_0x2bdebe(0x12e)],_0x35a5d6=Person,_0x492cac=await User[_0x2bdebe(0x1bb)]({'username':_0x5c974c,'key':_0x392874});if(!_0x492cac)return _0xb32c54[_0x2bdebe(0x157)](0x191)['send'](_0x2bdebe(0x11e));const _0x59eb9e=diminuirSaldo(_0x5c974c),_0x508b21=adicionarSaldo(_0x5c974c);if(_0x59eb9e&&_0x508b21){const _0xf3fe2c=JSON['parse'](fs['readFileSync'](__dirname+_0x2bdebe(0xdc))),_0xbb161d=_0xf3fe2c[Math[_0x2bdebe(0x13e)](Math[_0x2bdebe(0xc8)]()*_0xf3fe2c['length'])];_0xb32c54[_0x2bdebe(0x1ec)]({'url':''+_0xbb161d});}else console[_0x2bdebe(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)]('/anime/sagiri',async(_0x2fcb20,_0x43a854,_0x25d2f2)=>{const _0x2cd150=_0x4435ef,{username:_0x3aaf30,key:_0x34d02c}=_0x2fcb20['query'],_0xff6f9=Person,_0x37970a=await User['findOne']({'username':_0x3aaf30,'key':_0x34d02c});if(!_0x37970a)return _0x43a854[_0x2cd150(0x157)](0x191)['send']('Acesso\x20não\x20autorizado.');const _0x2207ed=diminuirSaldo(_0x3aaf30),_0x1b16a0=adicionarSaldo(_0x3aaf30);if(_0x2207ed&&_0x1b16a0){const _0x265aa5=JSON[_0x2cd150(0xc3)](fs['readFileSync'](__dirname+_0x2cd150(0x16d))),_0x2a333f=_0x265aa5[Math[_0x2cd150(0x13e)](Math[_0x2cd150(0xc8)]()*_0x265aa5['length'])];_0x43a854[_0x2cd150(0x1ec)]({'url':''+_0x2a333f});}else console[_0x2cd150(0x119)](_0x2cd150(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xd2),async(_0x2f9823,_0xba828,_0x17fd2b)=>{const _0x769a23=_0x4435ef,{username:_0x15b740,key:_0x1ba0e3}=_0x2f9823['query'],_0x183622=Person,_0x1753d4=await User[_0x769a23(0x1bb)]({'username':_0x15b740,'key':_0x1ba0e3});if(!_0x1753d4)return _0xba828[_0x769a23(0x157)](0x191)[_0x769a23(0x1df)](_0x769a23(0x11e));const _0x4ef1a2=diminuirSaldo(_0x15b740),_0x316d1a=adicionarSaldo(_0x15b740);if(_0x4ef1a2&&_0x316d1a){const _0x4bea5a=JSON['parse'](fs[_0x769a23(0x1ed)](__dirname+_0x769a23(0x123))),_0x19365a=_0x4bea5a[Math[_0x769a23(0x13e)](Math[_0x769a23(0xc8)]()*_0x4bea5a['length'])];_0xba828[_0x769a23(0x1ec)]({'url':''+_0x19365a});}else console[_0x769a23(0x119)](_0x769a23(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x124),async(_0x239a4d,_0x47f7fd,_0x36250b)=>{const _0x226d08=_0x4435ef,{username:_0x30d220,key:_0x23aaca}=_0x239a4d['query'],_0x4793b2=Person,_0xbf0d04=await User['findOne']({'username':_0x30d220,'key':_0x23aaca});if(!_0xbf0d04)return _0x47f7fd['status'](0x191)[_0x226d08(0x1df)](_0x226d08(0x11e));const _0x2ac389=diminuirSaldo(_0x30d220),_0x4df64e=adicionarSaldo(_0x30d220);if(_0x2ac389&&_0x4df64e){const _0x12b3a4=JSON[_0x226d08(0xc3)](fs['readFileSync'](__dirname+'/data/naruto.json')),_0x4a0296=_0x12b3a4[Math[_0x226d08(0x13e)](Math[_0x226d08(0xc8)]()*_0x12b3a4['length'])];_0x47f7fd['json']({'url':''+_0x4a0296});}else console['log'](_0x226d08(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1b3),async(_0x5e4a3a,_0x3ac0fc,_0x4c0e86)=>{const _0xe897d2=_0x4435ef,{username:_0x10c66c,key:_0x541ae}=_0x5e4a3a[_0xe897d2(0x12e)],_0x365363=Person,_0x1084bc=await User[_0xe897d2(0x1bb)]({'username':_0x10c66c,'key':_0x541ae});if(!_0x1084bc)return _0x3ac0fc[_0xe897d2(0x157)](0x191)[_0xe897d2(0x1df)](_0xe897d2(0x11e));const _0x1531e6=diminuirSaldo(_0x10c66c),_0x213185=adicionarSaldo(_0x10c66c);if(_0x1531e6&&_0x213185){const _0x4b746d=JSON[_0xe897d2(0xc3)](fs[_0xe897d2(0x1ed)](__dirname+_0xe897d2(0x1f1))),_0x6fbedd=_0x4b746d[Math['floor'](Math[_0xe897d2(0xc8)]()*_0x4b746d[_0xe897d2(0x164)])];_0x3ac0fc[_0xe897d2(0x1ec)]({'url':''+_0x6fbedd});}else console['log'](_0xe897d2(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1ca),async(_0x5bb331,_0x246524,_0x135a95)=>{const _0x675a2d=_0x4435ef,{username:_0x3e66e9,key:_0x100b6d}=_0x5bb331[_0x675a2d(0x12e)],_0x11c88b=Person,_0x2b7cb5=await User[_0x675a2d(0x1bb)]({'username':_0x3e66e9,'key':_0x100b6d});if(!_0x2b7cb5)return _0x246524['status'](0x191)[_0x675a2d(0x1df)](_0x675a2d(0x11e));const _0x5aeef6=diminuirSaldo(_0x3e66e9),_0x4c7816=adicionarSaldo(_0x3e66e9);if(_0x5aeef6&&_0x4c7816){const _0x2059bb=JSON[_0x675a2d(0xc3)](fs[_0x675a2d(0x1ed)](__dirname+_0x675a2d(0x115))),_0x147db1=_0x2059bb[Math[_0x675a2d(0x13e)](Math[_0x675a2d(0xc8)]()*_0x2059bb[_0x675a2d(0x164)])];_0x246524[_0x675a2d(0x1ec)]({'url':''+_0x147db1});}else console['log'](_0x675a2d(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x161),async(_0x3e8f5c,_0x1274f0,_0x2de53c)=>{const _0x5ed23e=_0x4435ef,{username:_0x491507,key:_0x372d45}=_0x3e8f5c[_0x5ed23e(0x12e)],_0x491fa1=Person,_0x2d8880=await User[_0x5ed23e(0x1bb)]({'username':_0x491507,'key':_0x372d45});if(!_0x2d8880)return _0x1274f0['status'](0x191)[_0x5ed23e(0x1df)](_0x5ed23e(0x11e));const _0x1d9780=diminuirSaldo(_0x491507),_0x1330b6=adicionarSaldo(_0x491507);if(_0x1d9780&&_0x1330b6){const _0x4e81bb=JSON['parse'](fs[_0x5ed23e(0x1ed)](__dirname+_0x5ed23e(0x192))),_0xe0cf7=_0x4e81bb[Math[_0x5ed23e(0x13e)](Math[_0x5ed23e(0xc8)]()*_0x4e81bb[_0x5ed23e(0x164)])];_0x1274f0['json']({'url':''+_0xe0cf7});}else console[_0x5ed23e(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0x189),async(_0x2b3ba0,_0x4bdb81,_0x3165ff)=>{const _0x4cc8a8=_0x4435ef,{username:_0x40a181,key:_0xe34d3a}=_0x2b3ba0['query'],_0xbac34a=Person,_0x1974a4=await User['findOne']({'username':_0x40a181,'key':_0xe34d3a});if(!_0x1974a4)return _0x4bdb81['status'](0x191)[_0x4cc8a8(0x1df)]('Acesso\x20não\x20autorizado.');const _0x425caf=diminuirSaldo(_0x40a181),_0x363d0c=adicionarSaldo(_0x40a181);if(_0x425caf&&_0x363d0c){const _0x11efac=JSON[_0x4cc8a8(0xc3)](fs['readFileSync'](__dirname+_0x4cc8a8(0x13a))),_0x264226=_0x11efac[Math[_0x4cc8a8(0x13e)](Math[_0x4cc8a8(0xc8)]()*_0x11efac[_0x4cc8a8(0x164)])];_0x4bdb81[_0x4cc8a8(0x1ec)]({'url':''+_0x264226});}else console[_0x4cc8a8(0x119)](_0x4cc8a8(0xc6));}),app[_0x4435ef(0x1e0)]('/anime/sasuke',async(_0x480e78,_0x5d4703,_0x5615b0)=>{const _0x5d2ddc=_0x4435ef,{username:_0x4b0e9b,key:_0x219c02}=_0x480e78[_0x5d2ddc(0x12e)],_0xcf193d=Person,_0x2076bb=await User[_0x5d2ddc(0x1bb)]({'username':_0x4b0e9b,'key':_0x219c02});if(!_0x2076bb)return _0x5d4703['status'](0x191)['send'](_0x5d2ddc(0x11e));const _0x3a5dfe=diminuirSaldo(_0x4b0e9b),_0x3d9037=adicionarSaldo(_0x4b0e9b);if(_0x3a5dfe&&_0x3d9037){const _0x1bbe10=JSON[_0x5d2ddc(0xc3)](fs[_0x5d2ddc(0x1ed)](__dirname+_0x5d2ddc(0x1fc))),_0x1e3d07=_0x1bbe10[Math[_0x5d2ddc(0x13e)](Math[_0x5d2ddc(0xc8)]()*_0x1bbe10[_0x5d2ddc(0x164)])];_0x5d4703['json']({'url':''+_0x1e3d07});}else console[_0x5d2ddc(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0x16f),async(_0x1d03c7,_0x583018,_0x55a826)=>{const _0x580d5e=_0x4435ef,{username:_0x414fe6,key:_0x25ad92}=_0x1d03c7[_0x580d5e(0x12e)],_0x2a2a9d=Person,_0x343760=await User[_0x580d5e(0x1bb)]({'username':_0x414fe6,'key':_0x25ad92});if(!_0x343760)return _0x583018[_0x580d5e(0x157)](0x191)[_0x580d5e(0x1df)](_0x580d5e(0x11e));const _0x24376f=diminuirSaldo(_0x414fe6),_0x2b5dea=adicionarSaldo(_0x414fe6);if(_0x24376f&&_0x2b5dea){const _0x4034dd=JSON['parse'](fs['readFileSync'](__dirname+_0x580d5e(0x188))),_0x3e2fc5=_0x4034dd[Math['floor'](Math[_0x580d5e(0xc8)]()*_0x4034dd[_0x580d5e(0x164)])];_0x583018[_0x580d5e(0x1ec)]({'url':''+_0x3e2fc5});}else console['log'](_0x580d5e(0xc6));}),app['get'](_0x4435ef(0xc5),async(_0xd1353d,_0x754201,_0x262ac4)=>{const _0x3f738b=_0x4435ef,{username:_0x27a4b3,key:_0x2d152e}=_0xd1353d[_0x3f738b(0x12e)],_0x1a5eb1=Person,_0x436b6d=await User[_0x3f738b(0x1bb)]({'username':_0x27a4b3,'key':_0x2d152e});if(!_0x436b6d)return _0x754201['status'](0x191)['send'](_0x3f738b(0x11e));const _0x319e5c=diminuirSaldo(_0x27a4b3),_0xefea0f=adicionarSaldo(_0x27a4b3);if(_0x319e5c&&_0xefea0f){const _0x4839c4=JSON[_0x3f738b(0xc3)](fs[_0x3f738b(0x1ed)](__dirname+_0x3f738b(0x1d4))),_0x469054=_0x4839c4[Math[_0x3f738b(0x13e)](Math['random']()*_0x4839c4[_0x3f738b(0x164)])];_0x754201[_0x3f738b(0x1ec)]({'url':''+_0x469054});}else console['log']('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0xcc),async(_0x2a6741,_0xcf18b1,_0x497e06)=>{const _0x36bb52=_0x4435ef,{username:_0x15200c,key:_0x19c615}=_0x2a6741[_0x36bb52(0x12e)],_0xbc388d=Person,_0x45aeb1=await User[_0x36bb52(0x1bb)]({'username':_0x15200c,'key':_0x19c615});if(!_0x45aeb1)return _0xcf18b1['status'](0x191)[_0x36bb52(0x1df)](_0x36bb52(0x11e));const _0x3f1329=diminuirSaldo(_0x15200c),_0x42384c=adicionarSaldo(_0x15200c);if(_0x3f1329&&_0x42384c){const _0x37750c=JSON['parse'](fs[_0x36bb52(0x1ed)](__dirname+_0x36bb52(0x129))),_0x233ae9=_0x37750c[Math['floor'](Math['random']()*_0x37750c[_0x36bb52(0x164)])];_0xcf18b1[_0x36bb52(0x1ec)]({'url':''+_0x233ae9});}else console['log'](_0x36bb52(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x112),async(_0xa61d5f,_0x197c87,_0x1b8453)=>{const _0x50842f=_0x4435ef,{username:_0x390d2c,key:_0x40783b}=_0xa61d5f[_0x50842f(0x12e)],_0xf19fed=Person,_0x5afb2c=await User[_0x50842f(0x1bb)]({'username':_0x390d2c,'key':_0x40783b});if(!_0x5afb2c)return _0x197c87['status'](0x191)[_0x50842f(0x1df)](_0x50842f(0x11e));const _0x5843f8=diminuirSaldo(_0x390d2c),_0x3e2ed6=adicionarSaldo(_0x390d2c);if(_0x5843f8&&_0x3e2ed6){const _0x3b7aec=JSON['parse'](fs[_0x50842f(0x1ed)](__dirname+_0x50842f(0x169))),_0x5b056d=_0x3b7aec[Math[_0x50842f(0x13e)](Math[_0x50842f(0xc8)]()*_0x3b7aec[_0x50842f(0x164)])];_0x197c87[_0x50842f(0x1ec)]({'url':''+_0x5b056d});}else console['log'](_0x50842f(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1a9),async(_0x2fd2fb,_0x7b7bbd,_0x1c20fd)=>{const _0x2ef9f7=_0x4435ef,{username:_0x4f4d5e,key:_0x495993}=_0x2fd2fb[_0x2ef9f7(0x12e)],_0x14649c=Person,_0x46a179=await User[_0x2ef9f7(0x1bb)]({'username':_0x4f4d5e,'key':_0x495993});if(!_0x46a179)return _0x7b7bbd['status'](0x191)[_0x2ef9f7(0x1df)](_0x2ef9f7(0x11e));const _0x5adf7e=diminuirSaldo(_0x4f4d5e),_0x415a6f=adicionarSaldo(_0x4f4d5e);if(_0x5adf7e&&_0x415a6f){const _0x2c17b5=JSON[_0x2ef9f7(0xc3)](fs[_0x2ef9f7(0x1ed)](__dirname+'/data/wallhp.json')),_0x17e80b=_0x2c17b5[Math['floor'](Math[_0x2ef9f7(0xc8)]()*_0x2c17b5[_0x2ef9f7(0x164)])];_0x7b7bbd[_0x2ef9f7(0x1ec)]({'url':''+_0x17e80b});}else console[_0x2ef9f7(0x119)]('Saldo\x20insuficiente.');}),app['get'](_0x4435ef(0x10f),async(_0x222b7c,_0x5f4178,_0xb466b1)=>{const _0x3f5ad1=_0x4435ef,{username:_0x3a8840,key:_0x55a8c9}=_0x222b7c[_0x3f5ad1(0x12e)],_0x1f11dd=Person,_0x4aef6e=await User[_0x3f5ad1(0x1bb)]({'username':_0x3a8840,'key':_0x55a8c9});if(!_0x4aef6e)return _0x5f4178[_0x3f5ad1(0x157)](0x191)[_0x3f5ad1(0x1df)](_0x3f5ad1(0x11e));const _0x245c6e=diminuirSaldo(_0x3a8840),_0x4c716b=adicionarSaldo(_0x3a8840);if(_0x245c6e&&_0x4c716b){const _0x1f52e5=JSON['parse'](fs[_0x3f5ad1(0x1ed)](__dirname+_0x3f5ad1(0x98))),_0x4b69f6=_0x1f52e5[Math[_0x3f5ad1(0x13e)](Math[_0x3f5ad1(0xc8)]()*_0x1f52e5[_0x3f5ad1(0x164)])];_0x5f4178[_0x3f5ad1(0x1ec)]({'url':''+_0x4b69f6});}else console[_0x3f5ad1(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0x15d),async(_0x5df79d,_0x3a8a0e,_0x5b4604)=>{const _0x376c67=_0x4435ef,{username:_0x2a2992,key:_0x364e1a}=_0x5df79d[_0x376c67(0x12e)],_0x157f0e=Person,_0xb31f7f=await User[_0x376c67(0x1bb)]({'username':_0x2a2992,'key':_0x364e1a});if(!_0xb31f7f)return _0x3a8a0e[_0x376c67(0x157)](0x191)[_0x376c67(0x1df)](_0x376c67(0x11e));const _0x34bb65=diminuirSaldo(_0x2a2992),_0x494945=adicionarSaldo(_0x2a2992);if(_0x34bb65&&_0x494945){const _0x41e58c=JSON[_0x376c67(0xc3)](fs[_0x376c67(0x1ed)](__dirname+_0x376c67(0x1c5))),_0x5ba0a1=_0x41e58c[Math[_0x376c67(0x13e)](Math[_0x376c67(0xc8)]()*_0x41e58c[_0x376c67(0x164)])];_0x3a8a0e['json']({'url':''+_0x5ba0a1});}else console[_0x376c67(0x119)]('Saldo\x20insuficiente.');}),app['get'](_0x4435ef(0x196),async(_0x288693,_0x308cb6,_0x81e570)=>{const _0x358652=_0x4435ef,{username:_0x3e0ee9,key:_0x35e0a7}=_0x288693[_0x358652(0x12e)],_0x4fe1c2=Person,_0x1e9f09=await User[_0x358652(0x1bb)]({'username':_0x3e0ee9,'key':_0x35e0a7});if(!_0x1e9f09)return _0x308cb6[_0x358652(0x157)](0x191)['send']('Acesso\x20não\x20autorizado.');const _0x4d049d=diminuirSaldo(_0x3e0ee9),_0x89b0b9=adicionarSaldo(_0x3e0ee9);if(_0x4d049d&&_0x89b0b9){Hekel=JSON['parse'](fs[_0x358652(0x1ed)](__dirname+_0x358652(0x10d)));const _0x107f4d=Hekel[Math[_0x358652(0x13e)](Math[_0x358652(0xc8)]()*Hekel[_0x358652(0x164)])];_0x308cb6[_0x358652(0x1ec)]({'url':''+_0x107f4d});}else console[_0x358652(0x119)](_0x358652(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x140),async(_0x1d7f9b,_0x1d48c3,_0xfe34a2)=>{const _0x54348d=_0x4435ef,{username:_0x2eea14,key:_0x5df0cd}=_0x1d7f9b[_0x54348d(0x12e)],_0x42880e=Person,_0x51fe60=await User[_0x54348d(0x1bb)]({'username':_0x2eea14,'key':_0x5df0cd});if(!_0x51fe60)return _0x1d48c3[_0x54348d(0x157)](0x191)[_0x54348d(0x1df)](_0x54348d(0x11e));const _0x1fe0e1=diminuirSaldo(_0x2eea14),_0x5ba55b=adicionarSaldo(_0x2eea14);if(_0x1fe0e1&&_0x5ba55b){Kucing=JSON['parse'](fs[_0x54348d(0x1ed)](__dirname+_0x54348d(0x138)));const _0x2383f1=Kucing[Math['floor'](Math[_0x54348d(0xc8)]()*Kucing[_0x54348d(0x164)])];_0x1d48c3[_0x54348d(0x1ec)]({'url':''+_0x2383f1});}else console[_0x54348d(0x119)](_0x54348d(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1ce),async(_0x31274a,_0x66d9bc,_0x254461)=>{const _0x5e19c3=_0x4435ef,{username:_0x48ad72,key:_0x5d826c}=_0x31274a[_0x5e19c3(0x12e)],_0x4c2eca=Person,_0x2ac111=await User['findOne']({'username':_0x48ad72,'key':_0x5d826c});if(!_0x2ac111)return _0x66d9bc[_0x5e19c3(0x157)](0x191)[_0x5e19c3(0x1df)](_0x5e19c3(0x11e));const _0x554e83=diminuirSaldo(_0x48ad72),_0x2288df=adicionarSaldo(_0x48ad72);if(_0x554e83&&_0x2288df){Pubg=JSON[_0x5e19c3(0xc3)](fs['readFileSync'](__dirname+_0x5e19c3(0xa9)));const _0x371bda=Pubg[Math[_0x5e19c3(0x13e)](Math[_0x5e19c3(0xc8)]()*Pubg[_0x5e19c3(0x164)])];_0x66d9bc['json']({'url':''+_0x371bda});}else console['log'](_0x5e19c3(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x166),async(_0x2e7924,_0xc8bf2,_0x1ef318)=>{const _0x5e52c4=_0x4435ef,{username:_0x117d74,key:_0x17ec2a}=_0x2e7924['query'],_0x19917f=Person,_0x5beb62=await User[_0x5e52c4(0x1bb)]({'username':_0x117d74,'key':_0x17ec2a});if(!_0x5beb62)return _0xc8bf2['status'](0x191)[_0x5e52c4(0x1df)](_0x5e52c4(0x11e));const _0x440b71=diminuirSaldo(_0x117d74),_0x31ccb1=adicionarSaldo(_0x117d74);if(_0x440b71&&_0x31ccb1){Pp=JSON['parse'](fs[_0x5e52c4(0x1ed)](__dirname+_0x5e52c4(0x187)));const _0x2e4da9=Pp[Math['floor'](Math[_0x5e52c4(0xc8)]()*Pp['length'])];_0xc8bf2['json']({'url':''+_0x2e4da9});}else console[_0x5e52c4(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0x202),async(_0xbfbb98,_0x3b0d57,_0x505604)=>{const _0x220f74=_0x4435ef,{username:_0x1e7780,key:_0x12528c}=_0xbfbb98['query'],_0xf1c00d=Person,_0x4acc2c=await User[_0x220f74(0x1bb)]({'username':_0x1e7780,'key':_0x12528c});if(!_0x4acc2c)return _0x3b0d57[_0x220f74(0x157)](0x191)[_0x220f74(0x1df)](_0x220f74(0x11e));const _0x2ccd4c=diminuirSaldo(_0x1e7780),_0x143361=adicionarSaldo(_0x1e7780);if(_0x2ccd4c&&_0x143361){Anjing=JSON[_0x220f74(0xc3)](fs['readFileSync'](__dirname+_0x220f74(0x1e1)));const _0xe577bc=Anjing[Math[_0x220f74(0x13e)](Math[_0x220f74(0xc8)]()*Anjing[_0x220f74(0x164)])];_0x3b0d57[_0x220f74(0x1ec)]({'url':''+_0xe577bc});}else console[_0x220f74(0x119)](_0x220f74(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x180),async(_0x3464d9,_0x4dcaf0,_0x3a0a5d)=>{const _0x67ea51=_0x4435ef,{username:_0x58c263,key:_0x52f147}=_0x3464d9[_0x67ea51(0x12e)],_0x2cb7ac=Person,_0x21e7f8=await User[_0x67ea51(0x1bb)]({'username':_0x58c263,'key':_0x52f147});if(!_0x21e7f8)return _0x4dcaf0[_0x67ea51(0x157)](0x191)['send'](_0x67ea51(0x11e));const _0x22e914=diminuirSaldo(_0x58c263),_0x42445e=adicionarSaldo(_0x58c263);if(_0x22e914&&_0x42445e){Dora=JSON[_0x67ea51(0xc3)](fs[_0x67ea51(0x1ed)](__dirname+_0x67ea51(0x1ac)));const _0x4bc55c=Dora[Math[_0x67ea51(0x13e)](Math['random']()*Dora['length'])];_0x4dcaf0[_0x67ea51(0x1ec)]({'url':''+_0x4bc55c});}else console[_0x67ea51(0x119)](_0x67ea51(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xd9),async(_0x2118ca,_0x261100,_0x129168)=>{const _0xbb0cc8=_0x4435ef,{username:_0x30f82b,key:_0x376b66}=_0x2118ca[_0xbb0cc8(0x12e)],_0x194aed=Person,_0x4103bf=await User['findOne']({'username':_0x30f82b,'key':_0x376b66});if(!_0x4103bf)return _0x261100[_0xbb0cc8(0x157)](0x191)[_0xbb0cc8(0x1df)](_0xbb0cc8(0x11e));const _0x47d676=diminuirSaldo(_0x30f82b),_0x51fcc1=adicionarSaldo(_0x30f82b);if(_0x47d676&&_0x51fcc1){const _0x39e09d=JSON[_0xbb0cc8(0xc3)](fs[_0xbb0cc8(0x1ed)](__dirname+_0xbb0cc8(0x17c))),_0x2576d6=_0x39e09d[Math[_0xbb0cc8(0x13e)](Math[_0xbb0cc8(0xc8)]()*_0x39e09d[_0xbb0cc8(0x164)])];_0x261100[_0xbb0cc8(0x1ec)]({'url':''+_0x2576d6});}else console[_0xbb0cc8(0x119)](_0xbb0cc8(0xc6));}),app['get'](_0x4435ef(0x1c7),async(_0xac7069,_0x176478,_0x1276c0)=>{const _0x5a2855=_0x4435ef,{username:_0x41b511,key:_0x8bd443}=_0xac7069[_0x5a2855(0x12e)],_0x8d1314=Person,_0x5ddff8=await User[_0x5a2855(0x1bb)]({'username':_0x41b511,'key':_0x8bd443});if(!_0x5ddff8)return _0x176478[_0x5a2855(0x157)](0x191)[_0x5a2855(0x1df)](_0x5a2855(0x11e));const _0x255061=diminuirSaldo(_0x41b511),_0xb77d25=adicionarSaldo(_0x41b511);if(_0x255061&&_0xb77d25){const _0x498c0b=JSON[_0x5a2855(0xc3)](fs['readFileSync'](__dirname+_0x5a2855(0x179))),_0x2cff2b=_0x498c0b[Math['floor'](Math['random']()*_0x498c0b[_0x5a2855(0x164)])];_0x176478[_0x5a2855(0x1ec)]({'url':''+_0x2cff2b});}else console[_0x5a2855(0x119)]('Saldo\x20insuficiente.');}),app['get'](_0x4435ef(0x99),async(_0x9a50ca,_0x156562,_0x4851c9)=>{const _0x8bd964=_0x4435ef,{username:_0x5dbd97,key:_0xd1e7fe}=_0x9a50ca[_0x8bd964(0x12e)],_0xcaf563=Person,_0x16c3be=await User[_0x8bd964(0x1bb)]({'username':_0x5dbd97,'key':_0xd1e7fe});if(!_0x16c3be)return _0x156562['status'](0x191)['send'](_0x8bd964(0x11e));const _0x5ceb96=diminuirSaldo(_0x5dbd97),_0x55d4ff=adicionarSaldo(_0x5dbd97);if(_0x5ceb96&&_0x55d4ff){const _0x3f46a3=JSON[_0x8bd964(0xc3)](fs[_0x8bd964(0x1ed)](__dirname+_0x8bd964(0x177))),_0x55ff17=_0x3f46a3[Math[_0x8bd964(0x13e)](Math['random']()*_0x3f46a3[_0x8bd964(0x164)])];_0x156562['json']({'url':''+_0x55ff17});}else console[_0x8bd964(0x119)]('Saldo\x20insuficiente.');}),app[_0x4435ef(0x1e0)](_0x4435ef(0x171),async(_0x3290d1,_0x390d13,_0x59e345)=>{const _0x4e5556=_0x4435ef,{username:_0x49a89b,key:_0x4e298e}=_0x3290d1[_0x4e5556(0x12e)],_0x164153=Person,_0x222057=await User['findOne']({'username':_0x49a89b,'key':_0x4e298e});if(!_0x222057)return _0x390d13['status'](0x191)[_0x4e5556(0x1df)](_0x4e5556(0x11e));const _0x156723=diminuirSaldo(_0x49a89b),_0x5349ab=adicionarSaldo(_0x49a89b);if(_0x156723&&_0x5349ab){const _0x38fa68=JSON['parse'](fs[_0x4e5556(0x1ed)](__dirname+_0x4e5556(0x142))),_0x2ae56e=_0x38fa68[Math[_0x4e5556(0x13e)](Math[_0x4e5556(0xc8)]()*_0x38fa68['length'])];_0x390d13[_0x4e5556(0x1ec)]({'url':''+_0x2ae56e});}else console[_0x4e5556(0x119)](_0x4e5556(0xc6));}),app['get']('/wallpaper/aesthetic',async(_0x1b067e,_0x101b35,_0x239dbb)=>{const _0x3b967b=_0x4435ef,{username:_0x5be7cb,key:_0x24a5d8}=_0x1b067e['query'],_0x46a05d=Person,_0x57d8b4=await User[_0x3b967b(0x1bb)]({'username':_0x5be7cb,'key':_0x24a5d8});if(!_0x57d8b4)return _0x101b35[_0x3b967b(0x157)](0x191)['send']('Acesso\x20não\x20autorizado.');const _0xd051b8=diminuirSaldo(_0x5be7cb),_0x2c1fa3=adicionarSaldo(_0x5be7cb);if(_0xd051b8&&_0x2c1fa3){const _0x105434=JSON[_0x3b967b(0xc3)](fs[_0x3b967b(0x1ed)](__dirname+_0x3b967b(0x1dc))),_0x2f4abf=_0x105434[Math['floor'](Math[_0x3b967b(0xc8)]()*_0x105434[_0x3b967b(0x164)])];_0x101b35[_0x3b967b(0x1ec)]({'url':''+_0x2f4abf});}else console[_0x3b967b(0x119)](_0x3b967b(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0x1f5),async(_0xe74091,_0x15a2ce,_0x1be3f7)=>{const _0x2bbe3e=_0x4435ef,{username:_0x4c33dc,key:_0x577bc9}=_0xe74091[_0x2bbe3e(0x12e)],_0x52f498=Person,_0x586989=await User[_0x2bbe3e(0x1bb)]({'username':_0x4c33dc,'key':_0x577bc9});if(!_0x586989)return _0x15a2ce[_0x2bbe3e(0x157)](0x191)[_0x2bbe3e(0x1df)](_0x2bbe3e(0x11e));const _0x4ba537=diminuirSaldo(_0x4c33dc),_0x582691=adicionarSaldo(_0x4c33dc);if(_0x4ba537&&_0x582691){const _0x5c0585=JSON['parse'](fs['readFileSync'](__dirname+'/data/sagiri.json')),_0x13ed47=_0x5c0585[Math['floor'](Math[_0x2bbe3e(0xc8)]()*_0x5c0585['length'])];_0x15a2ce['json']({'url':''+_0x13ed47});}else console['log'](_0x2bbe3e(0xc6));}),app['get'](_0x4435ef(0x11a),async(_0x1f2aec,_0x782e0d,_0x1ca33e)=>{const _0x428a53=_0x4435ef,{username:_0x23f6dc,key:_0x364f87}=_0x1f2aec[_0x428a53(0x12e)],_0x2ba1d9=Person,_0x372bd5=await User[_0x428a53(0x1bb)]({'username':_0x23f6dc,'key':_0x364f87});if(!_0x372bd5)return _0x782e0d[_0x428a53(0x157)](0x191)[_0x428a53(0x1df)](_0x428a53(0x11e));const _0x324643=diminuirSaldo(_0x23f6dc),_0x4be44b=adicionarSaldo(_0x23f6dc);if(_0x324643&&_0x4be44b){const _0x1b2e6a=JSON[_0x428a53(0xc3)](fs[_0x428a53(0x1ed)](__dirname+_0x428a53(0xfb))),_0x28a64c=_0x1b2e6a[Math['floor'](Math[_0x428a53(0xc8)]()*_0x1b2e6a[_0x428a53(0x164)])];_0x782e0d[_0x428a53(0x1ec)]({'url':''+_0x28a64c});}else console['log'](_0x428a53(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xa2),async(_0x22afa6,_0x5e94eb,_0x3af45f)=>{const _0x2706d3=_0x4435ef,{username:_0x2d302b,key:_0x463bc9}=_0x22afa6[_0x2706d3(0x12e)],_0x39d5fa=Person,_0x4c0b93=await User['findOne']({'username':_0x2d302b,'key':_0x463bc9});if(!_0x4c0b93)return _0x5e94eb[_0x2706d3(0x157)](0x191)[_0x2706d3(0x1df)](_0x2706d3(0x11e));const _0x5eb06d=diminuirSaldo(_0x2d302b),_0x3a640b=adicionarSaldo(_0x2d302b);if(_0x5eb06d&&_0x3a640b){const _0x5ca1be=JSON[_0x2706d3(0xc3)](fs[_0x2706d3(0x1ed)](__dirname+_0x2706d3(0x94))),_0x970c00=_0x5ca1be[Math[_0x2706d3(0x13e)](Math[_0x2706d3(0xc8)]()*_0x5ca1be['length'])];_0x5e94eb['json']({'url':''+_0x970c00});}else console[_0x2706d3(0x119)](_0x2706d3(0xc6));}),app[_0x4435ef(0x1e0)](_0x4435ef(0xe5),async(_0x4c5fa6,_0x27214f,_0x3ac460)=>{const _0x290f92=_0x4435ef,{username:_0x41e405,key:_0x4357f0}=_0x4c5fa6[_0x290f92(0x12e)],_0x2d1d1a=Person,_0x9f6647=await User[_0x290f92(0x1bb)]({'username':_0x41e405,'key':_0x4357f0});if(!_0x9f6647)return _0x27214f[_0x290f92(0x157)](0x191)[_0x290f92(0x1df)](_0x290f92(0x11e));const _0x50a58c=diminuirSaldo(_0x41e405),_0x57dcd8=adicionarSaldo(_0x41e405);if(_0x50a58c&&_0x57dcd8){const _0xd1d503=JSON[_0x290f92(0xc3)](fs[_0x290f92(0x1ed)](__dirname+'/data/hinata.json')),_0x3401f2=_0xd1d503[Math[_0x290f92(0x13e)](Math[_0x290f92(0xc8)]()*_0xd1d503[_0x290f92(0x164)])];_0x27214f[_0x290f92(0x1ec)]({'url':''+_0x3401f2});}else console['log'](_0x290f92(0xc6));});function saveUsers(_0x2223c){const _0xf9d044=_0x4435ef;try{fs[_0xf9d044(0xbe)](usersFilePath,JSON[_0xf9d044(0x139)]({'users':_0x2223c},null,0x2));}catch(_0x2080a7){console[_0xf9d044(0x1e2)](_0xf9d044(0x176),_0x2080a7);}}app[_0x4435ef(0x1e0)](_0x4435ef(0x1fe),async(_0x1d4448,_0x1556e6)=>{const _0x25150a=_0x4435ef;try{const _0x239845=_0x1d4448[_0x25150a(0x12e)]['q']||'',_0x48d4c3=_0x25150a(0x14c)+_0x239845,_0x52bb6e=await axios['get'](_0x48d4c3),_0x43e4ae=_0x52bb6e[_0x25150a(0xa1)]['mangas'],_0x11b633=await axios[_0x25150a(0x1e0)]('https://ruby-careful-skunk.cyclic.app/recents'),_0x3a5c9e=await axios[_0x25150a(0x1e0)]('https://ruby-careful-skunk.cyclic.app/top/1'),_0x37b861=await axios[_0x25150a(0x1e0)](_0x25150a(0x19b));!_0x11b633['ok']&&!_0x3a5c9e['ok']&&!_0x37b861['ok']&&await new Promise(_0x2eb531=>setTimeout(_0x2eb531,0x3e8));const _0x5cdba3=await _0x11b633[_0x25150a(0xa1)],_0x8fb8ee=_0x5cdba3[_0x25150a(0x1d5)],_0x2059c5=await _0x3a5c9e[_0x25150a(0xa1)],_0x749d5d=await _0x37b861[_0x25150a(0xa1)];_0x1556e6[_0x25150a(0xc9)](_0x25150a(0x108),{'data':_0x2059c5,'zera':_0x749d5d,'info':_0x8fb8ee,'mangas':_0x43e4ae,'query':_0x239845});}catch(_0x5e35b5){console[_0x25150a(0x1e2)](_0x25150a(0x17f),_0x5e35b5['message']),await new Promise(_0x52057a=>setTimeout(_0x52057a,0x3e8));}}),app['get'](_0x4435ef(0xa4),async(_0x3144c1,_0x2daf62)=>{const _0x128467=_0x4435ef;try{const _0x3fca40=_0x3144c1[_0x128467(0xe3)]['id'],_0x313fba=_0x3144c1['query'][_0x128467(0x174)],_0x29b065=await fetch(encodeURI(_0x128467(0x1c3)+_0x3fca40));!_0x29b065['ok']&&await new Promise(_0x1eb487=>setTimeout(_0x1eb487,0x3e8));const _0x54c821=await _0x29b065['json'](),_0x4f4959=_0x54c821,_0x3235ed=_0x4f4959['images'];_0x2daf62[_0x128467(0xc9)](_0x128467(0x12b),{'info':_0x4f4959,'foto':_0x313fba});}catch(_0xa8920e){console[_0x128467(0x1e2)](_0x128467(0x17f),_0xa8920e[_0x128467(0x103)]),_0x2daf62[_0x128467(0x157)](0x1f4)[_0x128467(0x1df)](_0x128467(0x1b0)),await new Promise(_0x2315de=>setTimeout(_0x2315de,0x3e8));}}),app[_0x4435ef(0x1e0)](_0x4435ef(0x18e),async(_0xedf78c,_0x16fcc5)=>{const _0x14c45d=_0x4435ef;try{const _0x20ad7c=_0xedf78c['params']['id'],_0x92580d=await fetch(encodeURI(_0x14c45d(0xda)+_0x20ad7c));!_0x92580d['ok']&&await new Promise(_0x101d4b=>setTimeout(_0x101d4b,0x3e8));const _0x455d58=await _0x92580d[_0x14c45d(0x1ec)](),_0xb93f28=_0x455d58,_0x88206d=_0xb93f28['images'];_0x16fcc5[_0x14c45d(0xc9)](_0x14c45d(0x11d),{'info':_0xb93f28,'fotos':_0x88206d});}catch(_0x1b754e){console['error']('Error:',_0x1b754e[_0x14c45d(0x103)]),_0x16fcc5[_0x14c45d(0x157)](0x1f4)[_0x14c45d(0x1df)]('An\x20error\x20occurred\x20while\x20fetching\x20manga\x20data.'),await new Promise(_0x43ca1d=>setTimeout(_0x43ca1d,0x3e8));}}),app[_0x4435ef(0x1e0)](_0x4435ef(0x18c),async(_0x4db30a,_0x33e75e)=>{const _0x680f9a=_0x4435ef;try{const _0x1a1dbe=_0x4db30a['query']['q']||'',_0x1b6418='https://ruby-careful-skunk.cyclic.app/search?q='+_0x1a1dbe,_0x1308a3=await axios[_0x680f9a(0x1e0)](_0x1b6418),_0x1706ad=_0x1308a3['data'][_0x680f9a(0x1d5)];_0x33e75e[_0x680f9a(0xc9)]('search',{'mangas':_0x1706ad,'query':_0x1a1dbe});}catch(_0x220f6e){console[_0x680f9a(0x1e2)](_0x680f9a(0x96),_0x220f6e),_0x33e75e[_0x680f9a(0x157)](0x1f4)[_0x680f9a(0x1df)]('Ocorreu\x20um\x20erro\x20ao\x20buscar\x20os\x20mangás.');}}),app[_0x4435ef(0x1e0)](_0x4435ef(0x18c),(_0x41a4fe,_0x6abed5)=>{const _0x11f2f7=_0x4435ef;_0x6abed5['render'](_0x11f2f7(0x1a7),{'mangas':[],'query':''});});const PORT=0x1f90;mongoose[_0x4435ef(0xfc)](_0x4435ef(0xa8),{'useNewUrlParser':!![],'useUnifiedTopology':!![]})[_0x4435ef(0x1cc)](()=>{const _0x414eec=_0x4435ef;console[_0x414eec(0x119)](_0x414eec(0x1dd)),app[_0x414eec(0x141)](PORT);})['catch'](_0x4d8c9a=>console[_0x4435ef(0x119)](_0x4d8c9a));
+const express = require('express');
+const mongoose = require('mongoose')
+const { MongoClient } = require('mongodb');
+const bodyParser = require('body-parser');
+const fs = require('fs');
+const path = require('path');
+const session = require('express-session');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+//const formidable = require('formidable');
+//const api = require("./api");
+const app = express();
+const router = app
+const __path = require('path');
+const axios = require('axios');
+const {
+fetchSearchGogo,
+fetchGogoRecentEpisodes,
+fetchGogoAnimeInfo,
+fetchGogoanimeEpisodeSource,
+episod,
+ytPlayMp4, 
+tiktokdownload,
+ytPlayMp3,
+getVideoDownloadLink,
+getAudioDownloadLink,
+scrapeWebsite
+} = require("./lib/scraper.js");
+let clientInstance;
+// INÍCIO DO BOT 
+
+//const fs = require('fs');
+const P = require('pino');
+const { Boom } = require('@hapi/boom');
+const fetch = require('node-fetch');
+const chalk = require('chalk');
+const { color, bgcolor, logs } = require('./lib/color');
+const moment = require('moment-timezone');
+const hora = moment.tz('America/Sao_Paulo').format('HH:mm:ss');
+const data = moment.tz('America/Sao_Paulo').format('DD/MM/YY');
+const yts = require('yt-search');
+const speed = require('performance-now');
+const ffmpeg = require('fluent-ffmpeg');
+const { exec, spawn, execSync } = require('child_process');
+//const axios = require('axios');
+const linkfy = require('linkifyjs');
+//const { banner, getGroupAdmins, getBuffer, getRandom, getExtension } = require('./lib/funções');
+
+
+// FIM DO BOT
+
+// Configurando o middleware de sessão
+app.use(session({
+  secret: 'trevoso',
+  resave: false,
+  saveUninitialized: true,
+}));
+
+
+const { Schema } = mongoose;
+
+// Configurando o parser para JSON e formulários
+const cors = require('cors');
+
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+const adminKey = 'sua_chave_do_administrador';
+
+// Definindo o schema do usuário
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true },
+  password: { type: String, required: true },
+  key: { type: String, required: true },
+  saldo: { type: Number, default: 0 },
+  total: { type: Number, default: 0 },
+  ft: { type: String, default: null },
+  favoriteMangas: [{ mangaId: String, mangaName: String, imageUrl: String }],
+});
+
+// Criando o modelo do usuário
+const User = mongoose.model('User', userSchema);
+
+//const mongoose = require('mongoose');
+
+const cer = new mongoose.Schema({
+  username: String,
+  password: String,
+  key: String,
+  saldo: { type: Number, default: 0 },
+  total: { type: Number, default: 0 },
+  ft: String,
+});
+
+//const User = mongoose.model('User', cer);
+
+//module.exports = User;
+//const User = require('./user'); // Importe o modelo User definido no arquivo user.js
+
+async function diminuirSaldo(username) {
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return false; // Usuário não encontrado
+    }
+
+    if (user.saldo > 0) {
+      user.saldo--;
+      await user.save(); // Salva os dados atualizados no MongoDB
+      return true; // Saldo diminuído com sucesso
+    } else {
+      return false; // Saldo insuficiente
+    }
+  } catch (error) {
+    console.error('Erro ao diminuir saldo:', error);
+    return false;
+  }
+}
+
+
+async function adicionarSaldo(username) {
+//async function adicionarTotal(username) {
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return false; // Usuário não encontrado
+    }
+
+    user.total += 1; // Adiciona 1 ao campo total
+    await user.save(); // Salva os dados atualizados no MongoDB
+    return true; // Total adicionado com sucesso
+  } catch (error) {
+    console.error('Erro ao adicionar total:', error);
+    return false;
+  }
+}
+
+// Função auxiliar para ler os dados dos usuários do banco de dados
+async function readUsers() {
+  try {
+    return await User.find();
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return [];
+  }
+}
+
+// Função auxiliar para salvar os dados dos usuários no banco de dados
+async function saveUsers(users) {
+  try {
+    await User.deleteMany(); // Limpa a coleção de usuários no banco
+    await User.insertMany(users); // Insere os novos dados de usuários
+  } catch (error) {
+    console.error('Erro ao salvar os dados no banco de dados:', error);
+  }
+}
+
+Person = User
+
+
+
+
+// Defina as rotas da sua API
+app.get('/rota', (req, res) => {
+  // Lógica da rota aqui
+  res.json({ message: 'Sua API está funcionando!' });
+});
+
+
+
+app.get("/search", (req, res) => {
+const name = req.query.q;
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/search?q=${name}`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+
+function getMangaById(name, id) {
+    var return_data  = {};
+    const nick = name;
+    let bay; // Declare a variável 'bay' aqui
+    return (async () => {
+        try {
+            let response = await axios.get("https://mangalivre.net/manga/"+name+"/"+id);
+            bay = response.data;
+            const $ = cheerio.load(bay);
+            //console.log(response.data)
+            const desc = $('meta[name="description"]').attr("content"); 
+            
+            const mangaName = $('span.series-title h1').text().trim();
+            const mangaImageURL = $('meta[property="og:image"]').attr("content"); 
+            const result = {"nome": mangaName, "desc": desc, "image": mangaImageURL}
+            return_data.manga = result;
+        } catch (error) {
+            console.error(error.message);
+        }
+        return return_data;
+    })();
+}
+
+// Exemplo de uso:
+//https://mkit.trevodev.repl.co/manga//9522
+
+
+
+  
+
+app.get("/dados", async (req, res) => {
+  const id = req.query.id;
+  const name = req.query.name;
+function getMangaById(name, id) {
+    var return_data  = {};
+    const nick = name;
+    let bay; // Declare a variável 'bay' aqui
+    return (async () => {
+        try {
+            let response = await axios.get("https://mangalivre.net/manga/"+name+"/"+id);
+            bay = response.data;
+            const $ = cheerio.load(bay);
+            //console.log(response.data)
+            const desc = $('meta[name="description"]').attr("content"); 
+            
+            const mangaName = $('span.series-title h1').text().trim();
+            const mangaImageURL = $('meta[property="og:image"]').attr("content"); 
+            const result = {"nome": mangaName, "desc": desc, "image": mangaImageURL}
+            return_data.manga = result;
+        } catch (error) {
+            console.error(error.message);
+        }
+        res.json(return_data);
+    })();
+}
+});
+
+app.get("/chapters/:id/", async (req, res) => {
+  const id = req.params.id;
+ // const name = req.params.name;
+
+  try {
+fetchChaptersData(id).then((adm) => {
+  res.json(adm);
+});
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+    res.status(500).json({ error: 'Erro ao buscar os dados.' });
+  }
+});
+
+
+app.get("/pages/:id", (req, res) => {
+    const id = req.params.id;
+
+    api.getPages(id).then((pages) => {
+        res.send(pages);
+    });
+});
+
+app.get("/genres/", (_req, res) => {
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/genres`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/recents", (req, res) => {
+    res.redirect("/recents/1");
+});
+
+app.get("/recents/:page", (req, res) => {
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/recents/1`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/popular/", async (_req, res) => {
+    res.redirect("/popular/1");
+});
+
+app.get("/popular/:page", (req, res) => {
+    const page = req.params.page;
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/popular/${page}`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/top/:page", (req, res) => {
+    const page = req.params.page;
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/top/${page}`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/top/", async (_req, res) => {
+    res.redirect("/top/1");
+});
+
+app.get("/manga/:id", async(req, res) => {
+    const id = req.params.id;
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/pages/${id}`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+
+});
+
+
+// Rota de registro para criar um novo usuário
+app.post('/register', async (req, res) => {
+  const { username, password, numero, key } = req.body;
+
+  // Verifica se o usuário já existe
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    return res.status(409).send('Nome de usuário já existe. Por favor, escolha outro.');
+  }
+
+  // Cria um novo usuário com a chave e o saldo padrão
+  const ft = "https://telegra.ph/file/f932f56e19397b0c7c448.jpg"; // URL padrão da foto
+  const saldo = 10000; // Saldo padrão
+  const total = 0;
+  const newUser = new User({ username, password, key, saldo, total, ft });
+
+  // Salva o novo usuário no banco de dados
+  try {
+    await newUser.save();
+    return res.redirect('/entrar');
+  } catch (error) {
+    console.error('Erro ao salvar o usuário no banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+});
+
+// Rota de login para autenticar o usuário
+app.get('/login', (req, res) => {
+  res.render('login'); // Renderiza a página de login (login.ejs)
+});
+
+app.get('/clover', (req, res) => {
+  const { key } = req.query;
+  if (key !== adminKey) {
+    return res.status(401).send('Acesso não autorizado para editar.');
+  }
+  const users = readUsers();
+  res.render('index', { users });
+});
+
+
+
+
+app.post('/confirma', async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user || user.password !== password) {
+      return res.status(401).send('Nome de usuário ou senha incorretos. Por favor, tente novamente.');
+    }
+
+    // Salva o username e a senha do usuário na sessão para autenticação
+    req.session.username = user.username;
+    req.session.password = user.password;
+
+    res.redirect(`/edit/${user.username}`);
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+});
+
+
+app.post('/login', async (req, res) => {
+  const { username, password, key } = req.body;
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user || user.password !== password) {
+      return res.status(401).send('Nome de usuário ou senha incorretos. Por favor, tente novamente.');
+    }
+
+    // Salva o username do usuário na sessão para autenticação
+    req.session.username = user.username;
+
+    res.redirect(`/perfil/${user.username}/${key}/${password}`);
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+});
+
+app.post('/paginaPrincipal', async (req, res) => {
+  const { username, password, key } = req.body;
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user || user.password !== password) {
+      return res.status(401).send('Nome de usuário ou senha incorretos. Por favor, tente novamente.');
+    }
+
+    res.redirect(`/anikit?username=${user.username}&key=${user.key}`);
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+});
+
+// Rota de perfil do usuário
+app.get('/perfil', async (req, res) => {
+    const { username, key, password } = req.query;
+    const user = await User.findOne({ username, key });
+    const users = user
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+  try {
+    const user = await User.findOne({ username, key, password });
+
+    if (!user) {
+      return res.status(404).send('Usuário não encontrado.');
+    }
+
+    res.render('profile', { user });
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+});
+
+// Rota de edição de perfil do usuário
+app.get('/editar/:username', async (req, res) => {
+  const { username } = req.params;
+  const { key } = req.query;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).send('Usuário não encontrado.');
+    }
+
+    if (key !== adminKey && user.key !== key) {
+      return res.status(401).send('Acesso não autorizado para editar.');
+    }
+
+    res.render('edit', { user });
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+});
+
+app.post('/edit/:username', async (req, res) => {
+  const { username } = req.params;
+  const { password, key, ft, saldo } = req.body;
+
+  try {
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).send('Usuário não encontrado.');
+    }
+
+    // Atualiza a senha apenas se for fornecida uma nova senha
+    if (password) {
+      user.password = password;
+    }
+
+    // Atualiza a chave apenas se for fornecida uma nova chave
+    if (key) {
+      user.key = key;
+    }
+
+    // Atualiza o saldo apenas se for fornecido um novo saldo
+    if (saldo) {
+      user.saldo = saldo;
+    }
+
+    // Atualiza a foto apenas se for fornecida uma nova URL da foto (ft)
+    if (ft) {
+      user.ft = ft;
+    }
+
+    // Salva as alterações no banco de dados
+    await user.save();
+
+    res.redirect(`/anikit?username=${user.username}&key=${user.key}`);
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+});
+
+// Restante do código do Express e configurações...
+
+app.get('/anikit', async (req, res) => {
+  const { username, key } = req.query;
+
+  try {
+    const user = await User.findOne({ username, key });
+    const users = user
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+    const topUsers = await User.find().sort({ total: -1 }).limit(7);
+    res.render('principal', { user, users, topUsers});
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+});
+
+// Depois de chamar a função adicionarTotal...
+
+// Busca os top 7 usuários com base no campo total
+
+app.get('/', (req, res) => {
+  const htmlPath = path.join(__dirname, './views/login.html');
+  res.sendFile(htmlPath);
+});
+
+
+app.get('/entrar', (req, res) => {
+  const htmlPath = path.join(__dirname, './views/login.html');
+  res.sendFile(htmlPath);
+});
+
+app.get('/new', (req, res) => {
+  const htmlPath = path.join(__dirname, './views/registro.html');
+  res.sendFile(htmlPath);
+});
+
+
+////////// registro do mangas kit
+
+// server.js
+
+function getMangaById(name, id) {
+    var return_data;
+    const nick = name;
+    let bay; // Declare a variável 'bay' aqui
+    return (async () => {
+        try {
+            let response = await axios.get("https://mangalivre.net/manga/"+name+"/"+id);
+            bay = response.data;
+            const $ = cheerio.load(bay);
+          //  console.log(response.data)
+            const descriptionContent = $('meta[name="description"]').attr("content");
+            const foto = $('meta[property="og:image"]').attr("content");
+            const groups = [];
+            $('ul.scans-list li').each((index, element) => {
+            const priority = $(element).find('h2.priority').text();
+            const scanlator = $(element).find('span.separator').next().text();
+            const chapters = $(element).find('span.chapters').text().trim();
+    groups.push({ priority, scanlator, chapters });
+            });
+            const result = {"nome": name, "id": id, "desc": descriptionContent, "foto": foto}
+            return result;
+        } catch (error) {
+            console.error(error.message);
+        }
+    })();
+}
+
+
+app.get("/manga/:name/:id", async(req, res) => {
+    const name = req.params.name
+    const id = req.params.id;
+    getMangaById(ab, aa).then((response) => {
+        res.json(response);
+    });
+});
+
+
+app.get("/search", (req, res) => {
+const name = req.query.q;
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/search?q=${name}`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/chapters/:id/", async (req, res) => {
+    const id = req.params.id;
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/chapters/${id}`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/genres/", (_req, res) => {
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/genres`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/recents", (req, res) => {
+    res.redirect("/recents/1");
+});
+
+app.get("/recents/:page", (req, res) => {
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/recents/1`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/popular/", async (_req, res) => {
+    res.redirect("/popular/1");
+});
+
+app.get("/popular/:page", (req, res) => {
+    const page = req.params.page;
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/popular/${page}`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/top/:page", (req, res) => {
+    const page = req.params.page;
+let resultInstance;
+
+async function fetchData() {
+  try {
+    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/top/${page}`);
+    const resultado = await response.json();
+    resultInstance = resultado;
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  }
+}
+
+fetchData().then(() => {
+  res.json(resultInstance);
+});
+});
+
+app.get("/top/", async (_req, res) => {
+    res.redirect("/top/1");
+});
+
+
+
+
+// Definir um modelo de usuário (usando o Mongoose)
+const salvar = new mongoose.Schema({
+  username: String,
+  password: String,
+});
+const Pessoa = mongoose.model('usuarios', salvar);
+
+app.use(bodyParser.json());
+
+// Rota de registro de usuário
+app.post('/reg', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Verifique se o usuário já existe
+    const existingUser = await Pessoa.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: 'Usuário já existe' });
+    }
+
+    // Hash da senha antes de armazená-la no banco de dados
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Crie um novo usuário
+const newUser = new User({
+  username,
+  password: hashedPassword,
+  favoritos: [],
+  historico: [],
+});
+
+    await newUser.save();
+
+    return res.status(201).json({ message: 'Usuário registrado com sucesso' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Erro no servidor' });
+  }
+});
+
+// Rota de login
+app.post('/log', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    // Encontre o usuário no banco de dados
+    const user = await Pessoa.findOne({ username });
+    if (!user) {
+      return res.status(401).json({ message: 'Credenciais inválidas' });
+    }
+
+    // Verifique a senha
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Credenciais inválidas' });
+    }
+
+    // Gere um token JWT para o usuário
+    const token = jwt.sign({ userId: user._id }, 'secreto', { expiresIn: '1h' });
+
+    return res.status(200).json({ token });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Erro no servidor' });
+  }
+});
+
+//////////////
+
+router.get('/recent-episodes', async (req, res) => {
+    const page = req.query.page;
+    const type = req.query.type;
+
+const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+    const data = await fetchGogoRecentEpisodes({ page, type });
+    res.json(data).status(200)
+    
+    
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+});
+
+router.get('/epis/:animeId', async (req, res) => {
+const animeId = req.params.animeId;
+const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+      const data = await episod({ animeId });
+    res.json(data).status(200);
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  
+});
+
+router.get('pesquisamanga', async (req, res) => {
+const ainaim = req.query.ainaim
+const got = require('got');
+
+async function searchManga(name) {
+    var return_data = { "mangas": [] };
+    const form = "search=" + name;
+
+    try {
+        let response = await got.post(
+            "https://mangalivre.net/lib/search/series.json", {
+            body: form,
+            headers: {
+                "x-requested-with": "XMLHttpRequest",
+                "content-type": "application/x-www-form-urlencoded",
+            },
+        });
+
+        // Convertendo a resposta para JSON
+        const responseData = JSON.parse(response.body);
+
+        // Verificando se a chave 'series' existe na resposta
+        if (responseData.series) {
+            for (let serie of responseData.series) {
+                return_data.mangas.push({
+                    "id_serie": serie.id_serie,
+                    "name": serie.name,
+                    "label": serie.label,
+                    "score": serie.score,
+                    "value": serie.value,
+                    "author": serie.author,
+                    "artist": serie.artist,
+                    "image": serie.cover,
+                    "categories": serie.categories.map((categorie) => { return { "name": categorie.name, "id_category": categorie.id_category }; }),
+                });
+            }
+        }
+
+        return return_data;
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// Chamando a função e lidando com a promessa retornada
+searchManga(ainaim)
+    .then(result => {
+        res.json(result);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+})
+
+router.get('/info/:animeId', async (req, res) => {
+    const animeId = req.params.animeId;
+const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+      const data = await fetchGogoAnimeInfo({ animeId });
+    res.json([data]).status(200);
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+});
+
+
+router.get('/popular', async (req, res) => {
+const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+fetch(encodeURI("https://animaster.onrender.com/api/popular/1"))
+     .then(response => response.json())
+     .then(data => {
+     res.json(data.results).status(200);
+     })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+})
+
+router.get('/watch/:episodeId', async (req, res) => {
+    const episodeId = req.params.episodeId;
+    const data = await fetchGogoanimeEpisodeSource({ episodeId });
+    res.json([data]).status(200);
+const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {  
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+})
+
+// ACABO;
+
+app.get('/anikit/tiktok', async(req, res) => {
+var videoUrl = req.query.videoUrl
+if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
+//const getVideoDownloadLink = require("./data/youtube.js")
+const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+scrapeWebsite(videoUrl).then((videoLinks) => {
+  console.log('Links dos vídeos encontrados:');
+  res.json({ link: videoLinks[0] });
+});
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+})
+
+
+app.get("/anikit/playmp4", async (req, res, next) => {
+var query = req.query.query
+if(!query) return res.json({"error": "faltouo parâmetro query"})
+    const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) { 
+    ytPlayMp4(query)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res.json(error);
+      });
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+});
+
+app.get("/anikit/playmp3", async (req, res, next) => {
+    const { username, key, query } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+ 
+    ytPlayMp3(query)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res.json(error);
+      });
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+});
+
+
+
+app.get('/anikit/ytmp4', async(req, res) => {
+var videoUrl = req.query.videoUrl
+if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
+//const getVideoDownloadLink = require("./data/youtube.js")
+// Exemplo de uso
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+getVideoDownloadLink(videoUrl)
+  .then((downloadLink) => {
+    if (downloadLink) {
+      res.json({
+      url: `${downloadLink}`
+    })
+    } else {
+      console.log('Falha ao obter o link de download do vídeo.');
+    }
+  });
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+
+})
+
+app.get('/anikit/ytmp3', async(req, res) => {
+var videoUrl = req.query.videoUrl
+if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
+//const getAudioDownloadLink = require("./data/youtube.js")
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+getAudioDownloadLink(videoUrl)
+  .then((downloadLink) => {
+    if (downloadLink) {
+    res.json({
+      url: `${downloadLink}`
+    })
+     // console.log('Link de download do áudio:', downloadLink);
+    } else {
+      console.log('Falha ao obter o link de download do áudio.');
+    }
+  });
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+
+});
+
+
+app.get('/nsfw/ahegao', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const ahegao = JSON.parse(fs.readFileSync(__dirname + '/data/ahegao.json'));
+    const randahegao = ahegao[Math.floor(Math.random() * ahegao.length)];
+
+    res.json({
+      url: `${randahegao}`
+  })
+  } else {
+console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/ass', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const ass = JSON.parse(fs.readFileSync(__dirname + '/data/ass.json'));
+    const randass = ass[Math.floor(Math.random() * ass.length)];
+
+    res.json({
+      url: `${randass}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/bdsm', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const bdsm = JSON.parse(fs.readFileSync(__dirname + '/data/bdsm.json'));
+    const randbdsm = bdsm[Math.floor(Math.random() * bdsm.length)];
+
+    res.json({
+      url: `${randbdsm}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/blowjob', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const blowjob = JSON.parse(fs.readFileSync(__dirname + '/data/blowjob.json'));
+    const randblowjob = blowjob[Math.floor(Math.random() * blowjob.length)];
+
+    res.json({
+      url: `${randblowjob}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/cuckold', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const cuckold = JSON.parse(fs.readFileSync(__dirname + '/data/cuckold.json'));
+    const randcuckold = cuckold[Math.floor(Math.random() * cuckold.length)];
+
+    res.json({
+      url: `${randcuckold}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/cum', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const cum = JSON.parse(fs.readFileSync(__dirname + '/data/cum.json'));
+    const randcum = cum[Math.floor(Math.random() * cum.length)];
+
+    res.json({
+      url: `${randcum}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/ero', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const ero = JSON.parse(fs.readFileSync(__dirname + '/data/ero.json'));
+    const randero = ero[Math.floor(Math.random() * ero.length)];
+
+    res.json({
+      url: `${randero}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+  
+app.get('/memes', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const meme = JSON.parse(fs.readFileSync(__dirname + '/data/memes-video.json'));
+    const randmeme = meme[Math.floor(Math.random() * meme.length)];
+
+    res.json({
+      url: `${randmeme}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/femdom', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const femdom = JSON.parse(fs.readFileSync(__dirname + '/data/femdom.json'));
+    const randfemdom = femdom[Math.floor(Math.random() * femdom.length)];
+
+    res.json({
+      url: `${randfemdom}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/foot', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const foot = JSON.parse(fs.readFileSync(__dirname + '/data/foot.json'));
+    const randfoot = foot[Math.floor(Math.random() * foot.length)];
+
+    res.json({
+      url: `${randfoot}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/gangbang', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const gangbang = JSON.parse(fs.readFileSync(__dirname + '/data/gangbang.json'));
+    const randgangbang = gangbang[Math.floor(Math.random() * gangbang.length)];
+
+    res.json({
+      url: `${randgangbang}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/glasses', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const glasses = JSON.parse(fs.readFileSync(__dirname + '/data/glasses.json'));
+    const randglasses = glasses[Math.floor(Math.random() * glasses.length)];
+
+    res.json({
+      url: `${randglasses}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/hentai', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const hentai = JSON.parse(fs.readFileSync(__dirname + '/data/hentai.json'));
+    const randhentai = hentai[Math.floor(Math.random() * hentai.length)];
+
+    res.json({
+      url: `${randhentai}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/gifs', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const gifs = JSON.parse(fs.readFileSync(__dirname + '/data/gifs.json'));
+    const randgifs = gifs[Math.floor(Math.random() * gifs.length)];
+
+    res.json({
+      url: `${randgifs}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/jahy', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const jahy = JSON.parse(fs.readFileSync(__dirname + '/data/jahy.json'));
+    const randjahy = jahy[Math.floor(Math.random() * jahy.length)];
+
+    res.json({
+      url: `${randjahy}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/manga', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const manga = JSON.parse(fs.readFileSync(__dirname + '/data/manga.json'));
+    const randmanga = manga[Math.floor(Math.random() * manga.length)];
+
+    res.json({
+      url: `${randmanga}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/masturbation', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const masturbation = JSON.parse(fs.readFileSync(__dirname + '/data/masturbation.json'));
+    const randmasturbation = masturbation[Math.floor(Math.random() * masturbation.length)];
+
+    res.json({
+      url: `${randmasturbation}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/neko', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const neko = JSON.parse(fs.readFileSync(__dirname + '/data/neko.json'));
+    const randneko = neko[Math.floor(Math.random() * neko.length)];
+
+    res.json({
+      url: `${randneko}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/orgy', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const orgy = JSON.parse(fs.readFileSync(__dirname + '/data/orgy.json'));
+    const randorgy = orgy[Math.floor(Math.random() * orgy.length)];
+
+    res.json({
+      url: `${randorgy}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/panties', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const panties = JSON.parse(fs.readFileSync(__dirname + '/data/panties.json'));
+    const randpanties = panties[Math.floor(Math.random() * panties.length)];
+
+    res.json({
+      url: `${randpanties}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/pussy', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const pussy = JSON.parse(fs.readFileSync(__dirname + '/data/pussy.json'));
+    const randpussy = pussy[Math.floor(Math.random() * pussy.length)];
+
+    res.json({
+      url: `${randpussy}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/neko2', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const neko2 = JSON.parse(fs.readFileSync(__dirname + '/data/neko2.json'));
+    const randneko2 = neko2[Math.floor(Math.random() * neko2.length)];
+
+    res.json({
+      url: `${randneko2}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/tentacles', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const tentacles = JSON.parse(fs.readFileSync(__dirname + '/data/tentacles.json'));
+    const randtentacles = tentacles[Math.floor(Math.random() * tentacles.length)];
+
+    res.json({
+      url: `${randtentacles}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/thighs', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const thighs = JSON.parse(fs.readFileSync(__dirname + '/data/thighs.json'));
+    const randthighs = thighs[Math.floor(Math.random() * thighs.length)];
+
+    res.json({
+      url: `${randthighs}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/yuri', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const yuri = JSON.parse(fs.readFileSync(__dirname + '/data/yuri.json'));
+    const randyuri = yuri[Math.floor(Math.random() * yuri.length)];
+
+    res.json({
+      url: `${randyuri}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/nsfw/zettai', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const zettai = JSON.parse(fs.readFileSync(__dirname + '/data/zettai.json'));
+    const randzettai = zettai[Math.floor(Math.random() * zettai.length)];
+
+    res.json({
+      url: `${randzettai}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/keneki', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const keneki = JSON.parse(fs.readFileSync(__dirname + '/data/keneki.json'));
+    const randkeneki = keneki[Math.floor(Math.random() * keneki.length)];
+
+    res.json({
+      url: `${randkeneki}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/megumin', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const megumin = JSON.parse(fs.readFileSync(__dirname + '/data/megumin.json'));
+    const randmegumin = megumin[Math.floor(Math.random() * megumin.length)];
+
+    res.json({
+      url: `${randmegumin}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/yotsuba', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const yotsuba = JSON.parse(fs.readFileSync(__dirname + '/data/yotsuba.json'));
+    const randyotsuba = yotsuba[Math.floor(Math.random() * yotsuba.length)];
+
+    res.json({
+      url: `${randyotsuba}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/shinomiya', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const shinomiya = JSON.parse(fs.readFileSync(__dirname + '/data/shinomiya.json'));
+    const randshinomiya = shinomiya[Math.floor(Math.random() * shinomiya.length)];
+
+    res.json({
+      url: `${randshinomiya}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/yumeko', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const yumeko = JSON.parse(fs.readFileSync(__dirname + '/data/yumeko.json'));
+    const randyumeko = yumeko[Math.floor(Math.random() * yumeko.length)];
+
+    res.json({
+      url: `${randyumeko}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/tejina', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const tejina = JSON.parse(fs.readFileSync(__dirname + '/data/tejina.json'));
+    const randtejina = tejina[Math.floor(Math.random() * tejina.length)];
+
+    res.json({
+      url: `${randtejina}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/chiho', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const chiho = JSON.parse(fs.readFileSync(__dirname + '/data/chiho.json'));
+    const randchiho = chiho[Math.floor(Math.random() * chiho.length)];
+
+    res.json({
+      url: `${randchiho}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/18/video', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+  
+    const vid = require("./data/pack.js")
+    const video_18 = vid.video_18
+    const danvid = video_18[Math.floor(Math.random() * video_18.length)];
+
+    res.json({
+      url: `${danvid}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/18/travazap', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+  
+    const tra = require("./data/pack.js")
+    const travazap = tra.travazap
+    const traft = travazap[Math.floor(Math.random() * travazap.length)];
+
+    res.json({
+      url: `${traft}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+  
+app.get('/18/foto_18', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+  
+    const tra = require("./data/pack.js")
+    const foto_18 = tra.foto_18
+    const traft = foto_18[Math.floor(Math.random() * foto_18.length)];
+
+    res.json({
+      url: `${traft}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+  
+app.get('/anime/toukachan', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const toukachan = JSON.parse(fs.readFileSync(__dirname + '/data/toukachan.json'));
+    const randtoukachan = toukachan[Math.floor(Math.random() * toukachan.length)];
+
+    res.json({
+      url: `${randtoukachan}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/akira', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const akira = JSON.parse(fs.readFileSync(__dirname + '/data/akira.json'));
+    const randakira = akira[Math.floor(Math.random() * akira.length)];
+
+    res.json({
+      url: `${randakira}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/itori', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const itori = JSON.parse(fs.readFileSync(__dirname + '/data/itori.json'));
+    const randitori = itori[Math.floor(Math.random() * itori.length)];
+
+    res.json({
+      url: `${randitori}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kurumi', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kurumi = JSON.parse(fs.readFileSync(__dirname + '/data/kurumi.json'));
+    const randkurumi = kurumi[Math.floor(Math.random() * kurumi.length)];
+
+    res.json({
+      url: `${randkurumi}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/miku', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const miku = JSON.parse(fs.readFileSync(__dirname + '/data/miku.json'));
+    const randmiku = miku[Math.floor(Math.random() * miku.length)];
+
+    res.json({
+      url: `${randmiku}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/pokemon', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const pokemon = JSON.parse(fs.readFileSync(__dirname + '/data/pokemon.json'));
+    const randpokemon = pokemon[Math.floor(Math.random() * pokemon.length)];
+
+    res.json({
+      url: `${randpokemon}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/ryujin', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const ryujin = JSON.parse(fs.readFileSync(__dirname + '/data/ryujin.json'));
+    const randryujin = ryujin[Math.floor(Math.random() * ryujin.length)];
+
+    res.json({
+      url: `${randryujin}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/rose', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const rose = JSON.parse(fs.readFileSync(__dirname + '/data/rose.json'));
+    const randrose = rose[Math.floor(Math.random() * rose.length)];
+
+    res.json({
+      url: `${randrose}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kaori', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kaori = JSON.parse(fs.readFileSync(__dirname + '/data/kaori.json'));
+    const randkaori = kaori[Math.floor(Math.random() * kaori.length)];
+
+    res.json({
+      url: `${randkaori}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/shizuka', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const shizuka = JSON.parse(fs.readFileSync(__dirname + '/data/shizuka.json'));
+    const randshizuka = shizuka[Math.floor(Math.random() * shizuka.length)];
+
+    res.json({
+      url: `${randshizuka}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kaga', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kaga = JSON.parse(fs.readFileSync(__dirname + '/data/kaga.json'));
+    const randkaga = kaga[Math.floor(Math.random() * kaga.length)];
+
+    res.json({
+      url: `${randkaga}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kotori', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kotori = JSON.parse(fs.readFileSync(__dirname + '/data/kotori.json'));
+    const randkotori = kotori[Math.floor(Math.random() * kotori.length)];
+    
+    res.json({
+      url: `${randkotori}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/mikasa', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const mikasa = JSON.parse(fs.readFileSync(__dirname + '/data/mikasa.json'));
+    const randmikasa = mikasa[Math.floor(Math.random() * mikasa.length)];
+
+    res.json({
+      url: `${randmikasa}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/akiyama', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const akiyama = JSON.parse(fs.readFileSync(__dirname + '/data/akiyama.json'));
+    const randakiyama = akiyama[Math.floor(Math.random() * akiyama.length)];
+
+    res.json({
+      url: `${randakiyama}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/gremory', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const gremory = JSON.parse(fs.readFileSync(__dirname + '/data/gremory.json'));
+    const randgremory = gremory[Math.floor(Math.random() * gremory.length)];
+    
+    res.json({
+      url: `${randgremory}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/isuzu', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const isuzu = JSON.parse(fs.readFileSync(__dirname + '/data/isuzu.json'));
+    const randisuzu = isuzu[Math.floor(Math.random() * isuzu.length)];
+
+    res.json({
+      url: `${randisuzu}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/cosplay', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const cosplay = JSON.parse(fs.readFileSync(__dirname + '/data/cosplay.json'));
+    const randcosplay = cosplay[Math.floor(Math.random() * cosplay.length)];
+
+    res.json({
+      url: `${randcosplay}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/shina', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const shina = JSON.parse(fs.readFileSync(__dirname + '/data/shina.json'));
+    const randshina = shina[Math.floor(Math.random() * shina.length)];
+
+    res.json({
+      url: `${randshina}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kagura', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kagura = JSON.parse(fs.readFileSync(__dirname + '/data/kagura.json'));
+    const randkagura = kagura[Math.floor(Math.random() * kagura.length)];
+
+    res.json({
+      url: `${randkagura}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/shinka', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const shinka = JSON.parse(fs.readFileSync(__dirname + '/data/shinka.json'));
+    const randshinka = shinka[Math.floor(Math.random() * shinka.length)];
+
+    res.json({
+      url: `${randshinka}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/eba', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const eba = JSON.parse(fs.readFileSync(__dirname + '/data/eba.json'));
+    const randeba = eba[Math.floor(Math.random() * eba.length)];
+
+    res.json({
+      url: `${randeba}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/deidara', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Deidara = JSON.parse(fs.readFileSync(__dirname + '/data/deidara.json'));
+    const randDeidara = Deidara[Math.floor(Math.random() * Deidara.length)];
+
+    res.json({
+      url: `${randDeidara}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+
+app.get('/anime/jeni', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const jeni = JSON.parse(fs.readFileSync(__dirname + '/data/jeni.json'));
+    const randjeni = jeni[Math.floor(Math.random() * jeni.length)];
+
+    res.json({
+      url: `${randjeni}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/random/meme', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const meme = JSON.parse(fs.readFileSync(__dirname + '/data/meme.json'));
+    const randmeme = meme[Math.floor(Math.random() * meme.length)];
+
+    res.json({
+      url: `${randmeme}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+app.get('/anime/toukachan', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const toukachan = JSON.parse(fs.readFileSync(__dirname + '/data/toukachan.json'));
+    const randtoukachan = toukachan[Math.floor(Math.random() * toukachan.length)];
+
+    res.json({
+      url: `${randtoukachan}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/akira', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const akira = JSON.parse(fs.readFileSync(__dirname + '/data/akira.json'));
+    const randakira = akira[Math.floor(Math.random() * akira.length)];
+
+    res.json({
+      url: `${randakira}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/itori', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const itori = JSON.parse(fs.readFileSync(__dirname + '/data/itori.json'));
+    const randitori = itori[Math.floor(Math.random() * itori.length)];
+
+    res.json({
+      url: `${randitori}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kurumi', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kurumi = JSON.parse(fs.readFileSync(__dirname + '/data/kurumi.json'));
+    const randkurumi = kurumi[Math.floor(Math.random() * kurumi.length)];
+
+    res.json({
+      url: `${randkurumi}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/miku', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const miku = JSON.parse(fs.readFileSync(__dirname + '/data/miku.json'));
+    const randmiku = miku[Math.floor(Math.random() * miku.length)];
+
+    res.json({
+      url: `${randmiku}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/pokemon', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const pokemon = JSON.parse(fs.readFileSync(__dirname + '/data/pokemon.json'));
+    const randpokemon = pokemon[Math.floor(Math.random() * pokemon.length)];
+
+    res.json({
+      url: `${randpokemon}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/ryujin', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const ryujin = JSON.parse(fs.readFileSync(__dirname + '/data/ryujin.json'));
+    const randryujin = ryujin[Math.floor(Math.random() * ryujin.length)];
+
+    res.json({
+      url: `${randryujin}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/rose', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const rose = JSON.parse(fs.readFileSync(__dirname + '/data/rose.json'));
+    const randrose = rose[Math.floor(Math.random() * rose.length)];
+
+    res.json({
+      url: `${randrose}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kaori', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kaori = JSON.parse(fs.readFileSync(__dirname + '/data/kaori.json'));
+    const randkaori = kaori[Math.floor(Math.random() * kaori.length)];
+
+    res.json({
+      url: `${randkaori}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/shizuka', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const shizuka = JSON.parse(fs.readFileSync(__dirname + '/data/shizuka.json'));
+    const randshizuka = shizuka[Math.floor(Math.random() * shizuka.length)];
+
+    res.json({
+      url: `${randshizuka}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kaga', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kaga = JSON.parse(fs.readFileSync(__dirname + '/data/kaga.json'));
+    const randkaga = kaga[Math.floor(Math.random() * kaga.length)];
+
+    res.json({
+      url: `${randkaga}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kotori', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kotori = JSON.parse(fs.readFileSync(__dirname + '/data/kotori.json'));
+    const randkotori = kotori[Math.floor(Math.random() * kotori.length)];
+    
+    res.json({
+      url: `${randkotori}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/mikasa', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const mikasa = JSON.parse(fs.readFileSync(__dirname + '/data/mikasa.json'));
+    const randmikasa = mikasa[Math.floor(Math.random() * mikasa.length)];
+
+    res.json({
+      url: `${randmikasa}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/akiyama', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const akiyama = JSON.parse(fs.readFileSync(__dirname + '/data/akiyama.json'));
+    const randakiyama = akiyama[Math.floor(Math.random() * akiyama.length)];
+
+    res.json({
+      url: `${randakiyama}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/gremory', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const gremory = JSON.parse(fs.readFileSync(__dirname + '/data/gremory.json'));
+    const randgremory = gremory[Math.floor(Math.random() * gremory.length)];
+    
+    res.json({
+      url: `${randgremory}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/isuzu', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const isuzu = JSON.parse(fs.readFileSync(__dirname + '/data/isuzu.json'));
+    const randisuzu = isuzu[Math.floor(Math.random() * isuzu.length)];
+
+    res.json({
+      url: `${randisuzu}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/cosplay', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const cosplay = JSON.parse(fs.readFileSync(__dirname + '/data/cosplay.json'));
+    const randcosplay = cosplay[Math.floor(Math.random() * cosplay.length)];
+
+    res.json({
+      url: `${randcosplay}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/shina', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const shina = JSON.parse(fs.readFileSync(__dirname + '/data/shina.json'));
+    const randshina = shina[Math.floor(Math.random() * shina.length)];
+
+    res.json({
+      url: `${randshina}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kagura', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const kagura = JSON.parse(fs.readFileSync(__dirname + '/data/kagura.json'));
+    const randkagura = kagura[Math.floor(Math.random() * kagura.length)];
+
+    res.json({
+      url: `${randkagura}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/shinka', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const shinka = JSON.parse(fs.readFileSync(__dirname + '/data/shinka.json'));
+    const randshinka = shinka[Math.floor(Math.random() * shinka.length)];
+
+    res.json({
+      url: `${randshinka}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/eba', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const eba = JSON.parse(fs.readFileSync(__dirname + '/data/eba.json'));
+    const randeba = eba[Math.floor(Math.random() * eba.length)];
+
+    res.json({
+      url: `${randeba}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/deidara', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Deidara = JSON.parse(fs.readFileSync(__dirname + '/data/deidara.json'));
+    const randDeidara = Deidara[Math.floor(Math.random() * Deidara.length)];
+
+    res.json({
+      url: `${randDeidara}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+
+app.get('/anime/jeni', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const jeni = JSON.parse(fs.readFileSync(__dirname + '/data/jeni.json'));
+    const randjeni = jeni[Math.floor(Math.random() * jeni.length)];
+
+    res.json({
+      url: `${randjeni}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/random/meme', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const meme = JSON.parse(fs.readFileSync(__dirname + '/data/meme.json'));
+    const randmeme = meme[Math.floor(Math.random() * meme.length)];
+
+    res.json({
+      url: `${randmeme}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/wallpaper/satanic', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const satanic = JSON.parse(fs.readFileSync(__dirname + '/data/satanic.json'));
+    const randsatanic = satanic[Math.floor(Math.random() * satanic.length)];
+
+    res.json({
+      url: `${randsatanic}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+
+app.get('/anime/itachi', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Itachi = JSON.parse(fs.readFileSync(__dirname + '/data/itachi.json'));
+    const randItachi = Itachi[Math.floor(Math.random() * Itachi.length)];
+
+    res.json({
+      url: `${randItachi}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/madara', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Madara = JSON.parse(fs.readFileSync(__dirname + '/data/madara.json'));
+    const randMadara = Madara[Math.floor(Math.random() * Madara.length)];
+
+    res.json({
+      url: `${randMadara}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/yuki', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Yuki = JSON.parse(fs.readFileSync(__dirname + '/data/yuki.json'));
+    const randYuki = Yuki[Math.floor(Math.random() * Yuki.length)];
+
+    res.json({
+      url: `${randYuki}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/wallpaper/asuna', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const asuna = JSON.parse(fs.readFileSync(__dirname + '/data/asuna.json'));
+    const randasuna = asuna[Math.floor(Math.random() * asuna.length)];
+
+    res.json({
+      url: `${randasuna}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/ayuzawa', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const ayuzawa = JSON.parse(fs.readFileSync(__dirname + '/data/ayuzawa.json'));
+    const randayuzawa = ayuzawa[Math.floor(Math.random() * ayuzawa.length)];
+
+    res.json({
+      url: `${randayuzawa}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/chitoge', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const chitoge = JSON.parse(fs.readFileSync(__dirname + '/data/chitoge.json'));
+    const randchitoge = chitoge[Math.floor(Math.random() * chitoge.length)];
+
+    res.json({
+      url: `${randchitoge}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/emilia', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const emilia = JSON.parse(fs.readFileSync(__dirname + '/data/emilia.json'));
+    const randemilia = emilia[Math.floor(Math.random() * emilia.length)];
+
+    res.json({
+      url: `${randemilia}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/hestia', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const hestia = JSON.parse(fs.readFileSync(__dirname + '/data/hestia.json'));
+    const randhestia = hestia[Math.floor(Math.random() * hestia.length)];
+
+    res.json({
+      url: `${randhestia}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/inori', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const inori = JSON.parse(fs.readFileSync(__dirname + '/data/inori.json'));
+    const randinori = inori[Math.floor(Math.random() * inori.length)];
+
+    res.json({
+      url: `${randinori}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/ana', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const ana = JSON.parse(fs.readFileSync(__dirname + '/data/ana.json'));
+    const randana = ana[Math.floor(Math.random() * ana.length)];
+
+    res.json({
+      url: `${randana}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/boruto', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Boruto = JSON.parse(fs.readFileSync(__dirname + '/data/boruto.json'));
+    const randBoruto = Boruto[Math.floor(Math.random() * Boruto.length)];
+
+    res.json({
+      url: `${randBoruto}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/erza', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Erza = JSON.parse(fs.readFileSync(__dirname + '/data/erza.json'));
+    const randErza = Erza[Math.floor(Math.random() * Erza.length)];
+
+    res.json({
+      url: `${randErza}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kakasih', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Kakasih = JSON.parse(fs.readFileSync(__dirname + '/data/kakasih.json'));
+    const randKakasih = Kakasih[Math.floor(Math.random() * Kakasih.length)];
+
+    res.json({
+      url: `${randKakasih}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/sagiri', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Sagiri = JSON.parse(fs.readFileSync(__dirname + '/data/sagiri.json'));
+    const randSagiri = Sagiri[Math.floor(Math.random() * Sagiri.length)];
+
+    res.json({
+      url: `${randSagiri}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/minato', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Minato = JSON.parse(fs.readFileSync(__dirname + '/data/minato.json'));
+    const randMinato = Minato[Math.floor(Math.random() * Minato.length)];
+
+    res.json({
+      url: `${randMinato}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/naruto', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Naruto = JSON.parse(fs.readFileSync(__dirname + '/data/naruto.json'));
+    const randNaruto = Naruto[Math.floor(Math.random() * Naruto.length)];
+
+    res.json({
+      url: `${randNaruto}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/nezuko', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Nezuko = JSON.parse(fs.readFileSync(__dirname + '/data/nezuko.json'));
+    const randNezuko = Nezuko[Math.floor(Math.random() * Nezuko.length)];
+
+    res.json({
+      url: `${randNezuko}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/onepiece', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Pic = JSON.parse(fs.readFileSync(__dirname + '/data/onepiece.json'));
+    const randPic = Pic[Math.floor(Math.random() * Pic.length)];
+
+    res.json({
+      url: `${randPic}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/rize', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Rize = JSON.parse(fs.readFileSync(__dirname + '/data/rize.json'));
+    const randRize = Rize[Math.floor(Math.random() * Rize.length)];
+
+    res.json({
+      url: `${randRize}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/sakura', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Sakura = JSON.parse(fs.readFileSync(__dirname + '/data/sakura.json'));
+    const randSakura = Sakura[Math.floor(Math.random() * Sakura.length)];
+
+    res.json({
+      url: `${randSakura}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/sasuke', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Sasuke = JSON.parse(fs.readFileSync(__dirname + '/data/sasuke.json'));
+    const randSasuke = Sasuke[Math.floor(Math.random() * Sasuke.length)];
+
+    res.json({
+      url: `${randSasuke}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/tsunade', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Su = JSON.parse(fs.readFileSync(__dirname + '/data/tsunade.json'));
+    const randSu = Su[Math.floor(Math.random() * Su.length)];
+
+    res.json({
+      url: `${randSu}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/montor', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Mon = JSON.parse(fs.readFileSync(__dirname + '/data/montor.json'));
+    const randMon = Mon[Math.floor(Math.random() * Mon.length)];
+
+    res.json({
+      url: `${randMon}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+// ain
+app.get('/anime/mobil', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Mob = JSON.parse(fs.readFileSync(__dirname + '/data/mobil.json'));
+    const randMob = Mob[Math.floor(Math.random() * Mob.length)];
+
+    res.json({
+      url: `${randMob}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/anime/anime', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Wai23 = JSON.parse(fs.readFileSync(__dirname + '/data/wallhp2.json'));
+    const randWai23 = Wai23[Math.floor(Math.random() * Wai23.length)];
+
+    res.json({
+      url: `${randWai23}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/anime/wallhp', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Wai22 = JSON.parse(fs.readFileSync(__dirname + '/data/wallhp.json'));
+    const randWai22 = Wai22[Math.floor(Math.random() * Wai22.length)];
+
+    res.json({
+      url: `${randWai22}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/waifu2', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Wai2 = JSON.parse(fs.readFileSync(__dirname + '/data/waifu2.json'));
+    const randWai2 = Wai2[Math.floor(Math.random() * Wai2.length)];
+
+    res.json({
+      url: `${randWai2}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/waifu', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Wai = JSON.parse(fs.readFileSync(__dirname + '/data/waifu.json'));
+    const randWai = Wai[Math.floor(Math.random() * Wai.length)];
+    
+    res.json({
+      url: `${randWai}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/anime/hekel', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    Hekel = JSON.parse(fs.readFileSync(__dirname + '/data/hekel.json'));
+    const randHekel = Hekel[Math.floor(Math.random() * Hekel.length)]
+
+    res.json({
+      url: `${randHekel}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/kucing', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    Kucing = JSON.parse(fs.readFileSync(__dirname + '/data/kucing.json'));
+    const randKucing = Kucing[Math.floor(Math.random() * Kucing.length)]
+
+    res.json({
+      url: `${randKucing}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/wallpaper/pubg', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    Pubg = JSON.parse(fs.readFileSync(__dirname + '/data/pubg.json'));
+    const randPubg = Pubg[Math.floor(Math.random() * Pubg.length)]
+
+    res.json({
+      url: `${randPubg}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/wallpaper/ppcouple', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    Pp = JSON.parse(fs.readFileSync(__dirname + '/data/profil.json'));
+    const randPp = Pp[Math.floor(Math.random() * Pp.length)]
+
+    res.json({
+      url: `${randPp}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/wallpaper/anjing', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    Anjing = JSON.parse(fs.readFileSync(__dirname + '/data/anjing.json'));
+    const randAnjing = Anjing[Math.floor(Math.random() * Anjing.length)]
+
+    res.json({
+      url: `${randAnjing}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/doraemon', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    Dora = JSON.parse(fs.readFileSync(__dirname + '/data/doraemon.json'));
+    const randDora = Dora[Math.floor(Math.random() * Dora.length)]
+
+    res.json({
+      url: `${randDora}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/anime/elaina', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Elaina = JSON.parse(fs.readFileSync(__dirname + '/data/elaina.json'))
+    const randElaina = Elaina[Math.floor(Math.random() * Elaina.length)]
+    //tansole.log(randLoli)
+
+    res.json({
+      url: `${randElaina}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/anime/loli', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Loli = JSON.parse(fs.readFileSync(__dirname + '/data/loli.json'))
+    const randLoli = Loli[Math.floor(Math.random() * Loli.length)]
+    //tansole.log(randLoli)
+
+    res.json({
+      url: `${randLoli}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/anime/yuri', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Yuri = JSON.parse(fs.readFileSync(__dirname + '/data/yuri.json'))
+    const randYuri = Yuri[Math.floor(Math.random() * Yuri.length)]
+    //tansole.log(randTech))
+    res.json({
+      url: `${randYuri}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/anime/cecan', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const cecan = JSON.parse(fs.readFileSync(__dirname + '/data/cecan.json'));
+    const randCecan = cecan[Math.floor(Math.random() * cecan.length)];
+    //data = await fetch(randCecan).then(v => v.buffer());
+    //await fs.writeFileSync(__dirname + '/tmp/cecan.jpeg', data)
+    res.json({
+      url: `${randCecan}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+app.get('/wallpaper/aesthetic', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Aesthetic = JSON.parse(fs.readFileSync(__dirname + '/data/aesthetic.json'));
+    const randAesthetic = Aesthetic[Math.floor(Math.random() * Aesthetic.length)];
+    //data = await fetch(randAesthetic).then(v => v.buffer());
+    //await fs.writeFileSync(__dirname + '/tmp/aesthetic.jpeg', data)
+    res.json({
+      url: `${randAesthetic}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+
+
+app.get('/anime/sagiri', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Sagiri = JSON.parse(fs.readFileSync(__dirname + '/data/sagiri.json'));
+    const randSagiri = Sagiri[Math.floor(Math.random() * Sagiri.length)];
+    //data = await fetch(randSagiri).then(v => v.buffer())
+    //await fs.writeFileSync(__dirname + '/tmp/sagiri.jpeg', data)
+    res.json({
+      url: `${randSagiri}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/shota', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Shota = JSON.parse(fs.readFileSync(__dirname + '/data/shota.json'));
+    const randShota = Shota[Math.floor(Math.random() * Shota.length)];
+    //data = await fetch(randShota).then(v => v.buffer());
+    //await fs.writeFileSync(__dirname + '/tmp/shota.jpeg', data)
+    res.json({
+      url: `${randShota}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/nsfwloli', async (req, res, next) => {
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Lol = JSON.parse(fs.readFileSync(__dirname + '/data/nsfwloli.json'));
+    const randLol = Lol[Math.floor(Math.random() * Lol.length)];
+    //data = await fetch(randLol).then(v => v.buffer());
+    //await fs.writeFileSync(__dirname + '/tmp/lol.jpeg', data)
+    res.json({
+      url: `${randLol}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+app.get('/anime/hinata', async (req, res, next) => {
+
+  const { username, key } = req.query;
+  const users = Person
+  // Verifica se o usuário existe e a chave está correta
+  const user = await User.findOne({ username, key });
+    if (!user) {
+      return res.status(401).send('Acesso não autorizado.');
+    }
+
+const resultadoDiminuicao = diminuirSaldo(username);
+const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
+
+    const Hinata = JSON.parse(fs.readFileSync(__dirname + '/data/hinata.json'));
+    const randHin = Hinata[Math.floor(Math.random() * Hinata.length)];
+    //data = await fetch(randHin).then(v => v.buffer());
+    //await fs.writeFileSync(__dirname + '/tmp/Hinata.jpeg', data)
+    res.json({
+      url: `${randHin}`
+  })
+  } else {
+    console.log('Saldo insuficiente.');
+  }
+  })
+
+// Função auxiliar para salvar os dados dos usuários no arquivo JSON
+function saveUsers(users) {
+  try {
+    fs.writeFileSync(usersFilePath, JSON.stringify({ users }, null, 2));
+  } catch (error) {
+    console.error('Erro ao salvar os dados no arquivo users.json:', error);
+  }
+}
+
+
+
+app.get('/mangakit', async (req, res) => {
+  try {
+  const query = req.query.q || ''; // Define o valor padrão como uma string vazia
+    const apiUrl = `https://ruby-careful-skunk.cyclic.app/search?q=${query}`;
+    const response_2 = await axios.get(apiUrl);
+    const mangas = response_2.data.mangas;
+/*
+    res.render('search', { mangas, query }); // Passa o valor de query para o template
+    */
+    const response = await axios.get(`https://ruby-careful-skunk.cyclic.app/recents`);
+    const topesResponse = await axios.get(`https://ruby-careful-skunk.cyclic.app/top/1`);
+    const topesdois = await axios.get(`https://ruby-careful-skunk.cyclic.app/top/2`);
+    
+    if (!response.ok && !topesResponse.ok && !topesdois.ok) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+    
+    const dai = await response.data;
+    const info = dai.mangas;
+    
+    const topesData = await topesResponse.data;
+    const mai = await topesdois.data
+    
+    res.render('pagina', { data: topesData, zera: mai, info, mangas, query });
+  } catch (error) {
+    console.error('Error:', error.message);
+    //res.status(500).send('An error occurred while fetching manga data.');
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+});
+
+
+app.get('/manga/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const foto = req.query.foto;
+   // console.log(id);
+
+    const response = await fetch(encodeURI(`https://ruby-careful-skunk.cyclic.app/chapters/${id}`));
+
+    if (!response.ok) {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+
+    const data = await response.json();
+    const info = data;
+   // console.log(data);
+
+    const fotos = info.images;
+    res.render('manga', { info, foto });
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).send('An error occurred while fetching manga data.');
+await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+});
+
+
+app.get('/ler/:id', async (req, res) => {
+
+ try {
+    const id = req.params.id;
+   // console.log(id);
+
+    const response = await fetch(encodeURI(`https://ruby-careful-skunk.cyclic.app/pages/${id}`));
+
+    if (!response.ok) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+    }
+
+    const data = await response.json();
+    const info = data;
+   // console.log(data);
+
+    const fotos = info.images;
+    res.render('ler', { info, fotos });
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).send('An error occurred while fetching manga data.');
+await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+  
+});
+
+// ... Código anterior
+
+app.get('/search', async (req, res) => {
+  try {
+    const query = req.query.q || ''; // Define o valor padrão como uma string vazia
+    const apiUrl = `https://ruby-careful-skunk.cyclic.app/search?q=${query}`;
+    const response = await axios.get(apiUrl);
+    const mangas = response.data.mangas;
+
+    res.render('search', { mangas, query }); // Passa o valor de query para o template
+  } catch (error) {
+    console.error('Erro ao buscar mangás:', error);
+    res.status(500).send('Ocorreu um erro ao buscar os mangás.');
+  }
+});
+
+// Rota para exibir a página de busca sem parâmetros
+app.get('/search', (req, res) => {
+  res.render('search', { mangas: [], query: '' });
+});
+
+
+
+
+
+const PORT = 8080;
+
+// Conexão com o MongoDB
+
+mongoose
+  .connect('mongodb+srv://anikit:EPt96b3yMx3wmEC@cluster0.ukzkyjq.mongodb.net/?retryWrites=true&w=majority', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log('Conectou ao banco!');
+    app.listen(PORT);
+  })
+  .catch((err) => console.log(err));
+  
+  
+  /*
+app.post('/favoritar/:id', async (req, res) => {
+  try {
+    const mangaId = req.params.id;
+
+    // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
+    const currentUser = await User.findById(/* ID do usuário * /);
+
+    if (currentUser) {
+      // Verifique se o mangá já está nos favoritos do usuário
+      const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
+
+      if (existingMangaIndex === -1) {
+        // Se o mangá ainda não está nos favoritos, adicione-o
+        const mangaInfo = /* Obtenha as informações do mangá aqui * /;
+        currentUser.favoriteMangas.push({
+          mangaId: mangaId,
+          mangaName: mangaInfo.name,
+          imageUrl: mangaInfo.image
+        });
+
+        // Salve as alterações no banco de dados
+        await currentUser.save();
+      }
+    }
+
+    // Redirecione para a página do mangá ou para onde desejar
+    res.redirect(`/manga/${mangaId}`);
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).send('An error occurred while saving the manga to favorites.');
+  }
+});
+
+app.post('/removerfavorito/:id', async (req, res) => {
+  try {
+    const mangaId = req.params.id;
+
+    // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
+    const currentUser = await User.findById(/* ID do usuário * /);
+
+    if (currentUser) {
+      // Encontre o índice do mangá nos favoritos do usuário
+      const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
+
+      if (existingMangaIndex !== -1) {
+        // Se o mangá estiver nos favoritos, remova-o
+        currentUser.favoriteMangas.splice(existingMangaIndex, 1);
+
+        // Salve as alterações no banco de dados
+        await currentUser.save();
+      }
+    }
+
+    // Redirecione para a página do mangá ou para onde desejar
+    res.redirect(`/manga/${mangaId}`);
+  } catch (error) {
+    console.error('Error:', error.message);
+    res.status(500).send('An error occurred while removing the manga from favorites.');
+  }
+});
+*/
