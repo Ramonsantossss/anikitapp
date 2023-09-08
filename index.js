@@ -222,11 +222,7 @@ function getMangaById(name, id) {
 
 
   
-
-app.get("/dados", async (req, res) => {
-  const id = req.query.id;
-  const name = req.query.name;
-function getMangaById(name, id) {
+function aaaaaaa(name, id) {
     var return_data  = {};
     const nick = name;
     let bay; // Declare a variável 'bay' aqui
@@ -245,9 +241,18 @@ function getMangaById(name, id) {
         } catch (error) {
             console.error(error.message);
         }
-        res.json(return_data);
+        return return_data;
     })();
 }
+app.get("/dados", async (req, res) => {
+  const id = req.query.id;
+  const name = req.query.name;
+
+
+aaaaaaa(name, id).then((adm) => {
+  res.json(adm);
+});
+
 });
 
 
