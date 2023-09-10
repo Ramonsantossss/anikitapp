@@ -4413,18 +4413,24 @@ app.get('/genero/:nameGenero', async (req, res) => {
   }
 });
 
-// Rota para ver informações de um anime específico
+
+// Rota da API que chama a função veranime
 app.get('/veranime/:name', async (req, res) => {
   const { name } = req.params;
   try {
     // Chame a função veranime para obter informações de um anime específico
     const animeInfo = await veranime(name);
-    res.json(animeInfo);
+
+    // Defina o cabeçalho Content-Type para JSON
+    res.setHeader('Content-Type', 'application/json');
+
+    // Envie os dados JSON como resposta
+    res.status(200).send(animeInfo);
   } catch (error) {
-    res.status(500).json({ error: 'Erro ao buscar informações do anime' });
+    console.error('Erro na rota da API:', error);
+    res.status(500).send({ error: 'Erro ao buscar informações do anime' });
   }
 });
-
 
 
 
