@@ -1,3 +1,5 @@
+const axios = require('axios');
+const cheerio = require('cheerio');
 
 // ASSISTA 
 async function assistir(epId) {
