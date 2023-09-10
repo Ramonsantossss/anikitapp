@@ -4368,6 +4368,67 @@ app.get('/search', (req, res) => {
 
 
 
+
+
+
+
+
+// Importe suas funções aqui
+const { assistir, fetchAnimesRecents, genero, veranime } = require('./api.js');
+
+//app.use(express.json());
+
+// Rota para assistir um episódio
+app.get('/assistir/:epId', async (req, res) => {
+  const { epId } = req.params;
+  try {
+    // Chame a função assistir para obter informações do episódio
+    const episodeInfo = await assistir(epId);
+    res.json(episodeInfo);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar informações do episódio' });
+  }
+});
+
+// Rota para buscar informações de animes recentes
+app.get('/animes-recentes', async (req, res) => {
+  try {
+    // Chame a função fetchAnimesRecents para obter informações de animes recentes
+    const episodes = await fetchAnimesRecents();
+    res.json(episodes);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar informações de animes recentes' });
+  }
+});
+
+// Rota para buscar animes por gênero
+app.get('/genero/:nameGenero', async (req, res) => {
+  const { nameGenero } = req.params;
+  try {
+    // Chame a função genero para obter informações de animes por gênero
+    const tvShows = await genero(nameGenero);
+    res.json(tvShows);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar informações dos animes por gênero' });
+  }
+});
+
+// Rota para ver informações de um anime específico
+app.get('/veranime/:name', async (req, res) => {
+  const { name } = req.params;
+  try {
+    // Chame a função veranime para obter informações de um anime específico
+    const animeInfo = await veranime(name);
+    res.json(animeInfo);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar informações do anime' });
+  }
+});
+
+
+
+
+
 const PORT = 8080;
 
 // Conexão com o MongoDB
