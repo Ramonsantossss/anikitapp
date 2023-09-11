@@ -324,7 +324,7 @@ let resultInstance;
 
 async function fetchData() {
   try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/popular/${page}`);
+    const response = await fetch(`https://animeland.appanimeplus.tk/videoweb/api.php?action=trendingcategory&items=10`);
     const resultado = await response.json();
     resultInstance = resultado;
   } catch (error) {
@@ -4423,7 +4423,7 @@ app.get('/veranime/:name', async (req, res) => {
 
     // Defina o cabeçalho Content-Type para JSON
     res.setHeader('Content-Type', 'application/json');
-
+    res.send(animeInfo)
     // Envie os dados JSON como resposta
     res.status(200).send(animeInfo);
   } catch (error) {
