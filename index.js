@@ -262,7 +262,7 @@ app.get('/tops', async (req, res) => {
 });
 
 // Endpoint para animes recentes
-app.get('/recentes', async (req, res) => {
+app.get('/novosep', async (req, res) => {
   const url = "https://animeland.appanimeplus.tk/videoweb/api.php?action=latestvideos";
 
   try {
