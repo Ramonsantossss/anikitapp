@@ -172,27 +172,6 @@ app.get('/rota', (req, res) => {
 });
 
 
-
-app.get("/search", (req, res) => {
-const name = req.query.q;
-let resultInstance;
-
-async function fetchData() {
-  try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/search?q=${name}`);
-    const resultado = await response.json();
-    resultInstance = resultado;
-  } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
-  }
-}
-
-fetchData().then(() => {
-  res.json(resultInstance);
-});
-});
-
-
 function getMangaById(name, id) {
     var return_data  = {};
     const nick = name;
@@ -255,130 +234,102 @@ aaaaaaa(name, id).then((adm) => {
 
 
 
-app.get("/pages/:id", (req, res) => {
-    const id = req.params.id;
-let resultInstance;
-
-async function fetchData() {
+// Endpoint para pesquisar por anime
+app.get('/pesquisar/:query', async (req, res) => {
+  const query = req.params.query;
+  const url = `https://animeland.appanimeplus.tk/videoweb/api.php?action=searchvideo&searchword=${query}`;
+  
   try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/pages/${id}`);
-    const resultado = await response.json();
-    resultInstance = resultado;
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+    res.status(500).json({ error: 'Erro ao buscar dados.' });
   }
-}
-
-fetchData().then(() => {
-  res.json(resultInstance);
-});
 });
 
-app.get("/genres/", (_req, res) => {
-let resultInstance;
+// Endpoint para os animes tops
+app.get('/tops', async (req, res) => {
+  const url = "https://animeland.appanimeplus.tk/videoweb/api.php?action=trendingcategory&items=10";
 
-async function fetchData() {
   try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/genres`);
-    const resultado = await response.json();
-    resultInstance = resultado;
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+    res.status(500).json({ error: 'Erro ao buscar dados.' });
   }
-}
-
-fetchData().then(() => {
-  res.json(resultInstance);
-});
 });
 
-app.get("/recents", (req, res) => {
-    res.redirect("/recents/1");
-});
+// Endpoint para animes recentes
+app.get('/recentes', async (req, res) => {
+  const url = "https://animeland.appanimeplus.tk/videoweb/api.php?action=latestvideos";
 
-app.get("/recents/:page", (req, res) => {
-let resultInstance;
-
-async function fetchData() {
   try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/recents/1`);
-    const resultado = await response.json();
-    resultInstance = resultado;
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+    res.status(500).json({ error: 'Erro ao buscar dados.' });
   }
-}
-
-fetchData().then(() => {
-  res.json(resultInstance);
-});
 });
 
-app.get("/popular/", async (_req, res) => {
-    res.redirect("/popular/1");
-});
+// Endpoint para animes dublados
+app.get('/dublados', async (req, res) => {
+  const url = "https://animeland.appanimeplus.tk/videoweb/api.php?action=searchgenre&searchword=dublado&items=10";
 
-app.get("/popular/:page", (req, res) => {
-    const page = req.params.page;
-let resultInstance;
-
-async function fetchData() {
   try {
-    const response = await fetch(`https://animeland.appanimeplus.tk/videoweb/api.php?action=trendingcategory&items=10`);
-    const resultado = await response.json();
-    resultInstance = resultado;
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+    res.status(500).json({ error: 'Erro ao buscar dados.' });
   }
-}
-
-fetchData().then(() => {
-  res.json(resultInstance);
-});
 });
 
-app.get("/top/:page", (req, res) => {
-    const page = req.params.page;
-let resultInstance;
+// Endpoint para filmes de anime
+app.get('/filmes', async (req, res) => {
+  const url = "https://animeland.appanimeplus.tk/videoweb/api.php?action=searchgenre&searchword=filme&items=10";
 
-async function fetchData() {
   try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/top/${page}`);
-    const resultado = await response.json();
-    resultInstance = resultado;
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+    res.status(500).json({ error: 'Erro ao buscar dados.' });
   }
-}
-
-fetchData().then(() => {
-  res.json(resultInstance);
-});
 });
 
-app.get("/top/", async (_req, res) => {
-    res.redirect("/top/1");
-});
+// Endpoint para informações do anime por categoria
+app.get('/anime/:categoryId', async (req, res) => {
+  const categoryId = req.params.categoryId;
+  const url = `https://animeland.appanimeplus.tk/videoweb/api.php?action=viewcategory&categoryid=${categoryId}`;
 
-app.get("/chapters/:id", async(req, res) => {
-    const id = req.params.id;
-let resultInstance;
-
-async function fetchData() {
   try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/chapters/${id}`);
-    const resultado = await response.json();
-    resultInstance = resultado;
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+    res.status(500).json({ error: 'Erro ao buscar dados.' });
   }
-}
-
-fetchData().then(() => {
-  res.json(resultInstance);
 });
 
+// Endpoint para listar episódios de um anime por categoria
+app.get('/episodios/:categoryId', async (req, res) => {
+  const categoryId = req.params.categoryId;
+  const url = `https://animeland.appanimeplus.tk/videoweb/api.php?action=category_videos&category_id=${categoryId}`;
+
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar dados.' });
+  }
 });
+
+
+
 
 
 // Rota de registro para criar um novo usuário
