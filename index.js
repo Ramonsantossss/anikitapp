@@ -14,17 +14,17 @@ const router = app
 const __path = require('path');
 const axios = require('axios');
 const {
-fetchSearchGogo,
-fetchGogoRecentEpisodes,
-fetchGogoAnimeInfo,
-fetchGogoanimeEpisodeSource,
-episod,
-ytPlayMp4, 
-tiktokdownload,
-ytPlayMp3,
-getVideoDownloadLink,
-getAudioDownloadLink,
-scrapeWebsite
+  fetchSearchGogo,
+  fetchGogoRecentEpisodes,
+  fetchGogoAnimeInfo,
+  fetchGogoanimeEpisodeSource,
+  episod,
+  ytPlayMp4,
+  tiktokdownload,
+  ytPlayMp3,
+  getVideoDownloadLink,
+  getAudioDownloadLink,
+  scrapeWebsite
 } = require("./lib/scraper.js");
 let clientInstance;
 // INÍCIO DO BOT 
@@ -95,6 +95,15 @@ const cer = new mongoose.Schema({
   ft: String,
 });
 
+
+
+app.use(session({
+  secret: 'suaChaveSecreta', // Uma chave secreta para assinar a sessão
+  resave: false,            // Não salva a sessão a cada requisição
+  saveUninitialized: true   // Salva uma sessão vazia, se ela não existir
+}));
+
+
 //const User = mongoose.model('User', cer);
 
 //module.exports = User;
@@ -123,7 +132,7 @@ async function diminuirSaldo(username) {
 
 
 async function adicionarSaldo(username) {
-//async function adicionarTotal(username) {
+  //async function adicionarTotal(username) {
   try {
     const user = await User.findOne({ username });
 
@@ -173,26 +182,26 @@ app.get('/rota', (req, res) => {
 
 
 function getMangaById(name, id) {
-    var return_data  = {};
-    const nick = name;
-    let bay; // Declare a variável 'bay' aqui
-    return (async () => {
-        try {
-            let response = await axios.get("https://mangalivre.net/manga/"+name+"/"+id);
-            bay = response.data;
-            const $ = cheerio.load(bay);
-            //console.log(response.data)
-            const desc = $('meta[name="description"]').attr("content"); 
-            
-            const mangaName = $('span.series-title h1').text().trim();
-            const mangaImageURL = $('meta[property="og:image"]').attr("content"); 
-            const result = {"nome": mangaName, "desc": desc, "image": mangaImageURL}
-            return_data.manga = result;
-        } catch (error) {
-            console.error(error.message);
-        }
-        return return_data;
-    })();
+  var return_data = {};
+  const nick = name;
+  let bay; // Declare a variável 'bay' aqui
+  return (async () => {
+    try {
+      let response = await axios.get("https://mangalivre.net/manga/" + name + "/" + id);
+      bay = response.data;
+      const $ = cheerio.load(bay);
+      //console.log(response.data)
+      const desc = $('meta[name="description"]').attr("content");
+
+      const mangaName = $('span.series-title h1').text().trim();
+      const mangaImageURL = $('meta[property="og:image"]').attr("content");
+      const result = { "nome": mangaName, "desc": desc, "image": mangaImageURL }
+      return_data.manga = result;
+    } catch (error) {
+      console.error(error.message);
+    }
+    return return_data;
+  })();
 }
 
 // Exemplo de uso:
@@ -200,35 +209,35 @@ function getMangaById(name, id) {
 
 
 
-  
+
 async function aaaaaaa(name, id) {
-    var return_data  = {};
-    const nick = name;
-    let bay; // Declare a variável 'bay' aqui
-    return (async () => {
-        try {
-            let response = await axios.get("https://mangalivre.net/manga/"+name+"/"+id);
-            bay = response.data;
-            const $ = cheerio.load(bay);
-            //console.log(response.data)
-            const desc = $('meta[name="description"]').attr("content"); 
-            
-            const mangaName = $('span.series-title h1').text().trim();
-            const mangaImageURL = $('meta[property="og:image"]').attr("content"); 
-            const result = {"nome": mangaName, "desc": desc, "image": mangaImageURL}
-            return_data.manga = result;
-        } catch (error) {
-            console.error(error.message);
-        }
-        return return_data;
-    })();
+  var return_data = {};
+  const nick = name;
+  let bay; // Declare a variável 'bay' aqui
+  return (async () => {
+    try {
+      let response = await axios.get("https://mangalivre.net/manga/" + name + "/" + id);
+      bay = response.data;
+      const $ = cheerio.load(bay);
+      //console.log(response.data)
+      const desc = $('meta[name="description"]').attr("content");
+
+      const mangaName = $('span.series-title h1').text().trim();
+      const mangaImageURL = $('meta[property="og:image"]').attr("content");
+      const result = { "nome": mangaName, "desc": desc, "image": mangaImageURL }
+      return_data.manga = result;
+    } catch (error) {
+      console.error(error.message);
+    }
+    return return_data;
+  })();
 }
 app.get("/dados", async (req, res) => {
   const id = req.query.id;
   const name = req.query.name;
-aaaaaaa(name, id).then((adm) => {
-  res.json(adm);
-});
+  aaaaaaa(name, id).then((adm) => {
+    res.json(adm);
+  });
 
 });
 
@@ -238,7 +247,7 @@ aaaaaaa(name, id).then((adm) => {
 app.get('/pesquisar/:query', async (req, res) => {
   const query = req.params.query;
   const url = `https://animeland.appanimeplus.tk/videoweb/api.php?action=searchvideo&searchword=${query}`;
-  
+
   try {
     const response = await fetch(url);
     const data = await response.json();
@@ -424,24 +433,35 @@ app.post('/paginaPrincipal', async (req, res) => {
     if (!user || user.password !== password) {
       return res.status(401).send('Nome de usuário ou senha incorretos. Por favor, tente novamente.');
     }
-
-    res.redirect(`/anikit?username=${user.username}&key=${user.key}`);
+    req.session.user = username;
+    req.session.senha = password;
+    res.redirect(`/anikit`);
   } catch (error) {
     console.error('Erro ao acessar o banco de dados:', error);
     return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
   }
 });
 
+app.get('/logout', (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Erro ao encerrar a sessão:', err);
+    }
+    res.redirect('/'); // Redireciona para a página de login após encerrar a sessão
+  });
+});
+
 // Rota de perfil do usuário
 app.get('/perfil', async (req, res) => {
-    const { username, key, password } = req.query;
-    const user = await User.findOne({ username, key });
-    const users = user
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  const username = req.session.user;
+  const password = req.session.senha;
+  const user = await User.findOne({ username });
+  const users = user
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
   try {
-    const user = await User.findOne({ username, key, password });
+    const user = await User.findOne({ username, password });
 
     if (!user) {
       return res.status(404).send('Usuário não encontrado.');
@@ -511,7 +531,7 @@ app.post('/edit/:username', async (req, res) => {
     // Salva as alterações no banco de dados
     await user.save();
 
-    res.redirect(`/anikit?username=${user.username}&key=${user.key}`);
+    res.redirect(`/logout`);
   } catch (error) {
     console.error('Erro ao acessar o banco de dados:', error);
     return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
@@ -521,17 +541,22 @@ app.post('/edit/:username', async (req, res) => {
 // Restante do código do Express e configurações...
 
 app.get('/anikit', async (req, res) => {
-  const { username, key } = req.query;
+  const username = req.session.user;
+  const password = req.session.senha;
+  // console.log(username, password)
+  const key = password;
+  // const { username, key } = req.query;
 
   try {
-    const user = await User.findOne({ username, key });
+    const user = await User.findOne({ username, password });
     const users = user
     if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
+      const htmlPath = path.join(__dirname, './views/login.html');
+      res.sendFile(htmlPath);
     }
 
     const topUsers = await User.find().sort({ total: -1 }).limit(7);
-    res.render('principal', { user, users, topUsers});
+    res.render('principal', { user, users, topUsers });
   } catch (error) {
     console.error('Erro ao acessar o banco de dados:', error);
     return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
@@ -542,11 +567,35 @@ app.get('/anikit', async (req, res) => {
 
 // Busca os top 7 usuários com base no campo total
 
-app.get('/', (req, res) => {
-  const htmlPath = path.join(__dirname, './views/login.html');
-  res.sendFile(htmlPath);
+app.get('/', async(req, res) => {
+  const username = req.session.user;
+  const password = req.session.senha;
+  // console.log(username, password)
+  const key = password;
+  // const { username, key } = req.query;
+
+  try {
+    const user = await User.findOne({ username, password });
+    const users = user
+    if (!user) {
+      const htmlPath = path.join(__dirname, './views/login.html');
+      res.sendFile(htmlPath);
+    }
+
+    const topUsers = await User.find().sort({ total: -1 }).limit(7);
+    res.render('principal', { user, users, topUsers });
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
 });
 
+app.get('/ver/:username', async(req, res) => {
+  const username = req.params.username;
+  const dados = await User.findOne({ username });
+  // console.log(dados);
+  res.render('usuario', { dados });
+});
 
 app.get('/entrar', (req, res) => {
   const htmlPath = path.join(__dirname, './views/login.html');
@@ -564,164 +613,164 @@ app.get('/new', (req, res) => {
 // server.js
 
 function getMangaById(name, id) {
-    var return_data;
-    const nick = name;
-    let bay; // Declare a variável 'bay' aqui
-    return (async () => {
-        try {
-            let response = await axios.get("https://mangalivre.net/manga/"+name+"/"+id);
-            bay = response.data;
-            const $ = cheerio.load(bay);
-          //  console.log(response.data)
-            const descriptionContent = $('meta[name="description"]').attr("content");
-            const foto = $('meta[property="og:image"]').attr("content");
-            const groups = [];
-            $('ul.scans-list li').each((index, element) => {
-            const priority = $(element).find('h2.priority').text();
-            const scanlator = $(element).find('span.separator').next().text();
-            const chapters = $(element).find('span.chapters').text().trim();
-    groups.push({ priority, scanlator, chapters });
-            });
-            const result = {"nome": name, "id": id, "desc": descriptionContent, "foto": foto}
-            return result;
-        } catch (error) {
-            console.error(error.message);
-        }
-    })();
+  var return_data;
+  const nick = name;
+  let bay; // Declare a variável 'bay' aqui
+  return (async () => {
+    try {
+      let response = await axios.get("https://mangalivre.net/manga/" + name + "/" + id);
+      bay = response.data;
+      const $ = cheerio.load(bay);
+      //  console.log(response.data)
+      const descriptionContent = $('meta[name="description"]').attr("content");
+      const foto = $('meta[property="og:image"]').attr("content");
+      const groups = [];
+      $('ul.scans-list li').each((index, element) => {
+        const priority = $(element).find('h2.priority').text();
+        const scanlator = $(element).find('span.separator').next().text();
+        const chapters = $(element).find('span.chapters').text().trim();
+        groups.push({ priority, scanlator, chapters });
+      });
+      const result = { "nome": name, "id": id, "desc": descriptionContent, "foto": foto }
+      return result;
+    } catch (error) {
+      console.error(error.message);
+    }
+  })();
 }
 
 
-app.get("/manga/:name/:id", async(req, res) => {
-    const name = req.params.name
-    const id = req.params.id;
-    getMangaById(ab, aa).then((response) => {
-        res.json(response);
-    });
+app.get("/manga/:name/:id", async (req, res) => {
+  const name = req.params.name
+  const id = req.params.id;
+  getMangaById(ab, aa).then((response) => {
+    res.json(response);
+  });
 });
 
 
 app.get("/search", (req, res) => {
-const name = req.query.q;
-let resultInstance;
+  const name = req.query.q;
+  let resultInstance;
 
-async function fetchData() {
-  try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/search?q=${name}`);
-    const resultado = await response.json();
-    resultInstance = resultado;
-  } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+  async function fetchData() {
+    try {
+      const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/search?q=${name}`);
+      const resultado = await response.json();
+      resultInstance = resultado;
+    } catch (error) {
+      console.error('Erro ao buscar os dados:', error);
+    }
   }
-}
 
-fetchData().then(() => {
-  res.json(resultInstance);
-});
+  fetchData().then(() => {
+    res.json(resultInstance);
+  });
 });
 
 app.get("/chapters/:id/", async (req, res) => {
-    const id = req.params.id;
-let resultInstance;
+  const id = req.params.id;
+  let resultInstance;
 
-async function fetchData() {
-  try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/chapters/${id}`);
-    const resultado = await response.json();
-    resultInstance = resultado;
-  } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+  async function fetchData() {
+    try {
+      const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/chapters/${id}`);
+      const resultado = await response.json();
+      resultInstance = resultado;
+    } catch (error) {
+      console.error('Erro ao buscar os dados:', error);
+    }
   }
-}
 
-fetchData().then(() => {
-  res.json(resultInstance);
-});
+  fetchData().then(() => {
+    res.json(resultInstance);
+  });
 });
 
 app.get("/genres/", (_req, res) => {
-let resultInstance;
+  let resultInstance;
 
-async function fetchData() {
-  try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/genres`);
-    const resultado = await response.json();
-    resultInstance = resultado;
-  } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+  async function fetchData() {
+    try {
+      const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/genres`);
+      const resultado = await response.json();
+      resultInstance = resultado;
+    } catch (error) {
+      console.error('Erro ao buscar os dados:', error);
+    }
   }
-}
 
-fetchData().then(() => {
-  res.json(resultInstance);
-});
+  fetchData().then(() => {
+    res.json(resultInstance);
+  });
 });
 
 app.get("/recents", (req, res) => {
-    res.redirect("/recents/1");
+  res.redirect("/recents/1");
 });
 
 app.get("/recents/:page", (req, res) => {
-let resultInstance;
+  let resultInstance;
 
-async function fetchData() {
-  try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/recents/1`);
-    const resultado = await response.json();
-    resultInstance = resultado;
-  } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+  async function fetchData() {
+    try {
+      const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/recents/1`);
+      const resultado = await response.json();
+      resultInstance = resultado;
+    } catch (error) {
+      console.error('Erro ao buscar os dados:', error);
+    }
   }
-}
 
-fetchData().then(() => {
-  res.json(resultInstance);
-});
+  fetchData().then(() => {
+    res.json(resultInstance);
+  });
 });
 
 app.get("/popular/", async (_req, res) => {
-    res.redirect("/popular/1");
+  res.redirect("/popular/1");
 });
 
 app.get("/popular/:page", (req, res) => {
-    const page = req.params.page;
-let resultInstance;
+  const page = req.params.page;
+  let resultInstance;
 
-async function fetchData() {
-  try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/popular/${page}`);
-    const resultado = await response.json();
-    resultInstance = resultado;
-  } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+  async function fetchData() {
+    try {
+      const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/popular/${page}`);
+      const resultado = await response.json();
+      resultInstance = resultado;
+    } catch (error) {
+      console.error('Erro ao buscar os dados:', error);
+    }
   }
-}
 
-fetchData().then(() => {
-  res.json(resultInstance);
-});
+  fetchData().then(() => {
+    res.json(resultInstance);
+  });
 });
 
 app.get("/top/:page", (req, res) => {
-    const page = req.params.page;
-let resultInstance;
+  const page = req.params.page;
+  let resultInstance;
 
-async function fetchData() {
-  try {
-    const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/top/${page}`);
-    const resultado = await response.json();
-    resultInstance = resultado;
-  } catch (error) {
-    console.error('Erro ao buscar os dados:', error);
+  async function fetchData() {
+    try {
+      const response = await fetch(`https://zany-pear-deer-gown.cyclic.cloud/top/${page}`);
+      const resultado = await response.json();
+      resultInstance = resultado;
+    } catch (error) {
+      console.error('Erro ao buscar os dados:', error);
+    }
   }
-}
 
-fetchData().then(() => {
-  res.json(resultInstance);
-});
+  fetchData().then(() => {
+    res.json(resultInstance);
+  });
 });
 
 app.get("/top/", async (_req, res) => {
-    res.redirect("/top/1");
+  res.redirect("/top/1");
 });
 
 
@@ -751,12 +800,12 @@ app.post('/reg', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Crie um novo usuário
-const newUser = new User({
-  username,
-  password: hashedPassword,
-  favoritos: [],
-  historico: [],
-});
+    const newUser = new User({
+      username,
+      password: hashedPassword,
+      favoritos: [],
+      historico: [],
+    });
 
     await newUser.save();
 
@@ -797,118 +846,118 @@ app.post('/log', async (req, res) => {
 //////////////
 
 router.get('/recent-episodes', async (req, res) => {
-    const page = req.query.page;
-    const type = req.query.type;
+  const page = req.query.page;
+  const type = req.query.type;
 
-const { username, key } = req.query;
+  const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
     const data = await fetchGogoRecentEpisodes({ page, type });
     res.json(data).status(200)
-    
-    
+
+
   } else {
     console.log('Saldo insuficiente.');
   }
 });
 
 router.get('/epis/:animeId', async (req, res) => {
-const animeId = req.params.animeId;
-const { username, key } = req.query;
+  const animeId = req.params.animeId;
+  const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-      const data = await episod({ animeId });
+    const data = await episod({ animeId });
     res.json(data).status(200);
   } else {
     console.log('Saldo insuficiente.');
   }
-  
+
 });
 
 router.get('pesquisamanga', async (req, res) => {
-const ainaim = req.query.ainaim
-const got = require('got');
+  const ainaim = req.query.ainaim
+  const got = require('got');
 
-async function searchManga(name) {
+  async function searchManga(name) {
     var return_data = { "mangas": [] };
     const form = "search=" + name;
 
     try {
-        let response = await got.post(
-            "https://mangalivre.net/lib/search/series.json", {
-            body: form,
-            headers: {
-                "x-requested-with": "XMLHttpRequest",
-                "content-type": "application/x-www-form-urlencoded",
-            },
-        });
+      let response = await got.post(
+        "https://mangalivre.net/lib/search/series.json", {
+        body: form,
+        headers: {
+          "x-requested-with": "XMLHttpRequest",
+          "content-type": "application/x-www-form-urlencoded",
+        },
+      });
 
-        // Convertendo a resposta para JSON
-        const responseData = JSON.parse(response.body);
+      // Convertendo a resposta para JSON
+      const responseData = JSON.parse(response.body);
 
-        // Verificando se a chave 'series' existe na resposta
-        if (responseData.series) {
-            for (let serie of responseData.series) {
-                return_data.mangas.push({
-                    "id_serie": serie.id_serie,
-                    "name": serie.name,
-                    "label": serie.label,
-                    "score": serie.score,
-                    "value": serie.value,
-                    "author": serie.author,
-                    "artist": serie.artist,
-                    "image": serie.cover,
-                    "categories": serie.categories.map((categorie) => { return { "name": categorie.name, "id_category": categorie.id_category }; }),
-                });
-            }
+      // Verificando se a chave 'series' existe na resposta
+      if (responseData.series) {
+        for (let serie of responseData.series) {
+          return_data.mangas.push({
+            "id_serie": serie.id_serie,
+            "name": serie.name,
+            "label": serie.label,
+            "score": serie.score,
+            "value": serie.value,
+            "author": serie.author,
+            "artist": serie.artist,
+            "image": serie.cover,
+            "categories": serie.categories.map((categorie) => { return { "name": categorie.name, "id_category": categorie.id_category }; }),
+          });
         }
+      }
 
-        return return_data;
+      return return_data;
     } catch (error) {
-        console.log(error.message);
+      console.log(error.message);
     }
-}
+  }
 
-// Chamando a função e lidando com a promessa retornada
-searchManga(ainaim)
+  // Chamando a função e lidando com a promessa retornada
+  searchManga(ainaim)
     .then(result => {
-        res.json(result);
+      res.json(result);
     })
     .catch(error => {
-        console.error(error);
+      console.error(error);
     });
 })
 
 router.get('/info/:animeId', async (req, res) => {
-    const animeId = req.params.animeId;
-const { username, key } = req.query;
+  const animeId = req.params.animeId;
+  const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-      const data = await fetchGogoAnimeInfo({ animeId });
+    const data = await fetchGogoAnimeInfo({ animeId });
     res.json([data]).status(200);
   } else {
     console.log('Saldo insuficiente.');
@@ -917,42 +966,42 @@ const add = adicionarSaldo(username)
 
 
 router.get('/popular', async (req, res) => {
-const { username, key } = req.query;
+  const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-fetch(encodeURI("https://animaster.onrender.com/api/popular/1"))
-     .then(response => response.json())
-     .then(data => {
-     res.json(data.results).status(200);
-     })
+    fetch(encodeURI("https://animaster.onrender.com/api/popular/1"))
+      .then(response => response.json())
+      .then(data => {
+        res.json(data.results).status(200);
+      })
   } else {
     console.log('Saldo insuficiente.');
   }
 })
 
 router.get('/watch/:episodeId', async (req, res) => {
-    const episodeId = req.params.episodeId;
-    const data = await fetchGogoanimeEpisodeSource({ episodeId });
-    res.json([data]).status(200);
-const { username, key } = req.query;
+  const episodeId = req.params.episodeId;
+  const data = await fetchGogoanimeEpisodeSource({ episodeId });
+  res.json([data]).status(200);
+  const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
-  if (resultadoDiminuicao && add) {  
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
   } else {
     console.log('Saldo insuficiente.');
   }
@@ -960,25 +1009,25 @@ const add = adicionarSaldo(username)
 
 // ACABO;
 
-app.get('/anikit/tiktok', async(req, res) => {
-var videoUrl = req.query.videoUrl
-if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
-//const getVideoDownloadLink = require("./data/youtube.js")
-const { username, key } = req.query;
+app.get('/anikit/tiktok', async (req, res) => {
+  var videoUrl = req.query.videoUrl
+  if (!videoUrl) return res.json({ "error": "faltouo parâmetro videoUrl" })
+  //const getVideoDownloadLink = require("./data/youtube.js")
+  const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-scrapeWebsite(videoUrl).then((videoLinks) => {
-  console.log('Links dos vídeos encontrados:');
-  res.json({ link: videoLinks[0] });
-});
+    scrapeWebsite(videoUrl).then((videoLinks) => {
+      console.log('Links dos vídeos encontrados:');
+      res.json({ link: videoLinks[0] });
+    });
   } else {
     console.log('Saldo insuficiente.');
   }
@@ -986,19 +1035,19 @@ scrapeWebsite(videoUrl).then((videoLinks) => {
 
 
 app.get("/anikit/playmp4", async (req, res, next) => {
-var query = req.query.query
-if(!query) return res.json({"error": "faltouo parâmetro query"})
-    const { username, key } = req.query;
+  var query = req.query.query
+  if (!query) return res.json({ "error": "faltouo parâmetro query" })
+  const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
-  if (resultadoDiminuicao && add) { 
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
+  if (resultadoDiminuicao && add) {
     ytPlayMp4(query)
       .then((result) => {
         res.json(result);
@@ -1012,18 +1061,18 @@ const add = adicionarSaldo(username)
 });
 
 app.get("/anikit/playmp3", async (req, res, next) => {
-    const { username, key, query } = req.query;
+  const { username, key, query } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
- 
+
     ytPlayMp3(query)
       .then((result) => {
         res.json(result);
@@ -1038,64 +1087,64 @@ const add = adicionarSaldo(username)
 
 
 
-app.get('/anikit/ytmp4', async(req, res) => {
-var videoUrl = req.query.videoUrl
-if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
-//const getVideoDownloadLink = require("./data/youtube.js")
-// Exemplo de uso
+app.get('/anikit/ytmp4', async (req, res) => {
+  var videoUrl = req.query.videoUrl
+  if (!videoUrl) return res.json({ "error": "faltouo parâmetro videoUrl" })
+  //const getVideoDownloadLink = require("./data/youtube.js")
+  // Exemplo de uso
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-getVideoDownloadLink(videoUrl)
-  .then((downloadLink) => {
-    if (downloadLink) {
-      res.json({
-      url: `${downloadLink}`
-    })
-    } else {
-      console.log('Falha ao obter o link de download do vídeo.');
-    }
-  });
+    getVideoDownloadLink(videoUrl)
+      .then((downloadLink) => {
+        if (downloadLink) {
+          res.json({
+            url: `${downloadLink}`
+          })
+        } else {
+          console.log('Falha ao obter o link de download do vídeo.');
+        }
+      });
   } else {
     console.log('Saldo insuficiente.');
   }
 
 })
 
-app.get('/anikit/ytmp3', async(req, res) => {
-var videoUrl = req.query.videoUrl
-if(!videoUrl) return res.json({"error": "faltouo parâmetro videoUrl"})
-//const getAudioDownloadLink = require("./data/youtube.js")
+app.get('/anikit/ytmp3', async (req, res) => {
+  var videoUrl = req.query.videoUrl
+  if (!videoUrl) return res.json({ "error": "faltouo parâmetro videoUrl" })
+  //const getAudioDownloadLink = require("./data/youtube.js")
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-getAudioDownloadLink(videoUrl)
-  .then((downloadLink) => {
-    if (downloadLink) {
-    res.json({
-      url: `${downloadLink}`
-    })
-     // console.log('Link de download do áudio:', downloadLink);
-    } else {
-      console.log('Falha ao obter o link de download do áudio.');
-    }
-  });
+    getAudioDownloadLink(videoUrl)
+      .then((downloadLink) => {
+        if (downloadLink) {
+          res.json({
+            url: `${downloadLink}`
+          })
+          // console.log('Link de download do áudio:', downloadLink);
+        } else {
+          console.log('Falha ao obter o link de download do áudio.');
+        }
+      });
   } else {
     console.log('Saldo insuficiente.');
   }
@@ -1108,12 +1157,12 @@ app.get('/nsfw/ahegao', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const ahegao = JSON.parse(fs.readFileSync(__dirname + '/data/ahegao.json'));
@@ -1121,23 +1170,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randahegao}`
-  })
+    })
   } else {
-console.log('Saldo insuficiente.');
+    console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/ass', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const ass = JSON.parse(fs.readFileSync(__dirname + '/data/ass.json'));
@@ -1145,23 +1194,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randass}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/bdsm', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const bdsm = JSON.parse(fs.readFileSync(__dirname + '/data/bdsm.json'));
@@ -1169,23 +1218,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randbdsm}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/blowjob', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const blowjob = JSON.parse(fs.readFileSync(__dirname + '/data/blowjob.json'));
@@ -1193,23 +1242,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randblowjob}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/cuckold', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const cuckold = JSON.parse(fs.readFileSync(__dirname + '/data/cuckold.json'));
@@ -1217,23 +1266,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randcuckold}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/cum', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const cum = JSON.parse(fs.readFileSync(__dirname + '/data/cum.json'));
@@ -1241,23 +1290,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randcum}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/ero', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const ero = JSON.parse(fs.readFileSync(__dirname + '/data/ero.json'));
@@ -1265,23 +1314,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randero}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
-  
+})
+
 app.get('/memes', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const meme = JSON.parse(fs.readFileSync(__dirname + '/data/memes-video.json'));
@@ -1289,23 +1338,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmeme}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/femdom', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const femdom = JSON.parse(fs.readFileSync(__dirname + '/data/femdom.json'));
@@ -1313,23 +1362,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randfemdom}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/foot', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const foot = JSON.parse(fs.readFileSync(__dirname + '/data/foot.json'));
@@ -1337,23 +1386,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randfoot}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/gangbang', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const gangbang = JSON.parse(fs.readFileSync(__dirname + '/data/gangbang.json'));
@@ -1361,23 +1410,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randgangbang}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/glasses', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const glasses = JSON.parse(fs.readFileSync(__dirname + '/data/glasses.json'));
@@ -1385,23 +1434,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randglasses}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/hentai', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const hentai = JSON.parse(fs.readFileSync(__dirname + '/data/hentai.json'));
@@ -1409,23 +1458,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randhentai}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/gifs', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const gifs = JSON.parse(fs.readFileSync(__dirname + '/data/gifs.json'));
@@ -1433,23 +1482,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randgifs}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/jahy', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const jahy = JSON.parse(fs.readFileSync(__dirname + '/data/jahy.json'));
@@ -1457,23 +1506,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randjahy}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/manga', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const manga = JSON.parse(fs.readFileSync(__dirname + '/data/manga.json'));
@@ -1481,23 +1530,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmanga}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/masturbation', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const masturbation = JSON.parse(fs.readFileSync(__dirname + '/data/masturbation.json'));
@@ -1505,23 +1554,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmasturbation}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/neko', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const neko = JSON.parse(fs.readFileSync(__dirname + '/data/neko.json'));
@@ -1529,23 +1578,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randneko}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/orgy', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const orgy = JSON.parse(fs.readFileSync(__dirname + '/data/orgy.json'));
@@ -1553,23 +1602,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randorgy}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/panties', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const panties = JSON.parse(fs.readFileSync(__dirname + '/data/panties.json'));
@@ -1577,23 +1626,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randpanties}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/pussy', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const pussy = JSON.parse(fs.readFileSync(__dirname + '/data/pussy.json'));
@@ -1601,23 +1650,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randpussy}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/neko2', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const neko2 = JSON.parse(fs.readFileSync(__dirname + '/data/neko2.json'));
@@ -1625,23 +1674,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randneko2}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/tentacles', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const tentacles = JSON.parse(fs.readFileSync(__dirname + '/data/tentacles.json'));
@@ -1649,23 +1698,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randtentacles}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/thighs', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const thighs = JSON.parse(fs.readFileSync(__dirname + '/data/thighs.json'));
@@ -1673,23 +1722,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randthighs}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/yuri', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const yuri = JSON.parse(fs.readFileSync(__dirname + '/data/yuri.json'));
@@ -1697,23 +1746,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randyuri}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/nsfw/zettai', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const zettai = JSON.parse(fs.readFileSync(__dirname + '/data/zettai.json'));
@@ -1721,23 +1770,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randzettai}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/keneki', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const keneki = JSON.parse(fs.readFileSync(__dirname + '/data/keneki.json'));
@@ -1745,23 +1794,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randkeneki}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/megumin', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const megumin = JSON.parse(fs.readFileSync(__dirname + '/data/megumin.json'));
@@ -1769,23 +1818,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmegumin}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/yotsuba', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const yotsuba = JSON.parse(fs.readFileSync(__dirname + '/data/yotsuba.json'));
@@ -1793,23 +1842,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randyotsuba}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/shinomiya', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const shinomiya = JSON.parse(fs.readFileSync(__dirname + '/data/shinomiya.json'));
@@ -1817,23 +1866,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randshinomiya}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/yumeko', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const yumeko = JSON.parse(fs.readFileSync(__dirname + '/data/yumeko.json'));
@@ -1841,23 +1890,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randyumeko}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/tejina', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const tejina = JSON.parse(fs.readFileSync(__dirname + '/data/tejina.json'));
@@ -1865,23 +1914,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randtejina}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/chiho', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const chiho = JSON.parse(fs.readFileSync(__dirname + '/data/chiho.json'));
@@ -1889,93 +1938,93 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randchiho}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/18/video', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-  
+
     const vid = require("./data/pack.js")
     const video_18 = vid.video_18
     const danvid = video_18[Math.floor(Math.random() * video_18.length)];
 
     res.json({
       url: `${danvid}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/18/travazap', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-  
+
     const tra = require("./data/pack.js")
     const travazap = tra.travazap
     const traft = travazap[Math.floor(Math.random() * travazap.length)];
 
     res.json({
       url: `${traft}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
-  
+})
+
 app.get('/18/foto_18', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-  
+
     const tra = require("./data/pack.js")
     const foto_18 = tra.foto_18
     const traft = foto_18[Math.floor(Math.random() * foto_18.length)];
 
     res.json({
       url: `${traft}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
-  
+})
+
 app.get('/anime/toukachan', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const toukachan = JSON.parse(fs.readFileSync(__dirname + '/data/toukachan.json'));
@@ -1983,23 +2032,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randtoukachan}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/akira', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const akira = JSON.parse(fs.readFileSync(__dirname + '/data/akira.json'));
@@ -2007,23 +2056,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randakira}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/itori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const itori = JSON.parse(fs.readFileSync(__dirname + '/data/itori.json'));
@@ -2031,23 +2080,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randitori}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kurumi', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kurumi = JSON.parse(fs.readFileSync(__dirname + '/data/kurumi.json'));
@@ -2055,23 +2104,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randkurumi}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/miku', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const miku = JSON.parse(fs.readFileSync(__dirname + '/data/miku.json'));
@@ -2079,23 +2128,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmiku}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/pokemon', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const pokemon = JSON.parse(fs.readFileSync(__dirname + '/data/pokemon.json'));
@@ -2103,23 +2152,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randpokemon}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/ryujin', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const ryujin = JSON.parse(fs.readFileSync(__dirname + '/data/ryujin.json'));
@@ -2127,23 +2176,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randryujin}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/rose', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const rose = JSON.parse(fs.readFileSync(__dirname + '/data/rose.json'));
@@ -2151,23 +2200,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randrose}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kaori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kaori = JSON.parse(fs.readFileSync(__dirname + '/data/kaori.json'));
@@ -2175,23 +2224,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randkaori}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/shizuka', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const shizuka = JSON.parse(fs.readFileSync(__dirname + '/data/shizuka.json'));
@@ -2199,23 +2248,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randshizuka}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kaga', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kaga = JSON.parse(fs.readFileSync(__dirname + '/data/kaga.json'));
@@ -2223,47 +2272,47 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randkaga}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kotori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kotori = JSON.parse(fs.readFileSync(__dirname + '/data/kotori.json'));
     const randkotori = kotori[Math.floor(Math.random() * kotori.length)];
-    
+
     res.json({
       url: `${randkotori}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/mikasa', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const mikasa = JSON.parse(fs.readFileSync(__dirname + '/data/mikasa.json'));
@@ -2271,23 +2320,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmikasa}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/akiyama', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const akiyama = JSON.parse(fs.readFileSync(__dirname + '/data/akiyama.json'));
@@ -2295,47 +2344,47 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randakiyama}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/gremory', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const gremory = JSON.parse(fs.readFileSync(__dirname + '/data/gremory.json'));
     const randgremory = gremory[Math.floor(Math.random() * gremory.length)];
-    
+
     res.json({
       url: `${randgremory}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/isuzu', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const isuzu = JSON.parse(fs.readFileSync(__dirname + '/data/isuzu.json'));
@@ -2343,23 +2392,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randisuzu}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/cosplay', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const cosplay = JSON.parse(fs.readFileSync(__dirname + '/data/cosplay.json'));
@@ -2367,23 +2416,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randcosplay}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/shina', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const shina = JSON.parse(fs.readFileSync(__dirname + '/data/shina.json'));
@@ -2391,23 +2440,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randshina}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kagura', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kagura = JSON.parse(fs.readFileSync(__dirname + '/data/kagura.json'));
@@ -2415,23 +2464,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randkagura}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/shinka', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const shinka = JSON.parse(fs.readFileSync(__dirname + '/data/shinka.json'));
@@ -2439,23 +2488,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randshinka}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/eba', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const eba = JSON.parse(fs.readFileSync(__dirname + '/data/eba.json'));
@@ -2463,23 +2512,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randeba}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/deidara', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Deidara = JSON.parse(fs.readFileSync(__dirname + '/data/deidara.json'));
@@ -2487,11 +2536,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randDeidara}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 
@@ -2500,12 +2549,12 @@ app.get('/anime/jeni', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const jeni = JSON.parse(fs.readFileSync(__dirname + '/data/jeni.json'));
@@ -2513,11 +2562,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randjeni}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/random/meme', async (req, res, next) => {
@@ -2525,12 +2574,12 @@ app.get('/random/meme', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const meme = JSON.parse(fs.readFileSync(__dirname + '/data/meme.json'));
@@ -2538,22 +2587,22 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmeme}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 app.get('/anime/toukachan', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const toukachan = JSON.parse(fs.readFileSync(__dirname + '/data/toukachan.json'));
@@ -2561,23 +2610,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randtoukachan}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/akira', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const akira = JSON.parse(fs.readFileSync(__dirname + '/data/akira.json'));
@@ -2585,23 +2634,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randakira}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/itori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const itori = JSON.parse(fs.readFileSync(__dirname + '/data/itori.json'));
@@ -2609,23 +2658,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randitori}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kurumi', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kurumi = JSON.parse(fs.readFileSync(__dirname + '/data/kurumi.json'));
@@ -2633,23 +2682,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randkurumi}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/miku', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const miku = JSON.parse(fs.readFileSync(__dirname + '/data/miku.json'));
@@ -2657,23 +2706,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmiku}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/pokemon', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const pokemon = JSON.parse(fs.readFileSync(__dirname + '/data/pokemon.json'));
@@ -2681,23 +2730,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randpokemon}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/ryujin', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const ryujin = JSON.parse(fs.readFileSync(__dirname + '/data/ryujin.json'));
@@ -2705,23 +2754,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randryujin}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/rose', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const rose = JSON.parse(fs.readFileSync(__dirname + '/data/rose.json'));
@@ -2729,23 +2778,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randrose}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kaori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kaori = JSON.parse(fs.readFileSync(__dirname + '/data/kaori.json'));
@@ -2753,23 +2802,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randkaori}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/shizuka', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const shizuka = JSON.parse(fs.readFileSync(__dirname + '/data/shizuka.json'));
@@ -2777,23 +2826,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randshizuka}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kaga', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kaga = JSON.parse(fs.readFileSync(__dirname + '/data/kaga.json'));
@@ -2801,47 +2850,47 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randkaga}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kotori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kotori = JSON.parse(fs.readFileSync(__dirname + '/data/kotori.json'));
     const randkotori = kotori[Math.floor(Math.random() * kotori.length)];
-    
+
     res.json({
       url: `${randkotori}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/mikasa', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const mikasa = JSON.parse(fs.readFileSync(__dirname + '/data/mikasa.json'));
@@ -2849,23 +2898,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmikasa}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/akiyama', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const akiyama = JSON.parse(fs.readFileSync(__dirname + '/data/akiyama.json'));
@@ -2873,47 +2922,47 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randakiyama}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/gremory', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const gremory = JSON.parse(fs.readFileSync(__dirname + '/data/gremory.json'));
     const randgremory = gremory[Math.floor(Math.random() * gremory.length)];
-    
+
     res.json({
       url: `${randgremory}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/isuzu', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const isuzu = JSON.parse(fs.readFileSync(__dirname + '/data/isuzu.json'));
@@ -2921,23 +2970,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randisuzu}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/cosplay', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const cosplay = JSON.parse(fs.readFileSync(__dirname + '/data/cosplay.json'));
@@ -2945,23 +2994,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randcosplay}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/shina', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const shina = JSON.parse(fs.readFileSync(__dirname + '/data/shina.json'));
@@ -2969,23 +3018,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randshina}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kagura', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const kagura = JSON.parse(fs.readFileSync(__dirname + '/data/kagura.json'));
@@ -2993,23 +3042,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randkagura}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/shinka', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const shinka = JSON.parse(fs.readFileSync(__dirname + '/data/shinka.json'));
@@ -3017,23 +3066,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randshinka}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/eba', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const eba = JSON.parse(fs.readFileSync(__dirname + '/data/eba.json'));
@@ -3041,23 +3090,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randeba}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/deidara', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Deidara = JSON.parse(fs.readFileSync(__dirname + '/data/deidara.json'));
@@ -3065,11 +3114,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randDeidara}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 
@@ -3078,12 +3127,12 @@ app.get('/anime/jeni', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const jeni = JSON.parse(fs.readFileSync(__dirname + '/data/jeni.json'));
@@ -3091,11 +3140,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randjeni}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/random/meme', async (req, res, next) => {
@@ -3103,12 +3152,12 @@ app.get('/random/meme', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const meme = JSON.parse(fs.readFileSync(__dirname + '/data/meme.json'));
@@ -3116,23 +3165,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randmeme}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/wallpaper/satanic', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const satanic = JSON.parse(fs.readFileSync(__dirname + '/data/satanic.json'));
@@ -3140,11 +3189,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randsatanic}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 
@@ -3153,12 +3202,12 @@ app.get('/anime/itachi', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Itachi = JSON.parse(fs.readFileSync(__dirname + '/data/itachi.json'));
@@ -3166,23 +3215,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randItachi}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/madara', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Madara = JSON.parse(fs.readFileSync(__dirname + '/data/madara.json'));
@@ -3190,23 +3239,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randMadara}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/yuki', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Yuki = JSON.parse(fs.readFileSync(__dirname + '/data/yuki.json'));
@@ -3214,23 +3263,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randYuki}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/wallpaper/asuna', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const asuna = JSON.parse(fs.readFileSync(__dirname + '/data/asuna.json'));
@@ -3238,23 +3287,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randasuna}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/ayuzawa', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const ayuzawa = JSON.parse(fs.readFileSync(__dirname + '/data/ayuzawa.json'));
@@ -3262,23 +3311,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randayuzawa}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/chitoge', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const chitoge = JSON.parse(fs.readFileSync(__dirname + '/data/chitoge.json'));
@@ -3286,23 +3335,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randchitoge}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/emilia', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const emilia = JSON.parse(fs.readFileSync(__dirname + '/data/emilia.json'));
@@ -3310,23 +3359,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randemilia}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/hestia', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const hestia = JSON.parse(fs.readFileSync(__dirname + '/data/hestia.json'));
@@ -3334,23 +3383,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randhestia}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/inori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const inori = JSON.parse(fs.readFileSync(__dirname + '/data/inori.json'));
@@ -3358,23 +3407,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randinori}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/ana', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const ana = JSON.parse(fs.readFileSync(__dirname + '/data/ana.json'));
@@ -3382,23 +3431,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randana}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/boruto', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Boruto = JSON.parse(fs.readFileSync(__dirname + '/data/boruto.json'));
@@ -3406,23 +3455,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randBoruto}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/erza', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Erza = JSON.parse(fs.readFileSync(__dirname + '/data/erza.json'));
@@ -3430,23 +3479,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randErza}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kakasih', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Kakasih = JSON.parse(fs.readFileSync(__dirname + '/data/kakasih.json'));
@@ -3454,23 +3503,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randKakasih}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/sagiri', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Sagiri = JSON.parse(fs.readFileSync(__dirname + '/data/sagiri.json'));
@@ -3478,23 +3527,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randSagiri}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/minato', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Minato = JSON.parse(fs.readFileSync(__dirname + '/data/minato.json'));
@@ -3502,23 +3551,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randMinato}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/naruto', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Naruto = JSON.parse(fs.readFileSync(__dirname + '/data/naruto.json'));
@@ -3526,23 +3575,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randNaruto}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/nezuko', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Nezuko = JSON.parse(fs.readFileSync(__dirname + '/data/nezuko.json'));
@@ -3550,23 +3599,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randNezuko}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/onepiece', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Pic = JSON.parse(fs.readFileSync(__dirname + '/data/onepiece.json'));
@@ -3574,23 +3623,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randPic}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/rize', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Rize = JSON.parse(fs.readFileSync(__dirname + '/data/rize.json'));
@@ -3598,23 +3647,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randRize}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/sakura', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Sakura = JSON.parse(fs.readFileSync(__dirname + '/data/sakura.json'));
@@ -3622,23 +3671,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randSakura}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/sasuke', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Sasuke = JSON.parse(fs.readFileSync(__dirname + '/data/sasuke.json'));
@@ -3646,23 +3695,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randSasuke}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/tsunade', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Su = JSON.parse(fs.readFileSync(__dirname + '/data/tsunade.json'));
@@ -3670,23 +3719,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randSu}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/montor', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Mon = JSON.parse(fs.readFileSync(__dirname + '/data/montor.json'));
@@ -3694,23 +3743,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randMon}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 // ain
 app.get('/anime/mobil', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Mob = JSON.parse(fs.readFileSync(__dirname + '/data/mobil.json'));
@@ -3718,11 +3767,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randMob}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/anime/anime', async (req, res, next) => {
@@ -3730,12 +3779,12 @@ app.get('/anime/anime', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Wai23 = JSON.parse(fs.readFileSync(__dirname + '/data/wallhp2.json'));
@@ -3743,11 +3792,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randWai23}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/anime/wallhp', async (req, res, next) => {
@@ -3755,12 +3804,12 @@ app.get('/anime/wallhp', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Wai22 = JSON.parse(fs.readFileSync(__dirname + '/data/wallhp.json'));
@@ -3768,23 +3817,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randWai22}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/waifu2', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Wai2 = JSON.parse(fs.readFileSync(__dirname + '/data/waifu2.json'));
@@ -3792,35 +3841,35 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randWai2}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/waifu', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Wai = JSON.parse(fs.readFileSync(__dirname + '/data/waifu.json'));
     const randWai = Wai[Math.floor(Math.random() * Wai.length)];
-    
+
     res.json({
       url: `${randWai}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/anime/hekel', async (req, res, next) => {
@@ -3828,12 +3877,12 @@ app.get('/anime/hekel', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     Hekel = JSON.parse(fs.readFileSync(__dirname + '/data/hekel.json'));
@@ -3841,23 +3890,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randHekel}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/kucing', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     Kucing = JSON.parse(fs.readFileSync(__dirname + '/data/kucing.json'));
@@ -3865,23 +3914,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randKucing}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/wallpaper/pubg', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     Pubg = JSON.parse(fs.readFileSync(__dirname + '/data/pubg.json'));
@@ -3889,23 +3938,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randPubg}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/wallpaper/ppcouple', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     Pp = JSON.parse(fs.readFileSync(__dirname + '/data/profil.json'));
@@ -3913,23 +3962,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randPp}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/wallpaper/anjing', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     Anjing = JSON.parse(fs.readFileSync(__dirname + '/data/anjing.json'));
@@ -3937,23 +3986,23 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randAnjing}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/doraemon', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     Dora = JSON.parse(fs.readFileSync(__dirname + '/data/doraemon.json'));
@@ -3961,11 +4010,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randDora}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/anime/elaina', async (req, res, next) => {
@@ -3973,12 +4022,12 @@ app.get('/anime/elaina', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Elaina = JSON.parse(fs.readFileSync(__dirname + '/data/elaina.json'))
@@ -3987,11 +4036,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randElaina}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/anime/loli', async (req, res, next) => {
@@ -3999,12 +4048,12 @@ app.get('/anime/loli', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Loli = JSON.parse(fs.readFileSync(__dirname + '/data/loli.json'))
@@ -4013,11 +4062,11 @@ const add = adicionarSaldo(username)
 
     res.json({
       url: `${randLoli}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/anime/yuri', async (req, res, next) => {
@@ -4025,12 +4074,12 @@ app.get('/anime/yuri', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Yuri = JSON.parse(fs.readFileSync(__dirname + '/data/yuri.json'))
@@ -4038,11 +4087,11 @@ const add = adicionarSaldo(username)
     //tansole.log(randTech))
     res.json({
       url: `${randYuri}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/anime/cecan', async (req, res, next) => {
@@ -4050,12 +4099,12 @@ app.get('/anime/cecan', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const cecan = JSON.parse(fs.readFileSync(__dirname + '/data/cecan.json'));
@@ -4064,11 +4113,11 @@ const add = adicionarSaldo(username)
     //await fs.writeFileSync(__dirname + '/tmp/cecan.jpeg', data)
     res.json({
       url: `${randCecan}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 app.get('/wallpaper/aesthetic', async (req, res, next) => {
@@ -4076,12 +4125,12 @@ app.get('/wallpaper/aesthetic', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Aesthetic = JSON.parse(fs.readFileSync(__dirname + '/data/aesthetic.json'));
@@ -4090,11 +4139,11 @@ const add = adicionarSaldo(username)
     //await fs.writeFileSync(__dirname + '/tmp/aesthetic.jpeg', data)
     res.json({
       url: `${randAesthetic}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 
 
@@ -4103,12 +4152,12 @@ app.get('/anime/sagiri', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Sagiri = JSON.parse(fs.readFileSync(__dirname + '/data/sagiri.json'));
@@ -4117,23 +4166,23 @@ const add = adicionarSaldo(username)
     //await fs.writeFileSync(__dirname + '/tmp/sagiri.jpeg', data)
     res.json({
       url: `${randSagiri}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/shota', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Shota = JSON.parse(fs.readFileSync(__dirname + '/data/shota.json'));
@@ -4142,23 +4191,23 @@ const add = adicionarSaldo(username)
     //await fs.writeFileSync(__dirname + '/tmp/shota.jpeg', data)
     res.json({
       url: `${randShota}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/nsfwloli', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Lol = JSON.parse(fs.readFileSync(__dirname + '/data/nsfwloli.json'));
@@ -4167,11 +4216,11 @@ const add = adicionarSaldo(username)
     //await fs.writeFileSync(__dirname + '/tmp/lol.jpeg', data)
     res.json({
       url: `${randLol}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 app.get('/anime/hinata', async (req, res, next) => {
 
@@ -4179,12 +4228,12 @@ app.get('/anime/hinata', async (req, res, next) => {
   const users = Person
   // Verifica se o usuário existe e a chave está correta
   const user = await User.findOne({ username, key });
-    if (!user) {
-      return res.status(401).send('Acesso não autorizado.');
-    }
+  if (!user) {
+    return res.status(401).send('Acesso não autorizado.');
+  }
 
-const resultadoDiminuicao = diminuirSaldo(username);
-const add = adicionarSaldo(username)
+  const resultadoDiminuicao = diminuirSaldo(username);
+  const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
     const Hinata = JSON.parse(fs.readFileSync(__dirname + '/data/hinata.json'));
@@ -4193,11 +4242,11 @@ const add = adicionarSaldo(username)
     //await fs.writeFileSync(__dirname + '/tmp/Hinata.jpeg', data)
     res.json({
       url: `${randHin}`
-  })
+    })
   } else {
     console.log('Saldo insuficiente.');
   }
-  })
+})
 
 // Função auxiliar para salvar os dados dos usuários no arquivo JSON
 function saveUsers(users) {
@@ -4212,27 +4261,27 @@ function saveUsers(users) {
 
 app.get('/mangakit', async (req, res) => {
   try {
-  const query = req.query.q || ''; // Define o valor padrão como uma string vazia
+    const query = req.query.q || ''; // Define o valor padrão como uma string vazia
     const apiUrl = `https://ruby-careful-skunk.cyclic.app/search?q=${query}`;
     const response_2 = await axios.get(apiUrl);
     const mangas = response_2.data.mangas;
-/*
-    res.render('search', { mangas, query }); // Passa o valor de query para o template
-    */
+    /*
+        res.render('search', { mangas, query }); // Passa o valor de query para o template
+        */
     const response = await axios.get(`https://ruby-careful-skunk.cyclic.app/recents`);
     const topesResponse = await axios.get(`https://ruby-careful-skunk.cyclic.app/top/1`);
     const topesdois = await axios.get(`https://ruby-careful-skunk.cyclic.app/top/2`);
-    
+
     if (!response.ok && !topesResponse.ok && !topesdois.ok) {
       await new Promise(resolve => setTimeout(resolve, 1000));
     }
-    
+
     const dai = await response.data;
     const info = dai.mangas;
-    
+
     const topesData = await topesResponse.data;
     const mai = await topesdois.data
-    
+
     res.render('pagina', { data: topesData, zera: mai, info, mangas, query });
   } catch (error) {
     console.error('Error:', error.message);
@@ -4246,52 +4295,52 @@ app.get('/manga/:id', async (req, res) => {
   try {
     const id = req.params.id;
     const foto = req.query.foto;
-   // console.log(id);
+    // console.log(id);
 
     const response = await fetch(encodeURI(`https://ruby-careful-skunk.cyclic.app/chapters/${id}`));
 
     if (!response.ok) {
-    await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
     const data = await response.json();
     const info = data;
-   // console.log(data);
+    // console.log(data);
 
     const fotos = info.images;
     res.render('manga', { info, foto });
   } catch (error) {
     console.error('Error:', error.message);
     res.status(500).send('An error occurred while fetching manga data.');
-await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
 });
 
 
 app.get('/ler/:id', async (req, res) => {
 
- try {
+  try {
     const id = req.params.id;
-   // console.log(id);
+    // console.log(id);
 
     const response = await fetch(encodeURI(`https://ruby-careful-skunk.cyclic.app/pages/${id}`));
 
     if (!response.ok) {
-            await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
     }
 
     const data = await response.json();
     const info = data;
-   // console.log(data);
+    // console.log(data);
 
     const fotos = info.images;
     res.render('ler', { info, fotos });
   } catch (error) {
     console.error('Error:', error.message);
     res.status(500).send('An error occurred while fetching manga data.');
-await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
-  
+
 });
 
 // ... Código anterior
@@ -4400,67 +4449,67 @@ mongoose
     app.listen(PORT);
   })
   .catch((err) => console.log(err));
-  
-  
-  /*
+
+
+/*
 app.post('/favoritar/:id', async (req, res) => {
-  try {
-    const mangaId = req.params.id;
+try {
+  const mangaId = req.params.id;
 
-    // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
-    const currentUser = await User.findById(/* ID do usuário * /);
+  // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
+  const currentUser = await User.findById(/* ID do usuário * /);
 
-    if (currentUser) {
-      // Verifique se o mangá já está nos favoritos do usuário
-      const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
+  if (currentUser) {
+    // Verifique se o mangá já está nos favoritos do usuário
+    const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
 
-      if (existingMangaIndex === -1) {
-        // Se o mangá ainda não está nos favoritos, adicione-o
-        const mangaInfo = /* Obtenha as informações do mangá aqui * /;
-        currentUser.favoriteMangas.push({
-          mangaId: mangaId,
-          mangaName: mangaInfo.name,
-          imageUrl: mangaInfo.image
-        });
+    if (existingMangaIndex === -1) {
+      // Se o mangá ainda não está nos favoritos, adicione-o
+      const mangaInfo = /* Obtenha as informações do mangá aqui * /;
+      currentUser.favoriteMangas.push({
+        mangaId: mangaId,
+        mangaName: mangaInfo.name,
+        imageUrl: mangaInfo.image
+      });
 
-        // Salve as alterações no banco de dados
-        await currentUser.save();
-      }
+      // Salve as alterações no banco de dados
+      await currentUser.save();
     }
-
-    // Redirecione para a página do mangá ou para onde desejar
-    res.redirect(`/manga/${mangaId}`);
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.status(500).send('An error occurred while saving the manga to favorites.');
   }
+
+  // Redirecione para a página do mangá ou para onde desejar
+  res.redirect(`/manga/${mangaId}`);
+} catch (error) {
+  console.error('Error:', error.message);
+  res.status(500).send('An error occurred while saving the manga to favorites.');
+}
 });
 
 app.post('/removerfavorito/:id', async (req, res) => {
-  try {
-    const mangaId = req.params.id;
+try {
+  const mangaId = req.params.id;
 
-    // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
-    const currentUser = await User.findById(/* ID do usuário * /);
+  // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
+  const currentUser = await User.findById(/* ID do usuário * /);
 
-    if (currentUser) {
-      // Encontre o índice do mangá nos favoritos do usuário
-      const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
+  if (currentUser) {
+    // Encontre o índice do mangá nos favoritos do usuário
+    const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
 
-      if (existingMangaIndex !== -1) {
-        // Se o mangá estiver nos favoritos, remova-o
-        currentUser.favoriteMangas.splice(existingMangaIndex, 1);
+    if (existingMangaIndex !== -1) {
+      // Se o mangá estiver nos favoritos, remova-o
+      currentUser.favoriteMangas.splice(existingMangaIndex, 1);
 
-        // Salve as alterações no banco de dados
-        await currentUser.save();
-      }
+      // Salve as alterações no banco de dados
+      await currentUser.save();
     }
-
-    // Redirecione para a página do mangá ou para onde desejar
-    res.redirect(`/manga/${mangaId}`);
-  } catch (error) {
-    console.error('Error:', error.message);
-    res.status(500).send('An error occurred while removing the manga from favorites.');
   }
+
+  // Redirecione para a página do mangá ou para onde desejar
+  res.redirect(`/manga/${mangaId}`);
+} catch (error) {
+  console.error('Error:', error.message);
+  res.status(500).send('An error occurred while removing the manga from favorites.');
+}
 });
 */

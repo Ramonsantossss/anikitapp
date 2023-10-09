@@ -124,23 +124,16 @@ return tvShows;
 
 
 
+
 async function veranime(name) {
   try {
-    const url = `https://animeshentai.biz/anime/${name}`;
+    const url = `https://animeshentai.biz/hentai/${name}`;
     const response = await axios.get(url);
     const $ = cheerio.load(response.data);
 
     const animeInfo = {
-      title: $('.sheader h1').text(),
-      description: $('.wp-content p').text(),
-      genres: [],
       seasons: [],
-    };
-
-    // Extrair gêneros
-    $('.sgeneros a[rel="tag"]').each((_, genreElement) => {
-      animeInfo.genres.push($(genreElement).text());
-    });
+    }
 
     // Extrair informações das temporadas
     $('.se-c').each((seasonIndex, seasonElement) => {
@@ -177,8 +170,6 @@ async function veranime(name) {
 
 
 
-
-//veranime()
 
 
 module.exports = {
