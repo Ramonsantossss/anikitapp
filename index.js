@@ -78,7 +78,6 @@ const userSchema = new mongoose.Schema({
   saldo: { type: Number, default: 0 },
   total: { type: Number, default: 0 },
   ft: { type: String, default: null },
-  favoriteMangas: [{ mangaId: String, mangaName: String, imageUrl: String }],
 });
 
 // Criando o modelo do usuário
@@ -372,14 +371,22 @@ app.get('/login', (req, res) => {
   res.render('login'); // Renderiza a página de login (login.ejs)
 });
 
-app.get('/clover', (req, res) => {
-  const { key } = req.query;
-  if (key !== adminKey) {
-    return res.status(401).send('Acesso não autorizado para editar.');
+
+//////
+
+app.get('/clover', async (req, res) => {
+  const username = req.session.user;
+  const password = req.session.senha;
+  if (username !== 'SUPREMO') {
+    return res.status(401).send('Acesso não autorizado.');
   }
-  const users = readUsers();
+  const users = await User.find();
+
   res.render('index', { users });
 });
+
+// Resto do seu código
+
 
 
 
@@ -476,9 +483,10 @@ app.get('/perfil', async (req, res) => {
 
 // Rota de edição de perfil do usuário
 app.get('/editar/:username', async (req, res) => {
-  const { username } = req.params;
-  const { key } = req.query;
-
+  const username = req.session.user;
+  const key = username;
+  const password = req.session.senha;
+  const aoao = 'SUPREMO'
   try {
     const user = await User.findOne({ username });
 
@@ -486,7 +494,7 @@ app.get('/editar/:username', async (req, res) => {
       return res.status(404).send('Usuário não encontrado.');
     }
 
-    if (key !== adminKey && user.key !== key) {
+    if (key !== aoao && user.key !== key) {
       return res.status(401).send('Acesso não autorizado para editar.');
     }
 
@@ -567,7 +575,7 @@ app.get('/anikit', async (req, res) => {
 
 // Busca os top 7 usuários com base no campo total
 
-app.get('/', async(req, res) => {
+app.get('/', async (req, res) => {
   const username = req.session.user;
   const password = req.session.senha;
   // console.log(username, password)
@@ -590,7 +598,7 @@ app.get('/', async(req, res) => {
   }
 });
 
-app.get('/ver/:username', async(req, res) => {
+app.get('/ver/:username', async (req, res) => {
   const username = req.params.username;
   const dados = await User.findOne({ username });
   // console.log(dados);
@@ -1026,15 +1034,15 @@ app.get('/anikit/tiktok', async (req, res) => {
   if (resultadoDiminuicao && add) {
     const bad = require('./lib/tkdl.js');
 
-      console.log('Links dos vídeos encontrados:');
-      bad.ttdownloader(videoUrl)
+    console.log('Links dos vídeos encontrados:');
+    bad.ttdownloader(videoUrl)
       .then((result) => {
         res.json(result);
       })
       .catch((error) => {
         res.json(error);
       })
-    } else {
+  } else {
     console.log('Saldo insuficiente.');
   }
 })
