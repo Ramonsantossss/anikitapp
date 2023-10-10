@@ -31,7 +31,7 @@ let clientInstance;
 
 //const fs = require('fs');
 const P = require('pino');
-const { Boom } = require('@hapi/boom');
+const { Boom, badData } = require('@hapi/boom');
 const fetch = require('node-fetch');
 const chalk = require('chalk');
 const { color, bgcolor, logs } = require('./lib/color');
@@ -1024,11 +1024,17 @@ app.get('/anikit/tiktok', async (req, res) => {
   const resultadoDiminuicao = diminuirSaldo(username);
   const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
-    scrapeWebsite(videoUrl).then((videoLinks) => {
+    const bad = require('./lib/tkdl.js');
+
       console.log('Links dos vídeos encontrados:');
-      res.json({ link: videoLinks[0] });
-    });
-  } else {
+      bad.ttdownloader(videoUrl)
+      .then((result) => {
+        res.json(result);
+      })
+      .catch((error) => {
+        res.json(error);
+      })
+    } else {
     console.log('Saldo insuficiente.');
   }
 })
@@ -1776,7 +1782,7 @@ app.get('/nsfw/zettai', async (req, res, next) => {
   }
 })
 
-app.get('/anime/keneki', async (req, res, next) => {
+app.get('/nime/keneki', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -1800,7 +1806,7 @@ app.get('/anime/keneki', async (req, res, next) => {
   }
 })
 
-app.get('/anime/megumin', async (req, res, next) => {
+app.get('/nime/megumin', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -1824,7 +1830,7 @@ app.get('/anime/megumin', async (req, res, next) => {
   }
 })
 
-app.get('/anime/yotsuba', async (req, res, next) => {
+app.get('/nime/yotsuba', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -1848,7 +1854,7 @@ app.get('/anime/yotsuba', async (req, res, next) => {
   }
 })
 
-app.get('/anime/shinomiya', async (req, res, next) => {
+app.get('/nime/shinomiya', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -1872,7 +1878,7 @@ app.get('/anime/shinomiya', async (req, res, next) => {
   }
 })
 
-app.get('/anime/yumeko', async (req, res, next) => {
+app.get('/nime/yumeko', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -1896,7 +1902,7 @@ app.get('/anime/yumeko', async (req, res, next) => {
   }
 })
 
-app.get('/anime/tejina', async (req, res, next) => {
+app.get('/nime/tejina', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -1920,7 +1926,7 @@ app.get('/anime/tejina', async (req, res, next) => {
   }
 })
 
-app.get('/anime/chiho', async (req, res, next) => {
+app.get('/nime/chiho', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2014,7 +2020,7 @@ app.get('/18/foto_18', async (req, res, next) => {
   }
 })
 
-app.get('/anime/toukachan', async (req, res, next) => {
+app.get('/nime/toukachan', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2038,7 +2044,7 @@ app.get('/anime/toukachan', async (req, res, next) => {
   }
 })
 
-app.get('/anime/akira', async (req, res, next) => {
+app.get('/nime/akira', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2062,7 +2068,7 @@ app.get('/anime/akira', async (req, res, next) => {
   }
 })
 
-app.get('/anime/itori', async (req, res, next) => {
+app.get('/nime/itori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2086,7 +2092,7 @@ app.get('/anime/itori', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kurumi', async (req, res, next) => {
+app.get('/nime/kurumi', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2110,7 +2116,7 @@ app.get('/anime/kurumi', async (req, res, next) => {
   }
 })
 
-app.get('/anime/miku', async (req, res, next) => {
+app.get('/nime/miku', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2134,7 +2140,7 @@ app.get('/anime/miku', async (req, res, next) => {
   }
 })
 
-app.get('/anime/pokemon', async (req, res, next) => {
+app.get('/nime/pokemon', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2158,7 +2164,7 @@ app.get('/anime/pokemon', async (req, res, next) => {
   }
 })
 
-app.get('/anime/ryujin', async (req, res, next) => {
+app.get('/nime/ryujin', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2182,7 +2188,7 @@ app.get('/anime/ryujin', async (req, res, next) => {
   }
 })
 
-app.get('/anime/rose', async (req, res, next) => {
+app.get('/nime/rose', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2206,7 +2212,7 @@ app.get('/anime/rose', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kaori', async (req, res, next) => {
+app.get('/nime/kaori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2230,7 +2236,7 @@ app.get('/anime/kaori', async (req, res, next) => {
   }
 })
 
-app.get('/anime/shizuka', async (req, res, next) => {
+app.get('/nime/shizuka', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2254,7 +2260,7 @@ app.get('/anime/shizuka', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kaga', async (req, res, next) => {
+app.get('/nime/kaga', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2278,7 +2284,7 @@ app.get('/anime/kaga', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kotori', async (req, res, next) => {
+app.get('/nime/kotori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2302,7 +2308,7 @@ app.get('/anime/kotori', async (req, res, next) => {
   }
 })
 
-app.get('/anime/mikasa', async (req, res, next) => {
+app.get('/nime/mikasa', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2326,7 +2332,7 @@ app.get('/anime/mikasa', async (req, res, next) => {
   }
 })
 
-app.get('/anime/akiyama', async (req, res, next) => {
+app.get('/nime/akiyama', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2350,7 +2356,7 @@ app.get('/anime/akiyama', async (req, res, next) => {
   }
 })
 
-app.get('/anime/gremory', async (req, res, next) => {
+app.get('/nime/gremory', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2374,7 +2380,7 @@ app.get('/anime/gremory', async (req, res, next) => {
   }
 })
 
-app.get('/anime/isuzu', async (req, res, next) => {
+app.get('/nime/isuzu', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2398,7 +2404,7 @@ app.get('/anime/isuzu', async (req, res, next) => {
   }
 })
 
-app.get('/anime/cosplay', async (req, res, next) => {
+app.get('/nime/cosplay', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2422,7 +2428,7 @@ app.get('/anime/cosplay', async (req, res, next) => {
   }
 })
 
-app.get('/anime/shina', async (req, res, next) => {
+app.get('/nime/shina', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2446,7 +2452,7 @@ app.get('/anime/shina', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kagura', async (req, res, next) => {
+app.get('/nime/kagura', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2470,7 +2476,7 @@ app.get('/anime/kagura', async (req, res, next) => {
   }
 })
 
-app.get('/anime/shinka', async (req, res, next) => {
+app.get('/nime/shinka', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2494,7 +2500,7 @@ app.get('/anime/shinka', async (req, res, next) => {
   }
 })
 
-app.get('/anime/eba', async (req, res, next) => {
+app.get('/nime/eba', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2518,7 +2524,7 @@ app.get('/anime/eba', async (req, res, next) => {
   }
 })
 
-app.get('/anime/deidara', async (req, res, next) => {
+app.get('/nime/deidara', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2544,7 +2550,7 @@ app.get('/anime/deidara', async (req, res, next) => {
 
 
 
-app.get('/anime/jeni', async (req, res, next) => {
+app.get('/nime/jeni', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2592,7 +2598,7 @@ app.get('/random/meme', async (req, res, next) => {
     console.log('Saldo insuficiente.');
   }
 })
-app.get('/anime/toukachan', async (req, res, next) => {
+app.get('/nime/toukachan', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2616,7 +2622,7 @@ app.get('/anime/toukachan', async (req, res, next) => {
   }
 })
 
-app.get('/anime/akira', async (req, res, next) => {
+app.get('/nime/akira', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2640,7 +2646,7 @@ app.get('/anime/akira', async (req, res, next) => {
   }
 })
 
-app.get('/anime/itori', async (req, res, next) => {
+app.get('/nime/itori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2664,7 +2670,7 @@ app.get('/anime/itori', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kurumi', async (req, res, next) => {
+app.get('/nime/kurumi', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2688,7 +2694,7 @@ app.get('/anime/kurumi', async (req, res, next) => {
   }
 })
 
-app.get('/anime/miku', async (req, res, next) => {
+app.get('/nime/miku', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2712,7 +2718,7 @@ app.get('/anime/miku', async (req, res, next) => {
   }
 })
 
-app.get('/anime/pokemon', async (req, res, next) => {
+app.get('/nime/pokemon', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2736,7 +2742,7 @@ app.get('/anime/pokemon', async (req, res, next) => {
   }
 })
 
-app.get('/anime/ryujin', async (req, res, next) => {
+app.get('/nime/ryujin', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2760,7 +2766,7 @@ app.get('/anime/ryujin', async (req, res, next) => {
   }
 })
 
-app.get('/anime/rose', async (req, res, next) => {
+app.get('/nime/rose', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2784,7 +2790,7 @@ app.get('/anime/rose', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kaori', async (req, res, next) => {
+app.get('/nime/kaori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2808,7 +2814,7 @@ app.get('/anime/kaori', async (req, res, next) => {
   }
 })
 
-app.get('/anime/shizuka', async (req, res, next) => {
+app.get('/nime/shizuka', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2832,7 +2838,7 @@ app.get('/anime/shizuka', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kaga', async (req, res, next) => {
+app.get('/nime/kaga', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2856,7 +2862,7 @@ app.get('/anime/kaga', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kotori', async (req, res, next) => {
+app.get('/nime/kotori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2880,7 +2886,7 @@ app.get('/anime/kotori', async (req, res, next) => {
   }
 })
 
-app.get('/anime/mikasa', async (req, res, next) => {
+app.get('/nime/mikasa', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2904,7 +2910,7 @@ app.get('/anime/mikasa', async (req, res, next) => {
   }
 })
 
-app.get('/anime/akiyama', async (req, res, next) => {
+app.get('/nime/akiyama', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2928,7 +2934,7 @@ app.get('/anime/akiyama', async (req, res, next) => {
   }
 })
 
-app.get('/anime/gremory', async (req, res, next) => {
+app.get('/nime/gremory', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2941,9 +2947,9 @@ app.get('/anime/gremory', async (req, res, next) => {
   const add = adicionarSaldo(username)
   if (resultadoDiminuicao && add) {
 
-    const gremory = JSON.parse(fs.readFileSync(__dirname + '/data/gremory.json'));
+    const gremory = JSON.parse(fs.readFileSync('./data/gremory.json'));
     const randgremory = gremory[Math.floor(Math.random() * gremory.length)];
-
+    console.log(randgremory)
     res.json({
       url: `${randgremory}`
     })
@@ -2952,7 +2958,7 @@ app.get('/anime/gremory', async (req, res, next) => {
   }
 })
 
-app.get('/anime/isuzu', async (req, res, next) => {
+app.get('/nime/isuzu', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -2976,7 +2982,7 @@ app.get('/anime/isuzu', async (req, res, next) => {
   }
 })
 
-app.get('/anime/cosplay', async (req, res, next) => {
+app.get('/nime/cosplay', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3000,7 +3006,7 @@ app.get('/anime/cosplay', async (req, res, next) => {
   }
 })
 
-app.get('/anime/shina', async (req, res, next) => {
+app.get('/nime/shina', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3024,7 +3030,7 @@ app.get('/anime/shina', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kagura', async (req, res, next) => {
+app.get('/nime/kagura', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3048,7 +3054,7 @@ app.get('/anime/kagura', async (req, res, next) => {
   }
 })
 
-app.get('/anime/shinka', async (req, res, next) => {
+app.get('/nime/shinka', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3072,7 +3078,7 @@ app.get('/anime/shinka', async (req, res, next) => {
   }
 })
 
-app.get('/anime/eba', async (req, res, next) => {
+app.get('/nime/eba', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3096,7 +3102,7 @@ app.get('/anime/eba', async (req, res, next) => {
   }
 })
 
-app.get('/anime/deidara', async (req, res, next) => {
+app.get('/nime/deidara', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3122,7 +3128,7 @@ app.get('/anime/deidara', async (req, res, next) => {
 
 
 
-app.get('/anime/jeni', async (req, res, next) => {
+app.get('/nime/jeni', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3197,7 +3203,7 @@ app.get('/wallpaper/satanic', async (req, res, next) => {
 
 
 
-app.get('/anime/itachi', async (req, res, next) => {
+app.get('/nime/itachi', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3221,7 +3227,7 @@ app.get('/anime/itachi', async (req, res, next) => {
   }
 })
 
-app.get('/anime/madara', async (req, res, next) => {
+app.get('/nime/madara', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3245,7 +3251,7 @@ app.get('/anime/madara', async (req, res, next) => {
   }
 })
 
-app.get('/anime/yuki', async (req, res, next) => {
+app.get('/nime/yuki', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3293,7 +3299,7 @@ app.get('/wallpaper/asuna', async (req, res, next) => {
   }
 })
 
-app.get('/anime/ayuzawa', async (req, res, next) => {
+app.get('/nime/ayuzawa', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3317,7 +3323,7 @@ app.get('/anime/ayuzawa', async (req, res, next) => {
   }
 })
 
-app.get('/anime/chitoge', async (req, res, next) => {
+app.get('/nime/chitoge', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3341,7 +3347,7 @@ app.get('/anime/chitoge', async (req, res, next) => {
   }
 })
 
-app.get('/anime/emilia', async (req, res, next) => {
+app.get('/nime/emilia', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3356,7 +3362,7 @@ app.get('/anime/emilia', async (req, res, next) => {
 
     const emilia = JSON.parse(fs.readFileSync(__dirname + '/data/emilia.json'));
     const randemilia = emilia[Math.floor(Math.random() * emilia.length)];
-
+    console.log(randemilia)
     res.json({
       url: `${randemilia}`
     })
@@ -3365,7 +3371,7 @@ app.get('/anime/emilia', async (req, res, next) => {
   }
 })
 
-app.get('/anime/hestia', async (req, res, next) => {
+app.get('/nime/hestia', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3389,7 +3395,7 @@ app.get('/anime/hestia', async (req, res, next) => {
   }
 })
 
-app.get('/anime/inori', async (req, res, next) => {
+app.get('/nime/inori', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3413,7 +3419,7 @@ app.get('/anime/inori', async (req, res, next) => {
   }
 })
 
-app.get('/anime/ana', async (req, res, next) => {
+app.get('/nime/ana', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3437,7 +3443,7 @@ app.get('/anime/ana', async (req, res, next) => {
   }
 })
 
-app.get('/anime/boruto', async (req, res, next) => {
+app.get('/nime/boruto', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3461,7 +3467,7 @@ app.get('/anime/boruto', async (req, res, next) => {
   }
 })
 
-app.get('/anime/erza', async (req, res, next) => {
+app.get('/nime/erza', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3485,7 +3491,7 @@ app.get('/anime/erza', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kakasih', async (req, res, next) => {
+app.get('/nime/kakasih', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3509,7 +3515,7 @@ app.get('/anime/kakasih', async (req, res, next) => {
   }
 })
 
-app.get('/anime/sagiri', async (req, res, next) => {
+app.get('/nime/sagiri', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3533,7 +3539,7 @@ app.get('/anime/sagiri', async (req, res, next) => {
   }
 })
 
-app.get('/anime/minato', async (req, res, next) => {
+app.get('/nime/minato', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3557,7 +3563,7 @@ app.get('/anime/minato', async (req, res, next) => {
   }
 })
 
-app.get('/anime/naruto', async (req, res, next) => {
+app.get('/nime/naruto', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3581,7 +3587,7 @@ app.get('/anime/naruto', async (req, res, next) => {
   }
 })
 
-app.get('/anime/nezuko', async (req, res, next) => {
+app.get('/nime/nezuko', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3605,7 +3611,7 @@ app.get('/anime/nezuko', async (req, res, next) => {
   }
 })
 
-app.get('/anime/onepiece', async (req, res, next) => {
+app.get('/nime/onepiece', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3629,7 +3635,7 @@ app.get('/anime/onepiece', async (req, res, next) => {
   }
 })
 
-app.get('/anime/rize', async (req, res, next) => {
+app.get('/nime/rize', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3653,7 +3659,7 @@ app.get('/anime/rize', async (req, res, next) => {
   }
 })
 
-app.get('/anime/sakura', async (req, res, next) => {
+app.get('/nime/sakura', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3677,7 +3683,7 @@ app.get('/anime/sakura', async (req, res, next) => {
   }
 })
 
-app.get('/anime/sasuke', async (req, res, next) => {
+app.get('/nime/sasuke', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3701,7 +3707,7 @@ app.get('/anime/sasuke', async (req, res, next) => {
   }
 })
 
-app.get('/anime/tsunade', async (req, res, next) => {
+app.get('/nime/tsunade', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3725,7 +3731,7 @@ app.get('/anime/tsunade', async (req, res, next) => {
   }
 })
 
-app.get('/anime/montor', async (req, res, next) => {
+app.get('/nime/montor', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3749,7 +3755,7 @@ app.get('/anime/montor', async (req, res, next) => {
   }
 })
 // ain
-app.get('/anime/mobil', async (req, res, next) => {
+app.get('/nime/mobil', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3774,7 +3780,7 @@ app.get('/anime/mobil', async (req, res, next) => {
 })
 
 
-app.get('/anime/anime', async (req, res, next) => {
+app.get('/nime/anime', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3799,7 +3805,7 @@ app.get('/anime/anime', async (req, res, next) => {
 })
 
 
-app.get('/anime/wallhp', async (req, res, next) => {
+app.get('/nime/wallhp', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3823,7 +3829,7 @@ app.get('/anime/wallhp', async (req, res, next) => {
   }
 })
 
-app.get('/anime/waifu2', async (req, res, next) => {
+app.get('/nime/waifu2', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3847,7 +3853,7 @@ app.get('/anime/waifu2', async (req, res, next) => {
   }
 })
 
-app.get('/anime/waifu', async (req, res, next) => {
+app.get('/nime/waifu', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3872,7 +3878,7 @@ app.get('/anime/waifu', async (req, res, next) => {
 })
 
 
-app.get('/anime/hekel', async (req, res, next) => {
+app.get('/nime/hekel', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3896,7 +3902,7 @@ app.get('/anime/hekel', async (req, res, next) => {
   }
 })
 
-app.get('/anime/kucing', async (req, res, next) => {
+app.get('/nime/kucing', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -3992,7 +3998,7 @@ app.get('/wallpaper/anjing', async (req, res, next) => {
   }
 })
 
-app.get('/anime/doraemon', async (req, res, next) => {
+app.get('/nime/doraemon', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -4017,7 +4023,7 @@ app.get('/anime/doraemon', async (req, res, next) => {
 })
 
 
-app.get('/anime/elaina', async (req, res, next) => {
+app.get('/nime/elaina', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -4043,7 +4049,7 @@ app.get('/anime/elaina', async (req, res, next) => {
 })
 
 
-app.get('/anime/loli', async (req, res, next) => {
+app.get('/nime/loli', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -4069,7 +4075,7 @@ app.get('/anime/loli', async (req, res, next) => {
 })
 
 
-app.get('/anime/yuri', async (req, res, next) => {
+app.get('/nime/yuri', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -4094,7 +4100,7 @@ app.get('/anime/yuri', async (req, res, next) => {
 })
 
 
-app.get('/anime/cecan', async (req, res, next) => {
+app.get('/nime/cecan', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -4147,7 +4153,7 @@ app.get('/wallpaper/aesthetic', async (req, res, next) => {
 
 
 
-app.get('/anime/sagiri', async (req, res, next) => {
+app.get('/nime/sagiri', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -4172,7 +4178,7 @@ app.get('/anime/sagiri', async (req, res, next) => {
   }
 })
 
-app.get('/anime/shota', async (req, res, next) => {
+app.get('/nime/shota', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -4197,7 +4203,7 @@ app.get('/anime/shota', async (req, res, next) => {
   }
 })
 
-app.get('/anime/nsfwloli', async (req, res, next) => {
+app.get('/nime/nsfwloli', async (req, res, next) => {
   const { username, key } = req.query;
   const users = Person
   // Verifica se o usuário existe e a chave está correta
@@ -4222,7 +4228,7 @@ app.get('/anime/nsfwloli', async (req, res, next) => {
   }
 })
 
-app.get('/anime/hinata', async (req, res, next) => {
+app.get('/nime/hinata', async (req, res, next) => {
 
   const { username, key } = req.query;
   const users = Person
@@ -4445,7 +4451,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log('Conectou ao banco!');
+    console.log('Conectou ao banco de dados!');
     app.listen(PORT);
   })
   .catch((err) => console.log(err));

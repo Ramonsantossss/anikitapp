@@ -34,7 +34,7 @@
 
     body {
       min-height: 100vh;
-      background-color: #1C1C1C;
+      background-color: black;
       background-size: 200% 200%;
       animation: color 2.7s ease infinite;
       color: white;
@@ -190,11 +190,9 @@
     }
 
     .tutotxt {
-      background-color: var(--color-dark3);
+      background-color: #1c1c1c;
       border-radius: 7px;
       margin: 24px;
-      box-shadow: 0 0 7px darkgray;
-
     }
 
     .fotos {
@@ -214,8 +212,7 @@
     }
 
     .cabeca {
-      background-color: var(--color-dark3);
-
+      background-color: #1c1c1c;
       text-align: center;
       padding: 20px;
       box-shadow: 10px 10px 10px black;
@@ -223,13 +220,13 @@
     }
 
     .final {
-      background-color: var(--color-dark3);
+      background-color: #1c1c1c;
 
       margin-bottom: 0;
       text-align: center;
       padding: 20px;
       box-shadow: 10px 10px 10px black;
-      box-shadow: 0 0 7px darkgray;
+     
     }
 
     .ft {
@@ -301,7 +298,7 @@
       width: 25%;
     }
 
-    
+
 
     .bv {}
 
@@ -502,7 +499,7 @@
       font-size: 12px;
       margin: 10px;
       color: white;
-      background: black;
+      background: #1c1c1c;
       margin: 0;
       padding: 15px;
       box-shadow: 0 0 3px white;
@@ -520,8 +517,33 @@
     .ip h3 {
       text-align: center;
     }
+
     .verp {
       text-decoration-color: transparent;
+    }
+
+    .bloco {
+      display: flex;
+      background-color: #1c1c1c;
+      margin: 24px;
+      padding: 15px;
+      border-radius: 7px;
+      font-size: 18px;
+    }
+
+    .blocodois {
+      color: white;
+    }
+
+    .blocodois i {
+      font-size: 50px;
+    }
+
+    .ppp {
+      float: right;
+      text-align: right;
+      margin-left: 50%;
+      margin-top: 15px;
     }
   </style>
   <script>
@@ -557,7 +579,7 @@
 
       <div class="fe">
         <a href="/perfil">
-          <img src="<%= user.ft %>"/>
+          <img src="<%= user.ft %>" />
         </a>
       </div>
       <div class="side-bar">
@@ -609,73 +631,73 @@
             <div class="sub-menu">
 
               <a class="dropdown-item" target="_blank"
-                href="/anime/cosplay?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+                href="/nime/cosplay?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
                 Cosplay</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/waifu?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Waifu</a>
+                href="/nime/waifu?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Waifu</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/waifu2?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Waifu2</a>
+                href="/nime/waifu2?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Waifu2</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/shota?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Shota</a>
+                href="/nime/shota?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Shota</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/loli?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Loli</a>
+                href="/nime/loli?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Loli</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/yotsuba?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+                href="/nime/yotsuba?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
                 Yotsuba</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/shinomiya?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+                href="/nime/shinomiya?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
                 Shinomiya</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/yumeko?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Yumeko</a>
+                href="/nime/yumeko?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Yumeko</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/tejina?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Tejina</a>
+                href="/nime/tejina?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Tejina</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/chiho?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Chiho</a>
+                href="/nime/chiho?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Chiho</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/shizuka?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+                href="/nime/shizuka?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
                 Shizuka</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/boruto?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Boruto</a>
+                href="/nime/boruto?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Boruto</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/kagori?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Kagori</a>
+                href="/nime/kagori?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Kagori</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/kaga?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Kaga</a>
+                href="/nime/kaga?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Kaga</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/kotori?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Kotori</a>
+                href="/nime/kotori?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Kotori</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/mikasa?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Mikasa</a>
+                href="/nime/mikasa?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Mikasa</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/akiyama?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+                href="/nime/akiyama?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
                 Akiyama</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/hinata?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Hinata</a>
+                href="/nime/hinata?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Hinata</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/minato?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Minato</a>
+                href="/nime/minato?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Minato</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/naruto?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Naruto</a>
+                href="/nime/naruto?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Naruto</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/nezuko?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Nezuko</a>
+                href="/nime/nezuko?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Nezuko</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/yuki?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Yuki</a>
+                href="/nime/yuki?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Yuki</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/hestia?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Hestia</a>
+                href="/nime/hestia?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Hestia</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/emilia?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Emilia</a>
+                href="/nime/emilia?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Emilia</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/itachi?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Itachi</a>
+                href="/nime/itachi?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Itachi</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/elaina?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Elaina</a>
+                href="/nime/elaina?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Elaina</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/madara?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Madara</a>
+                href="/nime/madara?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Madara</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/sasuke?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Sasuke</a>
+                href="/nime/sasuke?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Sasuke</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/deidara?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+                href="/nime/deidara?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
                 Deidara</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/sakura?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Sakura</a>
+                href="/nime/sakura?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime Sakura</a>
               <a class="dropdown-item" target="_blank"
-                href="/anime/tsunade?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+                href="/nime/tsunade?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
                 Tsunade</a>
 
             </div>
@@ -685,7 +707,7 @@
             <a class="sub-btn"><i class='far fa-check-circle'></i>NSFW<i class="fas fa-angle-right dropdown"></i></a>
             <div class="sub-menu">
               <a class="dropdown-item" target="_blank"
-                href="/anime/nsfwloli?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Nswf loli</a>
+                href="/nime/nsfwloli?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Nswf loli</a>
               <a class="dropdown-item" target="_blank"
                 href="/nsfw/ahegao?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw ahegao</a>
               <a class="dropdown-item" target="_blank"
@@ -780,65 +802,73 @@
   <div class="cabeca">
     <p class="fas fa-database"> AniKit - Api</p>
   </div>
-
   <div tabindex="0" class="content" onfocus="closeSidebar()" id="content">
-
   </div>
-  <div class="tutotxt"><br>
-    <center>
-      <h2 class="nov">Ola <%= user.username %> ↯</h2>
-      <br>
-    </center>
-    <div class="ip">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="font-weight-bold text-danger text-uppercase"></h5>
-          <h3 style="color: red;" class="font-weight-bold">Suas Informações ↯</h3>
-          <div class="video-container">
-            <center>
-            </center>
-            <h4>Nick: <%= user.username %>
-            </h4>
-            <h4>Saldo: <%= user.saldo %>
-            </h4>
-            <h4>Chave: <%= user.key %>
-            </h4>
-            <br>
-            <p>Para editar seu perfil clique na foto no canto direito do topo da tela</p>
-            </form>
-            </center>
-          </div>
-        </div>
-      </div>
+
+  <div class="bloco">
+    <div class="blocodois">
+      <i class='far fa-address-card'></i>
+    </div>
+    <div class="ppp">
+      <p>
+        <%= user.username %>
+      </p>
+    </div>
+  </div>
+  <div class="bloco">
+    <div class="blocodois">
+      <i class='fas fa-chart-area'></i>
+    </div>
+    <div class="ppp">
+      <p>
+        <%= user.total %>
+      </p>
+    </div>
+  </div>
+  <div class="bloco">
+    <div class="blocodois">
+      <i class='fas fa-dollar-sign'></i>
+    </div>
+    <div class="ppp">
+      <p>
+        <%= user.saldo %>
+      </p>
+    </div>
+  </div>
+  <div class="bloco">
+    <div class="blocodois">
+      <i class='fas fa-key'></i>
+    </div>
+    <div class="ppp">
+      <p>
+        <%= user.key %>
+      </p>
     </div>
   </div>
 
-
-
-  </div>
-
-  </div>
-
-
-
-  <h1>Lista de Usuários Mais Ativos</h1>
-  <div class="tutotxt">
+  <div class="tutotxt"><br>
+    <h1>Lista de Usuários Mais Ativos</h1>
     <div class="tutotxtt">
       <center>
         <% topUsers.sort((a, b)=> b.total - a.total).forEach(function(user) { %><br>
           <a class="verp" href="/ver/<%= user.username %>">
-          <div class="user-info">
-            <img class="user-photo" src="<%= user.ft %>" alt="Foto do Usuário">
-            <div class="user-name">@<%= user.username %>: <%= user.total %>
+            <div class="user-info">
+              <img class="user-photo" src="<%= user.ft %>" alt="Foto do Usuário">
+              <div class="user-name">@<%= user.username %>: <%= user.total %>
+              </div>
             </div>
-          </div>
-         </a>
+          </a>
           <hr><br>
           <% }); %>
 
       </center>
     </div>
+
   </div>
+
+
+
+
 
 
   </div>
