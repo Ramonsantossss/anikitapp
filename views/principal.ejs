@@ -14,6 +14,18 @@
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <link rel="shortcut icon" href="https://telegra.ph/file/a3374ddefcec357cd06b2.jpg" type="image/x-icon" />
   <title>Clover-Mods</title>
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.8/font-awesome-animation.min.css" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://inirey.github.io/lolhuman/vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+    type="text/css">
+  <link href="https://inirey.github.io/lolhuman/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"
+    type="text/css">
+  <link href="https://inirey.github.io/lolhuman/css/default.css" rel="stylesheet">
+  <link href="./cor.css" rel="stylesheet">
   <style>
     :root {
       --color-white: #fff;
@@ -54,6 +66,28 @@
       }
     }
 
+    body.dark-mode {
+      --bg-opacity: 1;
+      background-color: #1a202c;
+      background-color: rgba(26, 32, 44, var(--bg-opacity));
+      color: #d3d5f3;
+    }
+
+    .card-body {
+      background-color: #1c1c1c;
+
+    }
+
+    .sticky-footer {
+      background-color: #1c1c1c;
+
+      color: #fff
+    }
+
+    .sticky-footer a {
+      color: #fff
+    }
+
     .side-bar {
       background: rgba(000, 000, 000, 0.2);
       backdrop-filter: blur(15px);
@@ -69,12 +103,14 @@
 
     .side-bar.active {
       left: 0;
+      position: absolute;
     }
 
     .side-bar .menu {
       width: 100%;
       margin-top: 35px;
       text-shadow: 7px 7px 7px black;
+      position: absolute;
     }
 
     .side-bar .menu .item {
@@ -181,7 +217,6 @@
 
     .txt i {
       text-align: center;
-
       margin-top: 25px;
       font-size: 25px;
       margin-left: 25px;
@@ -191,7 +226,6 @@
 
     .tutotxt {
       background-color: #1c1c1c;
-      border-radius: 7px;
       margin: 24px;
     }
 
@@ -201,13 +235,11 @@
     }
 
     .tutotxtt {
-
       margin: 7px;
       text-align: center;
     }
 
     .aaaa {
-
       margin: 5px;
     }
 
@@ -216,7 +248,7 @@
       text-align: center;
       padding: 20px;
       box-shadow: 10px 10px 10px black;
-      box-shadow: 0 0 7px darkgray;
+      
     }
 
     .final {
@@ -434,6 +466,11 @@
       text-align: center;
     }
 
+    hr {
+      color: white;
+      background-color: white;
+    }
+
     .laranja {
       background-color: orange;
       transition: all 0.25s ease-in-out;
@@ -522,28 +559,85 @@
       text-decoration-color: transparent;
     }
 
-    .bloco {
-      display: flex;
-      background-color: #1c1c1c;
-      margin: 24px;
-      padding: 15px;
-      border-radius: 7px;
-      font-size: 18px;
-    }
-
-    .blocodois {
+    .container2 {
+      /* Alterado para alinhar os elementos à esquerda */
+      background-color: rgba(0, 255, 0, 0.3);
+      padding: 10px 10px;
+      /* Ajustado o padding para aproximar a barra da imagem */
+      width: 90%;
+      /* Ajustado a largura para melhor acomodar os elementos */
+      border-radius: 5px;
       color: white;
     }
 
-    .blocodois i {
-      font-size: 50px;
+    .container2 i {
+      font-size: 23px;
+
     }
 
-    .ppp {
-      float: right;
-      text-align: right;
-      margin-left: 50%;
-      margin-top: 15px;
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      /* Alterado para alinhar os elementos à esquerda */
+      background-color: #1c1c1c;
+      padding: 10px 10px;
+      /* Ajustado o padding para aproximar a barra da imagem */
+      width: 90%;
+      /* Ajustado a largura para melhor acomodar os elementos */
+      border-radius: 5px;
+      color: white;
+    }
+
+    .fav-icon {
+      font-size: 400%;
+    }
+
+    .vertical-bar {
+      width: 2px;
+      height: 44px;
+      padding: 3px;
+      background-color: #bd00ff;
+      margin: 0 5px;
+      /* Espaçamento reduzido entre a imagem e a barra */
+    }
+
+    .current-time {
+      font-size: 23px;
+      margin-right: 0;
+      margin-left: 65%;
+    }
+
+    /* Estilize o bloco de novidades de acordo com suas preferências */
+    .novidades {
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .novidades h2 {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .noticia {
+      margin: 25px 0;
+      padding: 10px;
+      background-color: #1c1c1c;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: left;
+    }
+
+    .noticia h3 {
+      font-size: 18px;
+      color: #333;
+    }
+
+    .noticia p {
+      font-size: 14px;
+      color: #777;
     }
   </style>
   <script>
@@ -563,7 +657,6 @@
 </head>
 
 <body>
-
 
   <header>
     <nav>
@@ -807,48 +900,133 @@
   </div>
   <div tabindex="0" class="content" onfocus="closeSidebar()" id="content">
   </div>
+  <br><br>
+<!--
 
-  <div class="bloco">
-    <div class="blocodois">
-      <i class='far fa-address-card'></i>
-    </div>
-    <div class="ppp">
-      <p>
-        <%= user.username %>
-      </p>
-    </div>
+    <div class="novidades">
+  <h2>Últimas Novidades</h2>
+  <div class="noticia">
+    <h3>Título da Notícia 1</h3>
+    <p>Descrição da notícia 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
   </div>
-  <div class="bloco">
-    <div class="blocodois">
-      <i class='fas fa-chart-area'></i>
-    </div>
-    <div class="ppp">
-      <p>
-        <%= user.total %>
-      </p>
-    </div>
+  <div class="noticia">
+    <h3>Título da Notícia 2</h3>
+    <p>Descrição da notícia 2. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
   </div>
-  <div class="bloco">
-    <div class="blocodois">
-      <i class='fas fa-dollar-sign'></i>
-    </div>
-    <div class="ppp">
-      <p>
-        <%= user.saldo %>
-      </p>
-    </div>
+  <div class="noticia">
+    <h3>Título da Notícia 3</h3>
+    <p>Descrição da notícia 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
   </div>
-  <div class="bloco">
-    <div class="blocodois">
-      <i class='fas fa-key'></i>
-    </div>
-    <div class="ppp">
-      <p>
-        <%= user.key %>
-      </p>
-    </div>
-  </div>
+</div> 
+-->
 
+
+
+
+  <center>
+
+    <div id="content">
+      <!-- Container Fluid-->
+      <div class="container-fluid" id="container-wrapper">
+        <div class="card h-50 mb-4">
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col mr-2">
+                <h3 style="margin-bottom: 0;"><i class="fas fa-ruler text-danger"></i>Ola <%= user.username %></h3>
+
+                <div class="card-body mb-3">
+                  <ol>
+                    <li>Nao mande sua apikey pra ninguem.</li>
+                    <li>Nao mande sua senha pra ninguem</li>
+                    <li>10K de saldo inicial</li>
+                    <li>Quando acabar o saldo fale com o Suporte.</li>
+                    <li>Aproveite</li>
+                  </ol>
+                </div>
+              </div>
+              <div class="col-auto">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <!-- Earnings (Annual) Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-50">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-uppercase mb-1">Registrados </div>
+                    <div class="h5 mb-0 font-weight-bold">
+                      <%= quantidade %> Users
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fa fa-users faa-ring animated fa-2x text-primary"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Pending Requests Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-50">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-uppercase mb-1">Total de Requests </div>
+                    <div class="h5 mb-0 font-weight-bold"><%= user.total %></div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-chart-area faa-wrench animated fa-2x text-primary"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Earnings (Annual) Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-50">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-uppercase mb-1">ApiKey </div>
+                    <div class="h5 mb-0 font-weight-bold">
+                      <%= user.key %>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-key faa-ring animated fa-2x text-primary"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Pending Requests Card Example -->
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card h-50">
+              <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div class="text-xs font-weight-bold text-uppercase mb-1">Saldo </div>
+                    <div class="h5 mb-0 font-weight-bold"><%= user.saldo %></div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fas fa-dollar-sign faa-wrench animated fa-2x text-primary"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--Row-->   
+      </div>
+      <!---Container Fluid-->
+    </div>
+  </center>
+
+  
   <div class="tutotxt"><br>
     <h1>Lista de Usuários Mais Ativos</h1>
     <div class="tutotxtt">
@@ -881,8 +1059,6 @@
     <div class="d-sm-flex justify-content-center justify-content-sm-between">
       <p><span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2023 Clover-Mods</span>
       </p>
-      <p><span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Meu Canal: <a
-            href="https://youtube.com/@clovermods" target="_blank">「 Clique 」</a> RUMO AOS 1000 INSCRITOS</span></p>
     </div>
   </footer>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js">
@@ -953,7 +1129,10 @@
       document.querySelector("body").setAttribute("class", "purpura");
     })
   </script>
-
+<script src="https://inirey.github.io/lolhuman/vendor/jquery/jquery.min.js"></script>
+<script src="https://inirey.github.io/lolhuman/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://inirey.github.io/lolhuman/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="https://inirey.github.io/lolhuman/js/ruang-admin.min.js"></script>
 </body>
 
 </html>

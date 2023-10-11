@@ -1,0 +1,19 @@
+body.dark-mode {
+    --bg-opacity: 1;
+    background-color: #1a202c;
+    background-color: rgba(26, 32, 44, var(--bg-opacity));
+    color: #d3d5f3;
+}
+
+.card-body {
+    background-color: #1c1c1c;
+}
+
+.sticky-footer {
+    background-color: #1c1c1c;
+    color: #fff
+}
+
+.sticky-footer a {
+    color: #fff
+}

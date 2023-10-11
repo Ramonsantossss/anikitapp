@@ -337,8 +337,10 @@ app.get('/episodios/:categoryId', async (req, res) => {
 });
 
 
-
-
+app.get('/test', async(req, res) => {
+  const aoba = path.join(__dirname, './views/test.html');
+  res.sendFile(aoba)
+})
 
 // Rota de registro para criar um novo usuário
 app.post('/register', async (req, res) => {
@@ -375,8 +377,7 @@ app.get('/login', (req, res) => {
 //////
 
 app.get('/clover', async (req, res) => {
-  const username = req.session.user;
-  const password = req.session.senha;
+  const username = req.query.username;
   if (username !== 'SUPREMO') {
     return res.status(401).send('Acesso não autorizado.');
   }
@@ -562,9 +563,10 @@ app.get('/anikit', async (req, res) => {
       const htmlPath = path.join(__dirname, './views/login.html');
       res.sendFile(htmlPath);
     }
-
+    const quantidadeRegistrados = await User.countDocuments();
     const topUsers = await User.find().sort({ total: -1 }).limit(7);
-    res.render('principal', { user, users, topUsers });
+    // console.log(quantidadeRegistrados)
+    res.render('principal', { user, users, topUsers, quantidade: quantidadeRegistrados });
   } catch (error) {
     console.error('Erro ao acessar o banco de dados:', error);
     return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
