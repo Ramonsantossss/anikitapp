@@ -248,7 +248,7 @@
       text-align: center;
       padding: 20px;
       box-shadow: 10px 10px 10px black;
-      
+
     }
 
     .final {
@@ -639,6 +639,15 @@
       font-size: 14px;
       color: #777;
     }
+
+    .opcao {
+      padding: 5px;
+      border: solid 1px #fff;
+      margin: 5px;
+      border-radius: 5px;
+      text-align: left;
+      color: #fff;
+    }
   </style>
   <script>
     document.getElementById("btn-laranja").addEventListener("click", function () {
@@ -660,11 +669,13 @@
 
   <header>
     <nav>
-
-      <div class="menu-btn">
+      <!--
+ <div class="menu-btn">
         <i class="fas fa-bars"></i>
 
       </div>
+      -->
+
 
 
       </div>
@@ -884,6 +895,7 @@
             </div>
 
           </div>
+
         </div>
       </div>
 
@@ -901,7 +913,7 @@
   <div tabindex="0" class="content" onfocus="closeSidebar()" id="content">
   </div>
   <br><br>
-<!--
+  <!--
 
     <div class="novidades">
   <h2>Últimas Novidades</h2>
@@ -932,7 +944,8 @@
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col mr-2">
-                <h3 style="margin-bottom: 0;"><i class="fas fa-ruler text-danger"></i>Ola <%= user.username %></h3>
+                <h3 style="margin-bottom: 0;"><i class="fas fa-ruler text-danger"></i>Ola <%= user.username %>
+                </h3>
 
                 <div class="card-body mb-3">
                   <ol>
@@ -976,10 +989,12 @@
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-uppercase mb-1">Ja Usou </div>
-                    <div class="h5 mb-0 font-weight-bold"><%= user.total %> Vezes</div>
+                    <div class="h5 mb-0 font-weight-bold">
+                      <%= user.total %> Vezes
+                    </div>
                   </div>
                   <div class="col-auto">
-                    <i class="fas fa-chart-area"></i>
+                    <i class="fas fa-chart-area faa-ring animated fa-2x text-primary"></i>
                   </div>
                 </div>
               </div>
@@ -997,7 +1012,7 @@
                     </div>
                   </div>
                   <div class="col-auto">
-                    <i class="fas fa-key"></i>
+                    <i class="fas fa-key faa-ring animated fa-2x text-primary"></i>
                   </div>
                 </div>
               </div>
@@ -1010,23 +1025,43 @@
                 <div class="row no-gutters align-items-center">
                   <div class="col mr-2">
                     <div class="text-xs font-weight-bold text-uppercase mb-1">Saldo </div>
-                    <div class="h5 mb-0 font-weight-bold"><%= user.saldo %></div>
+                    <div class="h5 mb-0 font-weight-bold">
+                      <%= user.saldo %>
+                    </div>
                   </div>
                   <div class="col-auto">
-                    <i class="fas fa-dollar-sign"></i>
+                    <i class="fas fa-dollar-sign faa-ring animated fa-2x text-primary"></i>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!--Row-->   
+        <!--Row-->
       </div>
       <!---Container Fluid-->
     </div>
   </center>
 
-  
+  <div class="tutotxt">
+    <div class="tutotxtt">
+      <br>
+      <a href="/nsfw">
+        <h4 class="opcao">NSFW</h4>
+      </a>
+      <a href="/downloads">
+        <h4 class="opcao">DOWNLOADS</h4>
+      </a>
+      <a href="/sfw">
+        <h4 class="opcao">SFW</h4>
+      </a>
+      <a href="/doisd">
+        <h4 class="opcao">ANIMES</h4>
+      </a>
+      <br>
+    </div>
+  </div>
+
   <div class="tutotxt"><br>
     <h1>Lista de Usuários Mais Ativos</h1>
     <div class="tutotxtt">
@@ -1046,8 +1081,6 @@
     </div>
 
   </div>
-
-
 
 
 
@@ -1129,10 +1162,10 @@
       document.querySelector("body").setAttribute("class", "purpura");
     })
   </script>
-<script src="https://inirey.github.io/lolhuman/vendor/jquery/jquery.min.js"></script>
-<script src="https://inirey.github.io/lolhuman/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="https://inirey.github.io/lolhuman/vendor/jquery-easing/jquery.easing.min.js"></script>
-<script src="https://inirey.github.io/lolhuman/js/ruang-admin.min.js"></script>
+  <script src="https://inirey.github.io/lolhuman/vendor/jquery/jquery.min.js"></script>
+  <script src="https://inirey.github.io/lolhuman/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://inirey.github.io/lolhuman/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="https://inirey.github.io/lolhuman/js/ruang-admin.min.js"></script>
 </body>
 
 </html>

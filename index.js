@@ -413,7 +413,7 @@ app.post('/confirma', async (req, res) => {
   }
 });
 
-
+// Após a autenticação bem-sucedida no servidor Express
 app.post('/login', async (req, res) => {
   const { username, password, key } = req.body;
   try {
@@ -426,12 +426,17 @@ app.post('/login', async (req, res) => {
     // Salva o username do usuário na sessão para autenticação
     req.session.username = user.username;
 
+    // Salva informações no localStorage após autenticação
+    localStorage.setItem('username', user.username);
+    localStorage.setItem('key', key);
+
     res.redirect(`/perfil/${user.username}/${key}/${password}`);
   } catch (error) {
     console.error('Erro ao acessar o banco de dados:', error);
     return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
   }
 });
+
 
 app.post('/paginaPrincipal', async (req, res) => {
   const { username, password, key } = req.body;
@@ -443,6 +448,8 @@ app.post('/paginaPrincipal', async (req, res) => {
     }
     req.session.user = username;
     req.session.senha = password;
+    // Salva informações no localStorage após autenticação
+    
     res.redirect(`/anikit`);
   } catch (error) {
     console.error('Erro ao acessar o banco de dados:', error);
@@ -550,10 +557,19 @@ app.post('/edit/:username', async (req, res) => {
 // Restante do código do Express e configurações...
 
 app.get('/anikit', async (req, res) => {
+  // Recupera informações do localStorage
   const username = req.session.user;
   const password = req.session.senha;
   // console.log(username, password)
   const key = password;
+  // const { username, key } = req.query;
+
+// Use as informações como necessário
+console.log('Username do localStorage:', username);
+console.log('Key do localStorage:', key);
+
+  // console.log(username, password)
+  //const key = password;
   // const { username, key } = req.query;
 
   try {
@@ -572,10 +588,83 @@ app.get('/anikit', async (req, res) => {
     return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
   }
 });
+//////////////////
 
-// Depois de chamar a função adicionarTotal...
+app.get('/nsfw', async(req, res) => {
+  const username = req.session.user;
+  const password = req.session.senha;
+  const key = password;
+  try {
+    const user = await User.findOne({ username, password });
+    const users = user
+    if (!user) {
+      const htmlPath = path.join(__dirname, './views/login.html');
+      res.sendFile(htmlPath);
+    }
+    // console.log(quantidadeRegistrados)
+    res.render('nsfw', { user, users });
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+})
 
-// Busca os top 7 usuários com base no campo total
+app.get('/downloads', async(req, res) => {
+  const username = req.session.user;
+  const password = req.session.senha;
+  const key = password;
+  try {
+    const user = await User.findOne({ username, password });
+    const users = user
+    if (!user) {
+      const htmlPath = path.join(__dirname, './views/login.html');
+      res.sendFile(htmlPath);
+    }
+    // console.log(quantidadeRegistrados)
+    res.render('downloads', { user, users });
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+})
+
+app.get('/sfw', async(req, res) => {
+  const username = req.session.user;
+  const password = req.session.senha;
+  const key = password;
+  try {
+    const user = await User.findOne({ username, password });
+    const users = user
+    if (!user) {
+      const htmlPath = path.join(__dirname, './views/login.html');
+      res.sendFile(htmlPath);
+    }
+    // console.log(quantidadeRegistrados)
+    res.render('sfw', { user, users });
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+})
+
+app.get('/doisd', async(req, res) => {
+  const username = req.session.user;
+  const password = req.session.senha;
+  const key = password;
+  try {
+    const user = await User.findOne({ username, password });
+    const users = user
+    if (!user) {
+      const htmlPath = path.join(__dirname, './views/login.html');
+      res.sendFile(htmlPath);
+    }
+    // console.log(quantidadeRegistrados)
+    res.render('doisd', { user, users });
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+})
 
 app.get('/', async (req, res) => {
   const username = req.session.user;
