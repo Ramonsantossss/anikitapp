@@ -648,6 +648,146 @@
       text-align: left;
       color: #fff;
     }
+
+    .func {
+      margin: 25px;
+      background-color: #1c1c1c;
+      color: white;
+      margin-top: 3px;
+    }
+
+    .func h2 {
+      text-align: center;
+    }
+
+    .func i {
+      color: greenyellow;
+      margin: 5px;
+    }
+
+    .sub-menu {
+      margin-top: 5px;
+    }
+
+    .sub-menu a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .ti {
+      text-align: left;
+    }
+
+    .func .item {
+      padding: 5px;
+      margin-left: 5px;
+    }
+
+    .card {
+      border-radius: 5px;
+      margin: 5px;
+      background-color: #1c1c1c;
+    }
+
+    .card img {
+      width: 40%;
+      border-radius: 5px;
+    }
+
+    .card p {
+      color: white;
+      font-size: 16px;
+
+    }
+
+
+    
+    /* styles.css */
+
+
+.custom-carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: black;
+}
+
+.custom-carousel {
+    display: flex;
+    width: 100%; /* 100% * número de slides */
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #1c1c1c black;
+}
+
+.custom-slide {
+    flex: 0 0 33.333%; /* 100% / número de slides */
+    text-align: center;
+    position: relative;
+}
+
+.custom-img {
+    width: 90%;
+    height: auto;
+}
+
+.custom-overlay {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 20px;
+    text-align: left;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.custom-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ff5733;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.custom-btn:hover {
+    background-color: #e0481e;
+}
+
+@keyframes custom-animate {
+    0%, 100% { transform: translateX(0); }
+    33.33% { transform: translateX(-100%); }
+    66.67% { transform: translateX(-200%); }
+}
+
+/* Barra de rolagem personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: blueviolet;
+    border-radius: 20px;
+}
+
+
   </style>
   <script>
     document.getElementById("btn-laranja").addEventListener("click", function () {
@@ -662,6 +802,28 @@
       document.querySelector("body").setAttribute("class", "purpura");
       document.querySelector("div").setAttribute("class", "purpura");
     })
+
+    // script.js
+const slides = document.querySelectorAll(".carousel-slide");
+let currentSlide = 0;
+
+function showSlide(slideIndex) {
+    slides[currentSlide].style.display = "none";
+    currentSlide = (slideIndex + slides.length) % slides.length;
+    slides[currentSlide].style.display = "block";
+}
+
+document.getElementById("prev").addEventListener("click", () => {
+    showSlide(currentSlide - 1);
+});
+
+document.getElementById("next").addEventListener("click", () => {
+    showSlide(currentSlide + 1);
+});
+
+// Exibir o primeiro slide
+showSlide(0);
+
   </script>
 </head>
 
@@ -949,11 +1111,12 @@
 
                 <div class="card-body mb-3">
                   <ol>
-                    <li>Nao mande sua apikey pra ninguem.</li>
-                    <li>Nao mande sua senha pra ninguem</li>
-                    <li>10K de saldo inicial</li>
-                    <li>Quando acabar o saldo fale com o Suporte.</li>
-                    <li>Aproveite</li>
+                    <li class="ti">Nao mande sua apikey pra ninguem.</li>
+                    <li class="ti">Nao mande sua senha pra ninguem</li>
+                    <li class="ti">Nao mande sua senha pra ninguem</li>
+                    <li class="ti">10K de saldo inicial</li>
+                    <li class="ti">Quando acabar o saldo fale com o Suporte.</li>
+                    <li class="ti">Aproveite</li>
                   </ol>
                 </div>
               </div>
@@ -1042,35 +1205,260 @@
       <!---Container Fluid-->
     </div>
   </center>
-
-  <div class="tutotxt">
-    <div class="tutotxtt">
-      <br>
-      <a href="/nsfw">
-        <h4 class="opcao">NSFW</h4>
-      </a>
-      <a href="/downloads">
-        <h4 class="opcao">DOWNLOADS</h4>
-      </a>
-      <a href="/sfw">
-        <h4 class="opcao">SFW</h4>
-      </a>
-      <a href="/doisd">
-        <h4 class="opcao">ANIMES</h4>
-      </a>
-      <br>
+  <!--
+  funcoes da api aqui 
+-->
+  <div class="func">
+    <br>
+    <h2>Utilizavel</h2>
+    <br>
+    <div class="item">
+      <details>
+        <summary><i class='far fa-check-circle'></i>NSFW</summary>
+        <div class="sub-menu">
+          <a class="dropdown-item" target="_blank"
+            href="/nime/nsfwloli?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Nswf loli</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/ahegao?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw ahegao</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/ass?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw ass</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/bdsm?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Nswf bdsm</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nsfw/blowjob?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw blowjob</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nsfw/cuckold?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw cuckold</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/cum?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw cum</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/ero?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw ero</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/femdom?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw femdom</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/foot?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw foot</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nsfw/gangbang?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw
+            gangbanh</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nsfw/glasses?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw glasses</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/hentai?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw hentai</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/gifs?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw gifs</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/jahy?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw jahy</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/manga?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw manga</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nsfw/masturbation?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw
+            mstb</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/neko?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw neko</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/orgy?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw orgy</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nsfw/panties?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw panties</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/pussy?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw pussy</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/neko2?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw neko2</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nsfw/tentacles?username=<%= user.username %>&key=<%= user.key %>" target="_blank">nsfw
+            tentacles</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/thighs?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw things</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/yuri?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw yuri</a>
+          <a class="dropdown-item" target="_blank" href="/nsfw/zettai?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">nsfw zettai</a><br><br>
+        </div>
+      </details>
     </div>
+
+    <div class="item">
+      <details>
+        <summary><i class='far fa-check-circle'></i>SFW</summary>
+        <div class="sub-menu">
+
+          <a class="dropdown-item" target="_blank"
+            href="/nime/cosplay?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+            Cosplay</a>
+          <a class="dropdown-item" target="_blank" href="/nime/waifu?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Waifu</a>
+          <a class="dropdown-item" target="_blank" href="/nime/waifu2?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Waifu2</a>
+          <a class="dropdown-item" target="_blank" href="/nime/shota?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Shota</a>
+          <a class="dropdown-item" target="_blank" href="/nime/loli?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Loli</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nime/yotsuba?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+            Yotsuba</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nime/shinomiya?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+            Shinomiya</a>
+          <a class="dropdown-item" target="_blank" href="/nime/yumeko?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Yumeko</a>
+          <a class="dropdown-item" target="_blank" href="/nime/tejina?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Tejina</a>
+          <a class="dropdown-item" target="_blank" href="/nime/chiho?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Chiho</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nime/shizuka?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+            Shizuka</a>
+          <a class="dropdown-item" target="_blank" href="/nime/boruto?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Boruto</a>
+          <a class="dropdown-item" target="_blank" href="/nime/kagori?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Kagori</a>
+          <a class="dropdown-item" target="_blank" href="/nime/kaga?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Kaga</a>
+          <a class="dropdown-item" target="_blank" href="/nime/kotori?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Kotori</a>
+          <a class="dropdown-item" target="_blank" href="/nime/mikasa?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Mikasa</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nime/akiyama?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+            Akiyama</a>
+          <a class="dropdown-item" target="_blank" href="/nime/hinata?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Hinata</a>
+          <a class="dropdown-item" target="_blank" href="/nime/minato?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Minato</a>
+          <a class="dropdown-item" target="_blank" href="/nime/naruto?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Naruto</a>
+          <a class="dropdown-item" target="_blank" href="/nime/nezuko?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Nezuko</a>
+          <a class="dropdown-item" target="_blank" href="/nime/yuki?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Yuki</a>
+          <a class="dropdown-item" target="_blank" href="/nime/hestia?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Hestia</a>
+          <a class="dropdown-item" target="_blank" href="/nime/emilia?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Emilia</a>
+          <a class="dropdown-item" target="_blank" href="/nime/itachi?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Itachi</a>
+          <a class="dropdown-item" target="_blank" href="/nime/elaina?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Elaina</a>
+          <a class="dropdown-item" target="_blank" href="/nime/madara?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Madara</a>
+          <a class="dropdown-item" target="_blank" href="/nime/sasuke?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Sasuke</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nime/deidara?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+            Deidara</a>
+          <a class="dropdown-item" target="_blank" href="/nime/sakura?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Anime Sakura</a>
+          <a class="dropdown-item" target="_blank"
+            href="/nime/tsunade?username=<%= user.username %>&key=<%= user.key %>" target="_blank">Anime
+            Tsunade</a>
+
+          <br><br>
+        </div>
+      </details>
+    </div>
+    <div class="item">
+      <details>
+        <summary><i class='far fa-check-circle'></i>DOWNLOADER</summary>
+
+        <div class="sub-menu">
+
+          <a class="dropdown-item" target="_blank"
+            href="/anikit/playmp4?query=vmz baka&username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Youtube MP4</a>
+
+          <a class="dropdown-item" target="_blank"
+            href="/anikit/playmp3?query=vmz baka&username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Youtube MP3</a>
+
+          <a class="dropdown-item" target="_blank"
+            href="/anikit/tiktok?videoUrl=https://vm.tiktok.com/ZMjLFBD7e/&username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">TikTok Video</a>
+
+          <a class="dropdown-item" target="_blank" href="/18/video?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Video +18</a>
+
+          <a class="dropdown-item" target="_blank" href="/18/foto_18?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Foto +18</a>
+
+          <a class="dropdown-item" target="_blank" href="/18/travazap?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">Foto pra
+            perfil</a>
+
+          <a class="dropdown-item" target="_blank" href="/memes?username=<%= user.username %>&key=<%= user.key %>"
+            target="_blank">memes</a><br><br>
+
+        </div>
+      </details>
+    </div>
+
+    <div class="item">
+      <details>
+        <summary class="titul"><i class='far fa-check-circle'></i>INFO ANIMES</summary>
+        <div class="sub-menu">
+          <a class="dropdown-item" href="/recent-episodes?username=<%= user.username %>&key=<%= user.key %>">Episódios
+            Recentes</a>
+          <a class="dropdown-item" href="/popular?username=<%= user.username %>&key=<%= user.key %>">Populares</a>
+          <a class="dropdown-item" href="/info/ID DO ANIME AQUI?username=<%= user.username %>&key=<%= user.key %>">Info
+            Anime</a>
+          <a class="dropdown-item"
+            href="/epis/ID DO ANIME AQUI?username=<%= user.username %>&key=<%= user.key %>">Episódios Do Anime</a>
+          <br><br>
+        </div>
+      </details>
+    </div>
+    <br>
+
   </div>
 
+
+
+  <div class="custom-carousel-container">
+    <div class="custom-carousel">
+        <div class="custom-slide">
+            <img class="custom-img" src="https://i.pinimg.com/originals/4d/f6/5b/4df65bb4809890faab894e8e8dff40c1.jpg" alt="Anúncio 1">
+            <div class="custom-overlay">
+                <h2>Produto em Destaque</h2>
+                <p>Descrição do produto ou oferta especial aqui.</p>
+                <a href="#" class="custom-btn">Saiba Mais</a>
+            </div>
+        </div>
+        <div class="custom-slide">
+            <img class="custom-img" src="https://i.pinimg.com/originals/4d/f6/5b/4df65bb4809890faab894e8e8dff40c1.jpg" alt="Anúncio 2">
+            <div class="custom-overlay">
+                <h2>Segundo Produto</h2>
+                <p>Uma breve descrição do segundo produto aqui.</p>
+                <a href="#" class="custom-btn">Saiba Mais</a>
+            </div>
+        </div>
+        <div class="custom-slide">
+            <img class="custom-img" src="https://i.pinimg.com/originals/4d/f6/5b/4df65bb4809890faab894e8e8dff40c1.jpg" alt="Anúncio 3">
+            <div class="custom-overlay">
+                <h2>Terceiro Produto</h2>
+                <p>Descrição do terceiro produto aqui.</p>
+                <a href="#" class="custom-btn">Saiba Mais</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--
+
+    
+    <div class="slides-navigation">
+        <label for="slide1"></label>
+        <label for="slide2"></label>
+        <label for="slide3"></label>
+    </div>
+
+  -->
+</div>
+
   <div class="tutotxt"><br>
-    <h1>Lista de Usuários Mais Ativos</h1>
+    <h1>Top 7 Usuários Mais Ativos</h1>
     <div class="tutotxtt">
       <center>
         <% topUsers.sort((a, b)=> b.total - a.total).forEach(function(user) { %><br>
           <a class="verp" href="/ver/<%= user.username %>">
             <div class="user-info">
               <img class="user-photo" src="<%= user.ft %>" alt="Foto do Usuário">
-              <div class="user-name">@<%= user.username %>: <%= user.total %>
+              <div class="user-name">@<%= user.username %>: Level <%= user.total %>
               </div>
             </div>
           </a>

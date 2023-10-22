@@ -127,14 +127,16 @@ h2 i{
 
 <body>
     <div class="item">
-        <h2><i class='fa fa-user-circle'></i>Info Animes</h2>
-        <div class="sub-menu">
-          <a class="dropdown-item" href="/recent-episodes?username=<%= user.username %>&key=<%= user.key %>">Episódios Recentes</a>
-          <a class="dropdown-item" href="/popular?username=<%= user.username %>&key=<%= user.key %>">Populares</a>
-          <a class="dropdown-item" href="/info/ID DO ANIME AQUI?username=<%= user.username %>&key=<%= user.key %>">Info Anime</a>
-          <a class="dropdown-item" href="/epis/ID DO ANIME AQUI?username=<%= user.username %>&key=<%= user.key %>">Episódios Do Anime</a>
-<br><br>
-        </div>
+        <details>
+            <summary><h2><i class='fa fa-user-circle'></i>Info Animes</h2></summary>
+            <div class="sub-menu">
+                <a class="dropdown-item" href="/recent-episodes?username=<%= user.username %>&key=<%= user.key %>">Episódios Recentes</a>
+                <a class="dropdown-item" href="/popular?username=<%= user.username %>&key=<%= user.key %>">Populares</a>
+                <a class="dropdown-item" href="/info/ID DO ANIME AQUI?username=<%= user.username %>&key=<%= user.key %>">Info Anime</a>
+                <a class="dropdown-item" href="/epis/ID DO ANIME AQUI?username=<%= user.username %>&key=<%= user.key %>">Episódios Do Anime</a>
+                <br><br>
+            </div>
+        </details>
       </div>
 
 
