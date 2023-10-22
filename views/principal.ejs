@@ -650,7 +650,7 @@
     }
 
     .func {
-      margin: 25px;
+      margin: 24px;
       background-color: #1c1c1c;
       color: white;
       margin-top: 3px;
@@ -700,108 +700,24 @@
 
     }
 
+    .swiffy-slider {
+      color: blueviolet;
+    }
 
+    .tttt {
+      margin: 24px;
+      color: #b040ff;
+    }
+
+    @media (min-width: 720px) {
+      .tttt {
+      width: 40%;
+      height: 80%;
+    }
+    }
 
     /* styles.css */
 
-
-    .custom-carousel-container {
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-      background-color: black;
-    }
-
-    .custom-carousel {
-      display: flex;
-      width: 100%;
-      /* 100% * número de slides */
-      overflow: auto;
-      scrollbar-width: thin;
-      scrollbar-color: #1c1c1c black;
-    }
-
-    .custom-slide {
-      flex: 0 0 33.333%;
-      /* 100% / número de slides */
-      text-align: center;
-      position: relative;
-    }
-
-    .custom-img {
-      width: 90%;
-      height: auto;
-    }
-
-    @media (max-width: 767px) {
-      /* Adicione estilos específicos para telas menores aqui */
-
-
-
-      .custom-carousel-container {
-        width: 300%;
-        overflow: hidden;
-        position: relative;
-        background-color: black;
-      }
-
-      .custom-img {
-        width: 100%;
-        height: auto;
-      }
-    }
-
-    .custom-overlay {
-      position: absolute;
-      background: rgba(0, 0, 0, 0.5);
-      color: #fff;
-      padding: 20px;
-      text-align: left;
-      bottom: 0;
-      left: 0;
-      right: 0;
-    }
-
-    h2 {
-      margin: 0;
-      font-size: 24px;
-    }
-
-    p {
-      margin: 10px 0;
-      font-size: 16px;
-    }
-
-    .custom-btn {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #ff5733;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s;
-    }
-
-    .custom-btn:hover {
-      background-color: #e0481e;
-    }
-
-    @keyframes custom-animate {
-
-      0%,
-      100% {
-        transform: translateX(0);
-      }
-
-      33.33% {
-        transform: translateX(-100%);
-      }
-
-      66.67% {
-        transform: translateX(-200%);
-      }
-    }
 
     /* Barra de rolagem personalizada */
     ::-webkit-scrollbar {
@@ -817,6 +733,8 @@
       border-radius: 20px;
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/js/swiffy-slider.min.js" crossorigin="anonymous" defer></script>
+  <link href="https://cdn.jsdelivr.net/npm/swiffy-slider@1.6.0/dist/css/swiffy-slider.min.css" rel="stylesheet" crossorigin="anonymous">
   <script>
     document.getElementById("btn-laranja").addEventListener("click", function () {
       document.querySelector("body").setAttribute("class", "laranja");
@@ -830,27 +748,12 @@
       document.querySelector("body").setAttribute("class", "purpura");
       document.querySelector("div").setAttribute("class", "purpura");
     })
+    function classToggle() {
+  var el = document.querySelector('.icon-cards__content');
+  el.classList.toggle('step-animation');
+}
 
-    // script.js
-    const slides = document.querySelectorAll(".carousel-slide");
-    let currentSlide = 0;
-
-    function showSlide(slideIndex) {
-      slides[currentSlide].style.display = "none";
-      currentSlide = (slideIndex + slides.length) % slides.length;
-      slides[currentSlide].style.display = "block";
-    }
-
-    document.getElementById("prev").addEventListener("click", () => {
-      showSlide(currentSlide - 1);
-    });
-
-    document.getElementById("next").addEventListener("click", () => {
-      showSlide(currentSlide + 1);
-    });
-
-    // Exibir o primeiro slide
-    showSlide(0);
+document.querySelector('#toggle-animation').addEventListener('click', classToggle);
 
   </script>
 </head>
@@ -1127,6 +1030,33 @@
 
   <center>
 
+    <div class="tttt">
+      <div class="swiffy-slider">
+        <ul class="slider-container">
+            <li><img src="https://i.ytimg.com/vi/peweGaAUzgY/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLBtbCtNEj36D1hdAB2w-LB5ZV35iQ" style="max-width: 100%;height: auto;"></li>
+            <li><img src="https://i.ytimg.com/vi/peweGaAUzgY/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLBtbCtNEj36D1hdAB2w-LB5ZV35iQ" style="max-width: 100%;height: auto;"></li>
+            <li><img src="https://i.ytimg.com/vi/peweGaAUzgY/hq720.jpg?sqp=-oaymwEXCNAFEJQDSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLBtbCtNEj36D1hdAB2w-LB5ZV35iQ" style="max-width: 100%;height: auto;"></li>
+        </ul>
+    
+        <button type="button" class="slider-nav"></button>
+        <button type="button" class="slider-nav slider-nav-next"></button>
+    
+        <div class="slider-indicators">
+            <button class="active"></button>
+            <button></button>
+            <button></button>
+        </div>
+    </div>
+    </div>
+    
+    <br>
+    
+    <!-- The dots/circles -->
+    <div style="text-align:center">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
     <div id="content">
       <!-- Container Fluid-->
       <div class="container-fluid" id="container-wrapper">
@@ -1436,39 +1366,9 @@
 
   </div>
 
+  
+  
 
-
-  <div class="custom-carousel-container">
-    <div class="custom-carousel">
-      <div class="custom-slide">
-        <img class="custom-img" src="https://i.pinimg.com/originals/4d/f6/5b/4df65bb4809890faab894e8e8dff40c1.jpg"
-          alt="Anúncio 1">
-        <div class="custom-overlay">
-          <h2>Produto em Destaque</h2>
-          <p>Descrição do produto ou oferta especial aqui.</p>
-          <a href="#" class="custom-btn">Saiba Mais</a>
-        </div>
-      </div>
-      <div class="custom-slide">
-        <img class="custom-img" src="https://i.pinimg.com/originals/4d/f6/5b/4df65bb4809890faab894e8e8dff40c1.jpg"
-          alt="Anúncio 2">
-        <div class="custom-overlay">
-          <h2>Segundo Produto</h2>
-          <p>Uma breve descrição do segundo produto aqui.</p>
-          <a href="#" class="custom-btn">Saiba Mais</a>
-        </div>
-      </div>
-      <div class="custom-slide">
-        <img class="custom-img" src="https://i.pinimg.com/originals/4d/f6/5b/4df65bb4809890faab894e8e8dff40c1.jpg"
-          alt="Anúncio 3">
-        <div class="custom-overlay">
-          <h2>Terceiro Produto</h2>
-          <p>Descrição do terceiro produto aqui.</p>
-          <a href="#" class="custom-btn">Saiba Mais</a>
-        </div>
-      </div>
-    </div>
-  </div>
   <!--
 
     
