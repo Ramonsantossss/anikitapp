@@ -389,6 +389,25 @@ app.get('/clover', async (req, res) => {
 // Resto do seu código
 
 
+// Rota '/paginaPrincipal' para lidar com a autenticação
+app.post('/logg', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    // Verifique o email e a senha no banco de dados ou em algum mecanismo de autenticação
+    if (email === 'usuario@example.com' && password === 'senha') {
+      // Autenticação bem-sucedida
+      req.session.user = email;
+      req.session.senha = password;
+      res.status(200).json({ message: 'Autenticação bem-sucedida' });
+    } else {
+      // Nome de usuário ou senha incorretos
+      res.status(401).json({ message: 'Nome de usuário ou senha incorretos. Por favor, tente novamente.' });
+    }
+  } catch (error) {
+    console.error('Erro ao acessar o banco de dados:', error);
+    res.status(500).json({ message: 'Erro interno do servidor. Por favor, tente novamente mais tarde.' });
+  }
+});
 
 
 
