@@ -8,6 +8,7 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 //const formidable = require('formidable');
+const prompt = require('prompt')
 //const api = require("./api");
 const app = express();
 const router = app
@@ -59,12 +60,13 @@ app.use(session({
 
 const { Schema } = mongoose;
 
-// Configurando o parser para JSON e formulários
+// Configurando o parser para JSON e formulárioss
 const cors = require('cors');
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.set('json spoaces', 2);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -241,7 +243,14 @@ app.get("/dados", async (req, res) => {
 });
 
 
+app.get('/popularrd', async (req, res) => {
+  const rd = require('./lib/ytdl.js');
 
+  rd.newsrd().then((mais) => {
+  res.json(mais);
+})
+
+})
 // Endpoint para pesquisar por anime
 app.get('/pesquisar/:query', async (req, res) => {
   const query = req.params.query;
@@ -337,7 +346,7 @@ app.get('/episodios/:categoryId', async (req, res) => {
 });
 
 
-app.get('/test', async(req, res) => {
+app.get('/test', async (req, res) => {
   const aoba = path.join(__dirname, './views/test.html');
   res.sendFile(aoba)
 })
@@ -377,10 +386,10 @@ app.get('/login', (req, res) => {
 //////
 
 app.get('/clover', async (req, res) => {
-  const username = req.query.username;
-  if (username !== 'SUPREMO') {
-    return res.status(401).send('Acesso não autorizado.');
-  }
+  //const username = req.query.username;
+  //if (username !== 'SUPREMO') {
+  //  return res.status(401).send('Acesso não autorizado.');
+  // }
   const users = await User.find();
 
   res.render('index', { users });
@@ -389,25 +398,6 @@ app.get('/clover', async (req, res) => {
 // Resto do seu código
 
 
-// Rota '/paginaPrincipal' para lidar com a autenticação
-app.post('/logg', async (req, res) => {
-  const { email, password } = req.body;
-  try {
-    // Verifique o email e a senha no banco de dados ou em algum mecanismo de autenticação
-    if (email === 'usuario@example.com' && password === 'senha') {
-      // Autenticação bem-sucedida
-      req.session.user = email;
-      req.session.senha = password;
-      res.status(200).json({ message: 'Autenticação bem-sucedida' });
-    } else {
-      // Nome de usuário ou senha incorretos
-      res.status(401).json({ message: 'Nome de usuário ou senha incorretos. Por favor, tente novamente.' });
-    }
-  } catch (error) {
-    console.error('Erro ao acessar o banco de dados:', error);
-    res.status(500).json({ message: 'Erro interno do servidor. Por favor, tente novamente mais tarde.' });
-  }
-});
 
 
 
@@ -468,7 +458,7 @@ app.post('/paginaPrincipal', async (req, res) => {
     req.session.user = username;
     req.session.senha = password;
     // Salva informações no localStorage após autenticação
-    
+
     res.redirect(`/anikit`);
   } catch (error) {
     console.error('Erro ao acessar o banco de dados:', error);
@@ -512,8 +502,13 @@ app.get('/perfil', async (req, res) => {
 app.get('/editar/:username', async (req, res) => {
   const username = req.session.user;
   const key = username;
-  const password = req.session.senha;
-  const aoao = 'SUPREMO'
+  const aoao = 'SUPREMO';
+
+  // Verifique se a senha de administrador fornecida é igual a 'aoao'
+  if (req.query.adminPassword !== aoao) {
+    return res.status(401).send('Senha de administrador incorreta.');
+  }
+
   try {
     const user = await User.findOne({ username });
 
@@ -531,6 +526,7 @@ app.get('/editar/:username', async (req, res) => {
     return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
   }
 });
+
 
 app.post('/edit/:username', async (req, res) => {
   const { username } = req.params;
@@ -583,9 +579,9 @@ app.get('/anikit', async (req, res) => {
   const key = password;
   // const { username, key } = req.query;
 
-// Use as informações como necessário
-console.log('Username do localStorage:', username);
-console.log('Key do localStorage:', key);
+  // Use as informações como necessário
+  console.log('Username do localStorage:', username);
+  console.log('Key do localStorage:', key);
 
   // console.log(username, password)
   //const key = password;
@@ -609,7 +605,7 @@ console.log('Key do localStorage:', key);
 });
 //////////////////
 
-app.get('/nsfw', async(req, res) => {
+app.get('/nsfw', async (req, res) => {
   const username = req.session.user;
   const password = req.session.senha;
   const key = password;
@@ -628,7 +624,7 @@ app.get('/nsfw', async(req, res) => {
   }
 })
 
-app.get('/downloads', async(req, res) => {
+app.get('/downloads', async (req, res) => {
   const username = req.session.user;
   const password = req.session.senha;
   const key = password;
@@ -647,7 +643,7 @@ app.get('/downloads', async(req, res) => {
   }
 })
 
-app.get('/sfw', async(req, res) => {
+app.get('/sfw', async (req, res) => {
   const username = req.session.user;
   const password = req.session.senha;
   const key = password;
@@ -666,7 +662,7 @@ app.get('/sfw', async(req, res) => {
   }
 })
 
-app.get('/doisd', async(req, res) => {
+app.get('/doisd', async (req, res) => {
   const username = req.session.user;
   const password = req.session.senha;
   const key = password;
@@ -4385,32 +4381,14 @@ function saveUsers(users) {
 
 app.get('/mangakit', async (req, res) => {
   try {
-    const query = req.query.q || ''; // Define o valor padrão como uma string vazia
-    const apiUrl = `https://ruby-careful-skunk.cyclic.app/search?q=${query}`;
-    const response_2 = await axios.get(apiUrl);
-    const mangas = response_2.data.mangas;
-    /*
-        res.render('search', { mangas, query }); // Passa o valor de query para o template
-        */
-    const response = await axios.get(`https://ruby-careful-skunk.cyclic.app/recents`);
-    const topesResponse = await axios.get(`https://ruby-careful-skunk.cyclic.app/top/1`);
-    const topesdois = await axios.get(`https://ruby-careful-skunk.cyclic.app/top/2`);
+    // Faça uma chamada à sua API para obter os dados dos mangás
+    const response = await axios.get('https://mkitapi.onrender.com/all');
+    const mangasData = response.data;
 
-    if (!response.ok && !topesResponse.ok && !topesdois.ok) {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    }
-
-    const dai = await response.data;
-    const info = dai.mangas;
-
-    const topesData = await topesResponse.data;
-    const mai = await topesdois.data
-
-    res.render('pagina', { data: topesData, zera: mai, info, mangas, query });
+    // Renderize a página index.ejs passando os dados dos mangás
+    res.render('index', { mangas: mangasData });
   } catch (error) {
-    console.error('Error:', error.message);
-    //res.status(500).send('An error occurred while fetching manga data.');
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    res.status(500).send('Erro ao buscar os dados dos mangás');
   }
 });
 
@@ -4492,7 +4470,17 @@ app.get('/search', (req, res) => {
 
 
 
+const obterMangas = require('./test'); // Ajuste para o nome correto do arquivo
 
+app.get('/all', async (req, res) => {
+  try {
+    const mangas = await obterMangas.manga(); // Chama a função que realiza o scraping
+
+    res.json(mangas); // Retorna os mangás encontrados como resposta JSON
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 
 
@@ -4573,67 +4561,3 @@ mongoose
     app.listen(PORT);
   })
   .catch((err) => console.log(err));
-
-
-/*
-app.post('/favoritar/:id', async (req, res) => {
-try {
-  const mangaId = req.params.id;
-
-  // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
-  const currentUser = await User.findById(/* ID do usuário * /);
-
-  if (currentUser) {
-    // Verifique se o mangá já está nos favoritos do usuário
-    const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
-
-    if (existingMangaIndex === -1) {
-      // Se o mangá ainda não está nos favoritos, adicione-o
-      const mangaInfo = /* Obtenha as informações do mangá aqui * /;
-      currentUser.favoriteMangas.push({
-        mangaId: mangaId,
-        mangaName: mangaInfo.name,
-        imageUrl: mangaInfo.image
-      });
-
-      // Salve as alterações no banco de dados
-      await currentUser.save();
-    }
-  }
-
-  // Redirecione para a página do mangá ou para onde desejar
-  res.redirect(`/manga/${mangaId}`);
-} catch (error) {
-  console.error('Error:', error.message);
-  res.status(500).send('An error occurred while saving the manga to favorites.');
-}
-});
-
-app.post('/removerfavorito/:id', async (req, res) => {
-try {
-  const mangaId = req.params.id;
-
-  // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
-  const currentUser = await User.findById(/* ID do usuário * /);
-
-  if (currentUser) {
-    // Encontre o índice do mangá nos favoritos do usuário
-    const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
-
-    if (existingMangaIndex !== -1) {
-      // Se o mangá estiver nos favoritos, remova-o
-      currentUser.favoriteMangas.splice(existingMangaIndex, 1);
-
-      // Salve as alterações no banco de dados
-      await currentUser.save();
-    }
-  }
-
-  // Redirecione para a página do mangá ou para onde desejar
-  res.redirect(`/manga/${mangaId}`);
-} catch (error) {
-  console.error('Error:', error.message);
-  res.status(500).send('An error occurred while removing the manga from favorites.');
-}
-});
-*/
