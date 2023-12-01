@@ -1,3 +1,4 @@
+ // const url = 
 const axios = require('axios');
 const cheerio = require('cheerio');
 //const apiModule = require('trevo-api');
@@ -127,3 +128,63 @@ async function manga() {
 module.exports = {
     manga
 }
+
+
+
+
+
+/*const fs = require('fs');
+const path = require('path');
+const fetch = require('node-fetch');
+const FormData = require('form-data');
+
+async function uploadPhotoToTelegraph(photoBuffer) {
+  const form = new FormData();
+  form.append('file', photoBuffer, { filename: 'media' });
+
+  try {
+    const response = await fetch('https://telegra.ph/upload', {
+      method: 'POST',
+      body: form,
+    });
+
+    const responseBody = await response.text(); // Obter o corpo da resposta como texto
+
+    if (responseBody && response.ok) {
+      const data = JSON.parse(responseBody);
+      if (data && data[0] && data[0].src) {
+        return 'https://telegra.ph' + data[0].src;
+      } else {
+        throw new Error('Failed to retrieve the image URL from the response.');
+      }
+    } else {
+      throw new Error(`Failed to upload photo. Response status: ${response.status}, Response body: ${responseBody}`);
+    }
+  } catch (error) {
+    throw new Error(`Error uploading photo: ${error.message}`);
+  }
+}
+
+async function processPhotosInFolder(folderPath) {
+  const files = fs.readdirSync(folderPath);
+  const photoFiles = files.filter(file => file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.png'));
+
+  for (const photoFile of photoFiles) {
+    const photoPath = path.join(folderPath, photoFile);
+    const photoBuffer = fs.readFileSync(photoPath);
+    
+    try {
+      const imageUrl = await uploadPhotoToTelegraph(photoBuffer);
+      console.log(imageUrl);
+    } catch (error) {
+      
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 500)); // Aguarda 2 segundos
+  }
+}
+
+// Substitua 'caminho/da/pasta' pelo caminho real da pasta com as fotos
+const photosFolderPath = './A3';
+processPhotosInFolder(photosFolderPath);
+*/
