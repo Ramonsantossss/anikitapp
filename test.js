@@ -1,6 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const apiModule = require('trevo-api');
+//const apiModule = require('trevo-api');
 
 async function verificaImagensCapitulo(url) {
     try {
