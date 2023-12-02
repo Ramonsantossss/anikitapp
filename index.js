@@ -610,27 +610,30 @@ console.log('Key do localStorage:', key);
 });
 
 app.get('/entrarr', async (req, res) => {
-  const { nome, senha } = req.query;
+  const nome = req.query.nome;
+  const senha = req.query.senha;
   const username = `${nome}`;
   const password = `${senha}`;
+  console.log(senha)
   try {
-  const user = await User.findOne({ username }); // Procura o usuário pelo username
+    const user = await User.findOne({ username });
 
-    if (!user) {
-      // Se o usuário não existe, retorna um erro 403 (Forbidden)
-      return res.status(403).json(null);
+    console.log('Usuário do banco de dados:', user);
+
+    if (!user || user.password !== senha) {
+      console.log('Falha na comparação:', user, password);
+      return res.json(null);
     }
 
-    // Aqui você poderia comparar a senha com a senha armazenada no banco de dados (se estiverem criptografadas)
-    // Por motivos de segurança, geralmente não se compara diretamente as senhas, mas sim seus hashes
-    // Se a senha conferir, você pode retornar os detalhes do usuário
-
+    console.log('Usuário autenticado:', user);
     res.json(user); // Retorna os dados do usuário em JSON
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Ocorreu um erro ao processar a requisição.' });
   }
 });
+
+
 
 //////////////////
 
