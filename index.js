@@ -66,6 +66,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+app.set("json spaces", 2)
 app.set('views', path.join(__dirname, 'views'));
 
 const adminKey = 'sua_chave_do_administrador';
@@ -607,6 +608,30 @@ console.log('Key do localStorage:', key);
     return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
   }
 });
+
+app.get('/entrarr', async (req, res) => {
+  const { nome, senha } = req.query;
+  const username = `${nome}`;
+  const password = `${senha}`;
+  try {
+  const user = await User.findOne({ username }); // Procura o usuário pelo username
+
+    if (!user) {
+      // Se o usuário não existe, retorna um erro 403 (Forbidden)
+      return res.status(403).json(null);
+    }
+
+    // Aqui você poderia comparar a senha com a senha armazenada no banco de dados (se estiverem criptografadas)
+    // Por motivos de segurança, geralmente não se compara diretamente as senhas, mas sim seus hashes
+    // Se a senha conferir, você pode retornar os detalhes do usuário
+
+    res.json(user); // Retorna os dados do usuário em JSON
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Ocorreu um erro ao processar a requisição.' });
+  }
+});
+
 //////////////////
 
 app.get('/nsfw', async(req, res) => {
@@ -4514,6 +4539,7 @@ app.get('/all', async (req, res) => {
 
 // Importe suas funções aqui
 const { assistir, fetchAnimesRecents, genero, veranime } = require('./api.js');
+const { error } = require('console');
 
 //app.use(express.json());
 
