@@ -540,7 +540,7 @@ app.get('/anikit', async (req, res) => {
 
 // Depois de chamar a função adicionarTotal...
 app.get('/entrarr', async (req, res) => {
-  const { nome, senha } = req.query;
+//  const { nome, senha } = req.query;
   const nome = req.query.nome;
   const senha = req.query.senha;
   const username = `${nome}`;
@@ -548,7 +548,7 @@ app.get('/entrarr', async (req, res) => {
   console.log(senha)
   try {
   const user = await User.findOne({ username }); // Procura o usuário pelo username
-    const user = await User.findOne({ username });
+  //  const user = await User.findOne({ username });
 
     if (!user) {
       // Se o usuário não existe, retorna um erro 403 (Forbidden)
