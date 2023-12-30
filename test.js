@@ -73,7 +73,7 @@ async function obterInformacoesManga() {
 
 async function manga() {
     try {
-        const response = await axios.get('https://remangas.net');
+        const response = await axios.get('https://ghostscan.com.br');
         const html = response.data;
         const $ = cheerio.load(html);
 
