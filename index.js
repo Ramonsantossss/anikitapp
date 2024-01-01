@@ -4507,7 +4507,17 @@ app.get('/all', async (req, res) => {
   }
 });
 
+app.get('/infomanga', async (req, res) => {
+  try {
+  const nome = req.query.nome
+  const obterMangas = require('./test'); // Ajuste para o nome correto do arquivo
+    const mangas = await obterMangas.obterInformacoesManga(nome); // Chama a função que realiza o scraping
 
+    res.json(mangas); // Retorna os mangás encontrados como resposta JSON
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 
 
 
