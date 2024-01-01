@@ -2,6 +2,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 //const apiModule = require('trevo-api');
+const url = 'manga/a-epoca-em-que-eramos-jovens'
 
 async function verificaImagensCapitulo(url) {
     try {
@@ -21,15 +22,15 @@ async function verificaImagensCapitulo(url) {
     }
 }
 
-async function encontrarCapitulosComImagens() {
-    const urlBase = 'https://ghostscan.com.br/manga/o-protagonista-masculino-e-um-assassino/cap-';
+async function encontrarCapitulosComImagens(url) {
+    const urlBase = `https://ghostscan.com.br/`;
     let ultimoCapitulo = 1;
     let capituloAtual = ultimoCapitulo;
     let imagensEncontradas = true;
     const urlsCapitulosComImagens = [];
 
     while (imagensEncontradas) {
-        const urlCapitulo = `${urlBase}${capituloAtual}/`;
+        const urlCapitulo = `${urlBase}${url}/cap-${capituloAtual}/`;
         const urlEncontrada = await verificaImagensCapitulo(urlCapitulo);
 
         if (urlEncontrada) {
@@ -46,9 +47,9 @@ async function encontrarCapitulosComImagens() {
 
 }
 
-async function obterInformacoesManga() {
+async function obterInformacoesManga(nome) {
     try {
-        const url = 'https://ghostscan.com.br/manga/o-protagonista-masculino-e-um-assassino/';
+        const url = `https://ghostscan.com.br/manga/${nome}/`;
         const response = await axios.get(url);
         const $ = cheerio.load(response.data);
 
@@ -126,11 +127,12 @@ async function manga() {
 
 
 module.exports = {
-    manga
+    manga,
+    obterInformacoesManga
 }
 
 
-
+obterInformacoesManga("a-epoca-em-que-eramos-jovens")
 
 
 /*const fs = require('fs');
