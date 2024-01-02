@@ -42,8 +42,9 @@ async function encontrarCapitulosComImagens(url) {
     }
 
     console.log(urlsCapitulosComImagens);
-    return JSON.stringify(urlsCapitulosComImagens, null, 2);
+    return urlsCapitulosComImagens; // Retorna o array diretamente, sem converter em JSON
 }
+
 
 async function obterInformacoesManga(nome) {
     try {
