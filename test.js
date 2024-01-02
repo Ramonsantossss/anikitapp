@@ -43,8 +43,6 @@ async function encontrarCapitulosComImagens(url) {
 
     console.log(urlsCapitulosComImagens);
     return JSON.stringify(urlsCapitulosComImagens, null, 2);
-
-
 }
 
 async function obterInformacoesManga(nome) {
@@ -128,11 +126,12 @@ async function manga() {
 
 module.exports = {
     manga,
-    obterInformacoesManga
+    obterInformacoesManga,
+    encontrarCapitulosComImagens
 }
 
 
-obterInformacoesManga("a-epoca-em-que-eramos-jovens")
+verificaImagensCapitulo("https://ghostscan.com.br/manga/a-epoca-em-que-eramos-jovens/cap-23/")
 
 
 /*const fs = require('fs');
