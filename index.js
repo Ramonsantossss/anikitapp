@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 //const formidable = require('formidable');
 //const api = require("./api");
@@ -31,7 +31,7 @@ let clientInstance;
 
 //const fs = require('fs');
 const P = require('pino');
-const { Boom, badData } = require('@hapi/boom');
+//const { Boom, badData } = require('@hapi/boom');
 const fetch = require('node-fetch');
 const chalk = require('chalk');
 const { color, bgcolor, logs } = require('./lib/color');
@@ -354,7 +354,7 @@ app.post('/register', async (req, res) => {
 
   // Cria um novo usuário com a chave e o saldo padrão
   const ft = "https://telegra.ph/file/f932f56e19397b0c7c448.jpg"; // URL padrão da foto
-  const saldo = 10000; // Saldo padrão
+  const saldo = 800; // Saldo padrão
   const total = 0;
   const newUser = new User({ username, password, key, saldo, total, ft });
 
@@ -368,10 +368,33 @@ app.post('/register', async (req, res) => {
   }
 });
 
+app.get('/registrarapi', async (req, res) => {
+  const { username, password, numero, key } = req.query;
+  if (!username || !password || !numero || !key) {
+    return res.status(400).send('Todos os campos são obrigatórios.');
+  }
+  const existingUser = await User.findOne({ username });
+  if (existingUser) {
+    return res.status(409).send('Nome de usuário já existe. Por favor, escolha outro.');
+  }
+  const ft = "https://telegra.ph/file/f932f56e19397b0c7c448.jpg"; // URL padrão da foto
+  const saldo = 800; // Saldo padrão
+  const total = 0;
+  const newUser = new User({ username, password, key, saldo, total, ft });
+  try {
+    await newUser.save();
+    res.json({ username: newUser.username, saldo: newUser.saldo, ft: newUser.ft });
+  } catch (error) {
+    console.error('Erro ao salvar o usuário no banco de dados:', error);
+    return res.status(500).send('Erro interno do servidor. Por favor, tente novamente mais tarde.');
+  }
+});
+
 // Rota de login para autenticar o usuário
 app.get('/login', (req, res) => {
   res.render('login'); // Renderiza a página de login (login.ejs)
 });
+
 
 
 //////
@@ -4639,67 +4662,3 @@ mongoose
     app.listen(PORT);
   })
   .catch((err) => console.log(err));
-
-
-/*
-app.post('/favoritar/:id', async (req, res) => {
-try {
-  const mangaId = req.params.id;
-
-  // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
-  const currentUser = await User.findById(/* ID do usuário * /);
-
-  if (currentUser) {
-    // Verifique se o mangá já está nos favoritos do usuário
-    const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
-
-    if (existingMangaIndex === -1) {
-      // Se o mangá ainda não está nos favoritos, adicione-o
-      const mangaInfo = /* Obtenha as informações do mangá aqui * /;
-      currentUser.favoriteMangas.push({
-        mangaId: mangaId,
-        mangaName: mangaInfo.name,
-        imageUrl: mangaInfo.image
-      });
-
-      // Salve as alterações no banco de dados
-      await currentUser.save();
-    }
-  }
-
-  // Redirecione para a página do mangá ou para onde desejar
-  res.redirect(`/manga/${mangaId}`);
-} catch (error) {
-  console.error('Error:', error.message);
-  res.status(500).send('An error occurred while saving the manga to favorites.');
-}
-});
-
-app.post('/removerfavorito/:id', async (req, res) => {
-try {
-  const mangaId = req.params.id;
-
-  // Encontre o usuário pelo ID (supondo que você tenha o ID do usuário)
-  const currentUser = await User.findById(/* ID do usuário * /);
-
-  if (currentUser) {
-    // Encontre o índice do mangá nos favoritos do usuário
-    const existingMangaIndex = currentUser.favoriteMangas.findIndex(manga => manga.mangaId === mangaId);
-
-    if (existingMangaIndex !== -1) {
-      // Se o mangá estiver nos favoritos, remova-o
-      currentUser.favoriteMangas.splice(existingMangaIndex, 1);
-
-      // Salve as alterações no banco de dados
-      await currentUser.save();
-    }
-  }
-
-  // Redirecione para a página do mangá ou para onde desejar
-  res.redirect(`/manga/${mangaId}`);
-} catch (error) {
-  console.error('Error:', error.message);
-  res.status(500).send('An error occurred while removing the manga from favorites.');
-}
-});
-*/
